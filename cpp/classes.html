@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <title>3-2 Classes (C++)</title>
+    <meta content="">
+    <style>
+    body {
+    	background-color: #000000;
+    	color: #ffffff;
+    	font-family: Arial, Helvetica, sans-serif;
+    }
+    h2 {
+    	text-align: center;
+    }</style>
+  </head>
+  <body>
+  <!-- PAGE HEADER -->
+	<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2014/06/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">3-2</span>&nbsp;Classes</h1>
+  	<hr />
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/cpp" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
+ 		&gt;&nbsp;Chapter 3&nbsp;&gt;&nbsp;Lesson 2
+  		</div>	
+  	<hr />
+  	
+  	<!-- PAGE CONTENT -->
+  	
+  	<div id="reading" style="width: 50%; float: left;">
+  		<h2>Reading</h2>
+  		<p style="font-weight: bold; color: #ff0000;">The content in this lesson applies directly to how the robot is programmed. Please ensure that you have a thorough working knowledge of the following content.</p>
+  		<p>Read the following pages thoroughly:</p>
+  		<ul>
+  			<li><a href="http://www.cplusplus.com/doc/tutorial/classes/" target="_blank">Classes I</a></li>
+  			<li><a href="http://www.cplusplus.com/doc/tutorial/classes2/" target="_blank">Classes II</a></li>
+  			<li><a href="http://www.cplusplus.com/doc/tutorial/inheritance/" target="_blank">Friendship and Inheritance</a></li>
+  		</ul>
+  		
+  		<h3>Extra Reading</h3>
+  		<ul>
+  			<li><a href="http://www.cprogramming.com/tutorial/lesson12.html" target="_blank">CProgramming page</a></li>
+  		</ul>
+  	</div>
+  	
+  	<div id="video" style="width: 50%; float: right;">
+		<h2>Companion Videos</h2>
+		<div id="scroll" style="overflow-x: scroll;">
+			<div id="vids" style="width: 1692px;">
+			</div>
+		</div>
+  	</div>
+  	
+  	<div style="clear: both;"></div>
+  	
+  	<div id="practice">
+  		<h2><a name="practice"></a>Practice</h2>
+  		<p>Once you feel comfortable with the above content, complete the following practice program.</p>
+  			<h3><a name="WAR"></a>WAR</h3>
+  				<h4><a name="The_Backstory"></a>The Backstory</h4>
+  					<p>WAR has swept through Middle Earth like a tornado. Of course, the actual physical WAR with elves shooting arrows and orcs dropping like flies has come to Middle Earth.
+  						But also the card game WAR has become very popular throughout the land, particularly in local taverns among the young hip hobbit crowd. 
+  						But with so many hobbits out of town on life-or-death quests to destroy magical rings, it&#x27;s hard to find a partner to play cards with. 
+  						If only there was a way to play single-player WAR, perhaps with some sort of magical lightbox. Who among you is lucky enough to rise to the challenge?</p>
+  				<h4><a name="Your_Assignment"></a>Your Assignment</h4>
+  					<p>Your goal is to write a simplified single-player version of the card game WAR, also know as In-Between. 
+  						The player will start with $100. At each round of play, the player will be shown two cards and decides how much to bet that the third card&#x27;s rank is in between. 
+  						Note the player is not allowed to bet more money than they currently have. The player should be told whether they won or lost and their total amount of money is updated accordingly. 
+  						The game ends when the player is down to $0 or their amount exceeds $1,000.</p>
+  					<p>A sample run is shown below. Note that betting $0 is equivalent to skipping a turn. Also note the user is prompted to re-enter their bet amount if they try to bet more than they actually have. 
+  						When checking if the third card is <q>in between</q>, the order in which the first two cards are presented should not matter. 
+  						For example, a <q>Jack</q> is in between <q>Five</q> and </q>Queen</q> and also in between <q>Queen</q> and <q>Five</q>. If the third card has the same rank as one of the original two cards, you may treat that as a loss.</p>
+  					<p>Do NOT allow the player to bet negative money (that's cheating)! <span style="font-style: italic;">HINT: We're talking about <span style="font-weight: bold;">unsigned</span> money.</span></p>
+  					<blockquote>
+  						You have $100. <br>
+						You got a Eight of Diamonds and a Seven of Clubs. <br>
+						How much do you want to bet the next card is in between? 200 <br>
+						You only have $100 to bet! Enter a new bet: 0 <br>
+						You got a Eight of Hearts. <br>
+						TOO BAD! You lose $0. <br>
+						<br>						
+						You have $100. <br>
+						You got a Queen of Hearts and a Five of Spades. <br> 
+						How much do you want to bet the next card is in between? 100 <br> 
+						You got a Jack of Clubs. <br>
+						COOL! You win $100. <br>
+						<br>
+						You have $200. <br>
+						You got a Two of Diamonds and a King of Clubs. <br> 
+						How much do you want to bet the next card is in between? 200 <br> 
+						You got a Ace of Spades. <br>
+						TOO BAD! You lose $200. <br>
+						<br>
+						You are out of money. GAME OVER. <br>
+						Press any key to continue. 
+					</blockquote>
+				<h4><a name="Programming_Requirements"></a>Programming Requirements</h4>
+					<p>You must use <a href="http://www.hotteam67.org/?attachment_id=405">this cards.h.</a>
+						<span style="font-weight:bold;">Do not make any changes to this header.</span></p>
+					<p>You are expected to use the two classes Player and Card which are declared in the header file cards.h. You should define all class member functions in the source file cards.cpp and the main routine in the source file main.cpp.
+						You should be able to figure out what the member functions do by looking at cards.h.</p>
+					<h5><a name="The_Player_Class"></a>The Player Class</h4>
+						<p>You should track the player's money using the Player class. You should define the member functions as given in the cards.h file.</p>
+					<h5><a name="Playing_Cards"></a>Playing Cards</h4>
+						<p>Every playing card has a suit and a rank. The possible suits, in no particular order, are:</p>
+						<ul>
+							<li>Hearts</li>
+							<li>Diamonds</li>
+							<li>Clubs</li>
+							<li>Spades</li>
+						</ul>
+						<p>The possible ranks, in order from lowest to highest, are:</p>
+						<ol>
+							<li>Ace</li>
+							<li>Two</li>
+							<li>Three</li>
+							<li>Four</li>
+							<li>Five</li>
+							<li>Six</li>
+							<li>Seven</li>
+							<li>Eight</li>
+							<li>Nine</li>
+							<li>Ten</li>
+							<li>Jack</li>
+							<li>Queen</li>
+							<li>King</li>
+						</ol>
+						<p>Assume that each card has a value of what is given in the list (it is also fine to use numbers 0-12 instead of 1-13).</p>
+					<h5><a name="The_Card_Class"></a>The Card Class</h5>
+						<p>The class Card should have the <q>less than</q> operator defined that compares the ranks. For example, if <code>card1</code> is the Eight of Clubs and <code>card2</code> is the Queen of Hearts, then:</p>
+						<pre lang="cpp" escaped="true">
+card1 &lt; card2
+						</pre>
+						<p>is a true statement. The suit has no effect on how the cards are compared. Your operator should make use of the public function <code>rank2num()</code>, which you may want to define first.</p>
+						<p>The default constructor for the Card class should assign a random suit and rank to the card. This allows us to <q>draw</q> a new card every time we call the constructor.</p>
+						<p>In order to generate random numbers, use the <a href="tips-tricks.html#Random_Numbers" target="_blank"><code>rand()</code></a> function. The <code>cstdlib</code> and <code>ctime</code> libraries have already been included for you in cards.h, so you don't have to.</p>
+						<p>For example, you could set the suit like this:</p>
+						<pre lang="cpp" escaped="true">
+int rand_num = 1 + rand() % 4;  //Random # between 1 and 4.
+switch(rand_num) {
+	case 1: suit = &quot;Hearts&quot;; break;
+	case 2: suit = &quot;Diamonds&quot;; break;
+	case 3: suit = &quot;Clubs&quot;; break;
+	case 4: suit = &quot;Spades&quot;; break;
+}
+						</pre>
+				<h4><a name="Extra_Practice"></a>Extra Practice</h4>
+				<p>Do any of the following:</p>
+				<ul>
+					<li>Make the cards dynamic memory (pointers), if you haven't already</li>
+					<li>Add multiplayer capability (still leave single player)</li>
+					<ul>
+						<li>If you do this, put single player game and multiplayer game in separate functions. </li>
+					</ul>
+					<li>Have the user set the starting amount and/or the goal.</li>
+					<ul>
+						<li>Do not allow the user to start with more than half of the goal.</li>
+						<li>For multiplayer: All players must start with the same amount.</li>
+					</ul>
+				</ul>
+  	</div>
+  	<hr>
+
+	<!-- NAVIGATION -->
+	<p align="center" style="font-size: 0.75em;">C++ GUIDED TUTORIAL</p>
+  	<table border="0" style="width: 100%;">
+  		<tbody>
+  			<tr>
+  				<td style="text-align: right; width: 40%;"><a href="pointers.html">&#8592; 3-1 Pointers</a></td>
+  				<td style="text-align: center; font-weight: bold; width: 20%;">3-2 Classes</td>
+  				<td style="text-align: left; width: 40%;"><a href="../wpi.html">WPI Tutorial &#8594;</a></td>
+  			</tr>
+  		</tbody>
+  	</table>  
+    </body>
+</html>

@@ -1,0 +1,44 @@
+a, a:link, a:visited {
+	color: #e84747;
+	text-decoration: none;
+}
+a:hover, a:active {
+	text-decoration: underline;
+}
+body {
+    	background-color: #111;
+    	color: #ffffff;
+    	font-family: 'Droid Sans', Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+h1.tutorial {
+	color: #ffffff;
+	line-height: 60px;
+}
+h2.tutorial,
+h3.tutorial,
+h4.tutorial,
+h5.tutorial {
+	color: #ffffff;
+	text-align: center;
+}
+img.tutorial {
+	display: block
+	margin-right: auto;
+	margin-left: auto;
+}
+blockquote.tutorialexample {
+	color: #000000;
+	font-family: "monospace";
+}
+img.select {
+	opacity: 0.5;
+}
+img.select:hover {
+	opacity: 1;
+}
+span.select {
+	opacity: 0.5;
+}
+span.select:hover {
+	opacity: 1;
+}

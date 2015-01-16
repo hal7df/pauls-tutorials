@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Paul's Tutorials</title>
+    <meta content="">
+    <style>
+    	body {
+    		color: #ffffff;
+    		font-family: Arial, Helvetica, sans-serif;
+    	}
+    	h2 {
+    		text-align: center;
+    	}
+    </style>
+  </head>
+  <body bgcolor="#000000;">  		
+  		<script type="text/javascript" >
+  		<!--
+		function cppSelected ()
+		{
+			document.getElementById("c++").style.opacity="1.0";
+			document.getElementById("tutorialLevel").innerHTML="This is for people either new to programming entirely or new to the C++ language."
+			document.getElementById("tutorialDescription").innerHTML="This will guide you through the tutorial at cplusplus.com and provide numerous practice activities to test your skills.";
+		}
+		
+		function wpiSelected ()
+		{
+			document.getElementById("wpi").style.opacity="1.0";
+			document.getElementById("tutorialLevel").innerHTML="This is for new robot programmers who have the basics of C++ down.";
+			document.getElementById("tutorialDescription").innerHTML="This is an in-depth tutorial of the WPI library for C++.";
+		}
+		
+		function resetAll()
+		{
+			document.getElementById("c++").style.opacity="0.5";
+			document.getElementById("wpi").style.opacity="0.5";
+			document.getElementById("tutorialLevel").innerHTML="&nbsp;";
+			document.getElementById("tutorialDescription").innerHTML="&nbsp;";
+		}  		
+		//-->
+  		</script>
+  		
+  		<!-- PAGE HEADER --> 
+  		<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2014/06/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  			style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Paul's Tutorials!</h1>
+  		<hr />
+  		
+  		<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;Paul's Tutorials</div>
+  		<hr />
+  		
+  		<!-- PAGE BODY -->
+  		<h2>Select tutorial</h2>
+  		
+  		<div id="selectTutorial" style="text-align: center;">
+  			<span id="c++" style="font-size: 100px; opacity: 0.5;" onmouseover="cppSelected()" onmouseout="resetAll()"><a style="color: #ffffff; text-decoration: none;" href="cpp.html">C++</a></span>
+  			
+  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  			
+  			<span id="wpi" style="font-size: 100px; opacity: 0.5;" onmouseover="wpiSelected()" onmouseout="resetAll()"><a style="color: #ffffff; text-decoration: none;" href="wpi.html">WPI</a></span>
+  		</div>
+  		
+  		<p id="tutorialDescription" style="text-align: center;">&nbsp;</p>
+  		<p id="tutorialLevel" style="text-align: center;">&nbsp;</p>
+  		
+  		<noscript><p style="text-align: center;">JavaScript is disabled/unavailable. You may not be able to enjoy the full features of this site.</p></noscript>
+  		
+  		<h2>News</h2>
+  		<ul>
+  			<li>Paul's Tutorials is moving to the HOT Team website!</li>
+  				<ul>
+  					<li>Please note that, during this transition, links may not work/will be unavailable until we have everything up and running. Thank you for your patience!</li>
+  				</ul>
+  			<li>A number of improvements to the tutorials are planned (such as more interactive activities and additional pages). These are expected to be finished by the end of the summer.</li>
+  		</ul>
+  		
+  		<h2>About</h2>
+  		<p>Paul's Tutorials is a series of in-depth tutorials designed to teach beginning programmers everything they need to know in order to program a robot. It includes a guided tutorial
+  		through the <a href="http://www.cplusplus.com/doc/tutorial" target="_blank">C++ tutorial at cplusplus.com</a> and a thorough tutorial through WPILib.</p>
+  		
+  		<h3>Note to other teams</h3>
+  		<p>If you're from another team, cool! I hope you find this tutorial useful. However, I would like to point out that some of the activities are optimized for the resources we have 
+  		available for training new team members (largely robots from previous years). I encourage you to adjust these activities to fit the needs of your team. Please talk to a mentor or 
+  		an experienced team member about what you should do.</p>
+  		<p>Also note that this tutorial teaches to program directly into the <code>BuiltinDefaultCode</code> template provided by WPI. While there are a few notes for the style provided by 
+  		RobotBuilder, programming using that method is not explored in this tutorial.</p>
+  		
+  		<p style="font-size: 0.75em; font-style: italic;">The WPILib tutorial is written and maintained by a student and as such is neither endorsed nor written by WPI.</p>
+  		
+  		<hr />
+  		<h2>Acknowledgements</h2>
+  		<p>The <a href="http://www.cplusplus.com/doc/tutorial" target="_blank">C++ tutorial</a> used with the C++ Guided Tutorial is written by authors at cplusplus.com</p>
+  		<p>Some C++ tutorial activities adapted these web resources:</p>
+  		<ul>
+  			<li><a href="http://www.cplusplus.com/forum/articles/12974" target="_blank">Beginner Exercises - cplusplus.com</a></li>
+  			<li><a href="http://www.math.ucla.edu/~wittman/10a.1.10w/Homework/HW7/homework7.html" target="_blank">PIC 10A Homework 7 - math.ucla.edu</a></li>
+  		</ul>
+  		
+  		<p>WPI Lesson 8 Activity -- from Carnegie Mellon University (<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15494-s11/lectures/manipulation_with_friction_files/PID%20Simulation.xls">original file</a>)</p>
+  
+  </body>
+</html>

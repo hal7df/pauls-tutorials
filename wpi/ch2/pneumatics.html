@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <title>2-4 Pneumatics (WPI)</title>
+    <meta content="">
+    <link rel="stylesheet" type="text/css" href="../style.css"/>
+  </head>
+  <body>
+  	<!-- PAGE HEADER -->
+	<h1 class="tutorial" style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">2-4</span>&nbsp;Pneumatics</h1>
+  	<hr />
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/wpi" title="C++ Guided Tutorial">WPILib Tutorial</a>
+ 		&gt;&nbsp;Chapter 2&nbsp;&gt;&nbsp;Lesson 4
+  		</div>	
+  	<hr />
+  	<div id="intro">
+  		<p>In this chapter, you have learned how to actuate different motors on the robot, and how to use them with driving. 
+  			However, this does not include all of the possible parts on the robot that can be actuated.</p>
+  		<p>In this lesson, you will learn how to actuate pneumatic control devices.</p>
+  	</div>
+  	<div id="toc">
+  		<ul>
+  			<li><a href="#pneumatic-control">Pneumatic Control</a></li>
+  			<li><a href="#solenoids">Solenoids</a></li>
+  			<ul>
+  				<li><a href="#solenoid-set-params">Solenoid <code>Set()</code> parameters</a></li>
+  				<li><a href="#solenoid-set-use">Solenoid <code>Set()</code> use</a></li>
+  				<li><a href="#what-state">What state?</a></li>
+  			</ul>
+  			<li><a href="#compressor">Compressor</a></li>
+  		</ul>
+  	</div>
+  	<div id="content">
+  		<h2 class="tutorial"><a name="pneumatic-control"></a>Pneumatic Control</h2>
+  			<p>The pneumatics on the robot follow a slightly different method of operation compared to motors.
+  				So, before you start looking at code for pneumatics, you should understand just how pneumatics work.</p>
+  			<p>If you remember from <a href="parts.html#Solenoid_valve">lesson 1-1</a>, pneumatic actuators are controlled by solenoid valves.
+  				These valves have two states: open and closed. These states are then keyed to the operation of the machine.</p>
+  			<p>It is important to realize that the valve's closed state is not necessarily like an "off" state. 
+  				While it is the state that the machine is in while it is off or disabled, teams usually make this state the state the machine is in most often.
+  				For example, on the 2014 HOTBOT, the shifter was controlled by a solenoid valve. However, when the solenoid was closed, the gearbox was in high gear.
+  				In order to shift into low gear, the valve had to be opened. Essentially, it is important to realize that the solenoid's closed state is not necessarily inert or unuseful.</p>
+  		<h2 class="tutorial"><a name="solenoids"></a>Solenoids</h2>  			
+  			<p>Just like motors, Solenoids are controlled using the <code>Set()</code> function.</p>
+  			<pre lang="cpp">
+void Solenoid::Set(bool state)
+  			</pre>
+  			<h3 class="tutorial"><a name="solenoid-set-params"></a>Solenoid <code>Set()</code> parameters</h3>
+  				<p>The only parameter for the <code>Set()</code> function is a <code>true</code> or <code>false</code> value. These map to open and closed, respectively.</p>
+  			<h3><a name="solenoid-set-use"></a>Solenoid <code>Set()</code> use</h3>
+  				<pre lang="cpp">
+m_solenoid->Set(true); //open valve
+m_solenoid->Set(false); //close valve
+  				</pre>
+  			<h3 class="tutorial"><a name="what-state"></a>What state?</h3>
+  				<p>Again, you may be in a situation where you need to know what state a solenoid is currently in. You can get this with the <code>Solenoid Get()</code>  function.
+  					The return value is a boolean that is true when the valve is open and false when it is closed.</p>
+  				<pre lang="cpp">
+bool Solenoid::Get()
+  				</pre>
+  		<h2 class="tutorial"><a name="compressor"></a>Compressor</h2>
+  			<p>One of the important things about a pneumatic system is that the pressure in the system must be kept at safe levels. 
+  				In the past, teams had to program this safety feature into their code, but since the 2015 season, this has been automatically controlled by the controls system.</p>
+  			<p>However, it is still important to be able to control whether the compressor is running or not, for similar safety reasons. 
+  				The <code>Compressor</code> class has remained on the new control system, and can be used to this effect.</p>
+  			<p>The unique thing about the <code>Compressor</code> class is that it acts both as a sensor and an actuator. 
+  				It combines the input from the pressure switch and the output to the compressor in one class.</p>
+  			<h3 class="tutorial"><a name="reading-pressure"></a>Reading from the Pressure Switch</h3>
+  				<p>If you remember from <a href="parts.html#Pressure_switch">lesson 1-1</a>, the pressure switch only gives you a true or a false value.
+  					You can use the following function to get that value:</p>
+  				<pre lang="cpp">
+bool Compressor::GetPressureSwitchValue()
+  				</pre>
+  				<p><code>GetPressureSwitchValue()</code> will return:</p>
+  				<ul>
+  					<li><code>true</code> if the switch is closed (high pressure).</li>
+  					<li><code>false</code> if the switch is open (lower pressure).</li>
+  				</ul>
+  			<h3 class="tutorial"><a name="setting-compressor"></a>Setting the Compressor</h3>
+  				<p>Of course, the other important thing that you need to be able to do with the compressor is control whether it is on or off.
+  					You can do this with the following two functions:</p>
+  				<pre lang="cpp">
+void Compressor::Enable()
+void Compressor::Disable()
+  				</pre>
+  				<p>Running the appropriate function will enable or disable the compressor.</p>
+  				<h4 class="tutorial"><a name="is-enabled"></a>Is it enabled?</h4>
+  					<p>In addition to being able to set the compressor, much like everything else, sometimes it is also helpful to know what the compressor is currently set to.
+  						You can use the following function to do this:</p>
+  					<pre lang="cpp">
+bool Compressor::Enabled()
+					</pre>
+				<p>This function will return <code>true</code> if the compressor is enabled, <code>false</code> otherwise.</p>
+  	</div>
+  	<div id="activity">
+  		<h2 class="tutorial"><a name="activity"></a>Activity</h2>
+  			<p>There currently is no activity for this lesson. One will be added later.</p>
+  	</div>
+  	<!-- NAVIGATION -->
+  	<div style="clear: both;">
+  		<hr>
+	  	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
+  		<table border="0" style="width: 100%;">
+  			<tbody>
+  				<tr>
+  					<td style="text-align: right; width: 40%;"><a href="driving.html">&#8592; 2-3 Earning Your Driver's License: Driving</a></td>
+  					<td style="text-align: center; font-weight: bold; width: 20%;">2-4 Pneumatics</td>
+  					<td style="text-align: left; width: 40%;"><a href="ch3.html">Chapter 3: Control &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+  </body>
+</html>

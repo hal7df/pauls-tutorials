@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>2-1 Functions (C++)</title>
+    <meta content="">
+    <style>
+    body {
+    	background-color: #000000;
+    	color: #ffffff;
+    	font-family: Arial, Helvetica, sans-serif;
+    }
+    h2 {
+    	text-align: center;
+    }
+    </style>
+  </head>
+  <body>
+  
+  <!-- PAGE HEADER -->
+	<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2014/06/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">2-1</span>&nbsp;Functions</h1>
+  	<hr />
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/cpp" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
+ 		&gt;&nbsp;Chapter 2&nbsp;&gt;&nbsp;Lesson 1
+  		</div>	
+  	<hr />
+  	
+  	<!-- PAGE CONTENT -->
+  	
+  	<div id="reading" style="width: 50%; float: left;">
+  		<h2>Reading</h2>
+  		<p>Read the first page below completely, and at least the "Overloaded Functions" section of the second. You may read the rest of the second page if you wish.</p>
+  		<ul>
+  			<li><a href="http://www.cplusplus.com/doc/tutorial/functions/" target="_blank">Functions</a></li>
+  			<li><a href="http://www.cplusplus.com/doc/tutorial/functions2/" target="_blank">Overloads and Templates</a></li>
+  		</ul>
+  		
+  		<h3>Extra Reading</h3>
+  		<ul>
+  			<li><a href="http://www.cprogramming.com/tutorial/lesson4.html" target="_blank">CProgramming page</a></li>
+  		</ul>
+  	</div>
+  	<div id="video" style="width: 50%; float: right;">
+		<h2>Companion Video</h2>  	
+  	</div>
+
+	<div style="clear: both;"></div>  	
+  	
+  	<div id="practice" style="width: 100%;">
+  		<h2>Practice</h2>
+  			<p>Once you feel comfortable with the above content, complete the following practice programs.</p>
+			<h3><a name="Temperature_Converter"></a>Temperature Converter</h3>
+				<p>Write a function <code>celsius()</code> to convert degrees Fahrenheit to degrees Celsius (The conversion formula is <code>&#176;C = 5/9 * (&#176;F - 32)</code>).
+					Use it to print a Fahrenheit-to-Centigrade table for -40 to 220 degrees Fahrenheit, in increments of 10 degrees.</p>
+				<p>It is important to note that the expression <code>5/9</code> is <code>0</code> (integer division), so you need to divide <code>5.0</code> by <code>9.0</code> instead.</p>
+				<h4><a name="temp-extra"></a>Extra Practice</h3><p>Do any of the following:</p>
+				<ul>
+					<li>Allow the user to input a desired temperature to convert</li>
+					<ul>
+						<li>You can also have them input a starting number and an ending number, and get a table from that.</li>
+						<ul>
+							<li><span style="font-weight: bold;">WARNING!</span> This is tricky!</li>
+						</ul>
+					</ul>
+					<li>Convert from Celsius to Fahrenheit </li>
+				</ul>
+			
+			<h3><a name="Rectangle"></a>Rectangle</h3>
+			<p>Write a function <code>createrect(int x, int y)</code> that creates a rectangle out of x&#x27;s. </p>
+			<p>For example, if you call <code>createrect(5,4)</code> you will receive: </p>
+			<pre>
+xxxxx
+x   x
+x   x
+xxxxx
+			</pre>
+			<p>HINT: you will need to use nested <code>for</code> loops like you did in the <q><a href="loops.html#Right_Triangle" target="_blank">Right Triangle</a></q> program.</p>
+			<h4><a name="rect-extra"></a>Extra Practice</h4>
+			<p>Rewrite the program so that it can do any of the following:</p>
+			<ul>
+				<li>Allow the user to change the size of the rectangle</li>
+				<li>Allow the user to create multiple rectangles in the same run (meaning the program cannot exit)</li>
+				<li>Allow the user to put a message in the rectangle <span style="font-weight: bold;">without</span> changing 
+					its dimensions or exceeding boundaries (pre-defined or user-defined dimensions, but the rectangle must stay a rectangle)</li>
+					<ul>
+						<li>If the dimensions are too small for the message to fit, do not print anything. Instead, tell the user they cannot fit 
+							the message inside that rectangle, and have them try again. </li>
+					</ul>
+			</ul>
+  			
+  	</div>
+  	<hr />
+  	
+  	<!-- NAVIGATION -->
+	<p align="center" style="font-size: 0.75em;">C++ GUIDED TUTORIAL</p>
+  	<table border="0" style="width: 100%;">
+  		<tbody>
+  			<tr>
+  				<td style="text-align: right; width: 40%;"><a href="switch-case.html">&#8592;&nbsp;1-4 Switch/Case Statements</a></td>
+  				<td style="text-align: center; font-weight: bold; width: 20%;">2-1 Functions</td>
+  				<td style="text-align: left; width: 40%;"><a href="arrays.html">2-2 Arrays &#8594;</a></td>
+  			</tr>
+  		</tbody>
+  	</table> 
+  	</body>
+</html>
