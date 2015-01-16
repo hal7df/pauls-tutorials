@@ -6,3 +6,5 @@ Paul's Tutorials are the programming tutorials for FRC Team #67, the 'HOT' Team.
 These are the updated versions from the [old version](https://code.google.com/p/hot67-programming-resources/wiki/Main_Page?tm=6), and are currently in the process of being updated.
 
 These pages are not yet complete, and may be inconsistent (style, etc.).
+
+Note: What is here is NOT a direct representation of what is on the official website. This version is oriented for running specifically off of a local drive.
