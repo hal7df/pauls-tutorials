@@ -1,12 +1,3 @@
-
- 
-
-
-
- 
-
-
-
 <html>
  <head>
   <title>2-2 Controlling Motors (WPI)</title>
@@ -14,53 +5,16 @@
  </head>
  <body>
  <!-- PAGE HEADER -->
- <h1 ><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+ <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
 	      style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-2</span>&nbsp;Controlling Motors</h1>
   	<hr />
   	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
   		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/wpi" title="WPILib Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;<a href="../ch1.html">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 3
+ 		&gt;&nbsp;<a href="../ch2.html" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 2
   		</div>	
   	<hr />
   	
   	<!-- PAGE CONTENT -->
-
-
-
-
-<div id="wikipage">
-<table>
- <tr>
- 
- 
- <td style="vertical-align:top; padding-left:5px">
- 
- <div id="wikiheader">
- 
-    <span style="font-size:120%;font-weight:bold">WPI_Lesson5</span>
-    &nbsp;
- <div> 
- 
-    <i>Controlling Motors</i>
- 
- 
- 
- <div id="wikiauthor" style="float:right">
- Updated <span title="Sat Jan 18 07:07:28 2014">
- Jan 18, 2014</span>
- 
- by 
-
- <a class="userlink"
- href="/u/112633510208610089649/">hal...@gmail.com</a
->
- 
- </div>
- </div>
- </div>
- 
- <div id="wikicontent">
- <div class="vt" id="wikimaincol">
   <p>This lesson is all about making the robot actually do something beyond manage variables -- making it move. </p>
   
   <ul>
@@ -69,14 +23,16 @@
   <ul>
       <li><a href="#Moving">Moving</a></li>
       <li><a href="#How_Fast?">How Fast?</a></li>
-      <li><a href="#Physical_Capabilities_of_the_Robot">Physical Capabilities of the Robot</a></li></ul>
-      <li><a href="#The_Relay">The Relay</a></li>
-  
+      <li><a href="#Physical_Capabilities_of_the_Robot">Physical Capabilities of the Robot</a></li>
+  </ul>
+  <li><a href="#The_Relay">The Relay</a></li>
   <ul>
       <li><a href="#Relay_Set">Relay Set</a></li>
-      <li><a href="#What_State?">What State?</a></li></ul>
-      <li><a href="#Activity">Activity</a></li></ul>
-      <h1><a name="The_Motor"></a>The Motor<a href="#The_Motor" class="section_anchor"></a></h1>
+      <li><a href="#What_State?">What State?</a></li>
+  </ul>
+  <li><a href="#Activity">Activity</a></li></ul>
+  
+  <h2 class="tutorial"><a name="The_Motor"></a>The Motor<a href="#The_Motor" class="section_anchor"></a></h2>
 
   <p>For the purposes of this tutorial, assume that all of the motors are <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Victors">Victors</a>. The API for controlling motors is basically the same across the three more complex drive controllers (Victors, <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Jaguars">Jaguars</a>, and <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Talons">Talons</a>), so you won&#x27;t need to worry about using different drive controllers. However, you will still need to make sure that you are declaring the correct controller. </p>
   <p>Another thing that you should take into consideration when programming the robot&#x27;s motors is the PWM of the motor that you are programming. You should always be sure that you 1) initialize the motor, and 2) initialize it on the right PWM! </p>
@@ -224,7 +180,7 @@ Talon::Set(double speed)
   </ul>
 
   <p>Don&#x27;t forget the controller deadband (0.2), as the controllers do not zero properly. To regain fine control, add the deadband (if the controller reading is negative) / subtract the deadband (if the controller reading is positive) and then multiply that value by 1.25. </p>
-  <p><table class="wikitable">
+<table class="wikitable">
   
   <tr>
     <td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson4">Lesson 4: Using User Input</a> </td>
@@ -233,19 +189,6 @@ Talon::Set(double speed)
   </tr> 
 </table>
   
-  </p>
- </div>
- </div>
- </td><tr>
-</table>
- </div>
-
-
-
-<script type="text/javascript" src="http://www.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
-
-
-
  </body>
 </html>
 
