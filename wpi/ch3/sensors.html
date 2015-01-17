@@ -1,8 +1,72 @@
+
+ 
+
+
+
+ 
+
+
+
 <html>
-  <head>
-    <title></title>
-    <meta content="">
-    <style></style>
-  </head>
-  <body></body>
+ <head>
+ <title>WPI_Lesson7</title>
+ </head>
+ <body>
+ 
+
+
+
+
+<div id="wikipage">
+<table>
+ <tr>
+ 
+ 
+ <td style="vertical-align:top; padding-left:5px">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">WPI_Lesson7</span>
+ &nbsp;
+ <div> 
+ 
+ <i>Sensors and Information</i>
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Sat Jan 18 07:07:28 2014">
+ Jan 18, 2014</span>
+ 
+ by 
+
+ <a class="userlink"
+ href="/u/112633510208610089649/">hal...@gmail.com</a
+>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <p>Now that you know how to make the robot move, now it is time to make it move intelligently. However, this can&#x27;t be done without some sort of indication of the robot&#x27;s state. This is what sensors are for. </p><p>This lesson will discuss how to obtain values from the various sensors on the robot. </p><p><ul><li><a href="#Providing_Information">Providing Information</a></li><ul><li><a href="#Driver_Station">Driver Station</a></li><li><a href="#SmartDashboard">SmartDashboard</a></li></ul><li><a href="#Reading_from_Sensors">Reading from Sensors</a></li><ul><li><a href="#A_Special_Function">A Special Function</a></li><li><a href="#Analog_Sensors">Analog Sensors</a></li><li><a href="#Digital_Sensors">Digital Sensors</a></li></ul><li><a href="#Activity">Activity</a></li><ul><li><a href="#Wiring_Schematic">Wiring Schematic</a></li><li><a href="#Notes">Notes</a></li></ul></ul> </p><h1><a name="Providing_Information"></a>Providing Information<a href="#Providing_Information" class="section_anchor"></a></h1><p>Sensors are useless if you can&#x27;t get a reading from them. While this can be done in the code, you still need hard values from the sensors in order to do anything with them. So, you need to find a way to print this data to the screen. </p><p>There are two ways to do this: through the driver station and through SmartDashboard. </p><h2><a name="Driver_Station"></a>Driver Station<a href="#Driver_Station" class="section_anchor"></a></h2><p>You already know how to do this. Simply inject the data into a <a href="/p/hot67-programming-resources/wiki/WPI_Lesson4#Printing_to_the_Driver_Station">Printf()</a> statement. </p><pre class="prettyprint">m_dsLCD-&gt;Printf(DriverStationLCD::kUserLine1,1,&quot;Sensor Value: %f&quot;,m_sensorValue);</pre><h2><a name="SmartDashboard"></a>SmartDashboard<a href="#SmartDashboard" class="section_anchor"></a></h2><p>The other way is to use an application called SmartDashboard. SmartDashboard is a program designed to provide data from the robot. It is the C++/Java equivalent of the FRC Dashboard. It also provides a function called <a href="/p/hot67-programming-resources/wiki/WPI_Lesson3#Live_Window">live window mode</a>, which you may remember from lesson 3. </p><p>However, how you print data to SmartDashboard is quite different than how you print data to the driver station. As a matter of fact, an object for SmartDashboard is not even required to do so. </p><p>What you do depends on the type of variable you want to display on SmartDashboard. </p><pre class="prettyprint">void SmartDashboard::PutNumber(const char* name, double value)
+void SmartDashboard::PutBoolean(const char* name, bool value)</pre><h3><a name="SmartDashboard_parameters"></a>SmartDashboard parameters<a href="#SmartDashboard_parameters" class="section_anchor"></a></h3><ul><li><tt>const char* name</tt>: Name/identifier of the variable in SmartDashboard. </li><li><tt>value</tt>: The variable. </li></ul><p>   </p><h3><a name="SmartDashboard_use"></a>SmartDashboard use<a href="#SmartDashboard_use" class="section_anchor"></a></h3><p>Because there is no object (outside of Live Window) that is required to manage SmartDashboard, so when you want to call these functions, you need to include the <tt>SmartDashboard::</tt> prefix in order for your code to compile. </p><pre class="prettyprint">//PutNumber example
+SmartDashboard::PutNumber(&quot;Sensor Value: &quot;,m_sensorValue);</pre><h1><a name="Reading_from_Sensors"></a>Reading from Sensors<a href="#Reading_from_Sensors" class="section_anchor"></a></h1><p>The following section contains a selection of functions from commonly used sensors. Look at the header files for each of the classes for the components for all of them. </p><h2><a name="A_Special_Function"></a>A Special Function<a href="#A_Special_Function" class="section_anchor"></a></h2><p>Most sensors should have this function: </p><pre class="prettyprint">int PIDGet()</pre><p>This function is special, because it returns a bitwise value (1-1024) representing the range of the sensor. This is important for later, because this provides the kind of input the cRIO needs to calculate certain values. </p><h2><a name="Analog_Sensors"></a>Analog Sensors<a href="#Analog_Sensors" class="section_anchor"></a></h2><h3><a name="AnalogChannel"></a>AnalogChannel<a href="#AnalogChannel" class="section_anchor"></a></h3><p><a href="/p/hot67-programming-resources/wiki/WPI_Lesson3#AnalogChannel">Analog Channel</a> devices use voltage as a means of measurement. What the voltage range is depends on the sensor being used. Potentiometers, the device most commonly used that falls under this class, have a range of about 0-6 volts. </p><pre class="prettyprint">float AnalogChannel::GetAverageVoltage()</pre><h2><a name="Digital_Sensors"></a>Digital Sensors<a href="#Digital_Sensors" class="section_anchor"></a></h2><h3><a name="DigitalInput"></a>DigitalInput<a href="#DigitalInput" class="section_anchor"></a></h3><p>Devices that use the <a href="/p/hot67-programming-resources/wiki/WPI_Lesson3#DigitalInput">DigitalInput</a> class return true/false values, as they are all switches of some sort. </p><pre class="prettyprint">bool DigitalInput::Get()</pre><h3><a name="Encoder"></a>Encoder<a href="#Encoder" class="section_anchor"></a></h3><p>When you are dealing with an <a href="/p/hot67-programming-resources/wiki/WPI_Lesson3#Encoder">encoder</a>, you should think of it as the trip odometer in your car. You use its input to determine if something needs to be done, and how it needs to be done. Should you do something that will only work when a certain value is hit, then you should reset the encoder. </p><p>The following functions get the distance (Pulses/set distance) recorded by the encoder, and reset it, respectively. </p><pre class="prettyprint">float Encoder::GetDistance()
+void Encoder::Reset()</pre><h3><a name="Accelerometer"></a>Accelerometer<a href="#Accelerometer" class="section_anchor"></a></h3><p>Since <a href="/p/hot67-programming-resources/wiki/WPI_Lesson3#Accelerometer">accelerometers</a> can measure acceleration on multiple axes, you need to specify the axis that you want to measure off of. </p><pre class="prettyprint">Accelerometer::GetAcceleration(axis)</pre><h4><a name="GetAcceleration_()_parameters"></a>GetAcceleration() parameters<a href="#GetAcceleration_()_parameters" class="section_anchor"></a></h4><ul><li><tt>axis</tt>: the <tt>axis</tt> object from within the <tt>Accelerometer</tt> class. </li><ul><li><tt>this-&gt;kAxis_X</tt> </li><li><tt>this-&gt;kAxis_Y</tt> </li><li><tt>this-&gt;kAxis_Z</tt> </li></ul></ul><p>   </p><h4><a name="GetAcceleration_()_use"></a>GetAcceleration() use<a href="#GetAcceleration_()_use" class="section_anchor"></a></h4><p>Although it may look like an <tt>enum</tt> due to the way it is written, it actually is not. Therefore, the <tt>kAxis_</tt> object passed to the <tt>GetAcceleration()</tt> function needs to be a member of the object you are trying to read from. </p><pre class="prettyprint">//GetAcceleration example
+m_accel-&gt;GetAcceleration(m_accel-&gt;kAxis_X);</pre><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>Find a wiring schematic for a robot that is available right now. Program it so that you can actuate all of the motors, and print all of the sensor inputs to SmartDashboard. You may optionally print to the driver station as well, but should there be more than 6 sensors available to you, you need to find a way to display the 6 most recently changed sensors. </p><p>What is given below is for the 2013 robot. </p><h2><a name="Wiring_Schematic"></a>Wiring Schematic<a href="#Wiring_Schematic" class="section_anchor"></a></h2><p><i>Note that not all of the mappings are posted at this time. I will post them when I get access to the latest version of the code.</i> </p><ul><li>Motors with sensors on them </li><ul><li>Drivetrain </li><ul><li>Left (<tt>Victor</tt>): PWM 1 </li><li>Right (<tt>Victor</tt>): PWM 2 </li></ul><li>Climber (<tt>Victor</tt>): PWM 3 </li><ul><li>Climb ratchet (<tt>Relay</tt>): Relay 1 </li></ul><li>Feeder (<tt>Victor</tt>): PWM 7 </li><ul><li>Run at full speed on specified button press </li></ul><li>Plate (2, both <tt>Victor</tt>): PWMs 8,10 </li></ul><li>Sensors </li><ul><li>Drive encoders </li><ul><li>Left: channels 1, 2; reversed </li><li>Right: channels 3, 4 </li></ul><li>Plate potentiometer: channel 1 </li><li>Climber </li><ul><li>Potentiometer: channel ? </li><li>Limit switch: channel ? </li></ul><li>Feeder limit switch: channel ? </li></ul><li>Control </li><ul><li>Drive game controller: 1 </li><li>Operator game controller: 2 </li></ul><li>Optional </li><ul><li>Climb indicator light (<tt>Relay</tt>): Relay ? </li></ul></ul><p>       </p><h2><a name="Notes"></a>Notes<a href="#Notes" class="section_anchor"></a></h2><p>In order to use the climber, you must use the ratchet properly.    <ul><li>Extend: Pulse the ratchet forward for .125 seconds, pulse the climber backwards at a value of (-)0.3 for the same period of time, then turn the relay off, and extend the climber. </li><li>All other states: Pulse the ratchet backwards for .125 seconds, then turn the relay off </li></ul>   If you wish to use the climb indicator light, turn it on whenever the climber switch is pressed. </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson6">Chapter 2: Driving and User Input - Lesson 6: Earning Your Driver&#x27;s License: Driving</a> </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 7</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson8">Lesson 8: Concepts of the PID</a> → </td></tr> </table></p>
+ </div>
+ </div>
+ </td><tr>
+</table>
+ </div>
+
+
+
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
+
+
+
+ </body>
 </html>
+

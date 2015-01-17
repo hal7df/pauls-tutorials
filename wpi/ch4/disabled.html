@@ -1,8 +1,68 @@
+
+ 
+
+
+
+ 
+
+
+
 <html>
-  <head>
-    <title></title>
-    <meta content="">
-    <style></style>
-  </head>
-  <body></body>
+ <head>
+ <title>WPI_Lesson12</title>
+ </head>
+ <body>
+ 
+
+
+
+
+<div id="wikipage">
+<table>
+ <tr>
+ 
+ 
+ <td style="vertical-align:top; padding-left:5px">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">WPI_Lesson12</span>
+ &nbsp;
+ <div> 
+ 
+ <i>Disabled Routines</i>
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Sun Dec 29 20:40:07 2013">
+ Dec 29, 2013</span>
+ 
+ by 
+
+ <a class="userlink"
+ href="/u/112633510208610089649/">hal...@gmail.com</a
+>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <p>This lesson is all about the Disabled routines. Disabled mode runs when the robot is not enabled (when the &#x27;disabled&#x27; button is highlighted on the driver station). </p><p><ul><li><a href="#Restrictions">Restrictions</a></li><li><a href="#Programming_in_Disabled">Programming in Disabled</a></li><li><a href="#Uses">Uses</a></li><li><a href="#Activity">Activity</a></li></ul> </p><h1><a name="Restrictions"></a>Restrictions<a href="#Restrictions" class="section_anchor"></a></h1><p>Disabled mode is the most restricted mode. In Disabled, robots <strong>cannot</strong> actuate anything on the robot. This means that victors, jaguars, talons, and even spikes cannot be changed in this mode (even if you have a spike attached to a light and not a motor). </p><p>However, you can read from sensors, read from the controller inputs, and print information to the driver station or SmartDashboard. </p><h1><a name="Programming_in_Disabled"></a>Programming in Disabled<a href="#Programming_in_Disabled" class="section_anchor"></a></h1><p>Remember that, when you are programming in Disabled, you are still programming in a periodic routine (outside of initialization). As such, you should take all considerations regarding CPU looping into account when you program in Disabled. </p><h1><a name="Uses"></a>Uses<a href="#Uses" class="section_anchor"></a></h1><p>Disabled is largely used to perform setup on the robot (choose autonomous strategy and adjusting an offset for PID subsystems), but can be used for any other setup related task (self-checks, etc) before the start of a match. </p><p>If you are using Disabled to set up the robot for Autonomous, it should generally do the following: </p><ul><li>Look for user input </li><li>Show the current autonomous strategy </li><li>Show the current PID subsystem offset(s), if any, compared to the default value </li><li>Emphasize anything that the drivers might see as a problem that your code has detected (dangerous/game-risking autonomous case selected, strange input values, etc.) </li></ul><p>You should be aware that, if your code is deployed to run on the robot when the drivers are driving it, it is possible they may hit a button on the controller without knowing, causing the robot to perform an unwanted autonomous strategy. </p><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>Redo <a href="/p/hot67-programming-resources/wiki/WPI_Lesson4#Activity">the activity from lesson 4</a> in Disabled mode. </p><p>Additionally, have the robot show you all of its sensor values in Disabled mode. </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson11">Lesson 11: Initialization Routines</a>  </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 12</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson13">Lesson 13: Autonomous Routines</a> → </td></tr> </table></p>
+ </div>
+ </div>
+ </td><tr>
+</table>
+ </div>
+
+
+
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
+
+
+
+ </body>
 </html>
+

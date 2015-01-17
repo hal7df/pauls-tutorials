@@ -1,8 +1,68 @@
+
+ 
+
+
+
+ 
+
+
+
 <html>
-  <head>
-    <title></title>
-    <meta content="">
-    <style></style>
-  </head>
-  <body></body>
+ <head>
+ <title>WPI_Lesson9</title>
+ </head>
+ <body>
+ 
+
+
+
+
+<div id="wikipage">
+<table>
+ <tr>
+ 
+ 
+ <td style="vertical-align:top; padding-left:5px">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">WPI_Lesson9</span>
+ &nbsp;
+ <div> 
+ 
+ <i>PID Part 2 - Implementing a PID</i>
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Sun Dec 29 20:40:07 2013">
+ Dec 29, 2013</span>
+ 
+ by 
+
+ <a class="userlink"
+ href="/u/112633510208610089649/">hal...@gmail.com</a
+>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <p>Now that you know what a PID is, you will learn how to apply it to the robot. </p><p><ul><li><a href="#Safety_Note">Safety Note</a></li><li><a href="#PIDController">PIDController</a></li><ul><li><a href="#Initialization">Initialization</a></li><li><a href="#Use">Use</a></li></ul><li><a href="#Tuning_a_PID">Tuning a PID</a></li><ul><li><a href="#PID_Setpoints">PID Setpoints</a></li><li><a href="#Prerequisites">Prerequisites</a></li><li><a href="#Finding_the_right_values">Finding the right values</a></li></ul><li><a href="#Activity">Activity</a></li></ul> </p><h1><a name="Safety_Note"></a>Safety Note<a href="#Safety_Note" class="section_anchor"></a></h1><p>The most important thing with robotics in general is safety, as you well know by now. One important thing to remember is that the more automated the machine becomes, the more dangerous it can be. As a PID automates the robot to a certain degree, you should always be <strong>VERY CAREFUL</strong> when you are testing one for the first time (although you should always be very careful anyway). </p><h1><a name="PIDController"></a><tt>PIDController</tt><a href="#PIDController" class="section_anchor"></a></h1><p>WPILib comes with a builtin PID controller class, named, quite creatively, <tt>PIDController</tt>. Declare it like you would any other robot component (as a pointer). </p><h2><a name="Initialization"></a>Initialization<a href="#Initialization" class="section_anchor"></a></h2><p>The <tt>PIDController</tt> constructor has 5 basic parameters for initialization. </p><pre class="prettyprint">PIDController::PIDController(float p, float i, float d, PIDSource* source, PIDOutput* output)</pre><ul><li><tt>float p</tt>: The value of P, or the proportional constant. </li><li><tt>float i</tt>: The value of I, or the integral constant. </li><li><tt>float d</tt>: The value of D, or the derivative constant. </li><li><tt>PIDSource* source</tt>: The sensor input to be used with the PID controller. All sensors inherit the <tt>PIDSource</tt> class. </li><li><tt>PIDOutput* output</tt>: The motor controller output to be used with the PID controller. All motor controllers inherit the <tt>PIDOutput</tt> class. </li></ul><p>   </p><h2><a name="Use"></a>Use<a href="#Use" class="section_anchor"></a></h2><p>Firstly, the <tt>PIDController</tt> has an on/off switch, which is off to start. In order to use it, it must first be enabled. </p><pre class="prettyprint">void PIDController::Enable()</pre><p>Similarly, it can be disabled: </p><pre class="prettyprint">void PIDController::Disable()</pre><p>Once enabled, all you need to do is set the setpoint. As soon as the robot reaches that point in the code, it will automatically move the output such that the input matches the setpoint. </p><pre class="prettyprint">void PIDController::SetSetpoint(float setpoint)</pre><p>You can also check what the current setpoint is, as well. </p><pre class="prettyprint">float PIDController::GetSetpoint()</pre><h1><a name="Tuning_a_PID"></a>Tuning a PID<a href="#Tuning_a_PID" class="section_anchor"></a></h1><p>Writing a PID is one thing. Making it work is another thing. </p><p>Tuning a PID can be dangerous on any number of levels, as you have no idea of how the robot will respond. When you are tuning a PID, you should <strong>ALWAYS</strong> have your finger on the Enter key so that, when things go wrong, you can stop the robot before it does any serious damage. </p><h2><a name="PID_Setpoints"></a>PID Setpoints<a href="#PID_Setpoints" class="section_anchor"></a></h2><p>You may remember <a rel="nofollow">the <tt>PIDGet()</tt> function from lesson 7</a>. Funny how it begins with P-I-D, huh? That&#x27;s because this is the function that the <tt>PIDController</tt> reads from when it runs the calculations. This means that all of your setpoints need to use the bitwise value found by <tt>PIDGet()</tt> </p><p>To get these values, simply write the output of the <tt>PIDGet()</tt> function for whatever sensor you are using to the driver station, and then use those values for the setpoints. </p><h2><a name="Prerequisites"></a>Prerequisites<a href="#Prerequisites" class="section_anchor"></a></h2><p><i>Before</i> you start tuning a PID, make sure your code does the following: </p><ul><li>Outputs the <tt>PIDGet()</tt> value of the sensor you are using to the driver station. </li><li>Reads from the right input and writes to the right output, and that those objects are mapped correctly. </li><li>Sets the setpoint <i>only</i> after a button press. </li></ul><p>Although not required, it would not be a bad idea to also put a soft killswitch in for the PID (disables the PID on a button press), which may be useful if others are helping you tune the PID. If you do this, do <i>not</i> make the button a toggleswitch. </p><p>You should start with the following PID constants: </p><ul><li>P: 1 </li><li>I: 0 </li><li>D: 0 </li></ul><h2><a name="Finding_the_right_values"></a>Finding the right values<a href="#Finding_the_right_values" class="section_anchor"></a></h2><p>When you are tuning the PID, you need to ask yourself the following questions. Below each question is a potential solution for a problem that you might see. </p><ul><li>Is it moving in the right direction? </li><ul><li>No: Make the P constant the opposite of what it is now (negative if it is positive, vice versa). </li></ul><li>Is it being too aggressive/shy in its movements? </li><ul><li>Aggressive: Lower the P constant. </li><li>Shy: Raise the P constant. </li></ul><li>Is it overshooting and not correcting itself? </li><ul><li>Solution 1: Try lowering the P constant. </li><li>Solution 2 </li><ul><li>Overshooting (try first): Adjust the D constant. Be careful if you are going to do this, and adjust D by values of 0.1 or even 0.01. </li><li>Steady-state error: Adjust the I constant. Take similar cautions with I that you would with D. </li></ul></ul></ul><p>     Knowing how much to change a P, I, or D value is a learned skill and does not really follow a definite algorithm. As suchm it cannot be taught through a tutorial. If you need help, ask someone who has tuned a PID before. </p><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>The content in this lesson could be tested, but most of the PID-capable subsystems on available robots require that you know the content from lesson 10. </p><p>If you do have access to a robot with a system that is ready to run a PID that only uses one sensor and one motor, then write code to implement a PID on that system. Otherwise, continue to the next lesson. </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson8">Lesson 8: PID Part 1 - PID Theory</a>  </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 9</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson10">Lesson 10: PID Part 3 - Advanced PID Programming</a> → </td></tr> </table></p>
+ </div>
+ </div>
+ </td><tr>
+</table>
+ </div>
+
+
+
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
+
+
+
+ </body>
 </html>
+

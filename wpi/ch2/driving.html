@@ -1,8 +1,88 @@
+
+ 
+
+
+
+ 
+
+
+
 <html>
-  <head>
-    <title></title>
-    <meta content="">
-    <style></style>
-  </head>
-  <body></body>
+ <head>
+ <title>WPI_Lesson6</title>
+ </head>
+ <body>
+ 
+
+
+
+
+<div id="wikipage">
+<table>
+ <tr>
+ 
+ 
+ <td style="vertical-align:top; padding-left:5px">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">WPI_Lesson6</span>
+ &nbsp;
+ <div> 
+ 
+ <i>Earning Your Driver's License: Driving</i>
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Sat Jan 18 07:07:28 2014">
+ Jan 18, 2014</span>
+ 
+ by 
+
+ <a class="userlink"
+ href="/u/112633510208610089649/">hal...@gmail.com</a
+>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <p>Up to this point, you have learned the various components of the robot, how they are represented by software, and how to use some of those components. Now, you will learn how to program one of the essential functions of any robot: driving.  </p><p><ul><li><a href="#RobotDrive">RobotDrive</a></li><ul><li><a href="#Arcade_Drive">Arcade Drive</a></li><li><a href="#Tank_Drive">Tank Drive</a></li></ul><li><a href="#Activity">Activity</a></li></ul> </p><h1><a name="RobotDrive"></a><tt>RobotDrive</tt><a href="#RobotDrive" class="section_anchor"></a></h1><p>You may remember the <a href="/p/hot67-programming-resources/wiki/WPI_Lesson6#RobotDrive">RobotDrive</a> object from lesson 3. This object provides various functions to make managing the drive system simpler. There are two functions that you will see most often: <tt>ArcadeDrive()</tt> and <tt>TankDrive()</tt>.  </p><p>For all of the following examples, use this set of declarations: </p><pre class="prettyprint">//Declarations
+Victor* m_lDrive;
+Victor* m_rDrive;
+
+RobotDrive* m_robotDrive;
+
+Timer* m_timer;
+
+//Initialization
+m_lDrive = new Victor (1);
+m_rDrive = new Victor (2);
+ 
+m_robotDrive = new RobotDrive (m_lDrive, m_rDrive);
+
+m_timer = new Timer;</pre><h2><a name="Arcade_Drive"></a>Arcade Drive<a href="#Arcade_Drive" class="section_anchor"></a></h2><p>This is the drive method that we most commonly use. </p><pre class="prettyprint">void RobotDrive::ArcadeDrive(float velocity, float rotation)</pre><h3><a name="ArcadeDrive()_parameters"></a><tt>ArcadeDrive()</tt> parameters<a href="#ArcadeDrive()_parameters" class="section_anchor"></a></h3><ul><li><tt>float velocity</tt>: The desired relative velocity of the robot (forwards/backwards) </li><li><tt>float rotation</tt>: the relative velocity at which the robot rotates (left/right) </li></ul><h3><a name="ArcadeDrive()_use"></a><tt>ArcadeDrive()</tt> use<a href="#ArcadeDrive()_use" class="section_anchor"></a></h3><p>How you use <tt>ArcadeDrive()</tt> depends on which routine you are programming. If you are programming in Teleop, you give it the opposite of the left Y axis and the right X axis (so that the robot doesn&#x27;t drift sideways if the left Y is being used), like so: </p><pre class="prettyprint">m_robotDrive-&gt;ArcadeDrive(-m_gamepad-&gt;GetRawAxis(2), -m_gamepad-&gt;GetRawAxis(4));</pre><p>However, in autonomous, you would feed <tt>ArcadeDrive()</tt> either set or calculated values. If you are using set values, you would use it in conjunction with a <tt>Timer</tt> or an encoder. </p><pre class="prettyprint">if (!m_timer-&gt;HasPeriodPassed(2.0))
+   m_robotDrive-&gt;ArcadeDrive(0.75,0.75);
+else
+   m_robotDrive-&gt;ArcadeDrive(0.0,0.0);</pre><p>The above code will run the robot in a curve to the right for two seconds, and then stop.  </p><h2><a name="Tank_Drive"></a>Tank Drive<a href="#Tank_Drive" class="section_anchor"></a></h2><p>The other driving function can achieve essentially the same effect as the <tt>ArcadeDrive()</tt>, but the mechanism it uses is different.  </p><pre class="prettyprint">void RobotDrive::TankDrive(float left_power, float right_power)</pre><h3><a name="TankDrive()_parameters"></a><tt>TankDrive()</tt> parameters<a href="#TankDrive()_parameters" class="section_anchor"></a></h3><ul><li><tt>float left_power</tt>: The relative power (-1.0 to 1.0) going to the left drive.  </li><li><tt>float right_power</tt>: The relative power going to the right drive.  </li></ul><h3><a name="TankDrive()_use"></a><tt>TankDrive()</tt> use<a href="#TankDrive()_use" class="section_anchor"></a></h3><p>How you use <tt>TankDrive()</tt> is determined in the same way as <tt>ArcadeDrive()</tt>. However, the game controllers do not lend themselves to this driving method. However, <tt>TankDrive()</tt> is actually the preferred method for driving in autonomous (since it makes the most sense). </p><pre class="prettyprint">if (m_timer-&gt;HasPeriodPassed(2.0))
+   m_robotDrive-&gt;TankDrive(0.0,0.0);
+else
+   m_robotDrive(0.0,0.0);</pre><p>The above code will run the robot in a left turn, moving forward.  </p><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>Program the robot to do the following: </p><ul><li>Drive forward and backward with the left stick.  </li><li>Move left and right with the right stick.  </li><li>When the start button pressed, toggle between the above &quot;mode&quot; and the following: </li><ul><li>Drive forward when Y is held.  </li><li><strong>Rotate</strong> the robot counterclockwise (to the left) when the X button is held </li><li><strong>Rotate</strong> the robot clockwise (to the right) when the B button is held.  </li><li>Drive backwards when the A button is held. </li><li>Run everything at <strong>half power</strong> in this drive mode! </li></ul></ul><p><i>The joystick drive and the button drive <strong>cannot</strong> be enabled at the same time!</i> </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson5">Lesson 5: Controlling Motors</a> </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 6</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson7">Chapter 3: Control - Lesson 7: Providing Information</a> → </td></tr> </table></p>
+ </div>
+ </div>
+ </td><tr>
+</table>
+ </div>
+
+
+
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
+
+
+
+ </body>
 </html>
+

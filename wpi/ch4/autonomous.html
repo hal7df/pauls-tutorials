@@ -1,8 +1,107 @@
+
+ 
+
+
+
+ 
+
+
+
 <html>
-  <head>
-    <title></title>
-    <meta content="">
-    <style></style>
-  </head>
-  <body></body>
+ <head>
+ <title>WPI_Lesson13</title>
+ </head>
+ <body>
+ 
+
+
+
+
+<div id="wikipage">
+<table>
+ <tr>
+ 
+ 
+ <td style="vertical-align:top; padding-left:5px">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">WPI_Lesson13</span>
+ &nbsp;
+ <div> 
+ 
+ <i>Autonomous Routines</i>
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Sun Dec 29 20:43:09 2013">
+ Dec 29, 2013</span>
+ 
+ by 
+
+ <a class="userlink"
+ href="/u/112633510208610089649/">hal...@gmail.com</a
+>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <p>This lesson is all about Autonomous routines. Autonomous mode runs at the beginning of a match (usually for 30 seconds), where the robot is entirely automated (although input from the Kinect has been allowed recently). </p><p><ul><li><a href="#Restrictions">Restrictions</a></li><li><a href="#Programming_in_Autonomous">Programming in Autonomous</a></li><li><a href="#Structure">Structure</a></li><ul><li><a href="#Individual_Autonomous_Cases">Individual Autonomous Cases</a></li></ul><li><a href="#Safety_Note">Safety Note</a></li><li><a href="#Activity">Activity</a></li></ul> </p><h1><a name="Restrictions"></a>Restrictions<a href="#Restrictions" class="section_anchor"></a></h1><p>Autonomous, as the name implies, runs without any user input. As some may well know (and others not), the drivers are banned from approaching the driver station during this period. Due to this, you do not rely on any user input in Autonomous. </p><p>However, you are free to access and actuate any components on the robot, and print to the driver station (this is useful for debugging). </p><h1><a name="Programming_in_Autonomous"></a>Programming in Autonomous<a href="#Programming_in_Autonomous" class="section_anchor"></a></h1><p>Autonomous is your time to shine! Autonomous relies entirely on programming (with the slight exception of preset autonomous strategies and offsets from Disabled), so make sure to do a good job with the code, but, this is also something you should be proud of! </p><p>Again, Autonomous follows the same &#x27;initialization → loop periodic&#x27; format as the other routines follow, so take all of the same considerations into effect with Autonomous regarding looping and so on. </p><p>In my experience, writing Autonomous code is not as daunting as it sounds. As long as you know what you are trying to accomplish, it should be relatively easy. </p><p>The first thing that should be done before you write any Autonomous code is sit down and talk strategy with those involved (usually the drive coach, other strategists, and your mentors). You will want to lay out a plan detailing the following: </p><ul><li>General ideas for Autonomous </li><li>Different strategies for executing Autonomous </li><li>Potential issues that could arise during Autonomous in a competition </li><li>Potential sources of error </li></ul><p>   Once those have been established, sit down with other programmers and start working out how the plan will look in code. What components are you going to need to use? What exactly does the robot need to do? How many different cases of Autonomous are going to be needed? You should be asking yourselves these questions throughout this process. </p><p>Regardless of what you come up with in the meeting, you should always include a &#x27;do nothing&#x27; case in case a physical issue prevents Autonomous from being executed safely. Also, you should remember to allow the drivers to select Autonomous strategies during the Disabled routine. </p><p>When you actually start coding Autonomous, it is <i>crucial</i> that you follow good style and clearly mark where the different sections (autonomous cases/strategies, individual operations within those cases) in the code are. This is important so the pit crew can easily locate issues and solve them quickly so no time is wasted in the pits during a competition. </p><h1><a name="Structure"></a>Structure<a href="#Structure" class="section_anchor"></a></h1><p>Generally, your Autonomous code should look something like this: </p><pre class="prettyprint">void AutonomousPeriodic()
+{
+  switch(m_strategy)
+  {
+    case 0:
+      //Inactive autonomous
+      break;
+    case 1:
+      //Function call for first autonomous strategy
+      break;
+    case 2:
+      //Function call for second autonomous strategy
+      break;
+    //...
+  }
+}</pre><p>Notice how the comments say &#x27;function call&#x27; and not &#x27;code&#x27;. This is because attempting to write all of the cases into the <tt>AutonomousPeriodic()</tt> function will overcomplicate the code and will almost certainly cause extreme amounts of logical problems. It is better to write each case into its own function and call that within your <tt>switch/case</tt> structure than to endure that mess. </p><p>When you do this, you should still treat each individual function as if it were its own periodic routine, as one will be effectively run as such throughout the Autonomous period of the match. </p><h2><a name="Individual_Autonomous_Cases"></a>Individual Autonomous Cases<a href="#Individual_Autonomous_Cases" class="section_anchor"></a></h2><p>Your individual cases will look syntactically similar, although the <tt>switch/case</tt> structure is used for a different purpose. </p><pre class="prettyprint">void MyAutonomousStrategy()
+{
+  switch(m_autonSegment)
+  {
+    case 0:
+      //First segment of Autonomous, e.g. spinning up motors
+      
+      /** The m_autonSegment may also be changed only when 
+        * a certain condition is true, such as a timeout
+        * passing, or a sensor reading is equal to or within
+        * a tolerable range to a certain value.
+        **/
+      m_autonSegment++;
+      break;
+    case 1:
+      //Second segment of Autonomous, e.g. initiating the first action
+      m_autonSegment++;
+      break;
+    case 2:
+      //Second segment of Autonomous
+      m_autonSegment++;
+      break;
+    //...
+  }
+}</pre><p>In this case, the <tt>switch/case</tt> statement is used to determine what &#x27;segment&#x27; of Autonomous it needs to execute. These &#x27;segments&#x27; are the distinct, individual actions (shooting, moving, etc) that the robot performs as part of the Autonomous strategy. </p><p>Generally, you should only increment the segment tracker variable when you know that the robot has completed the current one and needs to move on to the next. This is generally done through use of a <tt>Timer</tt> or by monitoring sensor readings. </p><h1><a name="Safety_Note"></a>Safety Note<a href="#Safety_Note" class="section_anchor"></a></h1><p>As it has been mentioned before, the robot is most dangerous when it is performing tasks by itself. As it is entirely automated during this period, you should be extra careful by being ready to disable the robot at the first sign of trouble, and by ensuring others are a safe distance from the robot. </p><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>Form a group and undertake the process of developing an Autonomous routine from start to finish (but only talk with your group members and your mentors, don&#x27;t bother anyone else) for a specific robot. Ask a mentor or an experienced team member if you do not know the game for which the robot was designed. </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson12">Lesson 12: Disabled Routines</a>  </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 13</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <i>Congratulations, you have completed the tutorial!</i> </td></tr> </table></p>
+ </div>
+ </div>
+ </td><tr>
+</table>
+ </div>
+
+
+
+<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
+
+
+
+ </body>
 </html>
+
