@@ -4,6 +4,26 @@
   <link rel="stylesheet" type="text/css" href="../../style.css" />
  </head>
  <body>
+	<!-- ACTIVITY SCRIPT -->
+  	<script type="text/javascript" >
+  	<!--
+  	function toggleDesc() {
+  		but = document.getElementById("showDesc");
+  		desc = document.getElementById("sampleDesc");
+  		
+  		if (desc.style.display == "none")
+  		{
+  			desc.style.display = "block";
+  			but.innerHTML = "Hide sample";
+  		}
+  		else {
+  			desc.style.display = "none";
+  			but.innerHTML = "Show sample";
+  		}
+  	}
+  	//-->
+  	</script>
+  	
  <!-- PAGE HEADER -->
  <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
 	      style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-2</span>&nbsp;Controlling Motors</h1>
@@ -14,180 +34,188 @@
   		</div>	
   	<hr />
   	
-  	<!-- PAGE CONTENT -->
-  <p>This lesson is all about making the robot actually do something beyond manage variables -- making it move. </p>
+	<!-- PAGE CONTENT -->
+	<div id="intro">	
+  		<p>This lesson is all about making the robot actually do something beyond manage variables -- making it move. </p>
+  	</div>
   
-  <ul>
-      <li><a href="#The_Motor">The Motor</a></li>
-  
-  <ul>
-      <li><a href="#Moving">Moving</a></li>
-      <li><a href="#How_Fast?">How Fast?</a></li>
-      <li><a href="#Physical_Capabilities_of_the_Robot">Physical Capabilities of the Robot</a></li>
-  </ul>
-  <li><a href="#The_Relay">The Relay</a></li>
-  <ul>
-      <li><a href="#Relay_Set">Relay Set</a></li>
-      <li><a href="#What_State?">What State?</a></li>
-  </ul>
-  <li><a href="#Activity">Activity</a></li></ul>
-  
-  <h2 class="tutorial"><a name="The_Motor"></a>The Motor<a href="#The_Motor" class="section_anchor"></a></h2>
+	<div id="toc">	
+		<ul>
+			<li><a href="#The_Motor">The Motor</a></li>
+			<ul>
+				<li><a href="#Moving">Moving</a></li>
+				<li><a href="#How_Fast?">How Fast?</a></li>
+				<li><a href="#Physical_Capabilities_of_the_Robot">Physical Capabilities of the Robot</a></li>
+			</ul>
+			<li><a href="#The_Relay">The Relay</a></li>
+			<ul>
+				<li><a href="#Relay_Set">Relay <code>Set()</code></a></li>
+				<li><a href="#What_State?">What State?</a></li>
+			</ul>	
+			<li><a href="#Activity">Activity</a></li>
+		</ul>
+	</div>
+  	
+  	<div id="content">
+		<h2 class="tutorial"><a name="The_Motor"></a>The Motor<a href="#The_Motor" class="section_anchor"></a></h2>
 
-  <p>For the purposes of this tutorial, assume that all of the motors are <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Victors">Victors</a>. The API for controlling motors is basically the same across the three more complex drive controllers (Victors, <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Jaguars">Jaguars</a>, and <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Talons">Talons</a>), so you won&#x27;t need to worry about using different drive controllers. However, you will still need to make sure that you are declaring the correct controller. </p>
-  <p>Another thing that you should take into consideration when programming the robot&#x27;s motors is the PWM of the motor that you are programming. You should always be sure that you 1) initialize the motor, and 2) initialize it on the right PWM! </p>
-  <p>For simplicity, the declaration of all of the components used in the code snippets below has been left out. You can assume the following: </p>
-  <pre lang="cpp">
-
+			<p>For the purposes of this tutorial, assume that all of the motors are <a href="../ch1/parts.html#Victors">Victors</a>. The API for controlling motors is basically the same across the three more complex drive controllers (Victors, <a href="../ch1/parts.html#Jaguars">Jaguars</a>, and <a href="../ch1/parts.html#Talons">Talons</a>), so you won&#x27;t need to worry about using different drive controllers. However, you will still need to make sure that you are declaring the correct controller.</p>
+			<p>Another thing that you should take into consideration when programming the robot&#x27;s motors is the PWM of the motor that you are programming. You should always be sure that you 1) initialize the motor, and 2) initialize it on the right PWM! </p>
+			<p>For simplicity, the declaration of all of the components used in the code snippets below has been left out. You can assume the following: </p>
+			<pre lang="cpp">
 /** Declarations **/
 Joystick* m_gamepad;
 Victor* m_arm;
 Victor* m_launcher;
 
 /** Initialization **/
-m_gamepad = new Joystick (2);
-m_arm = new Victor (4);
-m_launcher = new Victor (6);
+m_gamepad = new Joystick (1);
+m_arm = new Victor (0);
+m_launcher = new Victor (1);
+		</pre>
 
-  </pre>
-
-<h3 class="tutorial"><a name="Moving"></a>Moving<a href="#Moving" class="section_anchor"></a></h3>
-
-<p>Controlling the drive controllers is fairly simple. For basic control, you would use the following functions: </p>
-  
-  <pre lang="cpp">Victor::Set(double speed)
+			<h3 class="tutorial"><a name="Moving"></a>Moving</h3>
+				<p>Controlling the drive controllers is fairly simple. For basic control, you would use the following functions: </p>
+				<pre lang="cpp">
+Victor::Set(double speed)
 Jaguar::Set(double speed)
 Talon::Set(double speed)
-  </pre>
+				</pre>
 
-<h3 class="tutorial"><a name="Set_parameters"></a>
-<code>Set</code> parameters<a href="#Set_parameters" class="section_anchor"></a></h3>
+				<h4 class="tutorial"><a name="Set_parameters"></a><code>Set()</code> parameters</h4>
+					<ul>
+						<li><code>double speed</code>: Relative speed of the motor, where 1.0 is full speed forward, and -1.0 is full speed reverse. Note that this depends on the orientation of the <span style="font-weight: bold;">motor</span>, and not necessarily that of the robot. Due to that, you will need to run the motor with your code to check that you have coded the proper value.</li>
+					</ul>
+				<h4 class="tutorial"><a name="Set_use"></a><code>Set()</code> use</h4>
+					<p>You can use <code>Set()</code> in a variety of ways. If you need fine control over the speed of the motor, you would use <code>Set()</code> in conjunction with a <code>GetRawAxis()</code> call from one of your controllers (almost always controller 1 -- the joysticks on controller 0 are always reserved for driving), like so:</p>
+					<pre lang="cpp">
+m_arm->Set(-m_gamepad->GetRawAxis(2)); //remember that the Y axis is backwards!!!
+					</pre>
+  					<p>The above code sets up controller 1, a <code>Victor</code> for controlling an arm on PWM 0, and then uses the left Y axis to move the arm up and down.</p>
+					<p>The other way you would use <code>Set()</code> would be to bring a motor to a specific (relative) speed. This would be useful for powering up a launcher motor, etc. There is a way to get it to run at a more specific speed, but that will be described in thorough detail throughout the next chapter. For now, stick with this method.</p>
+					<p>In this case, you would use the controller buttons (usually A, B, X, and Y) to set the speed. B should generally be your <q>cancel</q> button, or speed of 0.</p>
+					<p>You might use it like this: </p>
+  					<pre lang="cpp">
+if (m_gamepad->GetRawButton(1)) //if the A button is pressed, full forward
+    m_launcher->Set(1.0);
+else if (m_gamepad->GetRawButton(3)) //if the X button is pressed, full reverse
+    m_launcher->Set(-1.0);
+else if (m_gamepad->GetRawButton(2)) //if the B button is pressed, cancel
+    m_launcher->Set(0.0);
+					</pre>
+					<p>In this case, a button timeout would not be required, because you are setting the motor to the same value while the button is pressed.</p>
+			<h3 class="tutorial"><a name="How_Fast?"></a>How Fast?</h3>
+				<p>If you set one motor to different speeds throughout your program, or the <code>Set()</code> function is controlled by a controller joystick, you may find yourself at some point needing to figure out what that motor is currently set to. There is a function for that.</p>
+				<pre lang="cpp">
+float Victor::Get()
+float Jaguar::Get()
+float Talon::Get()
+				</pre>
+			<h3 class="tutorial"><a name="Physical_Capabilities_of_the_Robot"></a>Physical Capabilities of the Robot</h3>
+				<p>Now that you are programming things to move, you should, first of all, be aware that <span style="font-weight: bold;">things are moving</span>, so you should be even more certain that you and everyone around you know that the equipment you are working with can move and potentially cause serious injury.
+					Secondly, you should be aware of the robot&#x27;s physical capabilities while you are programming. For example, the 2013 bot&#x27;s launcher system uses motors driving wheels via belts. If the motors spin up the belts too quickly, the belt pulleys will spin inside the belt, which in turn shreds the belt. In this case, the robot was programmed to spin up more slowly. At any rate, you should be aware of potential problems such as this and be able to work around them programmatically.</p>
+		<h2 class="tutorial"><a name="The_Relay"></a>The Relay</h2>
+			<p>One of the other controllers that was mentioned in lesson 1 was the <a href="../ch1/parts.html#Spikes%2FRelays">Spike</a>, which ran off of a relay. Since these devices are basically like light switches (with the added bonus of being able to go in reverse as well), they are programmed differently.</p>
+			<p>For this section, you can further assume that two relays have been set up like this: </p>
+			<pre lang="cpp">
+Relay* m_roller;
+Relay* m_light;
+m_roller = new Relay (0);
+m_light = new Relay (1);
+			</pre>
+			<h3 class="tutorial"><a name="Relay_Set"></a>Relay <code>Set()</code></h3>
+				<p>Like the other controllers, relays use the <code>Set()</code> function. However, it is used differently than the other functions.</p>
+				<pre lang="cpp">
+Relay::Set(enum relay_state)
+				</pre>
+				<h4 class="tutorial"><a name="Relay_Set_parameters"></a>Relay <code>Set()</code> parameters</h4>
+					<ul>
+						<li><code>enum relay_state</code>: The desired state of the relay, which is one of the following: </li>
+						<ul>
+							<li><code>Relay::kOff</code>: Off </li>
+							<li><code>Relay::kForward</code>: Forward, on (for lights) </li>
+							<li><code>Relay::kReverse</code>: Reverse </li>
+						</ul>
+					</ul>
+					<p>Again, you need to be careful, as the <code>kForward</code> and <code>kReverse</code> states are determined from the wiring and the orientation of the motor.</p>
+				<h4 class="tutorial"><a name="Relay_Set_use"></a>Relay <code>Set()</code> use</h4>
+					<p>You would use <code>Set()</code> like you might expect, calling it to enable (forward or reverse) or disable the relay.</p>
+					<pre lang="cpp">
+if (m_gamepad->GetRawButton(1))
+	m_roller->Set(Relay::kForward);
+else if (m_gamepad->GetRawButton(2))
+	m_roller->Set(Relay::kReverse);
+else
+	m_roller->Set(Relay::kOff);
+					</pre>
+					<p>The above code will make a roller move in one direction if the A button is held, and in the other direction if the B button is held.</p>
+					<p>One thing that should be noted is that lights almost always are wired to relays (unless they are unmanaged). Because they are lights, you should only ever use the <code>Relay:kOff</code> and <code>Relay::kForward</code> states.</p>
+					<pre lang="cpp">
+if (m_gamepad->GetRawButton(4))
+	m_light->Set(Relay::kForward);
+else
+	m_light->Set(Relay::kOff);
+					</pre>
+					<p>The above code will turn a light on if the Y button is held.</p>
 
-<ul><li><code>double speed</code>: Relative speed of the motor, where 1.0 is full speed forward, and -1.0 is full speed reverse. Note that this depends on the orientation of the <b>motor</b>, and not necessarily that of the robot. Due to that, you will need to run the motor with your code to check that you have coded the proper value. </li></ul>
-
-<h3 class="tutorial"><a name="Set_use"></a><code>Set</code> use<a href="#Set_use" class="section_anchor"></a></h3>
-
-  <p>You can use <code>Set</code> in a variety of ways. If you need fine control over the speed of the motor, you would use <code>Set</code> in conjunction with a <code>GetRawAxis</code> from one of your controllers (almost always controller 2 -- the joysticks on controller 1 are always reserved for driving), like so: </p>
-
-  <pre lang="cpp">m_arm-&gt;Set(-m_gamepad-&gt;GetRawAxis(2)); //remember that the Y axis is backwards!!!</pre>
-  
-  <p>The above code sets up controller 2, a <code>Victor</code> for controlling an arm on PWM 4, and then uses the left Y axis to move the arm up and down. </p>
-  <p>The other way you would use <code>Set</code> would be to bring a motor to a specific (relative) speed. This would be useful for powering up a launcher motor, etc. There is another way to do this, but that will be described in thorough detail throughout the next chapter. For now, stick with this method. </p>
-  <p>In this case, you would use the controller buttons (usually A, B, X, and Y) to set the speed. B should generally be your &#x27;cancel&#x27; button, or speed of 0. </p>
-  <p>You might use it like this: </p>
-  
-  <pre lang="cpp">if (m_gamepad-&gt;GetRawButton(1)) //if the A button is pressed, full forward
-    m_launcher-&gt;Set(1.0);
-    else if (m_gamepad-&gt;GetRawButton(3)) //if the X button is pressed, full reverse
-    m_launcher-&gt;Set(-1.0);
-    else if (m_gamepad-&gt;GetRawButton(2)) //if the B button is pressed, cancel
-    m_launcher-&gt;Set(0.0);
-  </pre>
-
-  <p>In this case, a button timeout would not be required, because you are setting the motor to the same value while the button is pressed. </p>
-
-<h3><a name="How_Fast?"></a>How Fast?<a href="#How_Fast?" class="section_anchor"></a></h3 >
-
-  <p>If you set one motor to different speeds throughout your program, or the <code>Set()</code> function is controlled by a controller joystick, you may find yourself at some point needing to figure out what that motor is currently set to. There is a function for that. </p>
-  <pre lang="cpp">
-
-    float Victor::Get()
-    float Jaguar::Get()
-    float Talon::Get()
-
-  </pre>
-
-<h4><a name="Physical_Capabilities_of_the_Robot"></a>Physical Capabilities of the Robot<a href="#Physical_Capabilities_of_the_Robot" class="section_anchor"></a></h4>
-
-  <p>Now that you are programming things to move, you should, first of all, be aware that <b>things are moving</b>, so you should be even more certain that you and everyone around you know that the equipment you are working with can move and potentially cause serious injury. Secondly, you should be aware of the robot&#x27;s physical capabilities while you are programming. For example, the 2013 bot&#x27;s launcher system uses motors driving wheels via belts. If the motors spin up the belts too quickly, the belt pulleys will spin inside the belt, which in turn shreds the belt. In this case, the robot was programmed to spin up more slowly. At any rate, you should be aware of potential problems such as this. </p>
-
-<h2><a name="The_Relay"></a>The Relay<a href="#The_Relay" class="section_anchor"></a></h1>
-
-  <p>One of the other controllers that was mentioned in lesson 1 was the <a href="/p/hot67-programming-resources/wiki/WPI_Lesson1#Spikes%2FRelays">Spike</a>, which ran off of a relay. Since these devices are basically like light switches (with the added bonus of being able to go in reverse as well), they are programmed differently. </p>
-  <p>For this section, you can further assume that two relays have been set up like this: </p>
-  <pre lang="cpp">
-    Relay* m_roller;
-    Relay* m_light;
-    m_roller = new Relay (1);
-    m_roller = new Relay (2);
-  </pre>
-
-<h3><a name="Relay_Set"></a>Relay <code>Set</code><a href="#Relay_Set" class="section_anchor"></a></h3>
-
-  <p>Like the other controllers, relays use the <code>Set</code> function. However, it is used differently than the other functions. </p>
-  <pre lang="cpp">
-    Relay::Set(enum RELAY_STATE)
-  </pre>
-
-<h3 class="tutorial"><a name="Relay_Set_parameters"></a>Relay <code>Set</code> parameters</h3>
-
-  <ul>
-    <li><code>enum relay_state</code>: The desired state of the relay, which is one of the following: </li>
-  <ul>
-    <li><code>Relay::kOff</code>: Off </li>
-    <li><code>Relay::kForward</code>: Forward, on (for lights) </li>
-    <li><code>Relay::kReverse</code>: Reverse </li>
-  </ul>
-  </ul>
-
-  <p>Again, you need to be careful, as the <code>kForward</code> and <code>kReverse</code> states are determined from the wiring and the orientation of the motor.</p>
-
-
-<h3 class="tutorial"><a name="Relay_Set_use"></a>Relay <code>Set</code> use</h3>
-  <p>You would use <code>Set</code> like you might expect, calling it to enable (forward or reverse) or disable the relay. </p>
-  <pre lang="cpp">if (m_gamepad-&gt;GetRawButton(1))
-    m_roller-&gt;Set(Relay::kForward);
-    else if (m_gamepad-&gt;GetRawButton(2))
-    m_roller-&gt;Set(Relay::kReverse);
-    else
-    m_roller-&gt;Set(Relay::kOff);</pre><p>The above code will make a roller move in one direction if the A button is held, and in the other direction if the B button is held. </p><p>One thing that should be noted is that lights almost always are left on relays (unless they are unmanaged). Because they are lights, you should only ever use the <code>Relay:kOff</code> and <code>Relay::kForward</code> states. </p><pre lang="cpp">if (m_gamepad-&gt;GetRawButton(4))
-    m_light-&gt;Set(Relay::kForward);
-    else
-    m_light-&gt;Set(Relay::kOff);</pre>
-  <p>The above code will turn a light on if the Y button is held. </p>
-
-<h3 ><a name="What_State?"></a>What State?<a href="#What_State?" class="section_anchor"></a></h3>
-  <p>Similar to the previous three, Relays also have a method to get what the controller is currently set to. </p>
-  <pre lang="cpp">enum Relay::Get()</pre>
-  <p>This returns the enumeration (from <a href="/p/hot67-programming-resources/wiki/WPI_Lesson5#Relay_Set_Use">above</a>) that represents the current state of the relay. </p>
-
-<h2><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1>
-
-  <p><b>This activity is designed for the 2013 robot. Talk to someone who is familiar with the setup of other robots to write something for another robot.</b></p>
-  <p>Program the robot to do the following: </p>
-
-  
-  <ul>
-    <li>Move the plate up and down using the left Y axis. </li>
-  
-  <ul>
-    <li>PWMs: 8 and 10 </li><li>Do not invert the controller reading </li></ul>
-    <li>Bring the launcher up to full speed with the A button, and turn it off with the B button. </li>
-  
-  <ul>
-    <li>PWMs: 4-6 </li><li>Slow spin up! In order to do this, you can start a <a href="/p/hot67-programming-resources/wiki/WPI_TipsAndTricks#Timers">timer</a> and set the victors to half the timer&#x27;s value until the timer reaches 2 seconds. </li>
-
-  <ul>
-    <li>Only for spin up. Setting the motors to 0 from full is fine. </li>
-  </ul>
-  </ul>
-    <li>Turn the climb indicator light on and off with the X button. </li>
-
-  <ul>
-    <li>Relay: 2 </li>
-    <li><a href="/p/hot67-programming-resources/wiki/WPI_TipsAndTricks#Timeouts">Timeout</a>! </li>
-  </ul>
-  </ul>
-
-  <p>Don&#x27;t forget the controller deadband (0.2), as the controllers do not zero properly. To regain fine control, add the deadband (if the controller reading is negative) / subtract the deadband (if the controller reading is positive) and then multiply that value by 1.25. </p>
-<table class="wikitable">
-  
-  <tr>
-    <td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson4">Lesson 4: Using User Input</a> </td>
-    <td style="border: 1px solid #ccc; padding: 5px;"> <b>Lesson 5</b> </td>
-    <td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson6">Lesson 6: Earning Your Driver&#x27;s License: Driving</a> → </td>
-  </tr> 
-</table>
+			<h3 class="tutorial"><a name="What_State?"></a>What State?</h3>
+				<p>Similar to the previous three, Relays also have a method to get what the controller is currently set to.</p>
+				<pre lang="cpp">
+enum Relay::Get()
+				</pre>
+  				<p>This returns the enumeration (from <a href="#Relay_Set_parameters">above</a>) that represents the current state of the relay.</p>
+	</div>
+	<div id="activity">
+		<h2><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1>
+			<p style="font-weight: bold; text-align: center;">You will want to talk to someone who is familiar with the setup of your available robots to write something to run on a robot.</p>
+			<p>Program an available robot so that:</p>
+			<ul>
+				<li>One of the non-driving motors responds to input on the left Y axis</li>
+				<ul>
+					<li>Do not use one of the drivetrain motors -- there is a special method for controlling these that you will learn next lesson.</li>
+				</ul>
+				<li>A relay gets set to forward when one button is held, reverse when another button is held, and off if no button is held</li>
+				<li>If you have access to a robot with lights on a relay, turn them on when another button (not yet used) is held.</li>
+			</ul>
+			<p>The sample below describes a program for the 2013 HOTBOT.</p>
+			<button onclick="toggleDesc()" id="showDesc">Show sample</button>
+			<ul id="sampleDesc" style="display: none;">
+				<li>Move the plate up and down using the left Y axis. </li>
+				<ul>
+					<li>PWMs: 8 and 10 </li><li>Do not invert the controller reading </li>
+				</ul>
+				<li>Bring the launcher up to full speed with the A button, and turn it off with the B button. </li>
+				<ul>
+					<li>PWMs: 4-6 </li>
+					<li>Slow spin up! In order to do this, you can start a <a href="../tips-tricks.html#Timers">timer</a> and set the victors to half the timer&#x27;s value until the timer reaches 2 seconds.</li>
+					<ul>
+    					<li>Only for spin up. Setting the motors to 0 from full is fine.</li>
+  					</ul>
+				</ul>
+				<li>Turn the climb indicator light on and off with the X button. </li>
+				<ul>
+					<li>Relay: 2 </li>
+					<li><a href="../tips-tricks.html#Timeouts">Button timeout</a>!</li>
+  				</ul>
+  			</ul>
+  			<p>Don&#x27;t forget the controller deadband (0.2), as the controllers do not zero properly. To regain fine control, add the deadband (if the controller reading is negative) / subtract the deadband (if the controller reading is positive) and then multiply that value by 1.25.</p>
+  		</div>
+  			
+	<!-- NAVIGATION -->
+  	<div style="clear: both;">
+  		<hr>
+	  	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
+  		<table border="0" style="width: 100%;">
+  			<tbody>
+  				<tr>
+  					<td style="text-align: right; width: 40%;"><a href="user-input.html">&#8592; 2-1 Using User Input</a></td>
+  					<td style="text-align: center; font-weight: bold; width: 20%;">2-2 Controlling Motors</td>
+  					<td style="text-align: left; width: 40%;"><a href="driving.html">2-3 Earning Your Driver's License: Driving &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+	</div>
   
  </body>
 </html>
