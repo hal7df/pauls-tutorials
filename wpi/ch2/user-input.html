@@ -161,80 +161,80 @@ bool SmartDashboard::GetBoolean(std::string key)
 								<pre lang="cpp">
 std::string SmartDashboard::GetString(std::string key)
 								</pre>
-							<h2 class="tutorial"><a name="Implementing"></a>Implementing</h2>
-								<p style="font-weight: bold; text-align: center;">This section just clarifies use of the functions we just discussed. If you feel confident, then you may <a href="#Programming_the_Robot">skip this section</a>.</p>
-								<p>If you&#x27;re still a little confused, this section will help you understand the content better (hopefully).</p>
-								<h3 class="tutorial"><a name="Quick_Note:_Periodic_Routines"></a>Quick Note: Periodic Routines</h3>
-									<p>If you remember from <a href="../ch1/program-structure.html#Periodic_Routines">lesson 1-2</a>, <code>TeleopPeriodic()</code> will loop until the robot shuts down or another mode is entered. So, you must remember that, for the cases of this program, what you write is constantly running in a loop.
-										Because it is already looping, you should write the <code>TeleopPeriodic()</code> function as if the whole thing were a loop. So, if you write something to the driver station in <code>TeleopPeriodic()</code>, it will write to the driver station every time the CPU performs another loop.
-										<span style="font-style: italic;">Future note: that is actually good, because then you can write real-time values to the driver station.</span></p>
-								<h3 class="tutorial"><a name="Button"></a>Button</h3>
-									<p>For example, let&#x27;s look at a program that prints <q>Hello World!</q> to the driver station when, and only when, the A button is pressed.</p>
-									<p>What we need:</p>
-									<ul>
-										<li>A <code>Joystick</code> object</li>
-									</ul>
-									<pre lang="cpp">
+				<h2 class="tutorial"><a name="Implementing"></a>Implementing</h2>
+					<p style="font-weight: bold; text-align: center;">This section just clarifies use of the functions we just discussed. If you feel confident, then you may <a href="#Programming_the_Robot">skip this section</a>.</p>
+					<p>If you&#x27;re still a little confused, this section will help you understand the content better (hopefully).</p>
+					<h3 class="tutorial"><a name="Quick_Note:_Periodic_Routines"></a>Quick Note: Periodic Routines</h3>
+						<p>If you remember from <a href="../ch1/program-structure.html#Periodic_Routines">lesson 1-2</a>, <code>TeleopPeriodic()</code> will loop until the robot shuts down or another mode is entered. So, you must remember that, for the cases of this program, what you write is constantly running in a loop.
+							Because it is already looping, you should write the <code>TeleopPeriodic()</code> function as if the whole thing were a loop. So, if you write something to the SmartDashboard in <code>TeleopPeriodic()</code>, it will write to SmartDashboard every time the CPU performs another loop.
+							<span style="font-style: italic;">Future note: that is actually good, because then you can write real-time values to SmartDashboard.</span></p>
+					<h3 class="tutorial"><a name="Button"></a>Button</h3>
+						<p>For example, let&#x27;s look at a program that prints <q>Hello World!</q> to the driver station when, and only when, the A button is pressed.</p>
+						<p>What we need:</p>
+						<ul>
+							<li>A <code>Joystick</code> object</li>
+						</ul>
+						<pre lang="cpp">
 #include "WPILib.h"
 
 class Robot: public IterativeRobot
 {
 public:
-  Joystick* m_gamepad;
+	Joystick* m_gamepad;
   
-  Robot()
-  {
-    m_gamepad = new Joystick(1);
-  }
+	Robot()
+	{
+		m_gamepad = new Joystick(1);
+	}
   
-  //...
+	//...
 }
-									</pre>
-									<p>Now, we&#x27;re ready to start programming the logic. This program will only use the <code>TeleopPeriodic()</code> routine, so leave the other routines blank.</p>
-									<pre lang="cpp">
+						</pre>
+						<p>Now, we&#x27;re ready to start programming the logic. This program will only use the <code>TeleopPeriodic()</code> routine, so leave the other routines blank.</p>
+						<pre lang="cpp">
 //...
   
-  void TeleopPeriodic()
-  {
-    /** The first thing we need to do
-      * is check for a button press.
-      * Because GetRawButton() returns
-      * a bool, we can simply put it
-      * in the if statement.
-      *
-      * Remember, button A is index
-      * 1.
-      */
+	void TeleopPeriodic()
+	{
+		/** The first thing we need to do
+		  * is check for a button press.
+		  * Because GetRawButton() returns
+		  * a bool, we can simply put it
+		  * in the if statement.
+		  *
+		  * Remember, button A is index
+		  * 1.
+		  */
       
-      if (m_gamepad->GetRawButton(1))
-      {
-	/** The user has pressed the
-	  * button. Set "Hello World" on the
-	  * dashboard to true.
-	  */
+		if (m_gamepad->GetRawButton(1))
+		{
+			/** The user has pressed the
+			  * button. Set "Hello World" on the
+			  * dashboard to true.
+			  */
 	  
 			SmartDashboard::PutBoolean("Hello World",true);
-      }
-      else
-      {
-	/** The user has not pressed
-	  * the button. Set the "Hellow World"
-	  * on the dashboard to false.
-	  */
+		}
+		else
+		{
+			/** The user has not pressed
+			  * the button. Set the "Hellow World"
+			  * on the dashboard to false.
+			  */
 	  
 			SmartDashboard::PutBoolean("Hello World",false);
-      }
-  }
+		}
+	}
 
-  //...
-  									</pre>
-  								<h3 class="tutorial"><a name="Joystick"></a>Joystick</h3>
-  									<p>Now, we will write a program that prints a message to the driver station and tells if either trigger is pressed past a threshold of 0.4.</p>
-  									<p>What we need:</p>
-  									<ul>
-  										<li>A <code>Joystick</code> object</li>
-  									</ul>
-  									<pre lang="cpp">
+//...
+  						</pre>
+  					<h3 class="tutorial"><a name="Joystick"></a>Joystick</h3>
+  						<p>Now, we will write a program that prints a message to the driver station and tells if either trigger is pressed past a threshold of 0.4.</p>
+  						<p>What we need:</p>
+  						<ul>
+  							<li>A <code>Joystick</code> object</li>
+  						</ul>
+  						<pre lang="cpp">
 #include "WPILib.h"
 #include <cmath>
 /** Because we want to know if
@@ -247,33 +247,92 @@ public:
 class Robot: public IterativeRobot
 {
 public:
-  Joystick* m_gamepad;
+	Joystick* m_gamepad;
   
-  Robot()
-  {
-    m_gamepad = new Joystick(1);
-    m_dsLCD = DriverStationLCD::GetInstance();
-  }
+	Robot()
+	{
+		m_gamepad = new Joystick(1);
+	}
   
-  //...
-}</pre><p>Now, let&#x27;s run through the program&#x27;s logic. </p><pre class="prettyprint">//...
+	//...
+}
+						</pre>
+						<p>Now, let's run through the program's logic.</p>
+						<pre lang="cpp">
+//...
 
-  void TeleopPeriodic ()
-  {
-    //Easy things first...print the value of the axis to the driver station
-    m_dsLCD-&gt;Printf(DriverStationLCD::kUser_Line1,1,&quot;Left X Axis: %f&quot;,m_gamepad-&gt;GetRawAxis(1));
+	void TeleopPeriodic ()
+	{
+		//Easy things first...print the value of the axis to the driver station
+		SmartDashboard::PutNumber("Left X Axis",m_gamepad->GetRawAxis(0);
     
-    //To reduce redundancy, we will update at the very end
     
-    //Check to see if a trigger is being pressed beyond the threshold
-    if (fabs(m_gamepad-&gt;GetRawAxis(3)) &gt; 0.4)
-      m_dsLCD-&gt;Printf(DriverStationLCD::kUser_Line1,1,&quot;Trigger pressed&quot;);
-      
-    //Now we update.
-    m_dsLCD-&gt;UpdateLCD();
-  }
+		//Check to see if a trigger is being pressed beyond the threshold
+		if (fabs(m_gamepad->GetRawAxis(2)) > 0.4)
+			SmartDashboard::PutBoolean("Trigger Pressed",true);
+		else
+			SmartDashboard::PutBoolean("Trigger Pressed",false);  
+	}
   
-//...</pre><h2 class="tutorial"><a name="Programming_the_Robot"></a>Programming the Robot<a href="#Programming_the_Robot" class="section_anchor"></a></h2><p>Congratulations! You are now capable of making (the electronics on) the robot do something! Activities beyond this point will involve creating real robot programs. Again, one of the parts of programming is actually running the code to test its functionality. </p><p>This means actually downloading the code to the robot. </p><p>You may do so, provided that: </p><ul><li>You have your mentor&#x27;s approval </li><li>(You have likely already discussed this) You shout &quot;ENABLING&quot; before you enable the robot -- loud enough for everyone to hear, but not too loud so that it is the last thing they hear. You should ALWAYS do this, regardless of the fact that your program might not do anything to actuate motors, but there is always a chance that something could go badly, so you need to take every precaution. </li></ul><p>   As for actually downloading the code, this is how you do it: </p><ol><li>Build the project - Ctrl+B x2 </li><ul><li>As the programs you write grow more complex, you may need to clean as well (Project → Clean) </li></ul><li>Check the downloader preferences if you haven&#x27;t already (you don&#x27;t need to do this every time, only when you switch projects). </li><ol><li>Go to Windows → Preferences </li><li>Select &quot;FIRST Downloader Preferences&quot; </li><li>Click &quot;Browse...&quot; </li><li>Navigate to this path in your project: </li><ul><li>PPC603gnu/(ProjectName)/Debug </li></ul><li>Select this file: </li><ul><li>(ProjectName).out </li></ul><li>Click &quot;OK&quot; </li></ol><li>Make sure you are connected to the robot -- either by tether or wifi </li><li>Download the code (FIRST → Deploy) </li><ul><li>ENSURE A SECURE CONNECTION THROUGHOUT THE ENTIRETY OF THIS STEP!!!! </li></ul><li>Open the FRC Driver Station </li><li>Navigate to the Diagnostics tab </li><li>Select &quot;Reboot cRIO..&quot; </li><li>Hit &quot;OK&quot; and wait for the robot to reboot.  </li><li>Once communications and robot code are back up, you may enable. </li></ol><p>   Make sure that you are always downloading the right project when you download to the robot.    </p><h2 class="tutorial"><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>Write a program that does the following: </p><ul><li>Has a counter (use a <tt>float</tt> for this) </li><ul><li>Counts <strong>UP</strong> on press of the A button </li><li>Counts <strong>DOWN</strong> on press of the B button </li><li>Note: you will need to use a <a href="/p/hot67-programming-resources/wiki/WPI_TipsAndTricks#Timeouts">timeout</a>. </li></ul><li>Controls a <tt>float</tt> with the left joystick and triggers as follows: </li><ul><li>When the left joystick is pressed <strong>FORWARD</strong>, it counts <strong>UP</strong> at a speed determined by how far the stick is pressed forward. </li><li>When the left joystick is pulled <strong>BACKWARD</strong>, it counts <strong>DOWN</strong> at a speed determined by how far the stick is pulled back. </li><li>When the left trigger is pressed, the float becomes negative </li><li>When the right trigger is pressed, the float becomes positive </li><li>Note: many of the controllers do not zero perfectly. Use a deadband of 0.2. </li></ul><li>Print these numbers to the driver station. </li></ul><p>
+//...
+						</pre>
+				<h2 class="tutorial"><a name="Programming_the_Robot"></a>Programming the Robot</h2>
+					<p>Congratulations! You are now capable of making (the electronics on) the robot do something! Activities beyond this point will involve creating real robot programs. Again, one of the parts of programming is actually running the code to test its functionality.</p>
+					<p>This means actually downloading the code to the robot.</p>
+					<p>You may do so, provided that:</p>
+					<ul>
+						<li>You have your mentor's approval</li>
+						<li>(You have likely already discussed this) You shout <q>ENABLING</q> before you enable the robot -- loud enough for everyone to hear, but not too loud so that it is the last thing they hear. You should ALWAYS do this, regardless of the fact that your program might not do anything to actuate motors, but there is always a chance that something could go badly, so you need to take every precaution.</li>
+					</ul>
+					<p>As for actually downloading the code, this is how you do it:</p>
+					<ol>
+						<li>Build the project - Ctrl+B</li>
+						<ul>
+							<li>As the programs you write grow more complex, you may need to clean as well (Project &gt; Clean)</li>
+						</ul>
+						<li>Check the downloader preferences if you haven&#x27;t already (you don&#x27;t need to do this every time, only when you switch projects).</li>
+						<li>Make sure you are connected to the robot -- either by tether or wifi.</li>
+						<li>Download the code (Run &gt; WPILib C++ Deployment)</li>
+						<ul>
+							<li>ENSURE A SECURE CONNECTION THROUGHOUT THE ENTIRETY OF THIS STEP!!!!</li>
+						</ul>
+						<li>Once the robot code is back up, you may enable.</li>
+					</ol>
+					<p>Make sure that you are always downloading the right project when you download to the robot.</p>
+				<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
+					<p>Write a program that does the following:</p>
+					<ul>
+						<li>Has a counter (use a <code>float</code> for this)</li>
+						<ul>
+							<li>Counts <span style="font-weight: bold;">UP</span> on press of the A button</li>
+							<li>Counts <span style="font-weight: bold;">DOWN</span> on press of the B button</li>
+							<li>Note: you will need to use a <a href="../tips-tricks#Timers">timeout</a>.</li>
+						</ul>
+						<li>Controls a <code>float</code> with the left joystick and triggers as follows:</li>
+						<ul>
+							<li>When the left joystick is pressed <span style="font-weight: bold;">FORWARD</span>, it counts <span style="font-weight: bold;">UP</span> at a speed determined by how far the stick is pressed forward.</li>
+							<li>When the left joystick is pulled <span style="font-weight: bold;">BACKWARD</span>, it counts <span style="font-weight: bold;">DOWN</span> at a speed determined by how far the stick is pulled back.</li>
+							<li>When the left trigger is pressed in, the float becomes negative</li>
+							<li>When the right trigger is pressed in, the float becomes positive</li>
+							<li>Note: many of the controllers do not zero perfectly. Use a deadband of 0.2.</li>
+						</ul>
+						<li>Print these numbers to SmartDashboard.</li>
+					</ul>
 	</div>
+	
+	<!-- NAVIGATION -->
+  	<div style="clear: both;">
+  		<hr>
+	  	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
+  		<table border="0" style="width: 100%;">
+  			<tbody>
+  				<tr>
+  					<td style="text-align: right; width: 40%;"><a href="../ch2.html">&#8592; Chapter 2 Overview</a></td>
+  					<td style="text-align: center; font-weight: bold; width: 20%;">2-1 Using User Input</td>
+  					<td style="text-align: left; width: 40%;"><a href="motors.html">2-2 Controlling Motors &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
   </body>
 </html>
