@@ -1,102 +1,147 @@
-
- 
-
-
-
- 
-
-
-
 <html>
  <head>
- <title>WPI_TipsAndTricks</title>
+ 	<title>Tips and Tricks (WPI)</title>
+ 	<link rel="stylesheet" type="text/css" href="../style.css"/>
  </head>
  <body>
- 
-
-
-
-
-<div id="wikipage">
-<table>
- <tr>
- 
- 
- <td style="vertical-align:top; padding-left:5px">
- 
- <div id="wikiheader">
- 
- <span style="font-size:120%;font-weight:bold">WPI_TipsAndTricks</span>
- &nbsp;
- <div> 
- 
- <i>Tips and Tricks</i>
- 
- 
- 
- <div id="wikiauthor" style="float:right">
- Updated <span title="Sun Dec 29 20:40:07 2013">
- Dec 29, 2013</span>
- 
- by 
-
- <a class="userlink"
- href="/u/112633510208610089649/">hal...@gmail.com</a
->
- 
- </div>
- </div>
- </div>
- 
- <div id="wikicontent">
- <div class="vt" id="wikimaincol">
- <p>This page is intended to provide useful information that is either too long to explain in the main tutorial or would not otherwise be included in any lesson. All of these require a certain level of understanding in order to be used. Like the other page, that will be listed below the header. </p><p>Note that the levels listed here are the <strong>absolute minimum</strong> levels of knowledge you will need to implement them. It may be easier for you to learn them at a later time. </p><p>If you have not reached lesson 4 yet, you may want to read the note about <a href="/p/hot67-programming-resources/wiki/WPI_Lesson4#Function_Presentation">how functions are presented in this tutorial</a>. </p><p><ul><li><a href="#Defined_Constants">Defined Constants</a></li><ul><li><a href="#The_Header_Definition">The Header Definition</a></li><li><a href="#Use">Use</a></li><li><a href="#Why?">Why?</a></li></ul><li><a href="#Timers">Timers</a></li><ul><li><a href="#Managing_the_timer">Managing the timer</a></li><li><a href="#Checking_the_timer">Checking the timer</a></li></ul><li><a href="#Timeouts">Timeouts</a></li><ul><li><a href="#Timer">Timer</a></li><li><a href="#Intelligent_Loop_Counter">Intelligent Loop Counter</a></li></ul></ul> </p><h1><a name="Defined_Constants"></a>Defined Constants<a href="#Defined_Constants" class="section_anchor"></a></h1><p><strong>Required Level: Lesson 1</strong> </p><p>You may have noticed in Lesson 4 that a file called &quot;<a href="https://code.google.com/p/hot67-programming-resources/source/browse/trunk/tutorial/Defines.h" rel="nofollow">Defines.h</a>&quot; was mentioned. This header file creates alias terms for the button and axis indicies that are more easily understood by humans. This section will explain exactly how it works, and how you would implement them. </p><p>You can read more about constants <a href="http://www.cplusplus.com/doc/tutorial/constants/" rel="nofollow">here</a>. </p><h2><a name="The_Header_Definition"></a>The Header Definition<a href="#The_Header_Definition" class="section_anchor"></a></h2><p>Aside from providing functions and other utilities for use in a source file, header files can also define specific values that can be accessed using a name in ALL_CAPS_WITH_NO_SPACES. A sample header definition is given below. </p><pre class="prettyprint">#define MY_NUMBER 4</pre><p>Essentially, we are telling the compiler&#x27;s preprocessor to create a constant called <tt>MY_NUMBER</tt>, with a value of 4. The compiler will then replace any instance of <tt>MY_NUMBER</tt> in associated code with 4. </p><p>Remember that you need to include the header file in all other files with which you intend to use the constant. </p><h2><a name="Use"></a>Use<a href="#Use" class="section_anchor"></a></h2><p>The use of the header definition is quite simple. Simply write it instead of its value. So, if we had the function <tt>void MyFunction(int)</tt>, and we wanted to pass it <tt>MY_NUMBER</tt>, you would simply write: </p><pre class="prettyprint">MyFunction(MY_NUMBER);</pre><p>This would be equivalent to calling <tt>MyFunction(4)</tt>.  </p><h2><a name="Why?"></a>Why?<a href="#Why?" class="section_anchor"></a></h2><p>The use of a header definition depends on the application of the header file itself. In our case, we are using it to turn seemingly arbitrary numbers into a more easily understood format. If you were writing a library, you would use a header definition to avoid the difference of values that occurs between platforms. </p><h1><a name="Timers"></a>Timers<a href="#Timers" class="section_anchor"></a></h1><p><strong>Required Level: Lesson 3</strong> </p><p>If you remember from Lesson 3, there was a <tt>Timer</tt> object that could be used to time events. This section will teach you how to use it. </p><h2><a name="Managing_the_timer"></a>Managing the timer<a href="#Managing_the_timer" class="section_anchor"></a></h2><p>The <tt>Timer</tt> object comes with the following functions to manage the timer: </p><pre class="prettyprint">void Timer::Start()
+ 	<!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">WPI</span>&nbsp;&nbsp;Tips and Tricks</h1>
+  	<hr />
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="../wpi.html" title="WPILib Tutorial">WPILib Tutorial</a>
+ 		&gt;&nbsp;Tips and Tricks
+  		</div>	
+  	<hr />
+  	
+  	<!-- PAGE CONTENT -->
+	<div id="intro">
+ 		<p>This page is intended to provide useful information that is either too long to explain in the main tutorial or would not otherwise be included in any lesson. All of these require a certain level of understanding in order to be used. Like the tips and tricks page from the other tutorial, that will be listed below the header for each section.</p>
+ 		<p>Note that the levels listed here are the <span style="font-weight: bold;">absolute minimum</span> levels of knowledge you will need to implement them. It may be easier for you to learn them at a later time.</p>
+ 		<p>If you have not reached lesson 2-1 yet, you may want to read the note about <a href="ch2/user-input.html">how functions are presented in this tutorial</a>.</p>
+	</div>
+	<div id="toc">
+ 		<ul>
+ 			<li><a href="#Defined_Constants">Defined Constants</a></li>
+ 			<ul>
+ 				<li><a href="#The_Header_Definition">The Header Definition</a></li>
+ 				<li><a href="#Use">Use</a></li>
+ 				<li><a href="#Why?">Why?</a></li>
+ 			</ul>
+ 			<li><a href="#Timers">Timers</a></li>
+			<ul>
+ 				<li><a href="#Managing_the_timer">Managing the timer</a></li>
+ 				<li><a href="#Checking_the_timer">Checking the timer</a></li>
+ 			</ul>
+ 			<li><a href="#Timeouts">Timeouts</a></li>
+ 			<ul>
+ 				<li><a href="#Timer">Timer</a></li>
+ 				<li><a href="#Button_Watching_Timeout">Button Watching Timeout</a></li>
+ 			</ul>
+ 		</ul>
+ 	</div>
+ 	<div id="tcontent">
+ 		<h2 class="tutorial"><a name="Defined_Constants"></a>Defined Constants</h2>
+ 			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+ 			<p>You may have noticed in Lesson 2-1 that a file called <q><a href="http://www.hotteam67.org/wp-content/uploads/2015/01/Defines.h" target="_blank">Defines.h</a></q> was mentioned. This header file creates alias terms for the button and axis indices that are more easily understood by humans. This section will explain exactly how it works, and how you would implement them.</p>
+ 			<p>You can read more about constants <a href="http://www.cplusplus.com/doc/tutorial/constants/" target="_blank">here</a>.</p>
+			<h3 class="tutorial"><a name="The_Header_Definition"></a>The Header Definition</h3>
+				<p>Aside from providing functions and other utilities for use in a source file, header files can also define specific values that can be accessed using a custom name. Usually, this name is written in <code>ALL_CAPS_WITH_NO_SPACES</code>, utilizing underscores if necessary. A sample header definition is given below.</p>
+				<pre lang="cpp">
+#define MY_NUMBER 4
+				</pre>
+				<p>Essentially, we are telling the compiler's preprocessor to create a constant called <code>MY_NUMBER</code>, with a value of 4. The compiler will then replace any instance of <code>MY_NUMBER</code> in associated code with the number 4.</p>
+				<p>Remember that you need to include the header file in all other files with which you intend to use the constant.</p>
+			<h3 class="tutorial"><a name="Use"></a>Use</h3>
+				<p>The use of the header definition is quite simple. Simply write it instead of its value. So, if we had the function <code>void MyFunction(int)</code>, and we wanted to pass it <code>MY_NUMBER</code>, you would simply write:</p>
+				<pre lang="cpp">
+MyFunction(MY_NUMBER);
+				</pre>
+				<p>This would be equivalent to calling <code>MyFunction(4)</code>.</p>
+			<h3 class="tutorial"><a name="Why?"></a>Why?</h3>
+				<p>The use of a header definition depends on the application of the header file itself. In our case, we are using it to turn seemingly arbitrary numbers into a more easily understood format. If you were writing a library, you might use a header definition to avoid the difference of values that occurs between platforms.</p>
+		<h2 class="tutorial"><a name="Timers"></a>Timers</h2>
+			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-3</p>
+			<p>If you remember from Lesson 1-3, there was a <code>Timer</code> object that could be used to time events. This section will teach you how to use it.</p>
+			<h3 class="tutorial"><a name="Managing_the_timer"></a>Managing the timer</h3>
+				<p>The <code>Timer</code> object comes with the following functions to manage the timer:</p>
+				<pre lang="cpp">
+void Timer::Start()
 void Timer::Stop()
-void Timer::Reset()</pre><p>Obviously, you would use these whenever you wanted to start, stop, or reset the timer, respectively. However, the operation of the timer isn&#x27;t that foolproof. </p><p>For one, you should keep in mind that the <tt>Reset()</tt> function does <strong>not</strong> stop the timer if it is running. The timer will continue to run, should you only call the <tt>Reset()</tt> function. </p><p>Secondly, the <tt>Timer</tt> object does not always function as planned. It has some issues, and as such, it should become habitual that you call the <tt>Stop()</tt> and <tt>Reset()</tt> functions (back-to-back, in that order) if you need to reset the timer, anyway. Should that not work, then call <tt>Stop()</tt>, <tt>Start()</tt>, and <tt>Reset()</tt> (the first two can switch, depending if you need the timer to continue running or not). Should that not work, then another course of action might be advisable. </p><p>You should note that an initialized timer that has not been started yet will have a value of 0, so, depending on what exactly you are using the <tt>Timer</tt> for, you may need to call the <tt>Start()</tt> function in the class constructor after in initializing the timer. </p><h2><a name="Checking_the_timer"></a>Checking the timer<a href="#Checking_the_timer" class="section_anchor"></a></h2><p>Of course, a timer would be not useful if it did not have some way to access its time. </p><pre class="prettyprint">double Timer::Get()
-bool Timer::HasPeriodPassed(double period)</pre><p>The <tt>Get()</tt> function simply accesses the time (in seconds) that the timer has counted. </p><p>The <tt>HasPeriodPassed()</tt> function is like checking to see if the timer has gone off, so to speak. Its only parameter is the length, in seconds, of the timed period. Note that (it is my understanding that) <tt>HasPeriodPassed</tt> will continue to return <tt>true</tt> once the defined period has passed. In order to make it return false again, you need to reset the timer. </p><h1><a name="Timeouts"></a>Timeouts<a href="#Timeouts" class="section_anchor"></a></h1><p><strong>Required Level: Lesson 4</strong>  </p><p>One of the downsides of the <tt>GetRawButton()</tt> function is that it returns true if there is a button pressed, regardless of how long that it has been pressed for. Because the cRIO is running the <tt>TeleopPeriodic()</tt> routine in a loop, one button press in the driver&#x27;s point of view may register anywhere from 5 to 20 times in the cRIO. Due to that, manipulating variables by set amounts (incrementing/decrementing) is trickier than it sounds. This section discusses how to create a button timeout. </p><p>There are two methods to do this. </p><h2><a name="Timer"></a>Timer<a href="#Timer" class="section_anchor"></a></h2><p><strong>Requires knowledge of how to use a <a href="/p/hot67-programming-resources/wiki/WPI_TipsAndTricks#Timers">timer</a>.</strong> </p><p>This method is the preferred method for implementing a timeout, as how long the timeout lasts will remain constant with a timer. However, this method is also less robust than the other, due to the generally high maintenance level of the <tt>Timer()</tt> object. </p><h3><a name="Required_Objects"></a>Required Objects<a href="#Required_Objects" class="section_anchor"></a></h3><ul><li>A <tt>Timer</tt> </li><li>A <tt>Joystick</tt> </li></ul><p>   </p><h3><a name="Creating_a_Timeout_with_a_Timer"></a>Creating a Timeout with a <tt>Timer</tt><a href="#Creating_a_Timeout_with_a_Timer" class="section_anchor"></a></h3><p>For simplicity&#x27;s sake, let&#x27;s assume that you have already declared and initialized the above objects. </p><p>The first thing that you should do when creating any timeout is check to see if the timeout has passed. This may seem odd at first, as when the <tt>TeleopPeriodic()</tt> routine is first entered, the timeout will not have occurred. However, you need to rembember that the same code will run over and over. Think 4<sup>th</sup>-dimensionally! </p><p>Here, we will use the <tt>HasPeriodPassed()</tt> function. A half a second should do for the timeout period. You should not forget that the timer will have a value of 0 upon entering the <tt>TeleopPeriodic()</tt> routine unless you start the timer at initialization. </p><p>Once you have confirmed that it is OK to check for a button press (either the timer has past the timeout or the timeout has not been started yet), check for one. If there is a button press, then run the action you need to run on the button press, then stop, start, and reset the timer (to ensure proper function). </p><pre class="prettyprint">//Assume that the Timer m_timer has been initialized and started in the class constructor.
+void Timer::Reset()
+				</pre>
+				<p>Obviously, you would use these whenever you wanted to start, stop, or reset the timer, respectively. However, the operation of the timer isn't that foolproof.</p>
+				<p>For one, you should keep in mind that the <code>Reset()</code> function does <span style="font-weight: bold;">not</span> stop the timer if it is running. The timer will continue to run, should you only call the <code>Reset()</code> function.</p>
+				<p>Secondly, the <code>Timer</code> object does not always function as planned. It has some issues, and as such, it should become habitual that you call the <code>Stop()</code> and <code>Reset()</code> functions (back-to-back, in that order) if you need to reset the timer, anyway. Should that not work, then call <code>Stop()</code>, <code>Start()</code>, and <code>Reset()</code> (the first two can switch, depending if you need the timer to continue running or not). Should that not work, then another course of action might be advisable.</p>
+				<p>You should note that an initialized timer that has not been started yet will have a value of 0, so, depending on what exactly you are using the <code>Timer</code> for, you may need to call the <code>Start()</code> function in the class constructor after in initializing the timer.</p>
+			<h3 class="tutorial"><a name="Checking_the_timer"></a>Checking the timer</h3>
+				<p>Of course, a timer would be not useful if it did not have some way to access its time.</p>
+				<pre lang="cpp">
+double Timer::Get()
+bool Timer::HasPeriodPassed(double period)
+				</pre>
+				<p>The <code>Get()</code> function simply accesses the time (in seconds) that the timer has counted.</p>
+				<p>The <code>HasPeriodPassed()</code> function is like checking to see if the timer has gone off, so to speak. Its only parameter is the length, in seconds, of the timed period. Note that <code>HasPeriodPassed()</code> will continue to return <code>true</code> once the defined period has passed. In order to make it return false again, you need to reset the timer.</p>
+		<h2 class="tutorial"><a name="Timeouts"></a>Timeouts</h2>
+			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 2-1</p>
+			<p>One of the downsides of the <code>GetRawButton()</code> function is that it returns <code>true</code> if there is a button pressed, regardless of how long that it has been pressed for. Because the roboRIO is running the <code>TeleopPeriodic()</code> routine in a loop, one button press in the driver's perspective may register anywhere from 5 to 20 times in the roboRIO. Due to that, manipulating variables by set amounts (incrementing/decrementing) is trickier than it sounds. This section discusses how to create a button timeout.</p>
+			<p>It is recommended that you create a wrapper class to handle the timeout, as it makes keeping track of the button press a lot cleaner.</p>			
+			<p>There are two methods to do this.</p>
+			<h3 class="tutorial"><a name="Timer"></a>Timer</h3>
+				<p style="font-weight: bold; text-align: center;">Requires knowledge of how to use a <a href="#Timers">timer</a>.</p>
+				<p>This method is the easier method to implement, since it only requires checking the timer. However, this method is also less robust than the other, due to the generally high maintenance level of the <code>Timer()</code> object.</p>
+				<h4 class="tutorial"><a name="Required_Objects"></a>Required Objects</h4>
+					<ul>
+						<li>A <code>Timer</code></li>
+						<li>A <code>Joystick</code></li>
+					</ul>
+				<h4 class="tutorial"><a name="Creating_a_Timeout_with_a_Timer"></a>Creating a Timeout with a <code>Timer</code></h4>
+					<p>For simplicity&#x27;s sake, let&#x27;s assume that you have already declared and initialized the above objects.</p>
+					<p>The first thing that you should do when creating any timeout is check to see if the timeout parameters have passed. This may seem odd at first, as when the <code>TeleopPeriodic()</code> routine is first entered, the timeout will not have occurred. However, you need to rembember that the same code will run over and over. Think 4<sup>th</sup>-dimensionally!</p>
+					<p>Here, we will use the <code>HasPeriodPassed()</code> function. A half a second should do for the timeout period. You should not forget that the timer will have a value of 0 upon entering the <code>TeleopPeriodic()</code> routine unless you start the timer at initialization.</p>
+					<p>Once you have confirmed that it is OK to check for a button press (either the timer has past the timeout or the timeout has not been started yet), check for one. If there is a button press, then run the action you need to run on the button press, then stop, start, and reset the timer (to ensure proper function).</p>
+					<pre lang="cpp">
+//Assume that the Timer m_timer has been initialized and started in the class constructor.
 
-if (m_timer-&gt;HasPeriodPassed(0.5))
+if (m_timer->HasPeriodPassed(0.5))
 {
-  if (m_joystick-&gt;GetRawButton(1))
-  { 
-    //run the action...
-    m_timer-&gt;Stop();
-    m_timer-&gt;Start();
-    m_timer-&gt;Reset();
-  }
-}</pre><p>Because the timer is running on its own, that is all you need to do to implement a button timeout with a <tt>Timer()</tt>. </p><h2><a name="Intelligent_Loop_Counter"></a>Intelligent Loop Counter<a href="#Intelligent_Loop_Counter" class="section_anchor"></a></h2><p>This method is more robust than the previous one, as it relies purely on hard-coded logic and simple variables. However, the timeout will not be a constant value, it depends on how fast the cRIO loops -- which is loosely dependent on what you have the robot programmed to do. </p><h3><a name="Required_Variable"></a>Required Variable<a href="#Required_Variable" class="section_anchor"></a></h3><ul><li>An <tt>int</tt> to count CPU loops </li></ul><p>   </p><h3><a name="Creating_a_Timeout_with_an_Intelligent_Loop_Counter"></a>Creating a Timeout with an Intelligent Loop Counter<a href="#Creating_a_Timeout_with_an_Intelligent_Loop_Counter" class="section_anchor"></a></h3><p>The first thing that should be noted is that this particular method relies on the fact that the timeout is underway if the loop counter is a non-zero value. Due to this, you need to increase the loop counter on the loop the button press was first detected. This loop should <strong>not</strong> be counted as part of the timeout, so you need to add 1 to your number of loops when you run a check. </p><p>The most efficient way to achieve this is using a <tt>switch</tt>/<tt>case</tt> statement (click <a href="/p/hot67-programming-resources/wiki/CPP_Lesson4">here</a> for a review). You need to check for the following values: </p><ul><li>0 </li><li>16 </li></ul><p>   However, this only covers a) if it is OK to check for a button press, and b) if the timeout has past and the loop counter needs to be reset. You still need to increment the loop counter during the timeout. Because this will happen when the counter has a value of anywhere between 1 and 15, use a <tt>default</tt> label to increment the counter. </p><pre class="prettyprint">  //assume that int m_loopCounter has been declared and initialized with a value of 0
-  
-  switch (m_loopCounter)
-  {
-    case 0:
-      if (m_joystick-&gt;GetRawButton(1))
-      {
-	//run the action...
-	
-	//start the timeout
-	m_loopCounter++;
-      }
-      break;
-    case 16:
-      //timeout is over, reset the counter
-      m_loopCounter = 0;
-      break;
-    default:
-      m_loopCounter++;
-      break;
-  }</pre>
- </div>
- </div>
- </td><tr>
-</table>
- </div>
-
-
-
-<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
-
-
-
+	if (m_joystick->GetRawButton(1))
+	{ 
+		//run the action...
+		m_timer->Stop();
+		m_timer->Start();
+		m_timer->Reset();
+	}
+}
+					</pre> 
+					<p>Because the timer is running on its own, that is all you need to do to implement a button timeout with a <code>Timer()</code>.</p>
+			<h3 class="tutorial"><a name="Button Watching Timeout"></a>Button Watching Timeout</h3>
+				<p>This method is more robust than the previous one, in large part because it does not rely on a timer. This method also allows for you to easily keep track of individually pressed buttons. It will also not register a long hold as several presses (a <code>Timer</code> timeout will). However, it is slightly harder to implement.</p>
+				<h4 class="tutorial"><a name="Required_Variable"></a>Required Variable</h4>
+					<ul>
+						<li>A <code>bool</code> to keep track of the button press</li>
+					</ul>
+				<h4 class="tutorial"><a name="Creating_a_Button_Watching_Timeout"></a>Creating a Button Watching Timeout</h4>
+					<p>This method is not a true timeout, in the sense that it does not actually keep track of time throughout its function. There are two steps to implementing a button watching timeout.</p>
+					<p>The first step is to check for a button press. While you are checking for a button press, you also need to check to see if the button is currently being held down, using the bool flag that you declared.</p>
+					<p>Should that pass, then perform your action. Then, set your button flag to <code>true</code>.</p>
+					<p>Assuming you have a <code>Joystick</code> named <code>m_joystick</code> and a <code>bool</code> named <code>m_pressed</code>:</p>
+					<pre lang="cpp">
+if (m_joystick->GetRawButton(1) && !m_pressed)
+{
+	//perform action
+	m_pressed = true;
+}
+					</pre>
+					<p>The second step is to check and see if the button has been released. This can be done by inverting the boolean statements in the <code>if</code> statement in the previous step. If that condition passes, then reset the flag.</p>
+					<pre lang="cpp">
+if (!m_joystick->GetRawButton(1) && m_pressed)
+{
+	m_pressed = false;
+}
+					</pre>
+					<p>In this case, once the driver releases the button, the second step will pass, which will enable the first step to register a button press again.</p>
+  </div>
  </body>
 </html>
 
