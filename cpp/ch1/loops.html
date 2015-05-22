@@ -2,35 +2,27 @@
   <head>
     <title>1-3 Loops (C++)</title>
     <meta content="">
-    <style>
-    body {
-    	background-color: #000000;
-    	color: #ffffff;
-    	font-family: Arial, Helvetica, sans-serif;
-    }
-    h2 {
-    	text-align: center;
-    }</style>
+    <link rel="stylesheet" type="text/css" href="../../style.css" />
   </head>
   <body>
   <!-- PAGE HEADER -->
-	<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2014/06/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+	<h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">1-3</span>&nbsp;Loops</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/cpp" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
- 		&gt;&nbsp;Chapter 1&nbsp;&gt;&nbsp;Lesson 3
+  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="../../" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
+ 		&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 3
   		</div>	
   	<hr />
   	
   	<!-- PAGE CONTENT -->
   	
   	<div id="reading" style="width: 50%; float: left;">
-  		<h2>Reading</h2>
+  		<h2 class="tutorial">Reading</h2>
   		<p>Go here: <br /> <a href="http://www.cplusplus.com/doc/tutorial/control/#loops" target="_blank">Loops</a><br /> and read through to the end of the 
   			section titled "Iteration statements (loops)".</p>
   		
-  		<h3>Extra Reading</h3>
+  		<h3 class="tutorial">Extra Reading</h3>
   		<ul>
   			<li><a href="http://www.cprogramming.com/tutorial/lesson3.html" target="_blank">CProgramming page</a></li>
   		</ul>
@@ -45,28 +37,26 @@
   	<div id="practice" style="width: 100%;">
   		<h2>Practice</h2>
   			<p>Once you feel comfortable with the above content, complete the following practice programs.</p>
-  			<h3>Tip: <code>printf()</code></h3>
-  				<p>For the following programs, you may want to look at the <a href="tips-tricks.html#printf" target="_blank"><code>printf()</code></a> function as an alternative output method.</p>
-  			<h3><a name="Counter"></a>Counter</h3>
+  			<h3 class="tutorial"><a name="Counter"></a>Counter</h3>
   				<p>Create a <span style="font-weight: bold;"><code>for</code> loop</span> that counts 1 to 101.  Count up by 4.  Display the number each time it goes through the loop.</p>
-  			<h3><a name="Counterintuitive_Exit"></a>Counterintuitive Exit</h3>
+  			<h3 class="tutorial"><a name="Counterintuitive_Exit"></a>Counterintuitive Exit</h3>
   				<p>Create a <span style="font-weight: bold;"><code>do-while</code> loop</span> that asks the user if they would like to quit the program. Keep on asking the question until the user says no. 
   					If the user does not enter a proper response (yes or no), tell the user they entered an improper answer and ask if they would like to quit again. </p>
-  			<h3><a name="Right_Triangle"></a>Right Triangle</h3>
+  			<h3 class="tutorial"><a name="Right_Triangle"></a>Right Triangle</h3>
   				<p>Write a program to print this triangle: </p>
-  				<pre>
-+
-++
-+++
-++++
-+++++
-++++++
-+++++++
-++++++++
-+++++++++
+  				<blockquote class="tutorialexample">
++<br>
+++<br>
++++<br>
+++++<br>
++++++<br>
+++++++<br>
++++++++<br>
+++++++++<br>
++++++++++<br>
 ++++++++++
-         	</pre>
-         	<p>Don&#x27;t use ten printf statements; use <span style="font-weight: bold;">two nested loops</span> (a loop in a loop) instead.
+         	</blockquote>
+         	<p>Don&#x27;t use ten cout statements; use <span style="font-weight: bold;">two nested loops</span> (a loop in a loop) instead.
          		You&#x27;ll have to use braces around the body of the outer loop if it contains multiple statements:</p>
          	<pre lang="cpp" escaped="true">
 for(i = 1; i &lt;= 10; i = i + 1)
@@ -75,11 +65,10 @@ for(i = 1; i &lt;= 10; i = i + 1)
  	 * can go in here */
 }
          	</pre>
-         	<p>(Hint: a string you hand to <code>printf</code> or <code>cout</code> does not have to contain the newline character <code>\n</code>, or in the case of 
-         		<code>cout</code>, the newline function <code>endl</code>).</p>
-       <h4><a name="Extra_Practice"></a>Extra Practice</h4>
+         	<p>(Hint: a string you hand to <code>cout</code> does not have to contain the newline character <code>\n</code> or the newline function <code>endl</code>).</p>
+       <h4 class="tutorial"><a name="Extra_Practice"></a>Extra Practice</h4>
        	<p>Rewrite this program to allow the user to pick the height of the triangle, still following the same line pattern. You may want to use an <code>unsigned int</code> in combination with an
-       		<a href="tips-tricks.html#Input_Validation" target="_blank">input check</a> to prevent the user from creating impossible triangles.</p>
+       		<a href="../../tips-tricks#Input_Validation" target="_blank">input check</a> to prevent the user from creating impossible triangles.</p>
   	</div>
   	<hr />
   	
@@ -88,9 +77,9 @@ for(i = 1; i &lt;= 10; i = i + 1)
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="if-else.html">&#8592;&nbsp;1-2 If and Else</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="../if-else">&#8592; 1-2 If and Else</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">1-3 Loops</td>
-  				<td style="text-align: left; width: 40%;"><a href="switch-case.html">1-4 Switch/Case Statements &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="../switch-case">1-4 Switch/Case Statements &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>  

@@ -2,26 +2,17 @@
   <head>
     <title>1-1 Basics of C++ (C++)</title>
     <meta content="">
-    <style>
-    body {
-    	background-color: #000000;
-    	color: #ffffff;
-    	font-family: Arial, Helvetica, sans-serif;
-    }
-    h2 {
-    	text-align: center;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../style.css" />
   </head>
   <body>
   
   <!-- PAGE HEADER -->
-	<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2014/06/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+	<h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">1-1</span>&nbsp;Basics of C++</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/cpp" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
- 		&gt;&nbsp;Chapter 1&nbsp;&gt;&nbsp;Lesson 1
+  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="../../" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
+ 		&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 1
   		</div>	
   	<hr />
   	
@@ -56,69 +47,69 @@
   	
   	<div id="specialtopic" style="clear:both;">
   		<br>
-  		<h2><a name="Debugging_and_Fixing_Errors"></a>Debugging and Fixing Errors</h2>
+  		<h2 class="tutorial"><a name="Debugging_and_Fixing_Errors"></a>Debugging and Fixing Errors</h2>
   			<p>When you start building programs, you may notice that your compiler may spit errors at you and not build your program, for example:</p>
-  			<pre>
-	math1.cpp: In function 'int main()':
-	math1.cpp:9:12: error: 'z' was not declared in this scope
-	math1.cpp:11:1: error: expected ';' before 'return'
-	math1.cpp:11:8: error: expected '}' at end of input
-			</pre>
-			<p>The errors that you get may look different depending on which compiler you use (what is shown above is from G++, which is what Eclipse uses).
+  			<blockquote class="tutorialexample">
+	math1.cpp: In function 'int main()':<br>
+	math1.cpp:9:12: error: 'z' was not declared in this scope<br>
+	math1.cpp:11:1: error: expected ';' before 'return'<br>
+	math1.cpp:11:8: error: expected '}' at end of input<br>
+			</blockquote>
+			<p>The errors that you get may look different depending on which compiler you use (what is shown above is from G++, which is what Eclipse and Code::Blocks use).
 				However, it is important that you know how to fix these errors. This section will show you how to deal with these errors.</p>
 			<p>Let's look at how to fix some of these errors.</p>
-			<h3><a name="Errors"></a>Errors</h3>
-				<h4><a name="Finding_the_error"></a>Finding the error</h4>
+			<h3 class="tutorial"><a name="Errors"></a>Errors</h3>
+				<h4 class="tutorial"><a name="Finding_the_error"></a>Finding the error</h4>
 					<p>Whenever you are given an error, whatever compiler you use should always tell you where the error is. It is important that you know how to determine where the error is.
 						Below are two examples of how to do this with two compilers, G++ and Visual Studio.</p>
-					<h5><a name="G++"></a>G++</h5>
-						<pre>
+					<h5 class="tutorial"><a name="G++"></a>G++</h5>
+						<blockquote class="tutorialexample">
 source_file.cpp:line:character: error...
-						</pre>
-						<p>Here, G++ will give you the name of the file that it found the error is in, the line number, the character from the left, and then it tells you the problem.</p>
-					<h5><a name="Visual_Studio"></a>Visual Studio</h5>
-					<pre>
+						</blockquote>
+						<p>Here, G++ will give you the name of the file that it found the error in, the line number, the character from the left, and then it tells you the problem.</p>
+					<h5 class="tutorial"><a name="Visual_Studio"></a>Visual Studio</h5>
+					<blockquote class="tutorialexample">
 \source_file.cpp(line): error...
-					</pre>
+					</blockquote>
 					<p>Here, Visual Studio tells you the name of the file that it found the error in, the line number in parentheses, and then the problem.</p>
-				<h4><a name="Common_errors"></a>Common errors</h4>
+				<h4 class="tutorial"><a name="Common_errors"></a>Common errors</h4>
 					<p style="font-style: italic;">Note: The errors shown below are examples of errors given by G++. If you are using a different compiler, the language will look slightly different.</p>
-					<h5><code>&#x27;variable&#x27; was not declared in this scope</code></h5>
+					<h5 class="tutorial"><code>&#x27;variable&#x27; was not declared in this scope</code></h5>
 						<p>You did not declare that variable in the current context (given by <code>In function:</code> or <code>In scope:</code>). There are usually three reasons for this error:</p>
 						<ul>
 							<li>You forgot to declare that variable.</li>
 							<li>You misspelled that variable or its declaration. </li>
 							<li>You omitted a semicolon at the end of the declaration of the variable directly before this one.</li>
 						</ul>
-					<h5><code>expected &#x27;something&#x27; before &#x27;key word&#x27;</code></h5>
+					<h5 class="tutorial"><code>expected &#x27;something&#x27; before &#x27;key word&#x27;</code></h5>
 						<p>You omitted an important character. These are most often semicolons (<code>;</code>), but they can be other symbols.</p>
 						<p>Your compiler should also give you key words (<code>return</code>, a variable name, etc) as to where the error is in addition to the line and character number.</p>
-				<h4><a name="Additional_errors"></a>Additional errors</h4>
+				<h4 class="tutorial"><a name="Additional_errors"></a>Additional errors</h4>
 					<p>There are lots of errors that you might encounter, and most of them depend highly on what you are programming. 
 						In general, if you have encountered an error you have not seen before, read it thoroughly. 
 						Most errors that your compiler gives you should be detailed enough to explain how to fix it. 
 						If it is too complex, then consult the Internet <span style="font-weight: bold;">with the words from the error that you think are important</span>.</p>
-			<h3><a name="Debugging"></a>Debugging</h3>
+			<h3 class="tutorial"><a name="Debugging"></a>Debugging</h3>
 				<p>Sometimes, your compiler will build your program, but your program will function improperly at runtime. 
 					This is usually due to improper code that the compiler was unable to find because the bug requires certain conditions within the program that might not always exist at runtime. 
 					In this case, there are a few techniques that you can apply to find the bad code and fix it.</p>
 				<p>In addition to what is given here, many IDEs (including Eclipse) have debugging tools that you can use. These are much more advanced and can help you find particularly elusive bugs.</p>
-				<h4><a name="Verbose_output"></a>Verbose output</h4>
+				<h4 class="tutorial"><a name="Verbose_output"></a>Verbose output</h4>
 					<p>The easiest debugging method is to build it right into your program (this is why production-level software -- e.g. Android -- may contain development tools).
-						You can do this by simply printing the variables that you think might be involved with the problem to the screen. 
-						Do this throughout the entirety of the program, and then build and run your program. Look closely at the output, and see where it starts to look funky. 
+						You can do this by simply printing the involved variables or even just a test message to the screen. 
+						Do this throughout the entirety of the program, and then build and run your program. Look closely at the output, and see where it starts to look funky or misbehave. 
 						Find that particular part of your code &#8212; that is where the problem is.</p>
-				<h4><a name="Condition_testing"></a>Condition testing</h4>
+				<h4 class="tutorial"><a name="Condition_testing"></a>Condition testing</h4>
 					<p>If the bug only seems to occur when given certain values and conditions, experiment with those variables/conditions (either by hard-coding them or have them input at runtime).
 						Note which values and conditions are causing the bug, and use that to determine exactly what the program is doing to cause the problem.</p>
   	</div>
   	
   	<div id="practice" style="width: 100%;">
-  		<h2>Practice</h2>
+  		<h2 class="tutorial">Practice</h2>
   		<p>Once you feel comfortable with the above content, complete the following practice programs.</p>
-  			<h3><a name="Math_1"></a>Math 1</h3>
+  			<h3 class="tutorial"><a name="Math_1"></a>Math 1</h3>
   				<p>Create a program that asks the user for 3 numbers.  Add the 1st and 3rd number and multiply the sum by the 2nd number.  Display the output of that function. </p>
-  			<h3><a name="Math_2"></a>Math 2</h3>
+  			<h3 class="tutorial"><a name="Math_2"></a>Math 2</h3>
   				<p>Create a program that asks the user for 3 numbers.  Add the 1st and 3rd number and divide the sum by the 2nd number.  Display the output of that function.  Make sure your output has decimals. </p>
   	</div>
   	<hr />
@@ -128,9 +119,9 @@ source_file.cpp:line:character: error...
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="../cpp.html">&#8592; Introduction</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="../../ch1">&#8592; Chapter 1 Overview</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">1-1 Basics of C++</td>
-  				<td style="text-align: left; width: 40%;"><a href="if-else.html">1-2 If and Else &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="../if-else">1-2 If and Else &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>  	

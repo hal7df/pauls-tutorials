@@ -2,51 +2,43 @@
   <head>
     <title>2-2 Arrays (C++)</title>
     <meta content="">
-    <style> 
-    body {
-    	background-color: #000000;
-    	color: #ffffff;
-    	font-family: Arial, Helvetica, sans-serif;
-    }
-    h2 {
-    	text-align: center;
-    }</style>
+    <link rel="stylesheet" type="text/css" href="../../style.css" />
   </head>
   <body>
-	
 	<!-- PAGE HEADER -->
-	<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2014/06/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+	<h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">2-2</span>&nbsp;Arrays</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/cpp" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
- 		&gt;&nbsp;Chapter 2&nbsp;&gt;&nbsp;Lesson 2
+  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="../../" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
+ 		&gt;&nbsp;<a href="../" title="Chapter 2: Organization">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 2
   		</div>	
   	<hr />
   	
   	<!-- PAGE CONTENT -->
   	
   	<div id="reading" style="width: 50%; float: left;">
-  		<h2>Reading</h2>
+  		<h2 class="tutorial">Reading</h2>
   		<p>Go here: <br><a href="http://www.cplusplus.com/doc/tutorial/arrays" target="_blank">Arrays</a><br />
   			and read through the whole page.</p>
   		
-  		<h3>Extra Reading</h3>
+  		<h3 class="tutorial">Extra Reading</h3>
   		<ul>
   			<li><a href="http://www.cprogramming.com/tutorial/lesson8.html" target="_blank">CProgramming page</a></li>
   		</ul>
   	</div>
   	<div id="video" style="width: 50%; float: right;">
-		<h2>Companion Video</h2>  	
+		<h2 class="tutorial">Companion Video</h2>  	
+			<iframe width="560" height="315" src="http://www.youtube.com/embed/gNRQHCGHROM?rel=0" frameborder="0" allowfullscreen></iframe>
   	</div>
 
 	<div style="clear: both;"></div>  	
 	
 	<div id="notes" style="width: 100%;">
-		<h2><a name="C_Strings"></a>C Strings</h2>
+		<h2 class="tutorial"><a name="C_Strings"></a>C Strings</h2>
 			<p>You are likely aware of this, but C++ is actually derived from another language called C. In C, there is no 
 				<code>string</code> data type. Instead, C programmers use an array of <code>chars</code>.</p>
-			<p>Since many functions are actually C functions ported to C++ (like <a href="tips-tricks.html#printf" target="_blank"><code>printf()</code></a>),
+			<p>Since many functions are actually C functions ported to C++ (like <a href="../../tips-tricks#printf" target="_blank"><code style="color: #e84747;">printf()</code></a>),
 				they still rely on C strings. If you need to use a string in a C function, you can do one of two things:</p>
 			<ul>
 				<li>Declare an array of <code>char</code>s</li>
@@ -58,82 +50,82 @@
 	</div>
   	
   	<div id="practice" style="width: 100%;">
-  		<h2>Practice</h2>
+  		<h2 class="tutorial">Practice</h2>
   			<p>Once you feel comfortable with the above content, complete Pancake Glutton and either Dungeon Crawl or 2048.</p>
 						
 			<!-- PANCAKE GLUTTON -->
-			<h3><a name="Pancake_Glutton"></a>Pancake Glutton</h3>
+			<h3 class="tutorial"><a name="Pancake_Glutton"></a>Pancake Glutton</h3>
 				<p>Write a program that asks the user to enter the number of pancakes eaten for breakfast by 10 different people 
 					(Person 1, Person 2, ..., Person 10) Once the data has been entered the program so that it outputs a list in order
 					of number of pancakes eaten of all 10 people.</p>
-				<h4>Example</h4>
-					<blockquote>
+				<h4 class="tutorial">Example</h4>
+					<blockquote class="tutorialexample">
 						Person 4: ate 10 pancakes<br>
 						Person 3: ate 7 pancakes<br>
 						Person 8: ate 4 pancakes<br>
 						...<br>
 						Person 5: ate 0 pancakes<br>
 					</blockquote>
-				<h4><a name="pancake-extra"></a>Extra Practice</h4>
+				<h4 class="tutorial"><a name="pancake-extra"></a>Extra Practice</h4>
 					<p>Sort the people in the other direction. </p>
 			
 			<!-- DUNGEON CRAWL -->			
-			<h3><a name="Dungeon_Crawl"></a>Dungeon Crawl</h3>
+			<h3 class="tutorial"><a name="Dungeon_Crawl"></a>Dungeon Crawl</h3>
 				<p>Make a program that outputs a simple 10 x 10 grid based gameboard to the screen using characters.</p>
-				<h4>Example</h4>
-					<pre>
-. . . . . E . . . .
-. G . . . . . . . .
-. . . . . . T . . .
-. . . . . . . . . .
-. . . . T . . . . .
-. . . . . . T . . .
-. . . . . . . . . X
-. . . . . . . T . .
-. . . E . . . . . .
+				<h4 class="tutorial">Example</h4>
+					<blockquote class="tutorialexample">
+. . . . . E . . . .<br>
+. G . . . . . . . .<br>
+. . . . . . T . . .<br>
+. . . . . . . . . .<br>
+. . . . T . . . . .<br>
+. . . . . . T . . .<br>
+. . . . . . . . . X<br>
+. . . . . . . T . .<br>
+. . . E . . . . . .<br>
 . T . . . . . . . .
-					</pre>
+					</blockquote>
 				<p>Allow the user (marked by G) to move either up, down, left, or right each turn. If the player steps on a trap (marked by T) then they lose. 
 					If they make it to the treasure <q>X</q> then they win.</p>
-				<p>Add enemies (denoted by E) that move <a href="tips-tricks.html#Random_Numbers" target="_blank">randomly</a> in any direction once per turn
+				<p>Add enemies (denoted by E) that move <a href="../../tips-tricks#Random_Numbers" target="_blank">randomly</a> in any direction once per turn
 					(enemies, just like traps, cause the player to lose if touched).</p>
 				<p>If you don&#x27;t want to have the user hit enter (for example, you want them to use the WASD keys to navigate), look at 
-					<a href="tips-tricks.html#unbuffered_input" target="_blank">unbuffered input</a>.</p>
+					<a href="../../tips-tricks#unbuffered_input" target="_blank">unbuffered input</a>.</p>
 				<p>HINT: Don&#x27;t let the player move off the gameboard! You program will crash if they move off the top or bottom of the board! (the same holds true for enemies)</p>
-					<h4><a name="dungeon-extra"></a>Extra Practice</h4>
+					<h4 class="tutorial"><a name="dungeon-extra"></a>Extra Practice</h4>
 						<p>Do any of the following:</p>
 						<ul>
 							<li>Create multiple difficulty levels</li>
 							<li>Create a dynamic map (the map changes between runs)</li>
 							<ul>
-								<li>HINT: <a href="tips-tricks.html#Random_Numbers" target="_blank"><code>rand()</code></a></li>
+								<li>HINT: <a href="../../tips-tricks#Random_Numbers" target="_blank"><code>rand()</code></a></li>
 							</ul>
 						</ul>
 						
 			<!-- 2048 -->
-			<h3><a name="2048"></a>2048</h3>
+			<h3 class="tutorial"><a name="2048"></a>2048</h3>
 				<p>Create a clone of the popular <a href="http://gabrielecirulli.github.io/2048/" target="_blank">2048 game</a> in the terminal using an array (you do not need to include animations).</p>
 				<p>The game is played on a 4x4 grid. The grid starts with all tiles empty except two, which contain either a 2 or a 4. The player can move the tiles up, down, left, or right. 
 					When the player moves the tiles, they all move as far as possible in that direction. When two tiles of the same number meet, they merge and the resulting tile contains twice the value of the first 
-					(however, tiles may only merge once per move). Every time the player makes a move, a 2 or a 4 is <a href="tips-tricks.html#Random_Numbers" target="_blank">randomly</a> added at a random location.</p>
+					(however, tiles may only merge once per move). Every time the player makes a move, a 2 or a 4 is <a href="../../tips-tricks#Random_Numbers" target="_blank">randomly</a> added at a random location.</p>
 				<p>The goal, of course, is to reach the 2048 tile.</p>
-				<h4>Example</h4>
-					<pre>
-.    .    2    .
-
-.    .    .    .
-
-.    4    .    .
-
-.    .    .    .
-					</pre>
+				<h4 class="tutorial">Example</h4>
+					<blockquote class="tutorialexample">
+.&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+<br>
+.&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;.
+					</blockquote>
 				<p>Use a multidimensional array of <code>int</code>s to do this. (Hint: If the number were, say, 0, you don't have to print that number)</p>
 				<p><span style="font-weight: bold;">Be sure that your grid has enough space to contain the 2048 tile!</span> Numbers cannot run over other tiles and the grid must look continuous.
-					In order to do this, you could use the <a href="tips-tricks.html#setw" target="_blank"><code>setw()</code></a> function to ensure each tile gets a set amount of space,
-					and then the <a href="tips-tricks.html#left" target="_blank">left</a> function to align it all to the left before printing the tile's contents.</p>
+					In order to do this, you could use the <a href="../../tips-tricks#setw" target="_blank"><code>setw()</code></a> function to ensure each tile gets a set amount of space,
+					and then the <a href="../../tips-tricks#left" target="_blank">left</a> function to align it all to the left before printing the tile's contents.</p>
 				<p>If you don&#x27;t want to have the user hit enter (for example, you want them to use the WASD keys to navigate), look at 
-					<a href="tips-tricks.html#unbuffered_input" target="_blank">unbuffered input</a>.</p>
-				<h4>Extra Practice</h4>
+					<a href="../../tips-tricks#unbuffered_input" target="_blank">unbuffered input</a>.</p>
+				<h4 class="tutorial">Extra Practice</h4>
 					<p>Allow the player to keep playing after they have reached the 2048 tile.</p>
   	</div>
   	<hr />
@@ -143,9 +135,9 @@
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="functions.html">&#8592;&nbsp;2-1 Functions</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="../functions">&#8592;&nbsp;2-1 Functions</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">2-2 Arrays</td>
-  				<td style="text-align: left; width: 40%;"><a href="structures.html">2-3 Structures &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="../structures">2-3 Structures &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>   
