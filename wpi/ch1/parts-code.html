@@ -5,204 +5,11 @@
     <link rel="stylesheet" type="text/css" href="../../style.css"/>
   </head>
   <body>
-	<!-- ACTIVITY SCRIPT -->
-	<script type="text/javascript" >
-	var parts;
-	var correct, curQ;
-	var curPart = new Object;
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("GET","http://www.hotteam67.org/wp-content/uploads/2014/09/parts-code.txt",true);
-	xmlhttp.send();
-	
-	curQ = 0;
-	
-	xmlhttp.onreadystatechange = function () {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-			parts = JSON.parse(xmlhttp.responseText);
-	}
-	
-	function startActivity () {
-		document.getElementById("activitydiv").style.display = "block";
-		newCard();
-	}
-	function grade () {
-	
-	}
-	function newCard() {
-		var x, dev, disp;
-		var descText;
-		
-		curQ++;
-		
-		for (var prop in curPart) delete curPart[prop];
-		
-		x = Math.floor((Math.random()*parts.length)+0.5);
-		curPart.index = x;
-		disp = Math.floor(Math.random()+0.5);
-		
-		descText = "<ul>";
-		
-		if (parts[x].generic)
-		{
-			dev = Math.floor((Math.random()*parts[x].devices.length)+0.5);
-			
-			if (disp == 0 || !parts[x].devices[dev].img)
-				document.getElementById("itemname").innerHTML="<p>"+parts[x].devices[dev].name+"</p>";
-			else
-			 	document.getElementById("itemname").innerHTML="<img src='"+parts[x].devices[dev].img+"'/>";
-		}
-		else {
-			dev = Math.floor((Math.random()*(parts[x].devices.length+1))+0.5);
-			
-			if (dev == 0) {
-				if (disp == 0 || !parts[x].img)
-					document.getElementById("itemname").innerHTML="<p>"+parts[x].display+"</p>";
-				else
-					document.getElementById("itemname").innerHTML="<img src='"+parts[x].img+"'/>";
-			}
-			else {
-				dev--;
-				if (disp == 0 || !parts[x].devices[dev].img)
-					document.getElementById("itemname").innerHTML="<p>"+parts[x].devices[dev].name+"</p>";
-				else
-					document.getElementById("itemname").innerHTML="<img src="+parts[x].devices[dev].img+"'/>";
-			}
-		}
-		
-		if (parts[x].port-type != "multiple")
-			curPart.port=getRandPort(parts[x].port-type);
-		
-		if (parts[x].port-type == "PWM")
-			descText += "<li>PWM: "+curPart.port+"</li>";
-		else if (parts[x].port-type == "Relay")
-			descText += "<li>Relay: "+curPart.port+"</li>";
-		else if (parts[x].port-type == "DIO")
-			descText += "<li>DIO: "+curPart.port+"</li>";
-		else if (parts[x].port-type == "Analog")
-			descText += "<li>Analog: "+curPart.port+"</li>";
-		else if (parts[x].port-type == "multiple")
-		{
-			curPart.port = new Array;
-			var flag;
-			var tryPort;
-			for (var y = 0; y < parts[x].ports.length; y++)
-			{
-				do {
-					tryPort = getRandPort(parts[x].ports[y].type);
-					flag = false;
-					
-					for (var z = 0; z < parts[x].ports.length; z++)
-					{
-						if ((parts[x].ports[y].type == parts[x].ports[z].type) && y != z)
-							flag = true;
-					}
-					
-					if (flag)
-					{
-						flag = false;
-						for (z = 0; z < curPart.port.length; z++)
-						{
-							if (tryPort == curPart.port[z])
-								flag = true;
-						}
-					}
-					
-				}while(flag);
-				
-				descText += "<li>"+parts[x].ports[y].description+": "+tryPort+"</li>";
-				
-				curPart.port.push(tryPort);
-			}
-		}
-		
-		if (parts[x].extParams)
-		{
-			descText += "<li>"+parts[x].extParams.description;
-			if (parts[x].extParams.type == "bool")
-			{
-				var on = getRandBool();
-				
-				if (on)
-					descText += ": true</li>";
-				else
-					descText += ": false</li>";
-					
-				curPart.extParams = on;
-			}
-		}
-		
-		if (parts[x].extInit)
-		{
-			if (parts[x].extInit instanceof Array)
-			{
-			}
-			else 
-			{
-				paramType = getParamType(parts[x].extInit.params);
-				
-				if (paramType == "bool")
-				{
-					curPart.extInit = getRandBool();
-				}
-			}
-		}
-		
-		descText += "</ul>";
-		
-		document.getElementById("itemdesc").innerHTML = descText;
-	}
-		
-	function getRandPort (type)
-	{
-		if (type == "PWM" || type == "DIO")
-			return Math.floor((Math.random()*10)+1.5);
-		else
-			return Math.floor((Math.random()*4)+1.5);
-	}
-	
-	function getParamType(param) {
-		var paramType;
-		
-		if (param instanceof String)
-		{
-			/*if (param.search(','))
-			{
-				paramType = new Array;
-				var params = param.split(',');
-							
-				for (var x = 0; x < params.length; x++)
-					paramType = params.split(' ')[0];
-			}
-			else*/
-				paramType = param.split(' ')[0];
-		}
-		else
-			paramType = false;
-		
-		return paramType;
-	}
-	
-	function getRandBool ()
-	{
-		if (Math.floor(Math.random()+0.5) == 0)
-			return false;
-		else
-			return true;
-	}
-	
-	function getRandFloat (min, max)
-	{
-		return Math.floor((Math.random()*max)+(min+0.5));
-	}
-	</script>  
-  
-  <!-- PAGE HEADER -->
+	<!-- PAGE HEADER -->
   <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">1-3</span>&nbsp;Parts of the Robot: In Code</h1>
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-3</span>&nbsp;Parts of the Robot: In Code</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/wpi" title="C++ Guided Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;Chapter 1&nbsp;&gt;&nbsp;Lesson 3
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;Chapter 1&nbsp;&gt;&nbsp;Lesson 3
   		</div>	
   	<hr />
   	
@@ -276,10 +83,10 @@ class Robot: public IterativeRobot
 				</pre>
 				<p style="font-style: italic;">RobotBuilder Note: If you are using RobotBuilder, this is done automatically. You should still know how to do this, however.</p>
 	<h2 class="tutorial"><a name="Robot_Parts"></a>Robot Parts</h2>
-		<p>Only parts listed in the <a href="parts.html#Programmed_Components">Programmed Components</a> section of Lesson 1 can be declared as components in the program.
-			Even then, the <a href="parts.html#rRIO">rRIO</a> and the <a href="parts.html#Solenoid_Control_Module">Solenoid Control Module</a>, and <a href="parts.html#Motors">motors</a> are not declared.</p>
+		<p>Only parts listed in the <a href="../parts#Programmed_Components">Programmed Components</a> section of Lesson 1 can be declared as components in the program.
+			Even then, the <a href="../parts#rRIO">rRIO</a> and the <a href="../parts#Pneumatic_Control_Module">Pneumatic Control Module</a>, and <a href="../parts#Motors">motors</a> are not declared.</p>
 		<p>Note that you do not need to declare all of the parts on the robot for your code to work. Of course, you will only be able to control what is declared. Also note that the rRIO cannot possibly detect the correct address (e.g. PWM or relay channel) of various components, so make sure that your assignment is correct.</p>
-		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="parts.html#rRIO">rRIO</a>).</p>
+		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="../parts#rRIO">rRIO</a>).</p>
 		<p>Note that the location of each statement is not shown in the declaration example. The actual declaration belongs in the class list, and the initialization belongs in the class constructor.</p>
 		<p>NOTE: If you declare standard variables, such as <code>int</code>s or <code>bool</code>s, <span style="font-weight: bold;">you need to set a default value in the constructor</span>, like so:</p>
 		<pre lang="cpp">
@@ -362,7 +169,7 @@ Relay *m_relay1;
 m_relay1 = new Relay (0);
 				</pre>
 			<h4 class="tutorial"><a name="Digital_Outputs"></a>Digital Outputs</h4>
-				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="parts.html#rRIO">digital output</a> on the rRIO, use this class.</p>
+				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="../parts#rRIO">digital output</a> on the rRIO, use this class.</p>
 				<p>A digital output is of type <code>DigitalOutput</code> (with a capital D and O, no space). In the initialization, provide the digital output channel on the Digital Sidecar.</p>
 				<pre lang="cpp">
 //Digital Output declaration
@@ -373,7 +180,7 @@ m_do = new DigitalOutput (0);
 				</pre>
 			<h4 class="tutorial"><a name="Pneumatics"></a>Pneumatics</h4>
 				<h5 class="tutorial"><a name="Compressor"></a>Compressor</h5>
-					<p>A compressor is of type <code>Compressor</code> (capital C). In initialization, provide the CAN ID of the solenoid control module.</p>
+					<p>A compressor is of type <code>Compressor</code> (capital C). In initialization, provide the CAN ID of the pneumatic control module.</p>
 					<pre lang="cpp">
 //Compressor declaration
 Compressor *m_compressor;
@@ -381,8 +188,9 @@ Compressor *m_compressor;
 //Compressor initialization with CAN ID 0
 m_compressor = new Compressor (0);
 					</pre>
+					<p>This class is unnecessary to declare if you intend just to use the Pneumatic Control Module's automatic compressor handling.</p>
 				<h5 class="tutorial"><a name="Solenoid"></a>Solenoid</h5>
-					<p>A solenoid is of type <code>Solenoid</code> (capital S). In initialization, provide the output number from the <a href="parts.html#Solenoid_Control_Module">solenoid control module</a>.</p>
+					<p>A solenoid is of type <code>Solenoid</code> (capital S). In initialization, provide the output number from the <a href="../parts#Pneumatic_Control_Module">pneumatic control module</a>.</p>
 					<pre lang="cpp">
 //Solenoid declaration
 Solenoid *m_sol;
@@ -392,18 +200,18 @@ m_sol = new Solenoid (0);
 					</pre>
 		<h3 class="tutorial"><a name="Sensors"></a>Sensors</h3>
 			<p>Some common sensors use a generic class for their type. Below, if a generic class is given, the sensors that use that class are provided in a list.</p>
-			<h4 class="tutorial"><a name="AnalogChannel"></a><code>AnalogChannel</code></h4>
-				<p>The class <code>AnalogChannel</code> (capital A,C; no space) manages generic analog devices. These devices manipulate voltage as output.</p>
+			<h4 class="tutorial"><a name="AnalogInput"></a><code>AnalogInput</code></h4>
+				<p>The class <code>AnalogInput</code> (capital A,I; no space) manages generic analog devices. These devices manipulate voltage as output.</p>
 				<p>In the initialization, provide the analog channel of the device.</p>
 				<pre lang="cpp">
-//AnalogChannel declaration
-AnalogChannel *m_analogDev;
+//AnalogInput declaration
+AnalogInput *m_analogDev;
 
-//AnalogChannel initialization on analog channel 0
-m_analogDev = new AnalogChannel (0);
+//AnalogInput initialization on analog channel 0
+m_analogDev = new AnalogInput (0);
 				</pre>
-				<h5 class="tutorial"><a name="AnalogChannel_Devices"></a><code>AnalogChannel</code> Devices</h5>
-					<p>The most common device used in this category is a <a href="parts.html#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
+				<h5 class="tutorial"><a name="AnalogInput_Devices"></a><code>AnalogInput</code> Devices</h5>
+					<p>The most common device used in this category is a <a href="../parts#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
 			<h4 class="tutorial"><a name="DigitalInput"></a>DigitalInput</h4>
 				<p>The class <code>DigitalInput</code> (capital D, I; no space) manages generic digital sensors.</p>
 				<p>In the initialization, provide the digital input channel on the Digital Sidecar.</p>
@@ -415,7 +223,7 @@ DigitalInput *m_digitalDev;
 m_digitalDev = new DigitalInput (0);
 				</pre>
 				<h5 class="tutorial"><a name="DigitalInput_Devices"></a><code>DigitalInput</code> Devices</h5>
-					<p>The most common device used in this category is a <a href="parts.html#Limit_Switch">limit switch</a>. If you have a general digital device, use this class (unless otherwise specified).</p>
+					<p>The most common device used in this category is a <a href="../parts#Limit_Switch">limit switch</a>. If you have a general digital device, use this class (unless otherwise specified).</p>
 			<h4 class="tutorial"><a name="Encoder"></a>Encoder</h4>
 				<p>An encoder is of type <code>Encoder</code> (capital E). In the initialization, do the following:</p>
 				<ul>
@@ -457,13 +265,13 @@ m_proximityDetect = new Ultrasonic (5,4);
 				</pre>
 			<h4 class="tutorial"><a name="Gyroscope"></a>Gyroscope</h3>
 				<p>A gyroscope is of class <code>Gyro</code> (capital G). In the initialization, provide the analog channel of the gyroscope, and set its sensitivity.</p>
-				<pre class="prettyprint" escaped="true">
+				<pre lang="cpp">
 //Gyroscope declaration
 Gyro *m_gyro;
 
 //Gyroscope initialization on analog channel 1 with sensitivity of 2.00
 m_gyro = new Gyro (1);
-m_gyro-&gt;SetSensitivity(2.00);
+m_gyro->SetSensitivity(2.00);
 				</pre>
 			<h4 class="tutorial"><a name="Accelerometer"></a>Accelerometer</h4>
 				<p>An accelerometer is of type <code>Accelerometer</code> (capital A). In the initialization, do the following:</p>
@@ -472,14 +280,14 @@ m_gyro-&gt;SetSensitivity(2.00);
 					<li>Set the voltage change per 1G (Earth gravity) change</li>
 					<li>Set the voltage output at 0G (no gravity)</li>
 				</ul>
-				<pre class="prettyprint">
+				<pre lang="cpp">
 //Accelerometer declaration
 Accelerometer *m_accel;
 
 //Accelerometer initialization on analog channel 2, voltage change of 2, and zero-G voltage of 1
 m_accel = new Accelerometer (2);
-m_accel-&gt;SetSensitivity(2.0);
-m_accel-&gt;SetZero(1.0);
+m_accel->SetSensitivity(2.0);
+m_accel->SetZero(1.0);
 				</pre>
 		<h3 class="tutorial"><a name="Driver_Station_Components"></a>Driver Station Components</h2>
 			<p>There are a few components on the driver&#x27;s side that you need to declare.</p>
@@ -544,44 +352,27 @@ Timer *m_timer;
 //Timer initialization
 m_timer = new Timer;
 
-/** Notice how no parentheses were added after the &#x27;Timer&#x27;
-  * statement in the initialization. It&#x27;s not necessary, so
+/** Notice how no parentheses were added after the 'Timer'
+  * statement in the initialization. It's not necessary, so
   * just leave it out.
   */
   				</pre>
   	<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
-  		<p>In this activity, you will be given either the name of a component or a picture of the component and all of the information required to initialize it. For each component, provide the following:</p>
-  		<ol>
-  			<li>Declaration line</li>
-  			<li>Initialization</li>
-  		</ol>
-  		<p>So, for example:</p>
-  		<p style="text-align: center; font-weight: bold;">GIVEN</p>
-  		<img src="http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg" alt="Victor">
-  		<ul>
-  			<li>PWM 5</li>
-  		</ul>
-  		<p style="text-align: center; font-weight: bold;">ANSWER</p>
-  		<ul>
-  			<li>Declaration: <code>Victor* m_victor;</code></li>
-  			<li>Initialization: <code>m_victor = new Victor(5);</code></li>
-  		</ul>
-  		
-  		<p>Anything in this lesson is fair game. There are 10 questions.</p>
-  		<p>Click Start to begin.</p>
-  		<noscript>This activity requires Javascript. Either turn on Javascript or use a different browser with Javascript.</noscript>
-  		<button onclick="startActivity()">Start</button>
-  		<a name="activityStart"></a>
-  		<div id="activitydiv" style="display: none;">
-  			<div id="itemname"></div>
-  			<div id="itemdesc"></div>
-  			<div id="answer">
-  				<input type="text" name="declare"/><br>
-  				<textarea name="init" placeholder="Initialization" rows="3" cols="25"></textarea><br>
-  				<button onclick="grade()">Check</button>
-  			</div>
-  			<div id="results"></div>
-  			<button onclick="newCard()" style="display: none;">Next</button>
-  		</div>
+  	  	<p style="text-align: center;">In progress</p>
+
+<!-- NAVIGATION -->
+  	<div style="clear: both;">
+  		<hr>
+	  	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
+  		<table border="0" style="width: 100%;">
+  			<tbody>
+  				<tr>
+  					<td style="text-align: right; width: 40%;"><a href="../program-structure">&#8592; 1-2 Program Structure</a></td>
+  					<td style="text-align: center; font-weight: bold; width: 20%;">1-2 Parts of the Robot: In Code</td>
+  					<td style="text-align: left; width: 40%;"><a href="../../ch2">Chapter 2: Driving and User Input &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
   </body>
 </html>

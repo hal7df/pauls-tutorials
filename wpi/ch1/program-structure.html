@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../../style.css" />
   </head>
   <body>
-  	<!-- ACTIVITY SCRIPT -->
+    	<!-- ACTIVITY SCRIPT -->
   	<script type="text/javascript" >
   	<!--
   	function toggleDesc() {
@@ -26,11 +26,9 @@
   	</script>
    <!-- PAGE HEADER -->
 	<h1 class ="tutorial" style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">1-2</span>&nbsp;Program Structure</h1>
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-2</span>&nbsp;Program Structure</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/wpi" title="WPILib Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;<a href="../ch1.html">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 2
+  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 2
   		</div>	
   	<hr />
   	
@@ -44,25 +42,25 @@
   		<li><a href="#Class_Constructor">Class Constructor</a></li>
   		<li><a href="#Initialization_Routines">Initialization Routines</a></li>
   		<ul>
-  			<li><a href="#RobotInit"><code>RobotInit()</code></a></li>
-  			<li><a href="#DisabledInit"><code>DisabledInit()</code></a></li>
-  			<li><a href="#AutonomousInit"><code>AutonomousInit()</code></a></li>
-  			<li><a href="#TeleopInit"><code>TeleopInit()</code></a></li>
-  			<li><a href="#TestInit"><code>TestInit</code></a></li>
+  			<li><a href="#RobotInit"><code style="color: #e84747;">RobotInit()</code></a></li>
+  			<li><a href="#DisabledInit"><code style="color: #e84747;">DisabledInit()</code></a></li>
+  			<li><a href="#AutonomousInit"><code style="color: #e84747;">AutonomousInit()</code></a></li>
+  			<li><a href="#TeleopInit"><code style="color: #e84747;">TeleopInit()</code></a></li>
+  			<li><a href="#TestInit"><code style="color: #e84747;">TestInit</code></a></li>
   		</ul>
   		<li><a href="#Periodic_Routines">Periodic Routines</a></li>
   		<ul>
-  			<li><a href="#DisabledPeriodic"><code>DisabledPeriodic()</code></a></li>
-  			<li><a href="#AutonomousPeriodic"><code>AutonomousPeriodic()</code></a></li>
-  			<li><a href="#TeleopPeriodic"><code>TeleopPeriodic()</code></a></li>
-  			<li><a href="#TestPeriodic"><code>TestPeriodic</code></a></li>
+  			<li><a href="#DisabledPeriodic"><code style="color: #e84747;">DisabledPeriodic()</code></a></li>
+  			<li><a href="#AutonomousPeriodic"><code style="color: #e84747;">AutonomousPeriodic()</code></a></li>
+  			<li><a href="#TeleopPeriodic"><code style="color: #e84747;">TeleopPeriodic()</code></a></li>
+  			<li><a href="#TestPeriodic"><code style="color: #e84747;">TestPeriodic</code></a></li>
   		</ul>
   		<li><a href="#Continuous_Routines">Continuous Routines</a></li>
   		<ul>
-  			<li><a href="#DisabledContinuous"><code>DisabledContinuous()</code></a></li>
-  			<li><a href="#AutonomousContinuous"><code>AutonomousContinuous()</code></a></li>
-  			<li><a href="#TeleopContinuous"><code>TeleopContinuous()</code></a></li>
-  			<li><a href="#TestContinuous"><code>TestContinuous()</code></a></li>
+  			<li><a href="#DisabledContinuous"><code style="color: #e84747;">DisabledContinuous()</code></a></li>
+  			<li><a href="#AutonomousContinuous"><code style="color: #e84747;">AutonomousContinuous()</code></a></li>
+  			<li><a href="#TeleopContinuous"><code style="color: #e84747;">TeleopContinuous()</code></a></li>
+  			<li><a href="#TestContinuous"><code style="color: #e84747;">TestContinuous()</code></a></li>
   		</ul>
   		<li><a href="#End_of_the_Program">End of the Program</a></li>
   		<li><a href="#Activity">Activity</a></li>
@@ -113,7 +111,7 @@ public:
 		m_Counter = 0;
 	}
 		</pre>
-		<p>Again, how to initialize specific robot components will be reviewed in <a href="parts-code.html">Lesson 1-3</a>.</p>
+		<p>Again, how to initialize specific robot components will be reviewed in <a href="../parts-code">Lesson 1-3</a>.</p>
 		<p>You may notice the <code>public:</code> keyword before the class constructor. Everything declared before is private, to avoid memory overflow.</p>
 	<h2 class="tutorial"><a name="Initialization_Routines"></a>Initialization Routines</h2>
 		<p style="font-style: italic;">Not to be confused with the component initialization in the <a href="#Class_Constructor">constructor</a></p>
@@ -493,9 +491,9 @@ START_ROBOT_CLASS(Lesson2);
   		<table border="0" style="width: 100%;">
   			<tbody>
   				<tr>
-  					<td style="text-align: right; width: 40%;"><a href="parts.html">&#8592; 1-1 Parts of the Robot</a></td>
+  					<td style="text-align: right; width: 40%;"><a href="../parts">&#8592; 1-1 Parts of the Robot</a></td>
   					<td style="text-align: center; font-weight: bold; width: 20%;">1-2 Program Structure</td>
-  					<td style="text-align: left; width: 40%;"><a href="parts-code.html">1-3 Parts of the Robot: In Code &#8594;</a></td>
+  					<td style="text-align: left; width: 40%;"><a href="../parts-code">1-3 Parts of the Robot: In Code &#8594;</a></td>
   				</tr>
   			</tbody>
   		</table>

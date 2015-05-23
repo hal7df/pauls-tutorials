@@ -28,9 +28,7 @@
  <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
 	      style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-2</span>&nbsp;Controlling Motors</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/wpi" title="WPILib Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;<a href="../ch2.html" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 2
+  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 2
   		</div>	
   	<hr />
   	
@@ -49,17 +47,17 @@
 			</ul>
 			<li><a href="#The_Relay">The Relay</a></li>
 			<ul>
-				<li><a href="#Relay_Set">Relay <code>Set()</code></a></li>
+				<li><a href="#Relay_Set">Relay <code style="color: #e84747;">Set()</code></a></li>
 				<li><a href="#What_State?">What State?</a></li>
 			</ul>	
 			<li><a href="#Activity">Activity</a></li>
 		</ul>
 	</div>
   	
-  	<div id="content">
+  	<div id="tcontent">
 		<h2 class="tutorial"><a name="The_Motor"></a>The Motor<a href="#The_Motor" class="section_anchor"></a></h2>
 
-			<p>For the purposes of this tutorial, assume that all of the motors are <a href="../ch1/parts.html#Victors">Victors</a>. The API for controlling motors is basically the same across the three more complex drive controllers (Victors, <a href="../ch1/parts.html#Jaguars">Jaguars</a>, and <a href="../ch1/parts.html#Talons">Talons</a>), so you won&#x27;t need to worry about using different drive controllers. However, you will still need to make sure that you are declaring the correct controller.</p>
+			<p>For the purposes of this tutorial, assume that all of the motors are <a href="../../ch1/parts#Victors">Victors</a>. The API for controlling motors is basically the same across the three more complex drive controllers (Victors, <a href="../../ch1/parts#Jaguars">Jaguars</a>, and <a href="../../ch1/parts#Talons">Talons</a>), so you won&#x27;t need to worry about using different drive controllers. However, you will still need to make sure that you are declaring the correct controller.</p>
 			<p>Another thing that you should take into consideration when programming the robot&#x27;s motors is the PWM of the motor that you are programming. You should always be sure that you 1) initialize the motor, and 2) initialize it on the right PWM! </p>
 			<p>For simplicity, the declaration of all of the components used in the code snippets below has been left out. You can assume the following: </p>
 			<pre lang="cpp">
@@ -115,7 +113,7 @@ float Talon::Get()
 				<p>Now that you are programming things to move, you should, first of all, be aware that <span style="font-weight: bold;">things are moving</span>, so you should be even more certain that you and everyone around you know that the equipment you are working with can move and potentially cause serious injury.
 					Secondly, you should be aware of the robot&#x27;s physical capabilities while you are programming. For example, the 2013 bot&#x27;s launcher system uses motors driving wheels via belts. If the motors spin up the belts too quickly, the belt pulleys will spin inside the belt, which in turn shreds the belt. In this case, the robot was programmed to spin up more slowly. At any rate, you should be aware of potential problems such as this and be able to work around them programmatically.</p>
 		<h2 class="tutorial"><a name="The_Relay"></a>The Relay</h2>
-			<p>One of the other controllers that was mentioned in lesson 1 was the <a href="../ch1/parts.html#Spikes%2FRelays">Spike</a>, which ran off of a relay. Since these devices are basically like light switches (with the added bonus of being able to go in reverse as well), they are programmed differently.</p>
+			<p>One of the other controllers that was mentioned in lesson 1 was the <a href="../../ch1/parts#Spikes%2FRelays">Spike</a>, which ran off of a relay. Since these devices are basically like light switches (with the added bonus of being able to go in reverse as well), they are programmed differently.</p>
 			<p>For this section, you can further assume that two relays have been set up like this: </p>
 			<pre lang="cpp">
 Relay* m_roller;
@@ -166,7 +164,7 @@ enum Relay::Get()
   				<p>This returns the enumeration (from <a href="#Relay_Set_parameters">above</a>) that represents the current state of the relay.</p>
 	</div>
 	<div id="activity">
-		<h2><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1>
+		<h2 class="tutorial"><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1>
 			<p style="font-weight: bold; text-align: center;">You will want to talk to someone who is familiar with the setup of your available robots to write something to run on a robot.</p>
 			<p>Program an available robot so that:</p>
 			<ul>
@@ -187,7 +185,7 @@ enum Relay::Get()
 				<li>Bring the launcher up to full speed with the A button, and turn it off with the B button. </li>
 				<ul>
 					<li>PWMs: 4-6 </li>
-					<li>Slow spin up! In order to do this, you can start a <a href="../tips-tricks.html#Timers">timer</a> and set the victors to half the timer&#x27;s value until the timer reaches 2 seconds.</li>
+					<li>Slow spin up! In order to do this, you can start a <a href="../../tips-tricks#Timers">timer</a> and set the victors to half the timer&#x27;s value until the timer reaches 2 seconds.</li>
 					<ul>
     					<li>Only for spin up. Setting the motors to 0 from full is fine.</li>
   					</ul>
@@ -195,7 +193,7 @@ enum Relay::Get()
 				<li>Turn the climb indicator light on and off with the X button. </li>
 				<ul>
 					<li>Relay: 2 </li>
-					<li><a href="../tips-tricks.html#Timeouts">Button timeout</a>!</li>
+					<li><a href="../../tips-tricks#Timeouts">Button timeout</a>!</li>
   				</ul>
   			</ul>
   			<p>Don&#x27;t forget the controller deadband (0.2), as the controllers do not zero properly. To regain fine control, add the deadband (if the controller reading is negative) / subtract the deadband (if the controller reading is positive) and then multiply that value by 1.25.</p>
@@ -208,9 +206,9 @@ enum Relay::Get()
   		<table border="0" style="width: 100%;">
   			<tbody>
   				<tr>
-  					<td style="text-align: right; width: 40%;"><a href="user-input.html">&#8592; 2-1 Using User Input</a></td>
+  					<td style="text-align: right; width: 40%;"><a href="../user-input">&#8592; 2-1 Using User Input</a></td>
   					<td style="text-align: center; font-weight: bold; width: 20%;">2-2 Controlling Motors</td>
-  					<td style="text-align: left; width: 40%;"><a href="driving.html">2-3 Earning Your Driver's License: Driving &#8594;</a></td>
+  					<td style="text-align: left; width: 40%;"><a href="../driving">2-3 Earning Your Driver's License: Driving &#8594;</a></td>
   				</tr>
   			</tbody>
   		</table>

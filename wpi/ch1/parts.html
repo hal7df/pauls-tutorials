@@ -2,23 +2,7 @@
   <head>
     <title>1-1 Parts of the Robot (WPI)</title>
     <meta content="">
-    <style>
-    body {
-    	background-color: #000000;
-    	color: #ffffff;
-    	font-family: Arial, Helvetica, sans-serif;
-    }
-    h2,
-    h3,
-    h4,
-    h5 {
-    	text-align: center;
-    }
-    img {
-    	display: block;
-    	margin-left: auto;
-    	margin-right: auto;
-    }</style>
+    <link rel="stylesheet" type="text/css" href="../../style.css" /> 
   </head>
   <body>
 	<!-- ACTIVITY SCRIPTS -->
@@ -29,9 +13,11 @@
 	  */
 	
 	function startActivity() {
-		document.getElementById("content").style.display = "none";
+		document.getElementById("tcontent").style.display = "none";
 		document.getElementById("questions").style.display = "block";
 		document.getElementById("start").style.display = "none";
+		document.getElementById("wrap").style.display = "block";
+		document.getElementById("content").style.display = "block";
 		window.location.replace("#activityStart");
 	}
 	
@@ -92,6 +78,7 @@
 			return ret;
 		}			
 		else {
+			console.log(ind+"_name");
 			var ans = document.getElementById(ind+"_name").textContent;
 			ans = ans.toUpperCase();
 			
@@ -105,15 +92,15 @@
 	
 		if (percent <= 0.5)
 		{		
-			var color1 = hexToRGB(0xff0000);
-			var color2 = hexToRGB(0xffff00);
+			var color1 = hexToRgb(0xff0000);
+			var color2 = hexToRgb(0xffff00);
 			
 			percent *= 2;
 		}
 		else
 		{
-			var color1 = hexToRGB(0xffff00);
-			var color2 = hexToRGB(0x00cc00);
+			var color1 = hexToRgb(0xffff00);
+			var color2 = hexToRgb(0x00cc00);
 			
 			percent = (percent-0.5)*2;
 		}
@@ -127,7 +114,7 @@
 		return rgbToHex(out);
 	}
 	
-	function hexToRGB(hex) {		
+	function hexToRgb(hex) {
 		var color = new Object;
 		
 		color.r = hex >> 16;
@@ -141,6 +128,24 @@
 		return color;
 	}
 	
+	/* Works better with WordPress? Local testing fails though...
+	function hexToRgb(hex) {
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		var color = new Object;
+		
+		if (result)
+		{
+			color.r = parseInt(result[1], 16);
+			color.g = parseInt(result[2], 16);
+			color.b = parseInt(result[3], 16);
+		
+			return color;
+		}
+		else
+			return null;
+	}
+	*/
+	
 	function rgbToHex(rgb) {
 		return "#" + componentToHex(rgb.r) + componentToHex(rgb.g) + componentToHex(rgb.b); 
 	}
@@ -153,13 +158,11 @@
 	</script>  
   
   	<!-- PAGE HEADER -->
-	<h1 style="line-height: 60px;"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 0.5em;">1-1</span>&nbsp;Parts of the Robot</h1>
+	<h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-1</span>&nbsp;Parts of the Robot</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="../../wpi.html" title="WPILib Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;<a href="../ch1.html">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 1
-  		</div>	
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 1
+  	</div>	
   	<hr />
 
 	<p style="text-align: center; font-weight: bold; color: #ff0000;"><noscript>Javascript is required for this page.</noscript></p>  	
@@ -190,29 +193,29 @@
 			</ul>
 		</div>
 	</div>
-	<div id="content">
-		<h2><a name="Basic_Components"></a>Basic Components</h2>
+	<div id="tcontent">
+		<h2 class="tutorial"><a name="Basic_Components"></a>Basic Components</h2>
 			<p>All of the following components are not programmed, because their operation is usually set in stone.</p>	
-			<h3><a name="Battery"></a>Battery</h3>
-				<img src="http://www.instructables.com/files/deriv/FHW/LWVN/H5ED7SOP/FHWLWVNH5ED7SOP.LARGE.jpg" style="width: 186px; height: 177px;">
+			<h3 class="tutorial"><a name="Battery"></a>Battery</h3>
+				<img class="tutorial" src="http://www.instructables.com/files/deriv/FHW/LWVN/H5ED7SOP/FHWLWVNH5ED7SOP.LARGE.jpg" style="width: 186px; height: 177px;">
 				<p>I sincerely hope that everyone reading this knows what this is.</p>
-			<h3><a name="Main_Breaker"></a>Main Breaker</h3>
-					<img src="http://frc-labs.com/wp-content/uploads/2012/09/100_1129.jpg" style="width: 201px; height: 150px;">
+			<h3 class="tutorial"><a name="Main_Breaker"></a>Main Breaker</h3>
+					<img class="tutorial" src="http://frc-labs.com/wp-content/uploads/2012/09/100_1129.jpg" style="width: 201px; height: 150px;">
 					<p>This is also fairly self-explanatory. This turns the whole robot on and off. The red button is the off button; there is a little black lever you push into the switch to turn the robot on.
 						If you e-stop the robot, you need to cycle power on the robot using this.</p>
-			<h3><a name="Power_distribution_panel"></a>Power distribution panel</h3>
-				<img src="http://www.fightingpi.org/Resources/Controls/Alpha/2015_Pictures/Power%20distribution.png" style="width: 200px; height: 297px;">
+			<h3 class="tutorial"><a name="Power_distribution_panel"></a>Power distribution panel</h3>
+				<img class="tutorial" src="http://www.fightingpi.org/Resources/Controls/Alpha/2015_Pictures/Power%20distribution.png" style="width: 200px; height: 297px;">
 				<p style="font-style: italic;">Note: This is an image of an power distribution panel from its alpha test. Production-level panels will have a cover, but the ports will still be accessible.</p>
 				<p>The main breaker feeds directly into this panel. From here, power is divided (depending on voltage) to the various components of the robot.</p>
 				<p>Note that you don&#x27;t always put a 5V device on a 5V terminal -- if the voltage from the battery dropped, the power for that device would also drop, causing it to stop working.</p>
-			<h3><a name="Signal_light"></a>Signal light</h3>
-				<img src="http://team358.org/files/programming/ControlSystem2009-/RSL-wiring.jpg" width="265px" height="110px">
+			<h3 class="tutorial"><a name="Signal_light"></a>Signal light</h3>
+				<img class="tutorial" src="http://team358.org/files/programming/ControlSystem2009-/RSL-wiring.jpg" width="265px" height="110px">
 					<p>This orange light is actually programmed, but you will never see the code for this light. It is embedded in the cRIO controller, which will be discussed next.
 						This light changes its flash frequency to tell you whether the robot is connected to a driver station or not.</p>
-		<h2><a name="Programmed_Components"></a>Programmed Components</h2>
+		<h2 class="tutorial"><a name="Programmed_Components"></a>Programmed Components</h2>
 			<p>The following components are either programmed, affect your program in some way, or are affected by your program.</p>
-			<h3><a name="rRIO"></a>roboRIO</h3>
-				<img src="http://forums.xilinx.com/t5/image/serverpage/image-id/8265i14FEE9972A33E49C/image-size/original?v=mpbl-1&px=-1" style="width: 203px; height: 200px;">
+			<h3 class="tutorial"><a name="rRIO"></a>roboRIO</h3>
+				<img class="tutorial" src="http://forums.xilinx.com/t5/image/serverpage/image-id/8265i14FEE9972A33E49C/image-size/original?v=mpbl-1&px=-1" style="width: 203px; height: 200px;">
 				<p>This is the brain of the robot. It communicates through the LAN port or through a connected USB wifi dongle. Your code is stored here.
 					When you replace it, you need to reboot this (either using the main breaker or the <q>Reboot roboRIO...</q> button on the driver station) in order for your changes to take effect.</p>
 				<p>Unlike previous years, all of the inputs and outputs are located directly on the rRIO. The following is a list of all of the ports that you might end up dealing with.</p>
@@ -254,147 +257,143 @@
 						<li>RS-232 (serial), at the top left, beneath the I<sup>2</sup>C port, labeled <q>RS-232</q></li>
 					</ul>
 				</ul>
-				<p>This year, the rRIO comes with a built-in gyroscope.</p>
-			<h3><a name="Solenoid_Control_Module"></a>Solenoid Control Module</h3>
-				<img src="http://www.fightingpi.org/Resources/Controls/Alpha/2015_Pictures/Pneumatic%20Control%20Module%20Length.png" alt="Solenoid Control Module" title="Tiny, isn't it?" style="width: 200px; height: 219px;">
-				<p>This year, the solenoid breakout is being replaced with the small solenoid control module.</p>
+				<p>This year, the rRIO comes with a built-in accelerometer.</p>
+			<h3 class="tutorial"><a name="Pneumatic_Control_Module"></a>Pneumatic Control Module</h3>
+				<img class="tutorial" src="http://www.fightingpi.org/Resources/Controls/Alpha/2015_Pictures/Pneumatic%20Control%20Module%20Length.png" alt="Solenoid Control Module" title="Tiny, isn't it?" style="width: 200px; height: 219px;">
+				<p>This year, the solenoid breakout is being replaced with the small pneumatic control module.</p>
 				<p>This device controls solenoids -- which, in this context, are the valves that control pneumatics on the robot -- through a CAN bus. However, it is not necessary to program the CAN bus to use this.</p>
-			<h3><a name="Motor_Controllers"></a>Motor Controllers<a href="#Motor_Controllers" class="section_anchor"></a></h3>
-				<p>The following components are devices that are used to control other devices on the robot (hence the name). The devices that are controlled by controllers (e.g. motors) operate based on analog signals (most commonly voltage),
-					so controllers are needed to <q>smarten</q> these devices and provide more control over them.</p>
+				<p>The pneumatic control module is also responsible for controlling the compressor.</p>
+			<h3 class="tutorial"><a name="Motor_Controllers"></a>Motor Controllers<a href="#Motor_Controllers" class="section_anchor"></a></h3>
+				<p>The following components are devices that are used to control other devices on the robot (hence the name). The devices that are controlled by controllers (e.g. motors) operate based on analog signals (most commonly voltage), so controllers are needed to <q>smarten</q> these devices and provide more control over them.</p>
 				<p>In the code, as you will learn later, you program these as if they are the device they are operating. You do not actually program the devices the controllers control.</p>
-				<h4><a name="Victors"></a>Victors</h4>
-					<img src="http://www.vexrobotics.com/media/catalog/product/cache/11/image/296x/5e06319eda06f020e43594a9c230972d/2/1/217-2769-950x950_1.jpg" style="width; 148px; height: 148px;">
-					<p>Victors are one kind of drive controller. They run off of a PWM output on the digital sidecar, and they translate the PWM signal into a voltage.</p>
+				<h4 class="tutorial"><a name="Victors"></a>Victors</h4>
+					<img class="tutorial" src="http://www.vexrobotics.com/media/catalog/product/cache/11/image/296x/5e06319eda06f020e43594a9c230972d/2/1/217-2769-950x950_1.jpg" style="width; 148px; height: 148px;">
+					<p>Victors are one kind of drive controller. They run off of a PWM output on the <a href="#rRIO">roboRIO</a>, and they translate the PWM signal into a voltage.</p>
 					<p>Victors provide a significant amount of strength, and are a good choice for drive motors.</p>
-				<h4><a name="Jaguars"></a>Jaguars</h4>
-					<img src="http://www.robotmarketplace.com/products/images/IFI-JAGUAR_lg.jpg" style="width: 200px; height: 172px;">
-					<p>Jaguars are also drive controllers, and they too run off of a PWM channel on the digital sidecar. In terms of programming, they are essentially the same as Victors.
+				<h4 class="tutorial"><a name="Jaguars"></a>Jaguars</h4>
+					<img class="tutorial" src="http://www.robotmarketplace.com/products/images/IFI-JAGUAR_lg.jpg" style="width: 200px; height: 172px;">
+					<p>Jaguars are also drive controllers, and they too run off of a PWM channel on the <a href="#rRIO">roboRIO</a>. In terms of programming, they are essentially the same as Victors.
 						They do provide different features from Victors; however, despite their size, they can freak out when they encounter too much stress.</p>
-				<h4><a name="Talons"></a>Talons</h4>
-					<img src="http://team358.org/files/programming/ControlSystem2009-/Talon.jpg" style="width: 200px; height: 176px;">
+				<h4 class="tutorial"><a name="Talons"></a>Talons</h4>
+					<img class="tutorial" src="http://team358.org/files/programming/ControlSystem2009-/Talon.jpg" style="width: 200px; height: 176px;">
 					<p>Talons are the newest type of drive controller. They combine some of the features of Jaguars and the robustness of Victors.</p>
 					<p>These, as well, run off of PWM channels and are programatically similar to the other two.</p>
-				<h4><a name="Spikes/Relays"></a>Spikes/Relays</h4>
-					<img src="http://www.robotmarketplace.com/products/images/IFIW-SP1_lg.jpg" style="width: 200px; height: 162px;">
-					<p>Spikes, controllers that run off of relays on the digital sidecar, have three states: Off, Forward, and Reverse (the latter two being the device&#x27;s <q>On</q> state).
-						They do not provide voltage control, so these are usually used on motors which do not require speed control (like window motors) or lights. The Reverse state is like taking a battery out and inserting it the other way, reversing the polarity.
-						This is useful for driving motors in different directions.</p>
-			<h3><a name="Motors"></a>Motors</h3>
+				<h4 class="tutorial"><a name="Spikes/Relays"></a>Spikes/Relays</h4>
+					<img class="tutorial" src="http://www.robotmarketplace.com/products/images/IFIW-SP1_lg.jpg" style="width: 200px; height: 162px;">
+					<p>Spikes, controllers that run off of relays on the <a href="#rRIO">roboRIO</a>, have three states: Off, Forward, and Reverse (the latter two being the device&#x27;s <q>On</q> state). They do not provide voltage control, so these are usually used on motors which do not require speed control (like window motors) or lights. The Reverse state is like taking a battery out and inserting it the other way, reversing the polarity. This is useful for driving motors in different directions.</p>
+			<h3 class="tutorial"><a name="Motors"></a>Motors</h3>
 				<p>All motors are hooked up to a controller, else they would be running constantly and in one state. You do not actually program the motors, but what you program the controller to do affects the motor.</p>
 				<p>Most motors are very similar. The only reason that specific motors are used is for different output ranges, torque, etc., properties that you, as programmers, are not particularly concerned with.</p>
 				<p>Of course, motors are not limited to this list. However, these are the kinds of motors you will see most commonly.</p>
-				<h4><a name="CIM"></a>CIM</h4>
-					<img src="http://ndroboknights.com/wp-content/uploads/2012/01/768-CIM_motor.jpg" style="width: 200px; height: 126px;">
+				<h4 class="tutorial"><a name="CIM"></a>CIM</h4>
+					<img class="tutorial" src="http://ndroboknights.com/wp-content/uploads/2012/01/768-CIM_motor.jpg" style="width: 200px; height: 126px;">
 					<p>CIMs are powerful motors that don&#x27;t give out easily. You will see these motors driving the drivetrain, but in some cases they power other things as well (in the case of the 2013 robot, they drove the climbing mechanism as well).</p>
 					<p>CIMs can come in different sizes (which provide different physical properties); the most common are the CIM and the miniCIM.</p>
-				<h4><a name="Banebot"></a>Banebot</h4>
-					<img src="http://www.robotshop.com/Images/big/en/banebots-rs-550-motor-12v.jpg" style="width: 200px; height: 200px;">
-				<h4><a name="AndyMark"></a>AndyMark</h4>
-					<img src="http://a248.e.akamai.net/origin-cdn.volusion.com/vyfsn.knvgw/v/vspfiles/photos/am-0912-2.jpg?1345723078" style="width: 250px; height: 164px;">
-				<h4><a name="Window_Motors"></a>Window Motors</h4>
-					<img src="http://www.hamiltontaxservices.com/images/MB/W126%20left%20rear%20window%20motor.jpg" style="width: 200; height: 150px;">
+				<h4 class="tutorial"><a name="Banebot"></a>Banebot</h4>
+					<img class="tutorial" src="http://www.robotshop.com/Images/big/en/banebots-rs-550-motor-12v.jpg" style="width: 200px; height: 200px;">
+				<h4 class="tutorial"><a name="AndyMark"></a>AndyMark</h4>
+					<img class="tutorial" src="http://a248.e.akamai.net/origin-cdn.volusion.com/vyfsn.knvgw/v/vspfiles/photos/am-0912-2.jpg?1345723078" style="width: 250px; height: 164px;">
+				<h4 class="tutorial"><a name="Window_Motors"></a>Window Motors</h4>
+					<img class="tutorial" src="http://www.hamiltontaxservices.com/images/MB/W126%20left%20rear%20window%20motor.jpg" style="width: 200; height: 150px;">
 					<p>Believe it or not, but this is the actual motor that drives the power windows in your car.</p>
 					<p>Window motors are different from most other motors in that they run off of a relay (meaning they have the off, forward, and reverse states).
 						You will usually see these running low-strain operations which do not require speed control.</p>
-				<h4><a name="Servos"></a>Servos</h4>
-					<img src="http://www.servocity.com/assets/images/HS-311.jpg" style="width: 180px; height: 164px;">
+				<h4 class="tutorial"><a name="Servos"></a>Servos</h4>
+					<img class="tutorial" src="http://www.servocity.com/assets/images/HS-311.jpg" style="width: 180px; height: 164px;">
 					<p>Servos are special types of motors. They read directly off of a PWM cable. Doing so permits them to be controlled without a motor controller.</p>
 					<p>The width of the pulse provided in the PWM determines the endpoint of the motion of the servo.</p>
 					<p>Servos also have a builtin sensor that determines the rotational angle of the output. This allows you to control the position of whatever is attached to the servo without a PID (in theory).</p>
 					<p>Servos can have various rotational ranges, from a half-turn to multiple turns.</p>
-				<h4><a name="Vex_Motors"></a>Vex Motors</h4>
-					<img src="http://www.vexrobotics.com/media/catalog/product/cache/11/image/296x/5e06319eda06f020e43594a9c230972d/2/7/276-2177-2-wire-motor-393.jpg" style="width: 200px; height: 200px;">
-					<p>Vex motors are very similar to a servo motor (and some are servo motors), but they are not all servos, despite their similar appearance.
-						These have specialized drive controllers, which are treated like Victors in the code.</p>
-			<h3><a name="Pneumatics"></a>Pneumatics</h3>
+				<h4 class="tutorial"><a name="Vex_Motors"></a>Vex Motors</h4>
+					<img class="tutorial" src="http://www.vexrobotics.com/media/catalog/product/cache/11/image/296x/5e06319eda06f020e43594a9c230972d/2/7/276-2177-2-wire-motor-393.jpg" style="width: 200px; height: 200px;">
+					<p>Vex motors are very similar to a servo motor (and some are servo motors), but they are not all servos, despite their similar appearance. These have specialized drive controllers, which are treated like Victors in the code.</p>
+			<h3 class="tutorial"><a name="Pneumatics"></a>Pneumatics</h3>
 				<p>Motors are not the only way to actuate parts of the robot. It is also possible to use a pneumatics system to change the position of various robot components.</p>
 				<p>Pneumatics are usually used to control parts of the robot that are not designed to maintain continuous motion. Usually, they control devices that have two different states.</p>
-				<h4><a name="Compressor"></a>Compressor</h4>
-					<img src="http://team358.org/files/pneumatic/Compressor2011.jpg" style="width: 219px; height: 200px;">
+				<h4 class="tutorial"><a name="Compressor"></a>Compressor</h4>
+					<img class="tutorial" src="http://team358.org/files/pneumatic/Compressor2011.jpg" style="width: 219px; height: 200px;">
 					<p>At the heart of the pneumatics system lies the compressor. This device charges the pneumatics system so that it can do useful work.</p>
 					<p>In the past, teams had to write code to control the compressor, turning it on when the pressure was too low, and turning it off when the pressure was reaching its safety limit.
 						Now, the new control system does this automatically, but it is still possible to control the compressor from the code.</p>
-				<h4><a name="Solenoid_valve"></a>Solenoid valve</h4>
-					<img src="http://www.parkerhydraulics.co.uk/wp-content/uploads/2013/07/CPE-Solenoid-Valve.jpg" style="width: 200px; height: 150px;">
+				<h4 class="tutorial"><a name="Solenoid_valve"></a>Solenoid valve</h4>
+					<img class="tutorial" src="http://www.parkerhydraulics.co.uk/wp-content/uploads/2013/07/CPE-Solenoid-Valve.jpg" style="width: 200px; height: 150px;">
 					<p>The solenoid valve is the component that controls the components that actuate the robot (usually a piston). In a sense, solenoids are to pneumatics as motor controllers are to electrical propulsion.</p>
 					<p>However, unlike most motor controllers, solenoids are two-state devices: open or closed. There is no fine control over the positioning of pneumatically actuated components.</p>	
-			<h3><a name="Sensors"></a>Sensors</h3>
+			<h3 class="tutorial"><a name="Sensors"></a>Sensors</h3>
 				<p>Sensors are crucial parts to the robot. They provide important information pertaining to the robot&#x27;s (or a part of the robot&#x27;s) position.
 					Note that what is listed here is not an exclusive list of what can be used on the robot.</p>
-				<h4><a name="Digital_Inputs"></a>Digital Inputs</h4>
-					<p>The following sensors are attached to the <a href="#Digital_Sidecar">Digital Sidecar</a>, and provide their data to the rRIO digitally.</p>
-					<h5><a name="Encoder"></a>Encoder</h5>
-						<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Gray_code_rotary_encoder_13-track_opened.jpg/125px-Gray_code_rotary_encoder_13-track_opened.jpg">
+				<h4 class="tutorial"><a name="Digital_Inputs"></a>Digital Inputs</h4>
+					<p>The following sensors are attached to the Digital I/O on the <a href="#rRIO">roboRIO</a>, and provide their data digitally.</p>
+					<h5 class="tutorial"><a name="Encoder"></a>Encoder</h5>
+						<img class="tutorial" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Gray_code_rotary_encoder_13-track_opened.jpg/125px-Gray_code_rotary_encoder_13-track_opened.jpg">
 						<p>Encoders are sensors that are used to measure distance. This distance can either be linear or rotational. You will see these most commonly on the drivetrain, measuring the distance the whole robot has traveled. They are usually used in autonomous.</p>
 						<p>Encoders work by emitting pulses every time a predefined distance has passed after the previous pulse. If you don&#x27;t want to use the intervals that are hard-wired into the encoders, there is a software function that allows you to change this (we still usually just use the pulses as the distance).
 							However, that will be discussed later.</p>
 						<p>Encoders always count up (unless driven backwards, then they count down), making them comparable to the odometer of a car.</p>
-					<h5><a name="Gear_Tooth_Sensor"></a>Gear Tooth Sensor</h5>
-						<img src="http://www.epcos.com/blob/28910/3/figure1-data.jpg">
+					<h5 class="tutorial"><a name="Gear_Tooth_Sensor"></a>Gear Tooth Sensor</h5>
+						<img class="tutorial" src="http://www.epcos.com/blob/28910/3/figure1-data.jpg">
 						<p>It may be hard to believe, but this sensor watches (with a magnet) a gear and counts the number of teeth that pass by in a given period of time.</p>
-					<h5><a name="Limit_Switch"></a>Limit Switch</h5>
-						<img src="https://www.egr.msu.edu/eceshop/Parts_Inventory/images/spdt%20limit%20switch.jpg" style="width: 214px; height: 214px;">
+					<h5 class="tutorial"><a name="Limit_Switch"></a>Limit Switch</h5>
+						<img class="tutorial" src="https://www.egr.msu.edu/eceshop/Parts_Inventory/images/spdt%20limit%20switch.jpg" style="width: 214px; height: 214px;">
 						<p>These digital devices are simple, in that they have two states: on and off (pressed and not pressed).</p>
-					<h5><a name="Ultrasonic_Sensor"></a>Ultrasonic Sensor</h5>
-						<img src="http://www.maxbotix.com/pictures/XL/XL%20Ultrasonic%20Sensor%20Iso.jpg" style="width; 259; height: 214px;">
+					<h5 class="tutorial"><a name="Ultrasonic_Sensor"></a>Ultrasonic Sensor</h5>
+						<img class="tutorial" src="http://www.maxbotix.com/pictures/XL/XL%20Ultrasonic%20Sensor%20Iso.jpg" style="width; 259; height: 214px;">
 						<p>This device is basically sonar. It sends out a super-high-pitched sound and waits for the echo to determine the distance to an object.</p>
-					<h5><a name="Pressure_switch"></a>Pressure switch</h4>
-						<img src="http://team358.org/files/pneumatic/NasonPressureSwitch.jpg">
+					<h5 class="tutorial"><a name="Pressure_switch"></a>Pressure switch</h4>
+						<img class="tutorial" src="http://team358.org/files/pneumatic/NasonPressureSwitch.jpg">
 						<p>This device is a simple mechanism that watches the pressure in the pneumatics system. If the pressure reaches a certain threshold (usually at about 115 psi), the switch will close.
 							The switch will remain closed until the pressure becomes low enough to open it again.</p>
-				<h4><a name="Analog_Inputs"></a>Analog Inputs</h4>
-					<p>The following sensors can all be found plugged into the <a href="#Analog_Breakout">analog breakout module</a>. They provide their data by varying voltage.</p>
-					<h5><a name="Potentiometer"></a>Potentiometer</h4>
-						<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Potentiometer.jpg/225px-Potentiometer.jpg">
+				<h4 class="tutorial"><a name="Analog_Inputs"></a>Analog Inputs</h4>
+					<p>The following sensors can all be found plugged into the analog ports on the <a href="#rRIO">roboRIO</a>. They provide their data by varying voltage.</p>
+					<h5 class="tutorial"><a name="Potentiometer"></a>Potentiometer</h4>
+						<img class="tutorial" src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Potentiometer.jpg/225px-Potentiometer.jpg">
 						<p>Potentiometers are sensors that measure rotation. You may not realize it, but a lot of the electronics you interact with on a day-to-day basis use potentiometers. For example, the volume knob on your car stereo works because there is a potentiometer behind the knob.</p>
 						<p>The range of a potentiometer&#x27;s output is technically from 0-6 volts, but may actually be around 1-5.</p>
-						<img src="http://fddrsn.net/pcomp/images/potentiometer1.gif" title="Mechanism of a potentiometer" style="width: 236px; height: 162px; background-color: #ffffff;">
-						<p>The number of turns a potentiometer will allow varies depending on the potentiometer. Some allow 3, some allow 10, some even allow less than a full turn (potentiometers are not limited to these).
-							Because most of the potentiometers you will interact with have the same voltage range, potentiometers that have a lower number of turns are more sensitive, therefore they will be more precise.</p>
-					<h5><a name="Gyroscope"></a>Gyroscope</h5>
-						<img src="http://www.robotshop.com/blog/en/files/sfe-dual-axis-gyro.jpg" style="width: 200px; height: 200px;">
+						<img class="tutorial" src="http://fddrsn.net/pcomp/images/potentiometer1.gif" title="Mechanism of a potentiometer" style="width: 236px; height: 162px; background-color: #ffffff;">
+						<p>The number of turns a potentiometer will allow varies depending on the potentiometer. Some allow 3, some allow 10, some even allow less than a full turn (potentiometers are not limited to these). Because most of the potentiometers you will interact with have the same voltage range, potentiometers that have a lower number of turns are more sensitive, therefore they will be more precise.</p>
+					<h5 class="tutorial"><a name="Gyroscope"></a>Gyroscope</h5>
+						<img class="tutorial" src="http://www.robotshop.com/blog/en/files/sfe-dual-axis-gyro.jpg" style="width: 200px; height: 200px;">
 						<p>Gyroscopes are sensors that determine rotation about all three axes: essentially, it determines the robot&#x27;s rotation compared to the ground. It can also measure lateral direction (y rotation).</p>
-						<p>Since the 2015 controls system upgrade, the roboRIO has had a built-in gyroscope.</p>
-					<h5><a name="Accelerometer"></a>Accelerometer</h5>
-						<img src="http://www.pyroelectro.com/tutorials/accel_intro/img/accel.jpg">
-						<p>Accelerometers are sensors that measure acceleration, but can also be used to measure rotation (similar to a <a href="#Gyroscope">gyroscope</a>). The use of an accelerometer versus a gyroscope depends on the application.</p>
-				<h4><a name="Other_sensors"></a>Other sensors</h4>
-					<h5><a name="Camera"></a>Camera</h5>
-						<img src="http://img.tomshardware.com/us/2003/12/11/axis_network_camera_review_axis205/205right.jpg">
+					<h5 class="tutorial"><a name="Accelerometer"></a>Accelerometer</h5>
+						<img class="tutorial" src="http://www.pyroelectro.com/tutorials/accel_intro/img/accel.jpg">
+						<p>Accelerometers are sensors that measure acceleration along all three axes. This can be used to determine a part's orientation to the ground.</p>
+						<p>Since the 2015 controls system upgrade, the <a href="#rRIO">roboRIO</a> has had a built-in accelerometer.
+				<h4 class="tutorial"><a name="Other_sensors"></a>Other sensors</h4>
+					<h5 class="tutorial"><a name="Camera"></a>Camera</h5>
+						<img class="tutorial" src="http://img.tomshardware.com/us/2003/12/11/axis_network_camera_review_axis205/205right.jpg">
 						<p>A camera&#x27;s video feed can be used for various purposes -- in recent years, teams have used them to create an auto-alignment feature. They can also simply be put on the dashboard, so that the drivers can align the robot themselves.
 							Of course, their use is not limited to that -- for example, it can be put near the bottom front of the robot so the drivers can see objects stuck in tight spaces or something small in front of the robot.</p>
 							<p>This year, the new rRIO has added a set of USB ports, allowing teams to hook a webcam directly to the rRIO for image processing.</p>
-			<h3><a name="Controls"></a>Controls</h3>
+			<h3 class="tutorial"><a name="Controls"></a>Controls</h3>
 				<p style="font-style: italic;">Not to be confused with <a href="#Motor_Controllers">motor controllers</a>.</p>
 				<p>These devices are what control the robot from the driver station.</p>
-				<h4><a name="Computer"></a>Computer</h3>
+				<h4 class="tutorial"><a name="Computer"></a>Computer</h3>
 					<p style="font-style: italic;">Commonly referred to as a driver station if it is sending user input to the robot</p>
-					<img src="http://upload.wikimedia.org/wikipedia/commons/7/7b/Acer_Aspire_8920_Gemstone.jpg" style="width: 238px; height: 172px;">
+					<img class="tutorial" src="http://upload.wikimedia.org/wikipedia/commons/7/7b/Acer_Aspire_8920_Gemstone.jpg" style="width: 238px; height: 172px;">
 					<p>If you do not know what this is, then you just made a paradox. In terms of robot operation, they gather data from the drivers and send it to the robot for processing.</p>
-				<h4><a name="Radio"></a>Radio</h4>
-					<img src="http://www.mln.com.au/img/files/4870/asus-usb-n53-2.jpg" style="height: 200px; width: 200px;">
+				<h4 class="tutorial"><a name="Radio"></a>Radio</h4>
+					<img class="tutorial" src="http://www.productwiki.com/upload/images/d_link_dap_1522.jpg" style="height: 163px; width: 250px;">
 					<p>The radio is the device that handles all of the robot&#x27;s incoming and outgoing data. It is similar to a router, but it has other functions, as well.</p>
 					<p>During competitions, it acts less like a router and more like a client device (for example, a laptop on your home wifi), which connects to the field management system (aka FMS), which handles all of the data for every competing team, and sends it to the proper place.</p>
-					<p>This year, traditional radios can be replaced with simple USB wifi dongles.</p>
-				<h4><a name="Game_Controller"></a>Game Controller</h4>
-					<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Xbox-360-S-Controller.png/293px-Xbox-360-S-Controller.png">
+				<h4 class="tutorial"><a name="Game_Controller"></a>Game Controller</h4>
+					<img class="tutorial" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Xbox-360-S-Controller.png/293px-Xbox-360-S-Controller.png">
 					<p>If you are under the age of 21 and do not know what this is, you have had a deprived childhood. Still, given how widespread videogames are these days, it is hard not to know what one of these is.</p>
 					<p>XBOX 360 controllers are one of the two types of controllers that teams use (the other being the <a href="#Joystick">joystick</a>).</p>
 					<p>In this case, each button runs a certain function (determined by you!), either started by a button press or only while a button is being held.
 						The joysticks on the controller are used to drive the robot (for us, left Y axis and right X axis, to allow precision driving), and to perform manual operations.</p>
-				<h4><a name="Joystick"></a>Joystick</h4>
+				<h4 class="tutorial"><a name="Joystick"></a>Joystick</h4>
 					<p style="font-style: italic;">Not to be confused with <a href="#Game_Controller">game controller</a> joysticks</p>
-					<img src="http://www.logitech.com/assets/35368/attack-3-joystick53.png">
+					<img class="tutorial" src="http://www.logitech.com/assets/35368/attack-3-joystick53.png">
 					<p>This is just a different input device. We do not use these, but you may see other teams using them.</p>
-		<h2><a name="Miscellaneous"></a>Miscellaneous<a href="#Miscellaneous" class="section_anchor"></a></h2>
+		<h2 class="tutorial"><a name="Miscellaneous"></a>Miscellaneous<a href="#Miscellaneous" class="section_anchor"></a></h2>
 			<p>Of course, the amount of components is not limited to this. There are even entirely different control systems (like an Arduino or a CAN bus). This is just a list of simple components that run on a simple control system (which we use).</p>
 	</div>
-	<div id="activity">
-		<h2><a name="Activity">Activity</a></h2>
+	<div id="activity" style="clear: both;">
+		<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
 			<p style="font-weight: bold; text-align: center; color: #ff0000;"><noscript>This activity requires Javascript. Please turn it on or use a browser with Javascript.</noscript></p>
+			<p style="font-weight: bold; text-align: center;">WARNING: This activity is not fully working at the moment. The input boxes work, but it will not check your answers. Please check back later.</p>
 		<div id="instructions">
-			<p>The following activity will test your knowledge of the robot components. When you click the button, the content on the page will disappear.</p>
+			<p>The following activity will test your knowledge of the robot components. Try to complete it without referring to the lesson.</p>
 			<p>The activity consists of 10 pictures. Your task is to do the following for each picture:</p>
 			<ul>
 				<li>Identify the name of the component</li>
@@ -402,7 +401,7 @@
 				<li>Explain its function</li>
 			</ul>
 			<p>For example, given the following image:</p>
-			<img src="http://www.robotshop.com/media/files/images/parallax-ping-ultrasonic-sensor-large.jpg" style="width: 317px; height: 200px;">
+			<img class="tutorial" src="http://www.robotshop.com/media/files/images/parallax-ping-ultrasonic-sensor-large.jpg" style="width: 317px; height: 200px;">
 			<ul>
 				<li><span style="font-weight: bold;">Name: </span>Ultrasonic Sensor</li>
 				<li><span style="font-weight: bold;">Category: </span>Analog Sensor</li>
@@ -416,7 +415,7 @@
 		</div>
 		<div id="questions" style="display: none;">
 			<br>
-			<img src="http://www.fightingpi.org/Resources/Controls/Alpha/2015_Pictures/roboRIO%20Top.png" style="width: 217px; height: 200px;">
+			<img class="tutorial" src="http://www.uwinfirst.com/wp-content/uploads/2013/08/roboRIO-Specification-Flyer-12.png" style="width: 274px; height: 268px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -426,7 +425,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg">
+			<img class="tutorial" src="http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -436,7 +435,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://img.ehowcdn.com/article-new/ehow/images/a05/3r/7k/potentiometer-works-800x800.jpg" style="width: 150px; height: 94px;">
+			<img class="tutorial" src="http://img.ehowcdn.com/article-new/ehow/images/a05/3r/7k/potentiometer-works-800x800.jpg" style="width: 150px; height: 94px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -446,7 +445,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://team358.org/files/programming/ControlSystem2015-2019/images/sm_Gyro.jpg" style="width: 225px; height: 225px;">
+			<img class="tutorial" src="http://team358.org/files/programming/ControlSystem2015-2019/images/sm_Gyro.jpg" style="width: 225px; height: 225px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -456,7 +455,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://upload.wikimedia.org/wikipedia/commons/4/4d/Xbox-360-Wireless-Controller-White.jpg" style="width: 215px; height: 200px;">
+			<img class="tutorial" src="http://upload.wikimedia.org/wikipedia/commons/4/4d/Xbox-360-Wireless-Controller-White.jpg" style="width: 215px; height: 200px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -466,7 +465,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg" style="width: 150px; height: 139px;" title="Hint: it's a digital input.">
+			<img class="tutorial" src="http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg" style="width: 150px; height: 139px;" title="Hint: it's a digital input.">
 			<p>Hint: It's a digital input.</p>
 			<form>
 				<label for="name">Name: </label>
@@ -477,7 +476,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://www.firstcadlibrary.com/images/CIM%20Motor.gif">
+			<img class="tutorial" src="http://www.firstcadlibrary.com/images/CIM%20Motor.gif">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -487,7 +486,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>
-			<img src="http://www.rockwellautomation.com/resources/images/productinfo/IDW_300x300/855BS/855BS-N10BL5_300x300.jpg" style="width: 200px; height: 200px;">
+			<img class="tutorial" src="http://www.rockwellautomation.com/resources/images/productinfo/IDW_300x300/855BS/855BS-N10BL5_300x300.jpg" style="width: 200px; height: 200px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -497,7 +496,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>		
-			<img src="http://www.lightobject.info/eBay/Images/LimitSWC2.jpg" style="width: 250px; height: 250px;">
+			<img class="tutorial" src="http://www.lightobject.info/eBay/Images/LimitSWC2.jpg" style="width: 250px; height: 250px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -507,7 +506,7 @@
 				<textarea name="func" rows="5" cols="50"></textarea> <br>
 			</form>
 			<br>		
-			<img src="http://myrobotlab.org/sites/default/files/users/user3images/servomotor.gif" style="width: 227px; height: 200px;">
+			<img class="tutorial" src="http://myrobotlab.org/sites/default/files/users/user3images/servomotor.gif" style="width: 227px; height: 200px;">
 			<form>
 				<label for="name">Name: </label>
 				<input type="text" name="name"/> <br>
@@ -521,7 +520,7 @@
 		<div id="answer" style="display: none;">
 			<p id="count" style="font-weight: bold;"></p>
 			<ol>
-				<li><img src="http://www.fightingpi.org/Resources/Controls/Alpha/2015_Pictures/roboRIO%20Top.png" style="width: 217px; height: 200px;"></li>
+				<li><img class="tutorial" src="http://www.uwinfirst.com/wp-content/uploads/2013/08/roboRIO-Specification-Flyer-12.png" style="width: 274px; height: 268px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -539,7 +538,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Uses preprogrammed instructions to interpret inputs and control outputs. This is the robot's onboard computer.</li>
 					</ul>
 				</ul>
-				<li><img src="http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg"></li>
+				<li><img class="tutorial" src="http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -557,7 +556,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Receives input through PWM and translates it into a voltage to control the attached motor.</li>
 					</ul>
 				</ul>
-				<li><img src="http://img.ehowcdn.com/article-new/ehow/images/a05/3r/7k/potentiometer-works-800x800.jpg" style="width: 150px; height: 94px;"></li>
+				<li><img class="tutorial" src="http://img.ehowcdn.com/article-new/ehow/images/a05/3r/7k/potentiometer-works-800x800.jpg" style="width: 150px; height: 94px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -572,10 +571,10 @@
 					<li>Function</li>
 					<ul>
 						<li><span style="font-weight: bold;">Your answer: </span><span id="2_gFunc"></span></li>
-						<li><span style="font-weight: bold;">Correct (example) answer: </span>Translates rotation into a resistance, and, in turn, a voltage. Translated into a digital signal by the analog breakout.</li>
+						<li><span style="font-weight: bold;">Correct (example) answer: </span>Translates rotation into a resistance, and, in turn, a voltage. Translated into a digital signal by the roboRIO</li>
 					</ul>
 				</ul>
-				<li><img src="http://www.brain.kyutech.ac.jp/~ishii/Darya_Bird/Ronbun/GyroSensor.png" style="width: 225px; height: 225px;"></li>
+				<li><img class="tutorial" src="http://team358.org/files/programming/ControlSystem2015-2019/images/sm_Gyro.jpg" style="width: 225px; height: 225px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -593,7 +592,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Measures rotation along the X, Y, and Z axes.</li>
 					</ul>
 				</ul>
-				<li><img src="http://upload.wikimedia.org/wikipedia/commons/4/4d/Xbox-360-Wireless-Controller-White.jpg" style="width: 215px; height: 200px;"></li>
+				<li><img class="tutorial" src="http://upload.wikimedia.org/wikipedia/commons/4/4d/Xbox-360-Wireless-Controller-White.jpg" style="width: 215px; height: 200px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -611,7 +610,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Gathers user input to control the robot.</li>
 					</ul>
 				</ul>
-				<li><img src="http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg" style="width: 150px; height: 139px;"></li>
+				<li><img class="tutorial" src="http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg" style="width: 150px; height: 139px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -629,7 +628,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Records distance/rotation as digital pulses.</li>
 					</ul>
 				</ul>
-				<li><img src="http://www.firstcadlibrary.com/images/CIM%20Motor.gif"></li>
+				<li><img class="tutorial" src="http://www.firstcadlibrary.com/images/CIM%20Motor.gif"></li>
 				<ul>
 					<li>Name</li>
 						<ul>
@@ -647,7 +646,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Converts (electrical) potential energy into mechanical energy. This specific motor provides a very powerful output.</li>
 					</ul>
 				</ul>
-				<li><img src="http://www.rockwellautomation.com/resources/images/productinfo/IDW_300x300/855BS/855BS-N10BL5_300x300.jpg" style="width: 200px; height: 200px;"></li>
+				<li><img class="tutorial" src="http://www.rockwellautomation.com/resources/images/productinfo/IDW_300x300/855BS/855BS-N10BL5_300x300.jpg" style="width: 200px; height: 200px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -665,7 +664,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>Uses differing sequences of long and short flashes to signal the status of the robot.</li>
 					</ul>
 				</ul>
-				<li><img src="http://www.lightobject.info/eBay/Images/LimitSWC2.jpg" style="width: 250px; height: 250px;"></li>
+				<li><img class="tutorial" src="http://www.lightobject.info/eBay/Images/LimitSWC2.jpg" style="width: 250px; height: 250px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -683,7 +682,7 @@
 						<li><span style="font-weight: bold;">Correct (example) answer: </span>A simple switch that senses on/off states.</li>
 					</ul>
 				</ul>
-				<li><img src="http://myrobotlab.org/sites/default/files/users/user3images/servomotor.gif" style="width: 227px; height: 200px;"></li>
+				<li><img class="tutorial" src="http://myrobotlab.org/sites/default/files/users/user3images/servomotor.gif" style="width: 227px; height: 200px;"></li>
 				<ul>
 					<li>Name</li>
 					<ul>
@@ -713,9 +712,9 @@
   		<table border="0" style="width: 100%;">
   			<tbody>
   				<tr>
-  					<td style="text-align: right; width: 40%;"><a href="../ch1.html">&#8592; Chapter 1 Overview</a></td>
+  					<td style="text-align: right; width: 40%;"><a href="../">&#8592; Chapter 1 Overview</a></td>
   					<td style="text-align: center; font-weight: bold; width: 20%;">1-1 Parts of the Robot</td>
-  					<td style="text-align: left; width: 40%;"><a href="program-structure.html">1-2 Program Structure &#8594;</a></td>
+  					<td style="text-align: left; width: 40%;"><a href="../program-structure">1-2 Program Structure &#8594;</a></td>
   				</tr>
   			</tbody>
   		</table>

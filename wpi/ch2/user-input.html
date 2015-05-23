@@ -6,12 +6,11 @@
   </head>
   <body>
   <!-- PAGE HEADER -->
-  <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-1</span>&nbsp;Using User Input</h1>
+  <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-1</span>&nbsp;Using User Input</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="http://www.hotteam67.org/programming/pauls-tutorials/wpi" title="WPILib Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;<a href="../ch2.html" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 1
+  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>
+  		&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>
+ 		&gt;&nbsp;<a href="../" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 1
   		</div>	
   	<hr />
   	
@@ -41,7 +40,7 @@
 		<li><a href="#Activity">Activity</a></li>
 	</ul>
 	</div>
-	<div id="content">
+	<div id="tcontent">
 		<h2 class="tutorial"><a name="Function_Presentation"></a>Function Presentation</h2>
 			<p>Now that we are diving into specific functions, it is important that you understand how they are presented to you in this tutorial. Whenever you are first given a function, its format will be like this:</p>
 			<pre lang="cpp">
@@ -61,7 +60,7 @@ RETURN_TYPE ComponentClass::FunctionName(OPTION_TYPE options)
 		<h2 class="tutorial"><a name="The_Game_Controller"></a>The Game Controller</h2>
 			<p>There are really two different kinds of devices available for controlling the robot -- a game controller and a joystick. They have different programming interfaces. However, since we use the game controller, this tutorial will cover how to program for the game controller.</p>
 			<h3 class="tutorial"><a name="Functions"></a>Functions</h3>
-				<p>If you recall from <a href="../ch1/parts-code.html">the last lesson</a>, the game controller uses the <code>Joystick</code> class (the joystick does use this class, but it is programmed in a different way), and you need to provide the joystick ID in the constructor. For the purposes of this tutorial, let&#x27;s say that you declared a pointer to a <code>Joystick</code> called <code>m_gamepad</code> at ID 0.</p>
+				<p>If you recall from <a href="../../ch1/parts-code">the last lesson</a>, the game controller uses the <code>Joystick</code> class (the joystick does use this class, but it is programmed in a different way), and you need to provide the joystick ID in the constructor. For the purposes of this tutorial, let&#x27;s say that you declared a pointer to a <code>Joystick</code> called <code>m_gamepad</code> at ID 0.</p>
 				<h4 class="tutorial"><a name="Buttons"></a>Buttons</h4>
 					<p>Buttons are the simplest to program. They use the following function:</p>
 					<pre lang="cpp">
@@ -69,16 +68,16 @@ bool Joystick::GetRawButton(int button_index)
 					</pre>
 					<p>where <code>button_index</code> is the numerical index of the desired button. For the XBox controller, this is the mapping:</p>
 					<ul>
-						<li>A = 0</li>
-						<li>B = 1</li>
-						<li>X = 2</li>
-						<li>Y = 3</li>
-						<li>Left Bumper = 4</li>
-						<li>Right Bumper = 5</li>
-						<li>Back = 6</li>
-						<li>Start = 7</li>
-						<li>Left Stick = 8</li>
-						<li>Right Stick = 9</li>
+						<li>A = 1</li>
+						<li>B = 2</li>
+						<li>X = 3</li>
+						<li>Y = 4</li>
+						<li>Left Bumper = 5</li>
+						<li>Right Bumper = 6</li>
+						<li>Back = 7</li>
+						<li>Start = 8</li>
+						<li>Left Stick = 9</li>
+						<li>Right Stick = 10</li>
 					</ul>
 					<p style="font-style: italic;">TIP! Check out <a href="http://www.hotteam67.org/wp-content/uploads/2015/01/Defines.h" target="_blank">Defines.h</a>!</p>
 					<p><span style="font-weight: bold;">WARNING</span>: The left and right stick buttons are pressed when the actual joystick on the controller is pressed down. Because they are tied in with the controller, a driver can hit either button inadvertantly. Use these with extreme caution, if at all.</p>
@@ -94,22 +93,21 @@ float Joystick::GetRawAxis(int axis_index)
 					<ul>
 						<li>Left stick, X axis = 0</li>
 						<li>Left stick, Y axis = 1</li>
-						<li>Triggers = 2</li>
-						<li>Right stick, X axis = 3</li>
-						<li>Right stick, Y axis = 4</li>
+						<li>Left trigger = 2</li>
+						<li>Right trigger = 3</li>
+						<li>Right stick, X axis = 4</li>
+						<li>Right stick, Y axis = 5</li>
 					</ul>
 					<p style="font-style: italic;">These mappings are available as header definitions in <a href="http://www.hotteam67.org/wp-content/uploads/2015/01/Defines.h" target="_blank">Defines.h</a> as well.</p>
 					<h5 class="tutorial"><a name="The_Joysticks"></a>The Joysticks</h5>
-						<p>The joysticks, or axes 0, 1, 3, and 4, act a bit differently than you might expect. Let&#x27;s look at axis 1, for example.</p>
+						<p>The joysticks, or axes 0, 1, 4, and 5, act a bit differently than you might expect. Let&#x27;s look at axis 1, for example.</p>
 						<p>If you were to push the left joystick forward, using <code>GetRawAxis()</code> on axis 1 actually returns a negative value. Similarly, if you pulled it back, <code>GetRawAxis</code> returns a positive value.</p>
 						<p>Just like the vertical axes, the horizontal axes are also backwards. Using the <code>GetRawAxis()</code> on axis 0 would return a negative value if the joystick is pushed right, and a positive value if it is pushed left.</p>
 						<p>Another thing of note is that, when the joystick is pushed to its maximum extent, the <code>GetRawAxis()</code> function's return value for that axis will have an absolute value of 1. So, if you pushed axis 2 to its furthest extent forward, it would return a value of -1.</p>
 					<h5 class="tutorial"><a name="The_Triggers"></a>The Triggers</h5>
-						<p>You may have noticed that the triggers of the game controller appear as axis 2. This is due to their capability of being able to tell exactly how far they are pressed down.</p>
-						<p>They are on one axis because one axis is capable of representing both triggers -- the left trigger is positive, and the right trigger is negative.</p>
-						<p><span style="font-weight: bold;">WARNING</span>: Because both triggers share one axis, holding both simultaneously will cause the values to cancel and return a value of 0.</p>
-						<p>Generally, if you need to treat the triggers like a button, check if the axis is past a threshold of 0.4 (0.4 on the left, -0.4 on the right). However, if necessary, you can adjust this threshold to where the driver/operator is most comfortable.</p>
-						<p>Again, the triggers will return an absolute value of 1 if one trigger is pressed completely.</p>
+						<p>You may have noticed that the triggers of the game controller appear as axes 2 and 3. This is due to their capability of being able to tell exactly how far they are pressed down.</p>
+						<p>Unlike the other axes, the triggers do not ever return negative values, since unpressed is 0.</p>
+						<p>Generally, if you need to treat the triggers like a button, check if the axis is past a threshold of 0.4. However, if necessary, you can adjust this threshold to where the driver/operator is most comfortable.</p>
 				<h2 class="tutorial"><a name="SmartDashboard"></a>SmartDashboard</h2>
 					<p>One of the most important parts of programming in general is being able to do something that has a tangible result, even if it is a string of characters on a screen. To this point, you do not know how to make any visible result when you are programming the robot. For any programmer this is a problem.</p>
 					<p>In the past, teams used to be able to write messages on the driver station panel. However, this is no longer the case. Now, teams must output robot data to one of many dashboards. In this lesson, you will learn how to output to WPI's SmartDashboard.</p>
@@ -122,10 +120,10 @@ float Joystick::GetRawAxis(int axis_index)
 						</ul>
 						<p>All of the writing functions for <code>SmartDashboard</code> take two parameters (listed above). Which function you use depends on the data type you're using.</p>
 						<p>Unlike all of the functions already discussed (and those that still have yet to be discussed), <code>SmartDashboard</code> functions are called exactly as they are presented in this tutorial (with the scope operator), like so:</p>
-						<p>As soon as you call these functions, the data is immediately written to SmartDashboard on the driver station, no manual updating required.</p>
 						<pre lang="cpp">
 SmartDashboard::PutString("My robot is","awesome");
 						</pre>
+						<p>As soon as you call these functions, the data is immediately written to SmartDashboard on the driver station, no manual updating required.</p>
 						<h4 class="tutorial"><a name="Numbers_PutNumber"></a>Numbers: <code>PutNumber()</code></h4>
 							<p>For all number-based data, use the <code>PutNumber()</code> function. It takes a <code>double</code> value, but any numerical data type you use can be typecast to a <code>double</code>.</p>
 							<pre lang="cpp">
@@ -165,7 +163,7 @@ std::string SmartDashboard::GetString(std::string key)
 					<p style="font-weight: bold; text-align: center;">This section just clarifies use of the functions we just discussed. If you feel confident, then you may <a href="#Programming_the_Robot">skip this section</a>.</p>
 					<p>If you&#x27;re still a little confused, this section will help you understand the content better (hopefully).</p>
 					<h3 class="tutorial"><a name="Quick_Note:_Periodic_Routines"></a>Quick Note: Periodic Routines</h3>
-						<p>If you remember from <a href="../ch1/program-structure.html#Periodic_Routines">lesson 1-2</a>, <code>TeleopPeriodic()</code> will loop until the robot shuts down or another mode is entered. So, you must remember that, for the cases of this program, what you write is constantly running in a loop.
+						<p>If you remember from <a href="../../ch1/program-structure#Periodic_Routines">lesson 1-2</a>, <code>TeleopPeriodic()</code> will loop until the robot shuts down or another mode is entered. So, you must remember that, for the cases of this program, what you write is constantly running in a loop.
 							Because it is already looping, you should write the <code>TeleopPeriodic()</code> function as if the whole thing were a loop. So, if you write something to the SmartDashboard in <code>TeleopPeriodic()</code>, it will write to SmartDashboard every time the CPU performs another loop.
 							<span style="font-style: italic;">Future note: that is actually good, because then you can write real-time values to SmartDashboard.</span></p>
 					<h3 class="tutorial"><a name="Button"></a>Button</h3>
@@ -290,7 +288,6 @@ public:
 						<ul>
 							<li>As the programs you write grow more complex, you may need to clean as well (Project &gt; Clean)</li>
 						</ul>
-						<li>Check the downloader preferences if you haven&#x27;t already (you don&#x27;t need to do this every time, only when you switch projects).</li>
 						<li>Make sure you are connected to the robot -- either by tether or wifi.</li>
 						<li>Download the code (Run &gt; WPILib C++ Deployment)</li>
 						<ul>
@@ -298,7 +295,6 @@ public:
 						</ul>
 						<li>Once the robot code is back up, you may enable.</li>
 					</ol>
-					<p>Make sure that you are always downloading the right project when you download to the robot.</p>
 				<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
 					<p>Write a program that does the following:</p>
 					<ul>
@@ -306,7 +302,7 @@ public:
 						<ul>
 							<li>Counts <span style="font-weight: bold;">UP</span> on press of the A button</li>
 							<li>Counts <span style="font-weight: bold;">DOWN</span> on press of the B button</li>
-							<li>Note: you will need to use a <a href="../tips-tricks.html#Timers">timeout</a>.</li>
+							<li>Note: you will need to use a <a href="../../tips-tricks#Timers">timeout</a>.</li>
 						</ul>
 						<li>Controls a <code>float</code> with the left joystick and triggers as follows:</li>
 						<ul>
@@ -327,9 +323,9 @@ public:
   		<table border="0" style="width: 100%;">
   			<tbody>
   				<tr>
-  					<td style="text-align: right; width: 40%;"><a href="../ch2.html">&#8592; Chapter 2 Overview</a></td>
+  					<td style="text-align: right; width: 40%;"><a href="../">&#8592; Chapter 2 Overview</a></td>
   					<td style="text-align: center; font-weight: bold; width: 20%;">2-1 Using User Input</td>
-  					<td style="text-align: left; width: 40%;"><a href="motors.html">2-2 Controlling Motors &#8594;</a></td>
+  					<td style="text-align: left; width: 40%;"><a href="../motors">2-2 Controlling Motors &#8594;</a></td>
   				</tr>
   			</tbody>
   		</table>

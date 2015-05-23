@@ -8,9 +8,7 @@
 	<h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">WPI</span>&nbsp;&nbsp;Tips and Tricks</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../pauls-tutorials.html" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="../wpi.html" title="WPILib Tutorial">WPILib Tutorial</a>
- 		&gt;&nbsp;Tips and Tricks
+  	<div><a href="../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;Tips and Tricks
   		</div>	
   	<hr />
   	
@@ -18,7 +16,7 @@
 	<div id="intro">
  		<p>This page is intended to provide useful information that is either too long to explain in the main tutorial or would not otherwise be included in any lesson. All of these require a certain level of understanding in order to be used. Like the tips and tricks page from the other tutorial, that will be listed below the header for each section.</p>
  		<p>Note that the levels listed here are the <span style="font-weight: bold;">absolute minimum</span> levels of knowledge you will need to implement them. It may be easier for you to learn them at a later time.</p>
- 		<p>If you have not reached lesson 2-1 yet, you may want to read the note about <a href="ch2/user-input.html">how functions are presented in this tutorial</a>.</p>
+ 		<p>If you have not reached lesson 2-1 yet, you may want to read the note about <a href="../ch2/user-input">how functions are presented in this tutorial</a>.</p>
 	</div>
 	<div id="toc">
  		<ul>
@@ -148,14 +146,15 @@ if (!m_joystick->GetRawButton(1) && m_pressed)
 					<p>In this case, once the driver releases the button, the second step will pass, which will enable the first step to register a button press again.</p>
 		<h2 class="tutorial"><a name="Wrappers"></a>Wrappers</h2>
 			<p style="font-weight: bold; text-align: center;">Recommended Level: Lesson 2-2</p>
-			<p style="font-style: italic; text-align: center;">Note: This concept is similar to <a href="ch3/pid3.html#Subsystem_Wrappers">subsystem wrappers</a> utilized with PID controllers, but not identical.</p>
+			<p style="font-style: italic; text-align: center;">Note: This concept is similar to <a href="https://code.google.com/p/hot67-programming-resources/wiki/WPI_Lesson10#Subsystem_Wrappers">subsystem wrappers</a> utilized with PID controllers, but not identical.</p>
 			<p>Sometimes, the classes provided by WPILib don't provide enough functionality to get a certain task done efficiently and in an organized manner. In order to fix this problem, you can create a class that wraps around (hence the term) a core WPILib class and add the functionality you want.</p>
 			<p>The way wrapper classes are written depends on the class that is being wrapped around. However, there are some basic concepts that can be discussed about wrappers.</p>
 			<h3 class="tutorial"><a name="What_a_Wrapper_Does"></a>What a Wrapper Does</h3>
 				<p>More specifically, a wrapper is designed to automate tasks performed with a specific class so that they do not need to be rewritten and rewritten in your code. Usually, a wrapper carries out the functions of the core class via functions of the same name, but add extra functionality in the process.</p>
 				<p>Wrapper functions should be designed so that they interface with external code as much like the original class as possible. So, for example, say you were wrapping around a class with the following function:</p>
 				<pre lang="cpp">
-bool SomeClass::GetActive (int id) //returns true if whatever SomeClass is associated with is 'active' on the specified id, false otherwise 
+bool SomeClass::GetActive (int id) 
+//returns true if whatever SomeClass is associated with is 'active' on the specified id, false otherwise 
 				</pre>
 				<p>If you were to write a wrapper function for this function, it should look somewhat like this:</p>
 				<pre lang="cpp">
@@ -175,13 +174,13 @@ enum ids {
 bool SomeClassWrapper::GetActive (ids id)
 				</pre>
 			<h3 class="tutorial"><a name="How_a_Wrapper_Works"></a>How a Wrapper Works</h3>
-				<p>To create a wrapper, create a blank class. Do <span style="font-weight: bold;">NOT</span> inherit the class you're trying to wrap around (unlike <a href="ch3/pid3.html#Subsystem_Wrappers">subsystem wrappers</a>). Instead, instantiate an object of that class as a <code>private</code> member of the wrapper class.</p>
+				<p>To create a wrapper, create a blank class. Do <span style="font-weight: bold;">NOT</span> inherit the class you're trying to wrap around (unlike <a href="https://code.google.com/p/hot67-programming-resources/wiki/WPI_Lesson10#Subsystem_Wrappers">subsystem wrappers</a>). Instead, instantiate an object of that class as a <code>private</code> member of the wrapper class.</p>
 				<p>The next thing you need to concern yourself with is the constructor. First, think about how many of the core class constructor's parameters should be available in the wrapper's constructor. Sometimes, the values in the core constructor remain constant in your implementation, so you can just hard-code those parameters into the core object initialization in your constructor and move on. If not, then add them as a parameter for your wrapper class.</p>
 				<p>Be sure to think about any initialization that your wrapper class might need in addition to the parameters needed by the core class. If you have any configurable functionality in your wrapper that is vital to its function, you should consider adding it to your constructor's parameter list.</p>
 				<p>The next thing you should do is look at the core class' header file and read through its list of <code>public</code> functions. You're not going to be able to access its <code>private</code> or <code>protected</code> functions, so don't worry about those.</p>
 				<p>Consider which of the class' <code>public</code> functions need to carry through in your wrapper. If you don't plan on rewriting a function, but you nonetheless need it, write a small function in your class that has the same parameters and return type as the original function, and pass all of the parameters to the original, and return the result, if necessary.</p>
 				<p>With functions that you do need to add logic to, create a function of the same name and return type as the original function. In that function, gather the data you need from the original, and perform any extra logic that you need there.</p>
   </div>
- </body>
+  </body>
 </html>
 
