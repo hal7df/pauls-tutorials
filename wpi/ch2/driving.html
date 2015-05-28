@@ -1,41 +1,42 @@
 <html>
  <head>
   <title>2-3 Earning Your Driver's License: Driving (WPI)</title>
-  <link style="stylesheet" rel="text/css" href="../../style.css"/>
+  <link rel="stylesheet" type="text/css" href="../../style.css"/>
  </head>
 <body>
  <!-- PAGE HEADER -->
  <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-     style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-3</span>&nbsp;Earning Your Driver's License: Driving</h1>
-     <hr />
-      <div>
-	<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 3
-      </div>
-     <hr />
+	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-3</span>&nbsp;Earning Your Driver's License: Driving</h1>
+	<hr />
+	<div>
+		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
+		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" name="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 3
+	</div>
+	<hr />
  
  <!-- PAGE CONTENT -->
  <div id="intro">
- <p>Up to this point, you have learned the various components of the robot, how they are represented by software, and how to use some of those components.
-    Now, you will learn how to program one of the essential functions of any robot: driving.</p>
+	<p>Up to this point, you have learned the various components of the robot, how they are represented by software, and how to use some of those components.
+		Now, you will learn how to program one of the essential functions of any robot: driving.</p>
  </div>
  
  <div id="toc">
  <ul>
-  <li><a href="#RobotDrive">RobotDrive</a></li>
-  <ul>
-    <li><a href="#Arcade_Drive">Arcade Drive</a></li>
-    <li><a href="#Tank_Drive">Tank Drive</a></li>
-  </ul>
-  <li><a href="#Activity">Activity</a></li>
+	<li><a href="#RobotDrive">RobotDrive</a></li>
+	<ul>
+		<li><a href="#Arcade_Drive">Arcade Drive</a></li>
+		<li><a href="#Tank_Drive">Tank Drive</a></li>
+	</ul>
+	<li><a href="#Activity">Activity</a></li>
  </ul>
  </div>
  
  <div id="tcontent">
-  <h2 class="tutorial"><a name="RobotDrive"></a><code>RobotDrive</code></h2>
-    <p>You may remember the <a href="../../ch1/parts-code#RobotDrive">RobotDrive</a> object from lesson 3. This object provides various functions to make managing the drive system simpler.
-       There are two functions that you will see most often: <code>ArcadeDrive()</code> and <code>TankDrive()</code>.</p>
-    <p>For all of the following examples, assume the following have all been declared:</p>
-    <pre lang="cpp">
+	<h2 class="tutorial"><a name="RobotDrive"></a><code>RobotDrive</code></h2>
+		<p>You may remember the <a href="../../ch1/parts-code#RobotDrive">RobotDrive</a> object from lesson 3. This object provides various functions to make managing the drive system simpler.
+			There are two functions that you will see most often: <code>ArcadeDrive()</code> and <code>TankDrive()</code>.</p>
+		<p>For all of the following examples, assume the following have all been declared:</p>
+		<pre lang="cpp">
 //Declarations
 Victor* m_lDrive;
 Victor* m_rDrive;
@@ -51,66 +52,81 @@ m_rDrive = new Victor (2);
 m_robotDrive = new RobotDrive (m_lDrive, m_rDrive);
 
 m_timer = new Timer;
-    </pre>
-    <h3 class="tutorial"><a name="Arcade_Drive"></a>Arcade Drive</h3>
-      <p>This is the drive method that we most commonly use.</p>
-      <pre lang="cpp">
+		</pre>
+		<h3 class="tutorial"><a name="Arcade_Drive"></a>Arcade Drive</h3>
+			<p>This is the drive method that we most commonly use.</p>
+			<pre lang="cpp">
 void RobotDrive::ArcadeDrive(float velocity, float rotation)
-      </pre>
-      <h4 class="tutorial"><a name="ArcadeDrive-parameters"></a><code>ArcadeDrive()</code> parameters</h4>
-	<ul>
-	  <li><code>float velocity</code>: The desired relative velocity of the robot (forwards/backwards)</li>
-	  <li><code>float rotation</code>: the relative velocity at which the robot rotates (left/right) </li>
-	</ul>
-      <h4><a name="ArcadeDrive-use"></a><code>ArcadeDrive()</code> use</h4>
-	<p>How you use <code>ArcadeDrive()</code> depends on which routine you are programming.
-	   If you are programming in Teleop, you give it the opposite of the left Y axis and the right X axis (so that the robot doesn&#x27;t drift sideways if the left Y is being used), like so:</p>
-	<pre lang="cpp" escaped=true>
+			</pre>
+			<h4 class="tutorial"><a name="ArcadeDrive-parameters"></a><code>ArcadeDrive()</code> parameters</h4>
+			<ul>
+				<li><code>float velocity</code>: The desired relative velocity of the robot (forwards/backwards)</li>
+				<li><code>float rotation</code>: the relative velocity at which the robot rotates (left/right) </li>
+			</ul>
+			<h4 class="tutorial"><a name="ArcadeDrive-use"></a><code>ArcadeDrive()</code> use</h4>
+				<p>How you use <code>ArcadeDrive()</code> depends on which routine you are programming.
+					If you are programming in Teleop, you give it the opposite of the left Y axis and the right X axis (so that the robot doesn&#x27;t drift sideways if the left Y is being used), like so:</p>
+				<pre lang="cpp" escaped=true>
 m_robotDrive-&gt;ArcadeDrive(-m_gamepad-&gt;GetRawAxis(2), -m_gamepad-&gt;GetRawAxis(4));
-	</pre>
-	<p>However, in autonomous, you would feed <code>ArcadeDrive()</code> either set or calculated values. If you are using set values, you would use it in conjunction with a <code>Timer</code> or an encoder.</p>
-	<pre lang="cpp" escaped="true">
-if (!m_timer-&gt;HasPeriodPassed(2.0))
+				</pre>
+				<p>However, in autonomous, you would feed <code>ArcadeDrive()</code> either set or calculated values. If you are using set values, you would use it in conjunction with a <code>Timer</code> or an encoder.</p>
+				<pre lang="cpp" escaped="true">
+if (!m_timer-&gt;Get() &lt; 2.0)
    m_robotDrive-&gt;ArcadeDrive(0.75,0.75);
 else
-   m_robotDrive-&gt;ArcadeDrive(0.0,0.0);</pre><p>The above code will run the robot in a curve to the right for two seconds, and then stop.  </p><h2><a name="Tank_Drive"></a>Tank Drive<a href="#Tank_Drive" class="section_anchor"></a></h2><p>The other driving function can achieve essentially the same effect as the <tt>ArcadeDrive()</tt>, but the mechanism it uses is different.  </p><pre class="prettyprint">void RobotDrive::TankDrive(float left_power, float right_power)</pre><h3><a name="TankDrive()_parameters"></a><tt>TankDrive()</tt> parameters<a href="#TankDrive()_parameters" class="section_anchor"></a></h3><ul><li><tt>float left_power</tt>: The relative power (-1.0 to 1.0) going to the left drive.  </li><li><tt>float right_power</tt>: The relative power going to the right drive.  </li></ul><h3><a name="TankDrive()_use"></a><tt>TankDrive()</tt> use<a href="#TankDrive()_use" class="section_anchor"></a></h3><p>How you use <tt>TankDrive()</tt> is determined in the same way as <tt>ArcadeDrive()</tt>. However, the game controllers do not lend themselves to this driving method. However, <tt>TankDrive()</tt> is actually the preferred method for driving in autonomous (since it makes the most sense). </p><pre class="prettyprint">if (m_timer-&gt;HasPeriodPassed(2.0))
-   m_robotDrive-&gt;TankDrive(0.0,0.0);
+   m_robotDrive-&gt;ArcadeDrive(0.0,0.0);
+				</pre>
+				<p>The above code will run the robot in a curve to the right for two seconds, and then stop.</p>
+		<h3 class="tutorial"><a name="Tank_Drive"></a>Tank Drive</h3>
+			<p>The other driving function can achieve essentially the same effect as the <code>ArcadeDrive()</code>, but the mechanism it uses is different.</p>
+			<pre lang="cpp">
+void RobotDrive::TankDrive(float left_power, float right_power)
+			</pre>
+			<h4 class="tutorial"><a name="TankDrive-parameters"></a><code>TankDrive()</code> parameters</h4>
+				<ul>
+					<li><code>float left_power</code>: The relative power (-1.0 to 1.0) going to the left drive.</li>
+					<li><code>float right_power</code>: The relative power going to the right drive.</li>
+				</ul>
+			<h4 class="tutorial"><a name="TankDrive-use"></a><code>TankDrive()</code> use</h4>
+				<p>How you use <code>TankDrive()</code> is determined in the same way as <code>ArcadeDrive()</code>. However, the game controllers do not lend themselves to this driving method.
+					Instead, <code>TankDrive()</code> is actually the preferred method for driving in autonomous (since it is generally easier to control the heading of the robot that way).</p>
+				<pre lang="cpp" escaped="true">
+if (m_timer-&gt;Get() &lt; 2.0)
+   m_robotDrive-&gt;TankDrive(0.5,1.0);
 else
    m_robotDrive(0.0,0.0);
-	</pre>
-	<p>The above code will run the robot in a left turn, moving forward.</p>
-  <h2 class="tutorial"><a name="Activity"></a>Activity</h2>
-    <p>Program the robot to do the following:</p>
-    <ul>
-      <li>Drive forward and backward with the left stick.</li>
-      <li>Move left and right with the right stick.</li>
-      <li>When the start button pressed, toggle between the above <q>mode<q> and the following:</li>
-      <ul>
-	<li>Drive forward when Y is held.</li>
-	<li><span style="font-weight: bold;">Rotate</span> the robot counterclockwise (to the left) when the X button is held</li>
-	<li><span style="font-weight: bold;">Rotate</span> the robot clockwise (to the right) when the B button is held.</li>
-	<li>Drive backwards when the A button is held.</li>
-	<li>Run everything at <span style="font-weight: bold;">half power</span> in this drive mode!</li>
-      </ul>
-    </ul>
-    <p style="font-style: italic;">The joystick drive and the button drive <span style="font-weight: bold;">cannot</span> be enabled at the same time!</p>
+				</pre>
+				<p>The above code will run the robot in a left turn, moving forward, for two seconds, and then stop.</p>
+	<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
+		<p>Program the robot to do the following:</p>
+		<ul>
+			<li>Drive forward and backward with the left stick.</li>
+			<li>Move left and right with the right stick.</li>
+			<li>When the start button pressed, toggle between the above <q>mode<q> and the following:</li>
+			<ul>
+				<li>Drive forward when Y is held.</li>
+				<li><span style="font-weight: bold;">Rotate</span> the robot counterclockwise (to the left) when the X button is held</li>
+				<li><span style="font-weight: bold;">Rotate</span> the robot clockwise (to the right) when the B button is held.</li>
+				<li>Drive backwards when the A button is held.</li>
+				<li>Run everything at <span style="font-weight: bold;">half power</span> in this drive mode!</li>
+			</ul>
+		</ul>
+ 		<p style="font-style: italic;">The joystick drive and the button drive <span style="font-weight: bold;">cannot</span> be enabled at the same time!</p>
   </div>
     
   <!-- NAVIGATION -->
   <div style="clear: both;">
-  <table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson5">Lesson 5: Controlling Motors</a> </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 6</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson7">Chapter 3: Control - Lesson 7: Providing Information</a> → </td></tr> </table></p>
- </div>
- </div>
- </td><tr>
-</table>
- </div>
-
-
-
-<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
-
-
-
+  	<hr />
+  	<table border="0" style="width: 100%;">
+  		<tbody>
+  			<tr>
+  				<td style="text-align: right; width: 40%;"><a href="../motors">&#8592; 2-2 Motors</a></td>
+  				<td style="text-align: center; font-weight: bold; width: 20%;">2-3 Earning Your Driver's License: Driving</td>
+  				<td style="text-align: left; width: 40%;"><a href="../pneumatics">2-4 Pneumatics &#8594;</a></td>
+  			</tr>
+  		</tbody>
+  	</table>
+  </div>
  </body>
 </html>
 
