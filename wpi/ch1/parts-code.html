@@ -84,9 +84,9 @@ class Robot: public IterativeRobot
 				<p style="font-style: italic;">RobotBuilder Note: If you are using RobotBuilder, this is done automatically. You should still know how to do this, however.</p>
 	<h2 class="tutorial"><a name="Robot_Parts"></a>Robot Parts</h2>
 		<p>Only parts listed in the <a href="../parts#Programmed_Components">Programmed Components</a> section of Lesson 1 can be declared as components in the program.
-			Even then, the <a href="../parts#rRIO">rRIO</a> and the <a href="../parts#Pneumatic_Control_Module">Pneumatic Control Module</a>, and <a href="../parts#Motors">motors</a> are not declared.</p>
-		<p>Note that you do not need to declare all of the parts on the robot for your code to work. Of course, you will only be able to control what is declared. Also note that the rRIO cannot possibly detect the correct address (e.g. PWM or relay channel) of various components, so make sure that your assignment is correct.</p>
-		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="../parts#rRIO">rRIO</a>).</p>
+			Even then, the <a href="../parts#rRIO">roboRIO</a> and the <a href="../parts#Pneumatic_Control_Module">Pneumatic Control Module</a>, and <a href="../parts#Motors">motors</a> are not declared.</p>
+		<p>Note that you do not need to declare all of the parts on the robot for your code to work. Of course, you will only be able to control what is declared. Also note that the roboRIO cannot possibly detect the correct address (e.g. PWM or relay channel) of various components, so make sure that your assignment is correct.</p>
+		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="../parts#rRIO">roboRIO</a>).</p>
 		<p>Note that the location of each statement is not shown in the declaration example. The actual declaration belongs in the class list, and the initialization belongs in the class constructor.</p>
 		<p>NOTE: If you declare standard variables, such as <code>int</code>s or <code>bool</code>s, <span style="font-weight: bold;">you need to set a default value in the constructor</span>, like so:</p>
 		<pre lang="cpp">
@@ -122,7 +122,7 @@ m_robotDrive->SetSafetyEnabled(false);
 				</pre>
 			<h4 class="tutorial"><a name="Victor"></a>Victor</h4>
 				<p>A Victor (which you have seen declared before) is of type <code>Victor</code> (with a capital V). It encompasses both Victor motor controllers and VEX motor controllers.</p>
-				<p>In the initialization, provide the PWM channel on the rRIO that the controller is hooked up to.</p>
+				<p>In the initialization, provide the PWM channel on the roboRIO that the controller is hooked up to.</p>
 				<pre lang="cpp">
 //Victor declaration
 Victor *m_motor1;
@@ -169,7 +169,7 @@ Relay *m_relay1;
 m_relay1 = new Relay (0);
 				</pre>
 			<h4 class="tutorial"><a name="Digital_Outputs"></a>Digital Outputs</h4>
-				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="../parts#rRIO">digital output</a> on the rRIO, use this class.</p>
+				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="../parts#rRIO">digital output</a> on the roboRIO, use this class.</p>
 				<p>A digital output is of type <code>DigitalOutput</code> (with a capital D and O, no space). In the initialization, provide the digital output channel on the Digital Sidecar.</p>
 				<pre lang="cpp">
 //Digital Output declaration
