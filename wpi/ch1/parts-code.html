@@ -9,7 +9,7 @@
   <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-3</span>&nbsp;Parts of the Robot: In Code</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;Chapter 1&nbsp;&gt;&nbsp;Lesson 3
+  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 3
   		</div>	
   	<hr />
   	
@@ -31,14 +31,14 @@
  		</ul>
  		<li><a href="#Activity">Activity</a></li>
  	</ul>
- 	<h2 class="tutorial"><a name="Naming_and_Declarative_Style"></a>Naming and Declarative Style</h1>
+ 	<h2 class="tutorial"><a name="Naming_and_Declarative_Style"></a>Naming and Declarative Style</h2>
 	 	<p>One of the most important things that you will need to learn is how to write code &#8212; not in the terms of syntax, but rather of style. How you write your code really shows your skill as a programmer.
  			If your coding style is atrocious, then no one (in some cases, not even you) will be able to understand your code. In terms of improvement, this is <span style="font-weight: bold;">bad</span>.
 	 		If no one can help you fix bugs, etc., then you are essentially stuck.</p>
  		<p>One of the most important things that a programmer has is his/her peers. Quite often, beating out a bug can take multiple people, as the original programmer might not be able to see the bug.
  			This is why it is so important that your code be legible.</p>
  		<p>In terms of general coding style for robotics, stick with a general C++ style. That is, keeping functions that take multiple statements on multiple lines, denoting different sections of your program with comments, and so on.</p>
- 		<h3 class="tutorial"><a name="Naming"></a>Naming</h2>
+ 		<h3 class="tutorial"><a name="Naming"></a>Naming</h3>
  			<p>This is likely the most important piece of style. Every variable you declare does something (if it doesn&#x27;t, get rid of it), but others need to know what it does in order for them to be able to help you with your program
  				(single-letter names for looping variables, such as <code>x</code>, <code>y</code>, <code>z</code>, or <code>i</code> are fine, <a href="program-structure.html#Periodic_Routines">but you will almost never use loops in robotics programming</a>).
  				Thus, we follow a specific naming scheme:</p>
@@ -60,7 +60,7 @@ int m_turtles;
 			<p style="font-style: italic;">RobotBuilder Note: <span style="font-weight: bold;">ONLY</span> if you are using RobotBuilder, take off the <code>m_</code> prefix. RobotBuilder tends to run into issues when the names get too complex.</p>
 		<h3 class="tutorial"><a name="Declaring_Members"></a>Declaring Members</h3>
 			<p>How you declare your class members depends on what type the member is.</p>
-			<h4 class="tutorial"><a name="Generic_Variables"></a>Generic Variables</h3>
+			<h4 class="tutorial"><a name="Generic_Variables"></a>Generic Variables</h4>
 				<p>The most commonly used variables in robotics programming are <code>int</code>s, <code>float</code>s, <code>double</code>s,  and <code>bool</code>s. Declare them like you normally would.</p>
 				<pre lang="cpp">
 int m_TeleopLoopCounter;
@@ -263,7 +263,7 @@ Ultrasonic *m_proximityDetect;
 //Ultrasonic sensor initialization on digital output 5 and digital input 4
 m_proximityDetect = new Ultrasonic (5,4);
 				</pre>
-			<h4 class="tutorial"><a name="Gyroscope"></a>Gyroscope</h3>
+			<h4 class="tutorial"><a name="Gyroscope"></a>Gyroscope</h4>
 				<p>A gyroscope is of class <code>Gyro</code> (capital G). In the initialization, provide the analog channel of the gyroscope, and set its sensitivity.</p>
 				<pre lang="cpp">
 //Gyroscope declaration
@@ -289,7 +289,7 @@ m_accel = new Accelerometer (2);
 m_accel->SetSensitivity(2.0);
 m_accel->SetZero(1.0);
 				</pre>
-		<h3 class="tutorial"><a name="Driver_Station_Components"></a>Driver Station Components</h2>
+		<h3 class="tutorial"><a name="Driver_Station_Components"></a>Driver Station Components</h3>
 			<p>There are a few components on the driver&#x27;s side that you need to declare.</p>
 			<h4 class="tutorial"><a name="Game_Controller"></a>Game Controller</h4>
 				<p>Both a standard XBOX 360 controller and the Attack3-like joysticks are of type <code>Joystick</code> (capital J). In the initialization, provide the Joystick ID. Use the following rule:</p>
