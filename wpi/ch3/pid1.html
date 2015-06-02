@@ -102,6 +102,8 @@
 				It then multiplies this by the integral constant K<sub>i</sub>. In effect, the longer the system is allowed to maintain steady-state error, the stronger the output from the integral term becomes, driving the system closer to its setpoint.</p>
 			<p>The effect of increasing K<sub>i</sub> will increase the system's response to accumulated error, reducing the steady-state error. If the K<sub>i</sub> constant is too large, the stability of the system will decrease (see below).</p>
 			
+			<img class="tutorial" src="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/files/ki.png" title="Example of a high Ki" style="width: 409px; height: 258px;"/>
+			
  <h2 class="tutorial"><a id="Review"></a>Review</h2>
 	<p>The following graph (specifically the green line) demonstrates what the output of a well-tuned PID controller would look like.</p>
 	
@@ -127,7 +129,7 @@
 	
  <h2 class="tutorial"><a id="Activity"></a>Activity</h2>
 	
-	<p>Download the <a href="https://hot67-programming-resources.googlecode.com/svn/trunk/tutorial/PIDSimulation.xls">PID Simulation</a> and open it. Play with the P, I and D constants and see how the output reacts to different values (the output is the red line, the setpoint is the blue line).</p>
+	<p>Download the <a href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/files/PIDSimulation.xls">PID Simulation</a> and open it. Play with the P, I and D constants and see how the output reacts to different values (the output is the red line, the setpoint is the blue line).</p>
 	<p>Try to accomplish the following:</p>
 	
 	<ul>
@@ -138,6 +140,7 @@
 	
 	<p style="font-style: italic;">Simulation source: Carnegie Mellon University (<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15494-s11/lectures/manipulation_with_friction_files/PID%20Simulation.xls">original file</a>)</p>
 	<p style="font-style: italic;">Image credits (P,D,final): University of Exeter</p>
+	<p style="font-style: italic;">K<sub>i</sub> graph generated with the PID simulation</p>
  </div>
 	
 <!-- NAVIGATION -->
