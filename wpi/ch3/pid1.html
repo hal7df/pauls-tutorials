@@ -1,68 +1,159 @@
-
- 
-
-
-
- 
-
-
-
 <html>
  <head>
- <title>WPI_Lesson8</title>
+ 	<title>3-2 PID Part 1: PID Theory (WPI)</title>
+ 	<link rel="stylesheet" type="text/css" href="../../style.css" />
  </head>
  <body>
+
+ <!-- PAGE HEADER -->
+  <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">3-2</span>&nbsp;PID Part 1: PID Theory</h1>
+	<hr />
+	<div>
+		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
+		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 2
+	</div>
+	<hr />
  
 
-
-
-
-<div id="wikipage">
-<table>
- <tr>
+ <div id="intro">
  
- 
- <td style="vertical-align:top; padding-left:5px">
- 
- <div id="wikiheader">
- 
- <span style="font-size:120%;font-weight:bold">WPI_Lesson8</span>
- &nbsp;
- <div> 
- 
- <i>PID Part 1 - PID Theory</i>
- 
- 
- 
- <div id="wikiauthor" style="float:right">
- Updated <span title="Sat Dec 28 14:45:39 2013">
- Dec 28, 2013</span>
- 
- by 
-
- <a class="userlink"
- href="/u/112633510208610089649/">hal...@gmail.com</a
->
+ <p>In review, you have studied the various components of the robot, how they appear in code, and how to use them.
+	The next three lessons will teach you one of the most important aspects of WPILib and robot programming in general -- the PID.</p>
+ <p>The PID is split up into three parts here because of its complexity. It is EXTREMELY important (enough that it will distinguish you as an accomplished robot programmer) that you know how to create a PID in your program - so pay close attention.</p>
+ <p>Robot programming is not the only thing that uses the PID -- it is used heavily in the automotive industry (think cruise control).</p>
+ <p><span style="font-style: italic;">Fun fact:</span> PID theory was developed by watching helmsmen steer a ship.</p>
  
  </div>
- </div>
+ 
+ <div id="toc">
+ <ul>
+ 	<li><a href="#PID-def">What is a PID?</a></li>
+ 	<ul>
+ 		<li><a href="#setpoint">Setpoints</a></li>
+ 		<li><a href="#error">Error</a></li>
+ 		<li><a href="#constants">The Constants</a></li>
+ 	</ul>
+ 	<li><a href="#Review">Review</a></li>
+ 	<li><a href="#Activity">Activity</a></li>
+ </ul>
  </div>
  
- <div id="wikicontent">
- <div class="vt" id="wikimaincol">
- <p>In review, you have studied the various components of the robot, how they appear in code, and how to use them. The next three lessons will teach you one of the most important aspects of WPILib and robot programming in general -- the PID. </p><p>The PID is split up into three parts here because of its complexity. It is EXTREMELY important (enough that it will distinguish you as an accomplished robot programmer) that you know how to create a PID in your program - so pay close attention. </p><p>Robot programming is not the only thing that uses the PID -- it is used heavily in the automotive industry (think cruise control). </p><p><i>Fun fact:</i> PID theory was developed by watching helmsmen steer a ship. </p><p><ul><li><a href="#What_is_a_PID?">What is a PID?</a></li><ul><li><a href="#Proportional">Proportional</a></li><li><a href="#Derivative">Derivative</a></li><li><a href="#Integral">Integral</a></li></ul><li><a href="#Review">Review</a></li><li><a href="#Activity">Activity</a></li></ul> </p><h1><a name="What_is_a_PID?"></a>What is a PID?<a href="#What_is_a_PID?" class="section_anchor"></a></h1><p>To put it simply: a PID is a method to control various motor outputs using sensor inputs in an intelligent manner. </p><p>A PID is implemented with a process or object known as the PID controller. It handles all of the necessary calculations in order to use a PID. </p><p>The PID runs based on something called a <i>setpoint</i>. The setpoint is where the PID controller is told to keep the sensor input value as constant as possible using the motor outputs it is given. For example, the cruise control in a car is told to keep the speed at a specific value (the setpoint), so it adjusts the output of the car&#x27;s engine to keep the speed constant. </p><p>The name &#x27;PID&#x27; comes from constants that are given to the PID controller that dictate the manner in which it adjusts the output of its motors:  </p><ul><li><strong>P</strong> roportional </li><li><strong>I</strong> ntegral  </li><li><strong>D</strong> erivative </li></ul><p>   In the descriptions of the constants below, the graphs effectively show a reading from a sensor over time, with the red line being the setpoint. The other lines are examples showing the reading over time given different constant values. </p><p>Just so you know: the PID is much more complex than what is explained here. Both the I and the D terms use calculus functions -- something very few reading this would know. If you want a more thorough explanation of PID theory, go <a href="http://en.wikipedia.org/wiki/PID_controller#PID_controller_theory" rel="nofollow">here</a>. </p><h2><a name="Proportional"></a>Proportional<a href="#Proportional" class="section_anchor"></a></h2><p>The proportional constant tells the PID controller to send an output <strong>in proportion</strong> to the error from the setpoint -- in other words, it multiplies the error from the setpoint by the proportional constant. Essentially, proportional control will provide more power to the output when presented with greater error. </p><p>Pure proportional control has a few problems. Firstly, if the error is significant, it tends to overshoot the setpoint, then moving back towards it. Secondly, if the proportional term is large enough, the system will not be able to respond as quickly to the changes in the desired output, and as such will lose stability. Finally, proportional control usually does not settle at the setpoint, but rather near it -- this is known as <i>steady-state error</i>. This occurs because the signal from the proportional control becomes neglectable, and the output does not change. </p><p><img src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/ProportionalGraph.gif" title="Example of proportional control, showing increasing gain"></img> </p><h2><a name="Derivative"></a>Derivative<a href="#Derivative" class="section_anchor"></a></h2><p>Derivative control fixes two of the three problems with proportional control: overshoot and instability. </p><p>Derivative control studies how the error changes over time and lessens the rate of change in the output if the sensor readings are approaching the setpoint too quickly, allowing the output to reach the setpoint more gracefully. </p><p>A high derivative constant will dampen the output considerably, drastically increasing the settling time. </p><p>Note that derivative control is sensitive to sensor noise (slight changes in the value that are associated with a lack of precision and not movement), and may take unneccessary dampening action on the output. </p><p><img src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/PDGraph.gif" title="Example of proportional and derivative control, showing increased dampening"></img> </p><h2><a name="Integral"></a>Integral<a href="#Integral" class="section_anchor"></a></h2><p>While derivative control eliminates overshoot and instability in the proportional control, it still does not eliminate the steady-state error, as the error is not changing, which satisfies derivative control. To fix this, integral control is used. </p><p>The integral constant looks at the average error in the system. As such, small, steady error (i.e. steady-state error) gradually accumulates over time and becomes more prominent to the integral controller. </p><p>Integral control adjusts the output such that the average error eventually reaches 0. </p><p><img src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/PIDGraph.gif" title="Example of PID Control"></img> </p><h1><a name="Review"></a>Review<a href="#Review" class="section_anchor"></a></h1><p>Effectively, what you should remember about each of these terms is: </p><ul><li><strong>P</strong>: Proportionally adjusts the output of the system based on the error to make the sensor reading closer to the setpoint. </li><ul><li>Key term: <strong>P</strong> ower </li></ul><li><strong>I</strong>: Adjusts the output of the system based on the average error. </li><ul><li>Key term: (Fixing) Offset </li></ul><li><strong>D</strong>: Adjusts the output of the system based on how the error is currently changing. </li><ul><li>Key term: <strong>D</strong> ampening </li></ul></ul><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>Download the <a href="https://hot67-programming-resources.googlecode.com/svn/trunk/tutorial/PIDSimulation.xls" rel="nofollow">PID Simulation</a> and open it. Play with the P, I and D constants and see how the output reacts to different values (the output is the red line, the setpoint is the blue line). </p><p>Try to accomplish the following: </p><ul><li>Minimize settling time (the time it takes to reach the setpoint) </li><li>Minimize overshoot </li><li>Minimize offset/steady-state error </li></ul><p><i>Simulation source: Carnegie Mellon University (<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15494-s11/lectures/manipulation_with_friction_files/PID%20Simulation.xls" rel="nofollow">original file</a>)</i> </p><p><i>Image credit: University of Exeter</i> </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson7">Lesson 7: Sensors and Information</a> </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 8</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson9">Lesson 9: PID Part 2 - Implementing a PID </a> → </td></tr> </table></p>
+ <div id="tcontent">
+ <h2 class="tutorial"><a id="PID-def"></a>What is a PID?</h2>
+ 
+ 	<p>PID theory allows you to intelligently control a motor input by performing algebra and calculus on a sensor input.
+		It is usually implemented in robotics using a class called a PID controller. This class reads from the appropriate sensor input, performs its calculations, and sets the appropriate motor output.</p>
+	
+	<h3 class="tutorial"><a id="setpoint"></a>Setpoints</h3>
+	
+		<p>The idea behind the PID is that you want a given system to be in a specific position, usually fairly quickly. This is accomplished by setting the PID controller&#x27;s <span style="font-style: italic;">setpoint</span>.</p>
+		<p>The setpoint is what your sensor reads when the system is at the position you want it to be at.
+			However, you must obtain this value manually &#8212; usually by controlling the system manually &#8212; and then feed it to the PID controller in the code (more on that later).</p>
+		<p>For example, the cruise control in a car is given a specific speed to run the car at (the setpoint), and it reads from the car&#x27;s speedometer and controls the output of the engine so that the speed of the car is as close to the set speed as possible.</p>
+	
+    <h3 class="tutorial"><a id="error"></a>Error</h3>
+    
+    	<p>In the following sections, you will see the term <span style="font-style: italic;">error</span> pop up a lot.
+			In the context of the PID, <span style="font-style: italic;">error</span> refers to the difference between the given sensor reading and the setpoint.</p>
+		<p>You will see this lesson refer to two different types of error: <span style="font-style: italic;">instantaneous error</span> and <span style="font-style: italic;">accumulated error</span>.
+			Instantaneous error refers to the difference between the setpoint and the sensor reading at any given instant.
+			Accumulated error is the sum of the errors at every instant from time 0 (when the PID controller is turned on) to the present moment.</p>
+		<p>All of the mathematical operations in a basic PID controller involve the error in some way.</p>
+	
+	<h3 class="tutorial"><a id="constants"></a>The Constants</h3>
+	
+		<p>The name <q>PID</q> comes from constants that are given to the PID controller that dictate the manner in which it adjusts its output:</p>
+ 	
+	 	<ul>
+ 			<li><span style="font-weight: bold;">P</span>roportional</li>
+ 			<li><span style="font-weight: bold;">I</span>ntegral</li>
+ 			<li><span style="font-weight: bold;">D</span>erivative</li>
+ 		</ul>
+ 	
+	 	<p>In the descriptions of the constants below, the graphs effectively show a reading from a sensor over time, with the red line being the setpoint. The other lines are examples showing the sensor reading over time given different constant values.</p>
+ 		<p>Just so you know: the PID is much more complex than what is explained here. Both the I and the D terms use calculus functions -- but don&#x27;t fear, you do not need to know calculus to implement a PID.
+			If you want a more thorough explanation of PID theory, go <a href="http://en.wikipedia.org/wiki/PID_controller#PID_controller_theory" target="blank">here</a>.</p>
+
+		<h4 class="tutorial"><a id="P"></a>Proportional</h4>
+			
+			<p>When given a non-zero proportional constant K<sub>p</sub>, the PID controller will simply multiply the instantaneous error by K<sub>p</sub>. In effect, this produces an output that uses more power the further the system is from the setpoint.</p>
+			<p>Changing the value of K<sub>p</sub> will effectively change the power of the PID controller.</p>
+			<p>Pure proportional control has a few problems. Firstly, if the error is significant, it tends to overshoot the setpoint, then moving back towards it.
+				Secondly, if the proportional term is large enough, the system will not be able to respond as quickly to the changes in the desired output, and as such will lose stability.
+				Finally, proportional control usually does not settle at the setpoint, but rather near it -- this is known as <span style="font-style: italic;">steady-state error</span>.
+				This occurs because the signal from the proportional control becomes negligible when the instantaneous error is very small, and so internal friction in the system is usually strong enough to resist any change.</p>
+				
+			<img class="tutorial" src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/ProportionalGraph.gif" title="Example of proportional control, showing increasing gain"></img>
+			
+		<h4 class="tutorial"><a id="D"></a>Derivative</h4>
+		
+			<p>Adding derivative control to the controller fixes two of the three problems with proportional control: overshoot and instability.</p>
+			<p>Derivative control takes the change of the instantaneous error over time and multiplies it by a derivative constant K<sub>d</sub>. In effect, this damps the motion of the output and allows the system to reach its setpoint more gracefully.</p>
+			<p>The effect of increasing K<sub>d</sub> will increase the amount of damping in the system, increasing the settling time &#8212; and potentially increasing the system's steady-state error.</p>
+			<p>Note that derivative control is sensitive to sensor noise (slight changes in the value that are associated with a lack of precision and not movement), and may take unneccessary damping action on the output.</p>
+			
+			<img class="tutorial" src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/PDGraph.gif" title="Example of proportional and derivative control, showing increased damping"></img>
+			
+		<h4 class="tutorial"><a id="I"></a>Integral</h4>
+		
+			<p>While derivative control eliminates overshoot and instability in the proportional control, it still does not eliminate the steady-state error, as the error does not change once it reaches its steady state, which satisfies derivative control. To fix this, integral control is used.</p>
+			<p>Integral control looks at the <span style="font-style: italic;">accumulated error</span> of the system as opposed to the instantaneous error. Integral control finds the accumulated error by integrating the error over the time period for which the controller has been running.
+				It then multiplies this by the integral constant K<sub>i</sub>. In effect, the longer the system is allowed to maintain steady-state error, the stronger the output from the integral term becomes, driving the system closer to its setpoint.</p>
+			<p>The effect of increasing K<sub>i</sub> will increase the system's response to accumulated error, reducing the steady-state error. If the K<sub>i</sub> constant is too large, the stability of the system will decrease (see below).</p>
+			
+ <h2 class="tutorial"><a id="Review"></a>Review</h2>
+	<p>The following graph (specifically the green line) demonstrates what the output of a well-tuned PID controller would look like.</p>
+	
+	<img class="tutorial" src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/PIDGraph.gif" title="Example of PID Control"></img>
+	
+	<p>Effectively, what you should remember about each of these terms is:</p>
+	
+	<ul>
+		<li><span style="font-weight: bold;">P</span>: Adjusts the output of the system proportionally to the instantaneous error.</li>
+		<ul>
+			<li>Effect of increasing K<sub>p</sub>: Increases <span style="font-weight: bold;">P</span>ower</li>
+		</ul>
+		<li><span style="font-weight: bold;">I</span>: Adjusts the output of the system based on the accumulated error.</li>
+		<ul>
+			<li>Effect of increasing K<sub>i</sub>: Increases sensitivity to accumulated error, decreasing steady-state error</li>
+			<li>If K<sub>i</sub> is too large, then the stability of the system will decrease</li>
+		</ul>
+		<li><span style="font-weight: bold;">D</span>: Adjusts the output of the system based on the rate of change of the instantaneous error.</li>
+		<ul>
+			<li>Effect of increasing K<sub>d</sub>: Increases <span style="font-weight: bold;">D</span>amping</li>
+		</ul>
+	</ul>
+	
+ <h2 class="tutorial"><a id="Activity"></a>Activity</h2>
+	
+	<p>Download the <a href="https://hot67-programming-resources.googlecode.com/svn/trunk/tutorial/PIDSimulation.xls">PID Simulation</a> and open it. Play with the P, I and D constants and see how the output reacts to different values (the output is the red line, the setpoint is the blue line).</p>
+	<p>Try to accomplish the following:</p>
+	
+	<ul>
+		<li>Minimize settling time (the time it takes to reach the setpoint)</li>
+		<li>Minimize overshoot</li>
+		<li>Minimize steady-state error</li>
+	</ul>
+	
+	<p style="font-style: italic;">Simulation source: Carnegie Mellon University (<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15494-s11/lectures/manipulation_with_friction_files/PID%20Simulation.xls">original file</a>)</p>
+	<p style="font-style: italic;">Image credits (P,D,final): University of Exeter</p>
  </div>
+	
+<!-- NAVIGATION -->
+  <div style="clear: both;">
+  	<hr />
+  	<table border="0" style="width: 100%;">
+  		<tbody>
+  			<tr>
+  				<td style="text-align: right; width: 40%;"><a href="../sensors">&#8592; 3-1 Sensors and Information</a></td>
+  				<td style="text-align: center; font-weight: bold; width: 20%;">3-2 PID Part 1: PID Theory</td>
+  				<td style="text-align: left; width: 40%;"><a href="../pid2">3-3 PID Part 2: Implementing a PID &#8594;</a></td>
+  			</tr>
+  		</tbody>
+  	</table>
+  </div>
  </div>
- </td><tr>
-</table>
- </div>
-
-
-
-<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
-
-
-
  </body>
 </html>
 
