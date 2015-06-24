@@ -1,68 +1,66 @@
-
- 
-
-
-
- 
-
-
-
 <html>
  <head>
- <title>WPI_Lesson11</title>
+ <title>4-1 Initialization Routines</title>
+ <link rel="stylesheet" type="text/css" href="../../style.css" />
  </head>
  <body>
  
-
-
-
-
-<div id="wikipage">
-<table>
- <tr>
- 
- 
- <td style="vertical-align:top; padding-left:5px">
- 
- <div id="wikiheader">
- 
- <span style="font-size:120%;font-weight:bold">WPI_Lesson11</span>
- &nbsp;
- <div> 
- 
- <i>Initialization Routines</i>
- 
- 
- 
- <div id="wikiauthor" style="float:right">
- Updated <span title="Sun Dec 29 20:40:07 2013">
- Dec 29, 2013</span>
- 
- by 
-
- <a class="userlink"
- href="/u/112633510208610089649/">hal...@gmail.com</a
->
- 
- </div>
- </div>
- </div>
- 
- <div id="wikicontent">
- <div class="vt" id="wikimaincol">
- <p>Your work on robot programming thus far has only taken place within the <tt>TeleopPeriodic()</tt> routine. If you remember from <a href="/p/hot67-programming-resources/wiki/WPI_Lesson2">lesson 2</a>, there were more routines than that -- namely Disabled and Autonomous. This chapter will teach you what these routines are for, and how you would program them. </p><p>Syntax-wise, programming in all of the new functions that will be presented throughout this chapter is the same as it would be in <tt>TeleopPeriodic()</tt>. However, there are restrictions on what can be done in the various routines, so you should be aware of what you are programming the robot to do and you are not telling it to break any of the restrictions. </p><p>However, in addition to the routines mentioned above, we have not discussed in great detail what initialization routines are. </p><p><i>Note: By</i> initialization, <i>I mean the routines that have <tt>Init</tt> appended to their function names, not the class constructor.</i> </p><p><ul><li><a href="#RobotInit()">RobotInit()</a></li><li><a href="#Preparing_for_a_Periodic_Routine">Preparing for a Periodic Routine</a></li><li><a href="#Activity">Activity</a></li></ul> </p><h1><a name="RobotInit()"></a><tt>RobotInit()</tt><a href="#RobotInit()" class="section_anchor"></a></h1><p>This routine is the second function that is run on robot power-up (barring boot sequences, after the class constructor). This routine is used to perform any other initialization that needs to be performed before the robot moves into a periodic routine that was not performed within the class constructor. What goes here is generally specific to the robot being programmed. </p><h1><a name="Preparing_for_a_Periodic_Routine"></a>Preparing for a Periodic Routine<a href="#Preparing_for_a_Periodic_Routine" class="section_anchor"></a></h1><p>Sometimes it is necessary to put the robot in a certain state before launching a periodic routine. Instead of putting in a loop counter and checking if it is the first loop, we instead use the initialization functions provided in the <tt>IterativeRobot()</tt> class. The cRIO always runs these functions the CPU loop before entering the associated mode. </p><p>Each initialization function is named similarly to its periodic relative, giving the name of the associated mode before <tt>Init</tt>. </p><p>Note that, for each of these functions, (<tt>DisabledInit</tt>, <tt>AutonomousInit</tt>, and <tt>TeleopInit</tt>), all of the restrictions for the associated mode still apply (those for Disabled and Autonomous you will learn later). Additionally, it is usually a good idea not to actuate motors during initialization routines. </p><h1><a name="Activity"></a>Activity<a href="#Activity" class="section_anchor"></a></h1><p>There is nothing that can be readily performed in an activity at this point. If you want, you can play around with initialization routines (do so safely and according to mode limitations!), otherwise, continue to the next lesson. </p><p><table class="wikitable"><tr><td style="border: 1px solid #ccc; padding: 5px;"> ← <a href="/p/hot67-programming-resources/wiki/WPI_Lesson10">Chapter 3: Control - Lesson 10: PID Part 3 - Advanced PID Programming</a>  </td><td style="border: 1px solid #ccc; padding: 5px;"> <strong>Lesson 11</strong> </td><td style="border: 1px solid #ccc; padding: 5px;"> <a href="/p/hot67-programming-resources/wiki/WPI_Lesson12">Lesson 12: Disabled Routines</a> → </td></tr> </table></p>
- </div>
- </div>
- </td><tr>
-</table>
+ <!-- PAGE HEADER -->
+ <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">4-1</span>&nbsp;Initialization Routines</h1>
+	<hr />
+	<div>
+		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
+		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 3: Control">Chapter 4</a>&nbsp;&gt;&nbsp;Lesson 1
+	</div>
+	<hr />
+	 
+ <!-- PAGE CONTENT --> 
+ <div id="intro">
+	<p>Your work on robot programming thus far has only taken place within the <code>TeleopPeriodic()</code> routine. If you remember from <a href="/p/hot67-programming-resources/wiki/WPI_Lesson2">lesson 2</a>, 
+		there were more routines than that -- namely Disabled and Autonomous. This chapter will teach you what these routines are for, and how you would program them. </p>
+	<p>Syntax-wise, programming in all of the new functions that will be presented throughout this chapter is the same as it would be in <code>TeleopPeriodic()</code>. However, 
+		there are restrictions on what can be done in the various routines, so you should be aware of what you are programming the robot to do and you are not telling it to break any of the restrictions. </p>
+	<p>However, in addition to the routines mentioned above, we have not discussed in great detail what initialization routines are. </p>
+	<p><span style="font-style: italic;">Note: By</span> initialization, <span style="font-style: italic;">I mean the routines that have <code>Init</code> appended to their function names, not the class constructor.</span> </p>
  </div>
 
-
-
-<script type="text/javascript" src="https://ssl.gstatic.com/codesite/ph/18133036155640238800/js/dit_scripts.js"></script>
-
-
-
+ <div id="toc">
+	<ul>
+		<li><a href="#RobotInit()">RobotInit()</a></li>
+		<li><a href="#Preparing_for_a_Periodic_Routine">Preparing for a Periodic Routine</a></li>
+		<li><a href="#Activity">Activity</a>
+		</li>
+	</ul>
+ </div>
+	
+ <div id="tcontents">
+	<h2 class="tutorial"><a id="RobotInit()"></a><code>RobotInit()</code></h2>
+		<p>This routine is the second function that is run on robot power-up (barring boot sequences, after the class constructor). This routine is used to perform any other initialization that needs to be performed before the robot moves into a periodic routine that was not performed within the class constructor. 
+			What goes here is generally specific to the robot being programmed. </p>
+	
+	<h2 class="tutorial"><a id="Preparing_for_a_Periodic_Routine"></a>Preparing for a Periodic Routine</h2>
+		<p>Sometimes it is necessary to put the robot in a certain state before launching a periodic routine. Instead of putting in a loop counter and checking if it is the first loop, we instead use the initialization functions provided in the <code>IterativeRobot()</code> class. 
+			The roboRIO always runs these functions the CPU loop before entering the associated mode. </p>
+		<p>Each initialization function is named similarly to its periodic relative, giving the name of the associated mode before <code>Init</code>. </p>
+		<p>Note that, for each of these functions, (<code>DisabledInit</code>, <code>AutonomousInit</code>, and <code>TeleopInit</code>), all of the restrictions for the associated mode still apply (those for Disabled and Autonomous you will learn later). Additionally, it is usually a good idea not to actuate motors during initialization routines. </p>
+		
+	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
+		<p>There is nothing that can be readily performed in an activity at this point. If you want, you can play around with initialization routines (do so safely and according to mode limitations!), otherwise, continue to the next lesson. </p>
+ </div>
+ 
+ <!-- NAVIGATION -->
+  <div style="clear: both;">
+ 	<hr />
+  	<table border="0" style="width: 100%;">
+  		<tbody>
+  			<tr>
+  				<td style="text-align: right; width: 40%;"><a href="../sensors">&#8592; 3-4 PID Part 3: Advanced PID Programming</a></td>
+  				<td style="text-align: center; font-weight: bold; width: 20%;">4-1 Initialization Routines</td>
+  				<td style="text-align: left; width: 40%;"><a href="../pid2">4-2 Disabled Routines &#8594;</a></td>
+  			</tr>
+  		</tbody>
+  	</table>
+  </div>
  </body>
 </html>
-
