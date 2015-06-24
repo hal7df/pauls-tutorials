@@ -78,7 +78,7 @@ float PIDController::GetSetpoint()
  	<p>Tuning a PID can be dangerous on any number of levels, as you have no idea of how the robot will respond. When you are tuning a PID, you should <span style="font-weight: bold;">ALWAYS</span> have your finger on the Enter key so that, when things go wrong, you can stop the robot before it does any serious damage.</p>
  	<h3 class="tutorial"><a id="PID_Setpoints"></a>PID Setpoints</h3>
  		<p>You may remember <a href="../sensors#A_Special_Function" target="_blank">the <code>PIDGet()</code> function from lesson 7</a>. Funny how it begins with P-I-D, huh? That&#x27;s because this is the function that the <code>PIDController</code> reads from when it runs the calculations.
-			This means that all of your setpoints need to use the bitwise value found by <code>PIDGet()</code>.</p>
+			This means that all of your setpoints need to match the value returned by <code>PIDGet()</code>.</p>
 		<p>To get these values, simply write the output of the <code>PIDGet()</code> function for whatever sensor you are using to the driver station, and then use those values for the setpoints.</p>
 	<h3 class="tutorial"><a id="Prerequisites"></a>Prerequisites</h3>
 		<p><span style="font-style: italic;">Before</span> you start tuning a PID, make sure your code does the following:</p>
