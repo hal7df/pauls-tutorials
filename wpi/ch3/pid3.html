@@ -85,7 +85,7 @@ MySubsystemWrapper::MySubsystemWrapper(Victor* m_motor1, Victor* m_motor2)
 void PIDOutput::PIDWrite(float output)
 		</pre>
 		<p>Since we now have the motors available to us, we can simply write a function that redirects this output at both motors. </p>
-		<pre lang="cpp">
+		<pre lang="cpp" escaped="true">
 //class header file
 class MySubsystemWrapper: public PIDOutput
 {
