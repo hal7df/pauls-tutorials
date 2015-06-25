@@ -50,22 +50,22 @@
   	<div style="clear: both;"></div>
   	
   	<div id="practice">
-  		<h2 class="tutorial"><a name="practice"></a>Practice</h2>
+  		<h2 class="tutorial"><a id="practice"></a>Practice</h2>
   		<p>Once you feel comfortable with the above content, complete the following practice program.</p>
-  			<h3 class="tutorial"><a name="WAR"></a>WAR</h3>
-  				<h4 class="tutorial"><a name="The_Backstory"></a>The Backstory</h4>
+  			<h3 class="tutorial"><a id="WAR"></a>WAR</h3>
+  				<h4 class="tutorial"><a id="The_Backstory"></a>The Backstory</h4>
   					<p>WAR has swept through Middle Earth like a tornado. Of course, the actual physical WAR with elves shooting arrows and orcs dropping like flies has come to Middle Earth.</p>
 					<p>But also the card game WAR has become very popular throughout the land, particularly in local taverns among the young hip hobbit crowd.</p>
 					<p>But with so many hobbits out of town on life-or-death quests to destroy magical rings, it&#x27;s hard to find a partner to play cards with.</p>
 					<p>If only there was a way to play single-player WAR, perhaps with some sort of magical lightbox. Who among you is lucky enough to rise to the challenge?</p>
-  				<h4 class="tutorial"><a name="Your_Assignment"></a>Your Assignment</h4>
+  				<h4 class="tutorial"><a id="Your_Assignment"></a>Your Assignment</h4>
   					<p>Your goal is to write a simplified single-player version of the card game WAR, also know as In-Between. 
   						The player will start with $100. At each round of play, the player will be shown two cards and decides how much to bet that the third card&#x27;s rank is in between. 
   						Note the player is not allowed to bet more money than they currently have. The player should be told whether they won or lost and their total amount of money is updated accordingly. 
   						The game ends when the player is down to $0 or their amount exceeds $1,000.</p>
   					<p>A sample run is shown below. Note that betting $0 is equivalent to skipping a turn. Also note the user is prompted to re-enter their bet amount if they try to bet more than they actually have. 
   						When checking if the third card is <q>in between</q>, the order in which the first two cards are presented should not matter. 
-  						For example, a <q>Jack</q> is in between <q>Five</q> and </q>Queen</q> and also in between <q>Queen</q> and <q>Five</q>. If the third card has the same rank as one of the original two cards, you may treat that as a loss.</p>
+  						For example, a <q>Jack</q> is in between <q>Five</q> and <q>Queen</q> and also in between <q>Queen</q> and <q>Five</q>. If the third card has the same rank as one of the original two cards, you may treat that as a loss.</p>
   					<p>Do NOT allow the player to bet negative money (that's cheating)! <span style="font-style: italic;">HINT: We're talking about <span style="font-weight: bold;">unsigned</span> money.</span></p>
   					<blockquote class="tutorialexample">
   						You have $100. <br>
@@ -90,14 +90,14 @@
 						You are out of money. GAME OVER. <br>
 						Press any key to continue. 
 					</blockquote>
-				<h4 class="tutorial"><a name="Programming_Requirements"></a>Programming Requirements</h4>
+				<h4 class="tutorial"><a id="Programming_Requirements"></a>Programming Requirements</h4>
 					<p>You must use <a href="http://www.hotteam67.org/?attachment_id=631">this cards.h.</a>
 						<span style="font-weight:bold;">Do not make any changes to this header.</span></p>
 					<p>You are expected to use the two classes Player and Card which are declared in the header file cards.h. You should define all class member functions in the source file cards.cpp and the main routine in the source file main.cpp.
 						You should be able to figure out what the member functions do by looking at cards.h.</p>
-					<h5 class="tutorial"><a name="The_Player_Class"></a>The Player Class</h4>
+					<h5 class="tutorial"><a id="The_Player_Class"></a>The Player Class</h5>
 						<p>You should track the player's money using the Player class. You should define the member functions as given in the cards.h file.</p>
-					<h5 class="tutorial"><a name="Playing_Cards"></a>Playing Cards</h4>
+					<h5 class="tutorial"><a id="Playing_Cards"></a>Playing Cards</h5>
 						<p>Every playing card has a suit and a rank. The possible suits, in no particular order, are:</p>
 						<ul>
 							<li>Hearts</li>
@@ -122,7 +122,7 @@
 							<li>King</li>
 						</ol>
 						<p>Assume that each card has a value of what is given in the list (it is also fine to use numbers 0-12 instead of 1-13).</p>
-					<h5 class="tutorial"><a name="The_Card_Class"></a>The Card Class</h5>
+					<h5 class="tutorial"><a id="The_Card_Class"></a>The Card Class</h5>
 						<p>The class Card should have the <q>less than</q> operator defined that compares the ranks. For example, if <code>card1</code> is the Eight of Clubs and <code>card2</code> is the Queen of Hearts, then:</p>
 						<pre lang="cpp" escaped="true">
 card1 &lt; card2
@@ -140,7 +140,7 @@ switch(rand_num) {
 	case 4: suit = &quot;Spades&quot;; break;
 }
 						</pre>
-				<h4 class="tutorial"><a name="Extra_Practice"></a>Extra Practice</h4>
+				<h4 class="tutorial"><a id="Extra_Practice"></a>Extra Practice</h4>
 				<p>Do any of the following:</p>
 				<ul>
 					<li>Make the cards dynamic memory (pointers), if you haven't already</li>

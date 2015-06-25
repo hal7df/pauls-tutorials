@@ -39,7 +39,7 @@
  		<p>However, you are free to access and actuate any components on the robot, and print to the driver station (this is useful for debugging). </p>
  	<h2 class="tutorial"><a id="Programming_in_Autonomous"></a>Programming in Autonomous</h2>
  		<p>Autonomous is your time to shine! Autonomous relies entirely on programming (with the slight exception of preset autonomous strategies and offsets from Disabled), so make sure to do a good job with the code, but, this is also something you should be proud of! </p>
- 		<p>Again, Autonomous follows the same &#x27;initialization → loop periodic&#x27; format as the other routines follow, so take all of the same considerations into effect with Autonomous regarding looping and so on. </p>
+ 		<p>Again, Autonomous follows the same &#x27;initialization &#8594; loop periodic&#x27; format as the other routines follow, so take all of the same considerations into effect with Autonomous regarding looping and so on. </p>
  		<p>In my experience, writing Autonomous code is not as daunting as it sounds. As long as you know what you are trying to accomplish, it should be relatively easy. </p>
  		<p>The first thing that should be done before you write any Autonomous code is sit down and talk strategy with those involved (usually the drive coach, other strategists, and your mentors). You will want to lay out a plan detailing the following: </p>
  		<ul>
@@ -73,7 +73,7 @@ void AutonomousPeriodic()
   }
 }
 		</pre>
-		<p>Notice how the comments say &#x27;function call&#x27; and not &#x27;code&#x27;. This is because attempting to write all of the cases into the <code>AutonomousPeriodic()</code> function will overcomplicate the code and will almost certainly cause extreme amounts of logical problems. It is better to write each case into its own function and call that within your code>switch/case</code> structure, rather than to endure that mess. </p>
+		<p>Notice how the comments say &#x27;function call&#x27; and not &#x27;code&#x27;. This is because attempting to write all of the cases into the <code>AutonomousPeriodic()</code> function will overcomplicate the code and will almost certainly cause extreme amounts of logical problems. It is better to write each case into its own function and call that within your <code>switch/case</code> structure, rather than to endure that mess. </p>
 		<p>When you do this, you should still treat each individual function as if it were its own periodic routine, as one will be effectively run as such throughout the Autonomous period of the match. </p>
 		
 		<h3 class="tutorial"><a id="Individual_Autonomous_Cases"></a>Individual Autonomous Cases</h3>
