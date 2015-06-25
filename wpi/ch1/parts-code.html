@@ -31,14 +31,14 @@
  		</ul>
  		<li><a href="#Activity">Activity</a></li>
  	</ul>
- 	<h2 class="tutorial"><a name="Naming_and_Declarative_Style"></a>Naming and Declarative Style</h2>
+ 	<h2 class="tutorial"><a id="Naming_and_Declarative_Style"></a>Naming and Declarative Style</h2>
 	 	<p>One of the most important things that you will need to learn is how to write code &#8212; not in the terms of syntax, but rather of style. How you write your code really shows your skill as a programmer.
  			If your coding style is atrocious, then no one (in some cases, not even you) will be able to understand your code. In terms of improvement, this is <span style="font-weight: bold;">bad</span>.
 	 		If no one can help you fix bugs, etc., then you are essentially stuck.</p>
  		<p>One of the most important things that a programmer has is his/her peers. Quite often, beating out a bug can take multiple people, as the original programmer might not be able to see the bug.
  			This is why it is so important that your code be legible.</p>
  		<p>In terms of general coding style for robotics, stick with a general C++ style. That is, keeping functions that take multiple statements on multiple lines, denoting different sections of your program with comments, and so on.</p>
- 		<h3 class="tutorial"><a name="Naming"></a>Naming</h3>
+ 		<h3 class="tutorial"><a id="Naming"></a>Naming</h3>
  			<p>This is likely the most important piece of style. Every variable you declare does something (if it doesn&#x27;t, get rid of it), but others need to know what it does in order for them to be able to help you with your program
  				(single-letter names for looping variables, such as <code>x</code>, <code>y</code>, <code>z</code>, or <code>i</code> are fine, <a href="program-structure.html#Periodic_Routines">but you will almost never use loops in robotics programming</a>).
  				Thus, we follow a specific naming scheme:</p>
@@ -58,14 +58,14 @@ int m_turtles;
 			</pre>
 			<p>The only conclusion I can draw from this declaration is that you are counting turtles. Such a feature would be useless on a competitive robot.</p>
 			<p style="font-style: italic;">RobotBuilder Note: <span style="font-weight: bold;">ONLY</span> if you are using RobotBuilder, take off the <code>m_</code> prefix. RobotBuilder tends to run into issues when the names get too complex.</p>
-		<h3 class="tutorial"><a name="Declaring_Members"></a>Declaring Members</h3>
+		<h3 class="tutorial"><a id="Declaring_Members"></a>Declaring Members</h3>
 			<p>How you declare your class members depends on what type the member is.</p>
-			<h4 class="tutorial"><a name="Generic_Variables"></a>Generic Variables</h4>
+			<h4 class="tutorial"><a id="Generic_Variables"></a>Generic Variables</h4>
 				<p>The most commonly used variables in robotics programming are <code>int</code>s, <code>float</code>s, <code>double</code>s,  and <code>bool</code>s. Declare them like you normally would.</p>
 				<pre lang="cpp">
 int m_TeleopLoopCounter;
 				</pre>
-			<h4 class="tutorial"><a name="Robot_Components"></a>Robot Components</h4>
+			<h4 class="tutorial"><a id="Robot_Components"></a>Robot Components</h4>
 				<p>When you are declaring actual robot components, use a pointer. This is generally to manage memory efficiently.
 					Each component is held as <a href="http://www.cplusplus.com/doc/tutorial/dynamic/" target="_blank">dynamic memory</a>, so you need to create <code>new</code> instances of each component (this is how we call the class' constructor).
 					We will discuss exactly how to use the <code>new</code> keyword as we look at the individual components.</p>
@@ -82,7 +82,7 @@ class Robot: public IterativeRobot
 };
 				</pre>
 				<p style="font-style: italic;">RobotBuilder Note: If you are using RobotBuilder, this is done automatically. You should still know how to do this, however.</p>
-	<h2 class="tutorial"><a name="Robot_Parts"></a>Robot Parts</h2>
+	<h2 class="tutorial"><a id="Robot_Parts"></a>Robot Parts</h2>
 		<p>Only parts listed in the <a href="../parts#Programmed_Components">Programmed Components</a> section of Lesson 1 can be declared as components in the program.
 			Even then, the <a href="../parts#rRIO">roboRIO</a> and the <a href="../parts#Pneumatic_Control_Module">Pneumatic Control Module</a>, and <a href="../parts#Motors">motors</a> are not declared.</p>
 		<p>Note that you do not need to declare all of the parts on the robot for your code to work. Of course, you will only be able to control what is declared. Also note that the roboRIO cannot possibly detect the correct address (e.g. PWM or relay channel) of various components, so make sure that your assignment is correct.</p>
@@ -100,8 +100,8 @@ class Robot: public IterativeRobot
 	}
 //...
 		</pre>
-		<h3 class="tutorial"><a name="Motor_Controllers"></a>Motor Controllers</h3>
-			<h4 class="tutorial"><a name="RobotDrive"></a><code>RobotDrive</code></h4>
+		<h3 class="tutorial"><a id="Motor_Controllers"></a>Motor Controllers</h3>
+			<h4 class="tutorial"><a id="RobotDrive"></a><code>RobotDrive</code></h4>
 				<p>The class <code>RobotDrive</code> is not actually a part on the robot, but it is an abstraction object that handles the drivetrain motors. A drivetrain can either consist of 2 or 4 drive controllers.
 					On our team, we use PWM splitter cables such that there are only 2 PWM channels being used, but there are actually 4 drive controllers running the robot. Treat it like a 2-controller drivetrain.</p>
 				<p>In the initialization, provide all of the drive controllers that are part of the drivetrain. Provide the left controller(s) first, then the right controller(s). Ensure that you initialize the <code>RobotDrive</code>
@@ -120,7 +120,7 @@ m_robotDrive = new RobotDrive (m_lDrive, m_rDrive);
 
 m_robotDrive->SetSafetyEnabled(false);
 				</pre>
-			<h4 class="tutorial"><a name="Victor"></a>Victor</h4>
+			<h4 class="tutorial"><a id="Victor"></a>Victor</h4>
 				<p>A Victor (which you have seen declared before) is of type <code>Victor</code> (with a capital V). It encompasses both Victor motor controllers and VEX motor controllers.</p>
 				<p>In the initialization, provide the PWM channel on the roboRIO that the controller is hooked up to.</p>
 				<pre lang="cpp">
@@ -130,7 +130,7 @@ Victor *m_motor1;
 //Victor initialization on PWM channel 0
 m_motor1 = new Victor (0);
 				</pre>
-			<h4 class="tutorial"><a name="Jaguar"></a>Jaguar</h4>
+			<h4 class="tutorial"><a id="Jaguar"></a>Jaguar</h4>
 				<p>A Jaguar is of type <code>Jaguar</code> (with a capital J). In the initialization, provide the PWM channel that the controller is hooked up to.</p>
 				<pre lang="cpp">
 //Jaguar declaration
@@ -139,7 +139,7 @@ Jaguar *m_motor2;
 //Jaguar initialization on PWM channel 1
 m_motor2 = new Jaguar (1);
 				</pre>
-			<h4 class="tutorial"><a name="Talon"></a>Talon</h4>
+			<h4 class="tutorial"><a id="Talon"></a>Talon</h4>
 				<p>A Talon is of type <code>Talon</code> (with a capital T). In the initialization, provide the controller&#x27;s PWM channel.</p>
 				<pre lang="cpp">
 //Talon declaration
@@ -148,7 +148,7 @@ Talon *m_motor3;
 //Talon initialization on PWM channel 2
 m_motor3 = new Talon (2);
 				</pre>
-			<h4 class="tutorial"><a name="Servo"></a>Servo</h4>
+			<h4 class="tutorial"><a id="Servo"></a>Servo</h4>
 				<p>This category includes generic servos but not VEX motors (see <a href="#Victor">Victors</a>), as VEX motors are managed differently.</p>
 				<p>A servo is of type <code>Servo</code> (with a capital S). In the initialization, provide the servo&#x27;s PWM channel.</p>
 				<pre lang="cpp">
@@ -158,7 +158,7 @@ Servo *m_servo1;
 //Servo initialization on PWM channel 3
 m_servo1 = new Servo (3);
 				</pre>
-			<h4 class="tutorial"><a name="Spike"></a>Spike</h4>
+			<h4 class="tutorial"><a id="Spike"></a>Spike</h4>
 				<p>Other than window motors, Spikes also drive generic lights on the robot (this does not include the notification light).</p>
 				<p>A Spike is of type <code>Relay</code> (with a capital R). In the initialization, provide the relay channel the Spike is connected to.</p>
 				<pre lang="cpp">
@@ -168,7 +168,7 @@ Relay *m_relay1;
 //Spike initialization on relay 0
 m_relay1 = new Relay (0);
 				</pre>
-			<h4 class="tutorial"><a name="Digital_Outputs"></a>Digital Outputs</h4>
+			<h4 class="tutorial"><a id="Digital_Outputs"></a>Digital Outputs</h4>
 				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="../parts#rRIO">digital output</a> on the roboRIO, use this class.</p>
 				<p>A digital output is of type <code>DigitalOutput</code> (with a capital D and O, no space). In the initialization, provide the digital output channel on the Digital Sidecar.</p>
 				<pre lang="cpp">
@@ -178,8 +178,8 @@ DigitalOutput *m_do;
 //Digital Output initialization on digital output 0
 m_do = new DigitalOutput (0);
 				</pre>
-			<h4 class="tutorial"><a name="Pneumatics"></a>Pneumatics</h4>
-				<h5 class="tutorial"><a name="Compressor"></a>Compressor</h5>
+			<h4 class="tutorial"><a id="Pneumatics"></a>Pneumatics</h4>
+				<h5 class="tutorial"><a id="Compressor"></a>Compressor</h5>
 					<p>A compressor is of type <code>Compressor</code> (capital C). In initialization, provide the CAN ID of the pneumatic control module.</p>
 					<pre lang="cpp">
 //Compressor declaration
@@ -189,7 +189,7 @@ Compressor *m_compressor;
 m_compressor = new Compressor (0);
 					</pre>
 					<p>This class is unnecessary to declare if you intend just to use the Pneumatic Control Module's automatic compressor handling.</p>
-				<h5 class="tutorial"><a name="Solenoid"></a>Solenoid</h5>
+				<h5 class="tutorial"><a id="Solenoid"></a>Solenoid</h5>
 					<p>A solenoid is of type <code>Solenoid</code> (capital S). In initialization, provide the output number from the <a href="../parts#Pneumatic_Control_Module">pneumatic control module</a>.</p>
 					<pre lang="cpp">
 //Solenoid declaration
@@ -198,9 +198,9 @@ Solenoid *m_sol;
 //Solenoid initialization on port 0
 m_sol = new Solenoid (0);					
 					</pre>
-		<h3 class="tutorial"><a name="Sensors"></a>Sensors</h3>
+		<h3 class="tutorial"><a id="Sensors"></a>Sensors</h3>
 			<p>Some common sensors use a generic class for their type. Below, if a generic class is given, the sensors that use that class are provided in a list.</p>
-			<h4 class="tutorial"><a name="AnalogInput"></a><code>AnalogInput</code></h4>
+			<h4 class="tutorial"><a id="AnalogInput"></a><code>AnalogInput</code></h4>
 				<p>The class <code>AnalogInput</code> (capital A,I; no space) manages generic analog devices. These devices manipulate voltage as output.</p>
 				<p>In the initialization, provide the analog channel of the device.</p>
 				<pre lang="cpp">
@@ -210,9 +210,9 @@ AnalogInput *m_analogDev;
 //AnalogInput initialization on analog channel 0
 m_analogDev = new AnalogInput (0);
 				</pre>
-				<h5 class="tutorial"><a name="AnalogInput_Devices"></a><code>AnalogInput</code> Devices</h5>
+				<h5 class="tutorial"><a id="AnalogInput_Devices"></a><code>AnalogInput</code> Devices</h5>
 					<p>The most common device used in this category is a <a href="../parts#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
-			<h4 class="tutorial"><a name="DigitalInput"></a>DigitalInput</h4>
+			<h4 class="tutorial"><a id="DigitalInput"></a>DigitalInput</h4>
 				<p>The class <code>DigitalInput</code> (capital D, I; no space) manages generic digital sensors.</p>
 				<p>In the initialization, provide the digital input channel on the Digital Sidecar.</p>
 				<pre lang="cpp">
@@ -222,9 +222,9 @@ DigitalInput *m_digitalDev;
 //DigitalInput initialization on digital input 0
 m_digitalDev = new DigitalInput (0);
 				</pre>
-				<h5 class="tutorial"><a name="DigitalInput_Devices"></a><code>DigitalInput</code> Devices</h5>
+				<h5 class="tutorial"><a id="DigitalInput_Devices"></a><code>DigitalInput</code> Devices</h5>
 					<p>The most common device used in this category is a <a href="../parts#Limit_Switch">limit switch</a>. If you have a general digital device, use this class (unless otherwise specified).</p>
-			<h4 class="tutorial"><a name="Encoder"></a>Encoder</h4>
+			<h4 class="tutorial"><a id="Encoder"></a>Encoder</h4>
 				<p>An encoder is of type <code>Encoder</code> (capital E). In the initialization, do the following:</p>
 				<ul>
 					<li>provide the device&#x27;s two digital channels</li>
@@ -244,7 +244,7 @@ m_lEncode = new Encoder (1,2,false);
 m_lEncode-&gt;SetDistancePerPulse(1);
 m_lEncode-&gt;SetMaxPeriod(1.0);
 				</pre>
-			<h4 class="tutorial"><a name="Gear_Tooth_Sensor"></a>Gear Tooth Sensor</h4>
+			<h4 class="tutorial"><a id="Gear_Tooth_Sensor"></a>Gear Tooth Sensor</h4>
 				<p>A gear tooth sensor is of type <code>GearTooth</code> (capital G, T). In the initialization, provide the digital input channel and whether you want to have the sensor keep track of the direction of rotation or not, using a true/false value.</p>
 				<pre lang="cpp" escaped="true">
 //Gear Tooth sensor declaration
@@ -254,7 +254,7 @@ GearTooth *m_gt;
 m_gt = new GearTooth (3);
 m_gt-&gt;EnableDirectionSensing(true);
 				</pre>
-			<h4 class="tutorial"><a name="Ultrasonic_Sensor"></a>Ultrasonic Sensor</h4>
+			<h4 class="tutorial"><a id="Ultrasonic_Sensor"></a>Ultrasonic Sensor</h4>
 				<p>An ultrasonic sensor is of type <code>Ultrasonic</code> (capital U). In the initialization, provide the digital output channel of the sound emitter and the digital input of the echo detector.</p>
 				<pre lang="cpp">
 //Ultrasonic sensor declaration
@@ -263,7 +263,7 @@ Ultrasonic *m_proximityDetect;
 //Ultrasonic sensor initialization on digital output 5 and digital input 4
 m_proximityDetect = new Ultrasonic (5,4);
 				</pre>
-			<h4 class="tutorial"><a name="Gyroscope"></a>Gyroscope</h4>
+			<h4 class="tutorial"><a id="Gyroscope"></a>Gyroscope</h4>
 				<p>A gyroscope is of class <code>Gyro</code> (capital G). In the initialization, provide the analog channel of the gyroscope, and set its sensitivity.</p>
 				<pre lang="cpp">
 //Gyroscope declaration
@@ -273,7 +273,7 @@ Gyro *m_gyro;
 m_gyro = new Gyro (1);
 m_gyro->SetSensitivity(2.00);
 				</pre>
-			<h4 class="tutorial"><a name="Accelerometer"></a>Accelerometer</h4>
+			<h4 class="tutorial"><a id="Accelerometer"></a>Accelerometer</h4>
 				<p>An accelerometer is of type <code>Accelerometer</code> (capital A). In the initialization, do the following:</p>
 				<ul>
 					<li>Provide the analog channel of the device</li>
@@ -289,9 +289,9 @@ m_accel = new Accelerometer (2);
 m_accel->SetSensitivity(2.0);
 m_accel->SetZero(1.0);
 				</pre>
-		<h3 class="tutorial"><a name="Driver_Station_Components"></a>Driver Station Components</h3>
+		<h3 class="tutorial"><a id="Driver_Station_Components"></a>Driver Station Components</h3>
 			<p>There are a few components on the driver&#x27;s side that you need to declare.</p>
-			<h4 class="tutorial"><a name="Game_Controller"></a>Game Controller</h4>
+			<h4 class="tutorial"><a id="Game_Controller"></a>Game Controller</h4>
 				<p>Both a standard XBOX 360 controller and the Attack3-like joysticks are of type <code>Joystick</code> (capital J). In the initialization, provide the Joystick ID. Use the following rule:</p>
 				<ul>
 					<li>Joystick 1: Driver</li>
@@ -311,11 +311,11 @@ Joystick *m_operator;
 m_driver = new Joystick (1);
 m_operator = new Joystick (2);
 				</pre>
-			<h4 class="tutorial"><a name="Driver_Station"></a>Driver Station</h4>
+			<h4 class="tutorial"><a id="Driver_Station"></a>Driver Station</h4>
 				<p>Believe it or not, the driver station (computer) has a few components that need to be declared. These are either useful debugging tools or methods to access information about the field.</p>
 				<p>Note that, unlike everything above, you do not use the <code>new</code> keyword to initialize the object, because the object is already running on the driver station (and hence is not new).
 					Instead, each of these objects have a <code>GetInstance()</code> method that can be called to grab a pointer to the right instance. None of these objects have any parameters.</p>
-				<h5 class="tutorial"><a name="Driver_Station_obj"></a><code>DriverStation</code> Object</h5>
+				<h5 class="tutorial"><a id="Driver_Station_obj"></a><code>DriverStation</code> Object</h5>
 					<p>The <code>DriverStation</code> object (capital D, S) fetches different pieces of information regarding the field setup and the current match, such as:</p>
 					<ul>
 						<li>The current operating mode (Autonomous, Teleop, Disabled)</li>
@@ -331,7 +331,7 @@ DriverStation *m_ds;
 //DriverStation initialization
 m_ds = DriverStation::GetInstance();
 					</pre>
-				<h5 class="tutorial"><a name="Live_Window"></a>Live Window</h5>
+				<h5 class="tutorial"><a id="Live_Window"></a>Live Window</h5>
 					<p>Smart Dashboard provides an option to manipulate robot components in real time. This feature is known as <span style="font-style: italic;">Live Window mode</span>, and is used in the <code>Test</code> routines in your program.
 						You manage Live Window with the <code>LiveWindow</code> object.</p>
 					<pre lang="cpp">
@@ -341,8 +341,8 @@ LiveWindow *m_lw;
 //Live Window initialization
 m_lw = LiveWindow::GetInstance();
 					</pre>
-		<h3 class="tutorial"><a name="Miscellaneous"></a>Miscellaneous</h3>
-			<h4 class="tutorial"><a name="Timer"></a>Timer</h4>
+		<h3 class="tutorial"><a id="Miscellaneous"></a>Miscellaneous</h3>
+			<h4 class="tutorial"><a id="Timer"></a>Timer</h4>
 				<p>A <code>Timer</code>, is, well, a timer. This is useful for creating timed actions.</p>
 				<p>It is of type <code>Timer</code>. It has no special initialization.</p>
 				<pre lang="cpp" escaped="true">
@@ -357,8 +357,21 @@ m_timer = new Timer;
   * just leave it out.
   */
   				</pre>
-  	<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
-  	  	<p style="text-align: center;">In progress</p>
+  	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
+  	  	<p>In this activity, you will be given either the name of a component or a picture of a component. You will be given all of the necessary information to initialize the component. Using this information, write both a component declaration and initialization line.</p>
+  	  	<p style="font-weight: bold; text-align: center;">Example</p>
+  	  	<ul>
+  	  		<li>Component name: Talon</li>
+  	  		<li>PWM 3</li>
+  	  	</ul>
+  	  	<br>
+  	  	<ul>
+  	  		<li>Declaration: <code>Talon* m_talon;</code></li>
+  	  		<li>Initialization: <code>m_talon = new Talon (3)</code></li>
+  	  	</ul>
+  	  	
+  	  	<div id="activity">
+  	  	</div>
 
 <!-- NAVIGATION -->
   	<div style="clear: both;">

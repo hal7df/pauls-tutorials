@@ -35,7 +35,7 @@
 	<div style="clear: both;"></div>  	
 	
 	<div id="notes" style="width: 100%;">
-		<h2 class="tutorial"><a name="C_Strings"></a>C Strings</h2>
+		<h2 class="tutorial"><a id="C_Strings"></a>C Strings</h2>
 			<p>You are likely aware of this, but C++ is actually derived from another language called C. In C, there is no 
 				<code>string</code> data type. Instead, C programmers use an array of <code>chars</code>.</p>
 			<p>Since many functions are actually C functions ported to C++ (like <a href="../../tips-tricks#printf" target="_blank"><code style="color: #e84747;">printf()</code></a>),
@@ -54,7 +54,7 @@
   			<p>Once you feel comfortable with the above content, complete Pancake Glutton and either Dungeon Crawl or 2048.</p>
 						
 			<!-- PANCAKE GLUTTON -->
-			<h3 class="tutorial"><a name="Pancake_Glutton"></a>Pancake Glutton</h3>
+			<h3 class="tutorial"><a id="Pancake_Glutton"></a>Pancake Glutton</h3>
 				<p>Write a program that asks the user to enter the number of pancakes eaten for breakfast by 10 different people 
 					(Person 1, Person 2, ..., Person 10) Once the data has been entered the program so that it outputs a list in order
 					of number of pancakes eaten of all 10 people.</p>
@@ -66,11 +66,11 @@
 						...<br>
 						Person 5: ate 0 pancakes<br>
 					</blockquote>
-				<h4 class="tutorial"><a name="pancake-extra"></a>Extra Practice</h4>
+				<h4 class="tutorial"><a id="pancake-extra"></a>Extra Practice</h4>
 					<p>Sort the people in the other direction. </p>
 			
 			<!-- DUNGEON CRAWL -->			
-			<h3 class="tutorial"><a name="Dungeon_Crawl"></a>Dungeon Crawl</h3>
+			<h3 class="tutorial"><a id="Dungeon_Crawl"></a>Dungeon Crawl</h3>
 				<p>Make a program that outputs a simple 10 x 10 grid based gameboard to the screen using characters.</p>
 				<h4 class="tutorial">Example</h4>
 					<blockquote class="tutorialexample">
@@ -92,7 +92,7 @@
 				<p>If you don&#x27;t want to have the user hit enter (for example, you want them to use the WASD keys to navigate), look at 
 					<a href="../../tips-tricks#unbuffered_input" target="_blank">unbuffered input</a>.</p>
 				<p>HINT: Don&#x27;t let the player move off the gameboard! You program will crash if they move off the top or bottom of the board! (the same holds true for enemies)</p>
-					<h4 class="tutorial"><a name="dungeon-extra"></a>Extra Practice</h4>
+					<h4 class="tutorial"><a id="dungeon-extra"></a>Extra Practice</h4>
 						<p>Do any of the following:</p>
 						<ul>
 							<li>Create multiple difficulty levels</li>
@@ -103,7 +103,7 @@
 						</ul>
 						
 			<!-- 2048 -->
-			<h3 class="tutorial"><a name="2048"></a>2048</h3>
+			<h3 class="tutorial"><a id="2048"></a>2048</h3>
 				<p>Create a clone of the <a href="http://gabrielecirulli.github.io/2048/" target="_blank">2048 game</a> in the terminal using an array (you do not need to include animations).</p>
 				<p>The game is played on a 4x4 grid. The grid starts with all tiles empty except two, which contain either a 2 or a 4. The player can move the tiles up, down, left, or right. 
 					When the player moves the tiles, they all move as far as possible in that direction. When two tiles of the same number meet, they merge and the resulting tile contains twice the value of the first 

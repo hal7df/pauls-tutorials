@@ -40,13 +40,9 @@
     "display":"Compressor",
     "generic":false,
     "devices":false,
-    "port-type":"multiple",
-    "ports":[
-      {"description":"Pressure switch", "type": "DIO"},
-      {"description":"Compressor", "type": "Relay"}
-    ],
+    "port-type":"CAN"
     "img":"http://team358.org/files/pneumatic/Compressor2011.jpg",
-    "params":"int DIO, int Relay",
+    "params":"int CAN",
     "extParams":false,
     "extInit":false
   },
@@ -54,14 +50,18 @@
     "display":"Solenoid valve",
     "generic":false,
     "devices":false,
-    "port-type":"Solenoid",
+    "port-type":"multiple",
+    "ports":[
+    	{"description":"PCM ID", "type": "CAN"}
+    	{"description":"Solenoid channel", "type": "Solenoid"}
+    ]
     "img":"http://team358.org/files/pneumatic/Festo24v.jpg",
-    "params":"int Solenoid",
+    "params":"int CAN, int Solenoid",
     "extParams":false,
     "extInit":false
   },
-  {"name":"AnalogChannel",
-    "display":"Analog Channel",
+  {"name":"AnalogInput",
+    "display":"Analog Input",
     "generic":false,
     "devices":[
       {"name":"Potentiometer", "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Potentiometer.jpg/225px-Potentiometer.jpg"}
@@ -100,7 +100,6 @@
     "extInit":[
       {"function":"SetDistancePerPulse","params":"float distance","description":"Measured distance per encoder pulse","range":[0.1,5.0]},
       {"function":"SetMaxPeriod","params":"float period","description":"Maximum period","range":[0.5,2.0]},
-      {"function":"Start","params":false,"description":false}
     ]
   },
   {"name":"GearTooth",
@@ -162,16 +161,6 @@
   },
   {"name":"DriverStation",
     "display":"Driver Station Object",
-    "generic":false,
-    "devices":false,
-    "port-type":"abstract",
-    "img":false,
-    "params":"GetInstance",
-    "extParams":false,
-    "extInit":false
-  },
-  {"name":"DriverStationLCD",
-    "display":"Driver Station DriverStationLCD",
     "generic":false,
     "devices":false,
     "port-type":"abstract",

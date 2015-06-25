@@ -118,49 +118,6 @@ float PIDController::GetSetpoint()
 		</ul>
 		<p>Knowing how much to change a P, I, or D value is a learned skill and does not really follow a definite algorithm. As such it cannot be taught through a tutorial. If you need help, ask someone who has tuned a PID before.</p>
 
-	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
-		<p>The content in this lesson could be tested, but most of the PID-capable subsystems on available robots require that you know the content from lesson 10.</p>
-		<p>If you do have access to a robot with a system that is ready to run a PID that only uses one sensor and one motor, then write code to implement a PID on that system. Otherwise, continue to the next lesson.</p>
- 	<h3 class="tutorial"><a id="PID_Setpoints"></a>PID Setpoints</h3>
- 		<p>You may remember <a href="../sensors#A_Special_Function" target="_blank" rel="nofollow">the <code>PIDGet()</code> function from lesson 7</a>. Funny how it begins with P-I-D, huh? That&#x27;s because this is the function that the <code>PIDController</code> reads from when it runs the calculations. This means that all of your setpoints need to use the bitwise value found by <code>PIDGet()</code></p>
- 		<p>To get these values, simply write the output of the <code>PIDGet()</code> function for whatever sensor you are using to the driver station, and then use those values for the setpoints. </p>
- 	<h3 class="tutorial"><a id="Prerequisites"></a>Prerequisites</h3>
- 		<p><span style="font-style: italic;">Before</span> you start tuning a PID, make sure your code does the following: </p>
- 	<ul>
- 		<li>Outputs the <code>PIDGet()</code> value of the sensor you are using to the dashboard. </li>
- 		<li>Reads from the right input and writes to the right output, and that those objects are mapped correctly.</li>
- 		<li>Sets the setpoint <span style="font-style: italic;">only</span> after a button press. </li>
- 	</ul>
- 	<p>Setting the setpoint and enabling the PID controller should be run when a button on the controller is pressed. This means that when the operator lets go of the button, the <code>PIDController</code> should be <span style="font-weight: bold;">disabled</span>.</p>
- 	<p>You should start with the following PID constants: </p>
- 	<ul>
- 		<li>P: 1 </li>
- 		<li>I: 0 </li>
- 		<li>D: 0 </li>
- 	</ul>
- 	<h3><a id="Finding_the_right_values"></a>Finding the right values</h3>
- 		<p>When you are tuning the PID, you need to ask yourself the following questions. Below each question is a potential solution for a problem that you might see. </p>
- 		<ul>
- 			<li>Is it moving in the right direction? </li>
- 			<ul>
- 				<li>No: Make the P constant the opposite of what it is now (negative if it is positive, vice versa). </li>
- 			</ul>
- 			<li>Is it being too aggressive/shy in its movements? </li>
- 			<ul>
- 				<li>Aggressive: Lower the P constant. </li>
- 				<li>Shy: Raise the P constant. </li>
- 			</ul>
- 			<li>Is it overshooting and not correcting itself? </li>
- 			<ul>
- 				<li>Solution 1: Try lowering the P constant. </li>
- 				<li>Solution 2 </li>
- 				<ul>
- 					<li>Overshooting (try first): Adjust the D constant. Be careful if you are going to do this, and adjust D by values of 0.1 or even 0.01. </li>
- 					<li>Steady-state error: Adjust the I constant. Take similar cautions with I that you would with D. </li>
- 				</ul>
- 			</ul>
- 		</ul>
- 		<p>Knowing how much to change a P, I, or D value is a learned skill and does not really follow a definite algorithm. As suchm it cannot be taught through a tutorial. If you need help, ask someone who has tuned a PID before. </p>
  		<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
  			<p>The content in this lesson could be tested, but most of the PID-capable subsystems on available robots require that you know the content from lesson 10. </p>
  			<p>If you do have access to a robot with a system that is ready to run a PID that only uses one sensor and one motor, then write code to implement a PID on that system. Otherwise, continue to the next lesson. </p>		
