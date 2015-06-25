@@ -66,11 +66,11 @@
   		<li><a href="#Activity">Activity</a></li>
   	</ul>
   	
-  	<h2 class="tutorial"><a name="Introduction"></a>Introduction</h2>
+  	<h2 class="tutorial"><a id="Introduction"></a>Introduction</h2>
   		<p>The robot&#x27;s program is a little different from what you are used to. Instead of using an <code>int main</code> and a lot of functions, you program the robot as a class. And only a class. 
   		The <code>int main</code> portion of the program doesn&#x27;t change, so it is already embedded into the roboRIO for you.</p>
   		<p>The underlying program on the roboRIO reads the class that you wrote, and applies it to the robot. So, essentially, you are treating the robot as if it were a class.</p>
-  	<h2 class="tutorial"><a name="Getting_Started"></a>Getting Started</h2>
+  	<h2 class="tutorial"><a id="Getting_Started"></a>Getting Started</h2>
   		<p>When you installed the WPI Eclipse extension, you installed a robot class template. In order to get it, go to File &gt; New &gt; Project. In the dialog, select <q>Robot C++ Project</q>, then <q>Iterative Robot</q>, then give your project a name.
   		This will load all of the required files into your workspace (there are some other underlying files that you don&#x27;t touch). The file you want is in the <q>src</q> directory, <q>Robot.cpp</q>. Let&#x27;s examine what it has done for us: </p>
   		<pre lang="cpp" escaped="true">
@@ -83,7 +83,7 @@ class Robot: public IterativeRobot
 		<p>This creates a new class called <code>Robot</code> that you will program. It inherits the <code>IterativeRobot</code> class, the class the roboRIO treats the robot as.
 		Your class <span style="font-weight: bold;">MUST</span> inherit <code>IterativeRobot</code>, otherwise it will not work.</p>
 		<p>Now, we will look at the structure of the robot class.</p>
-	<h2 class="tutorial"><a name="Class_Members"></a>Class Members</h2>
+	<h2 class="tutorial"><a id="Class_Members"></a>Class Members</h2>
 		<pre lang="cpp">
 class Robot: public IterativeRobot
 {
@@ -93,7 +93,7 @@ class Robot: public IterativeRobot
    	</pre>
    	<p>Here is where you declare everything that your robot has: drive controllers, sensors, etc. You also declare variables that you will use for control here, as well.</p>
    	<p>There is a specific way in which we declare robot components -- that is, using pointers. But we&#x27;ll get into that later.</p>
-   <h2 class="tutorial"><a name="Class_Constructor"></a>Class Constructor</h2>
+   <h2 class="tutorial"><a id="Class_Constructor"></a>Class Constructor</h2>
 		<p>The default code actually does not include this part, but you should write it in. If you remember from the C++ Guided Tutorial, the constructor is the part of the class where it initializes itself.</p>
    	<pre lang="cpp">
 Robot::Robot()
@@ -113,12 +113,12 @@ public:
 		</pre>
 		<p>Again, how to initialize specific robot components will be reviewed in <a href="../parts-code">Lesson 1-3</a>.</p>
 		<p>You may notice the <code>public:</code> keyword before the class constructor. Everything declared before is private, to avoid memory overflow.</p>
-	<h2 class="tutorial"><a name="Initialization_Routines"></a>Initialization Routines</h2>
+	<h2 class="tutorial"><a id="Initialization_Routines"></a>Initialization Routines</h2>
 		<p style="font-style: italic;">Not to be confused with the component initialization in the <a href="#Class_Constructor">constructor</a></p>
 		<p>The following routines are called once before their corresponding <a href="#Periodic_Routines">periodic routines</a> are called. Note that <a href="#RobotInit">RobotInit</a> does not have a periodic routine associated with it.</p>
 		<p>One important concept to note at this point is that the roboRIO operates in loops. It runs an init routine in one loop, then it switches to the corresponding periodic routine.
 			The periodic routine runs once per loop until the mode is changed, and the process is repeated again for the new mode.</p>
-		<h3 class="tutorial"><a name="RobotInit"></a><code>RobotInit()</code></h3>
+		<h3 class="tutorial"><a id="RobotInit"></a><code>RobotInit()</code></h3>
 			<pre lang="cpp">
 void Robot::RobotInit()
 {
@@ -127,7 +127,7 @@ void Robot::RobotInit()
 }
 			</pre>
 			<p>The comment says it all -- everything that is not component and variable initialization that you want to do before the robot does anything else (e.g. sending things to the dashboard, if necessary).</p>
-		<h3 class="tutorial"><a name="DisabledInit"></a><code>DisabledInit()</code></h3>
+		<h3 class="tutorial"><a id="DisabledInit"></a><code>DisabledInit()</code></h3>
 			<pre lang="cpp">
 void BuiltinDefaultCode::DisabledInit()
 {
@@ -136,7 +136,7 @@ void BuiltinDefaultCode::DisabledInit()
 			</pre>
 			<p>Disabled routines, or when <q>Disabled</q> is selected in the driver station, are routines in which you can change variables, but you cannot change the state of the robot (i.e. activate motors). The most common use for this mode is to change between autonomous modes.
 				In the <code>DisabledInit</code> portion of the program, you would put statements that you want run as the robot enters disabled mode.</p>
-		<h3 class="tutorial"><a name="AutonomousInit"></a><code>AutonomousInit()</code></h3>
+		<h3 class="tutorial"><a id="AutonomousInit"></a><code>AutonomousInit()</code></h3>
 			<pre lang="cpp">
 void Robot::AutonomousInit()
 {
@@ -145,7 +145,7 @@ void Robot::AutonomousInit()
 			</pre>
 			<p>Autonomous is the part of the match where the robot functions without input from the drivers (with the exception of the Kinect and other video devices).
 				If there are some actions that need to be run as you enter autonomous, put them here.</p>
-		<h3 class="tutorial"><a name="TeleopInit"></a><code>TeleopInit()</code></h3>
+		<h3 class="tutorial"><a id="TeleopInit"></a><code>TeleopInit()</code></h3>
 			<pre lang="cpp">
 void Robot::TeleopInit()
 {
@@ -153,7 +153,7 @@ void Robot::TeleopInit()
 }
 			</pre>
 			<p>Teleop, short for teleoperated, is when the drivers control the robot through the controls. This initialization routine is important, as it is often used to stop any leftover autonomous commands, should they run past their allocated period. It can also be used to reset the robot to a certain state after autonomous ends.</p>
-		<h3 class="tutorial"><a name="TestInit"></a><code>TestInit()</code></h3>
+		<h3 class="tutorial"><a id="TestInit"></a><code>TestInit()</code></h3>
 			<pre lang="cpp">
 void Robot::TestInit()
 {
@@ -162,10 +162,10 @@ void Robot::TestInit()
 			</pre>
 			<p>Test mode is an important mode: you can use it to test the functionality of your robot. Essentially, it is a diagnostic mode that you can use to determine exactly what is wrong with your robot.</p>
 			<p>In TestInit, you would set your robot up for diagnostics, if any are needed.</p>
-	<h2 class="tutorial"><a name="Periodic_Routines"></a>Periodic Routines</h2>
+	<h2 class="tutorial"><a id="Periodic_Routines"></a>Periodic Routines</h2>
 		<p>These are all routines that are run once the roboRIO has finished the initialization stage for that specific mode (e.g. teleop). These continue to run, once per loop until the robot is disabled (in matches, the robot is disabled for a short period of time after autonomous to switch to teleop).
 			Because they loop automatically, you should <span style="font-weight: bold;">never</span> write a loop into these routines.</p>
-		<h3 class="tutorial"><a name="DisabledPeriodic"></a><code>DisabledPeriodic()</code></h3>
+		<h3 class="tutorial"><a id="DisabledPeriodic"></a><code>DisabledPeriodic()</code></h3>
 			<pre lang="cpp">
 void Robot::DisabledPeriodic()
 {
@@ -173,7 +173,7 @@ void Robot::DisabledPeriodic()
 }
 			</pre>
 			<p>Here is where you would program your robot to change autonomous modes, tune in a shot height, etc. Again, you cannot interact with drive controllers or anything that actuates parts of the robot here.</p>
-		<h3 class="tutorial"><a name="AutonomousPeriodic"></a><code>AutonomousPeriodic()</code></h3>
+		<h3 class="tutorial"><a id="AutonomousPeriodic"></a><code>AutonomousPeriodic()</code></h3>
 			<pre lang="cpp">
 void Robot::AutonomousPeriodic()
 {
@@ -182,7 +182,7 @@ void Robot::AutonomousPeriodic()
 			</pre>
 			<p><code>AutonomousPeriodic()</code> is what runs during the autonomous portion of the match. Here, you write the robot&#x27;s autonomous routine.</p>
 			<p>Note that, depending on the complexity of your autonomous, this can be the part of your program that requires the most logic.</p>
-		<h3 class="tutorial"><a name="TeleopPeriodic"></a><code>TeleopPeriodic()</code></h3>
+		<h3 class="tutorial"><a id="TeleopPeriodic"></a><code>TeleopPeriodic()</code></h3>
 			<pre lang="cpp">
 void Robot::TeleopPeriodic()
 {
@@ -216,7 +216,7 @@ void Robot::TeleopDashboardUpdate()
 			</pre>
 			<p><span style="font-weight: bold;">Note:</span> This will become even more apparent as the tutorial progresses, but <span style="font-weight: bold;">PLEASE</span> name your functions and variables with relevant names.
 				Not doing so will cause a lot of ripped-out hair and shouting voices.</p>
-		<h3 class="tutorial"><a name="TestPeriodic"></a><code>TestPeriodic()</code></h2>
+		<h3 class="tutorial"><a name="TestPeriodic"></a><code>TestPeriodic()</code></h>
 			<pre lang="cpp">
 void Robot::TestPeriodic()
 {
@@ -244,7 +244,7 @@ void Robot::AutonomousContinuous()
 }
 			</pre>
 			<p>This is the continuous routine that runs in autonomous.</p>
-		<h3 class="tutorial"><a name="TeleopContinuous"></a><code>TeleopContinuous()</code></h3>
+		<h3 class="tutorial"><a id="TeleopContinuous"></a><code>TeleopContinuous()</code></h3>
 			<pre lang="cpp">
 void Robot::TeleopContinuous()
 {
@@ -252,7 +252,7 @@ void Robot::TeleopContinuous()
 }
 			</pre>
 			<p>This is the continuous routine that runs in teleop.</p>
-		<h3 class="tutorial"><a name="TestContinuous"></a><code>TestContinuous()</code></h3>
+		<h3 class="tutorial"><a id="TestContinuous"></a><code>TestContinuous()</code></h3>
 			<pre lang="cpp">
 void Robot::TestContinuous()
 {
@@ -260,12 +260,12 @@ void Robot::TestContinuous()
 }
 			</pre>
 			<p>This is the continuous routine that runs in test mode.</p>
-	<h2 class="tutorial"><a name="End_of_the_Program"></a>End of the Program</h2>
+	<h2 class="tutorial"><a id="End_of_the_Program"></a>End of the Program</h2>
 		<p>At the end of the program, you may notice the following line:</p>
 		<pre lang="cpp">
 START_ROBOT_CLASS(Robot);
 		</pre><p>This is a macro that basically tells the roboRIO that the class <code>Robot</code> is the class to load and use on the robot.</p>
-	<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
+	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
 	<p>Alone or with a partner, talk to a mentor/veteran team member to get a detailed description of all of the functions of a robot from a previous year (this activity does not require that the robot is available, but it may be useful for your reference).</p>
 	<p>Below is the class template discussed in this lesson, and in each function is a multi-line comment with an editable text box. Using the description you obtained, fill in the comments so that all of the functions (and any basic logic, if possible) are in the right place.</p>
 	<p>Click the button below to see a sample function description (of the 2013 HOTBOT)</p>

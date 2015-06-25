@@ -41,7 +41,7 @@
 	</ul>
 	</div>
 	<div id="tcontent">
-		<h2 class="tutorial"><a name="Function_Presentation"></a>Function Presentation</h2>
+		<h2 class="tutorial"><a id="Function_Presentation"></a>Function Presentation</h2>
 			<p>Now that we are diving into specific functions, it is important that you understand how they are presented to you in this tutorial. Whenever you are first given a function, its format will be like this:</p>
 			<pre lang="cpp">
 RETURN_TYPE ComponentClass::FunctionName(OPTION_TYPE options)
@@ -57,11 +57,11 @@ RETURN_TYPE ComponentClass::FunctionName(OPTION_TYPE options)
 				</ul>
 			</ul>
 			<p>What you see printed is NOT exactly what you type in. It is shown in this format for informative purposes.</p>
-		<h2 class="tutorial"><a name="The_Game_Controller"></a>The Game Controller</h2>
+		<h2 class="tutorial"><a id="The_Game_Controller"></a>The Game Controller</h2>
 			<p>There are really two different kinds of devices available for controlling the robot -- a game controller and a joystick. They have different programming interfaces. However, since we use the game controller, this tutorial will cover how to program for the game controller.</p>
-			<h3 class="tutorial"><a name="Functions"></a>Functions</h3>
+			<h3 class="tutorial"><a id="Functions"></a>Functions</h3>
 				<p>If you recall from <a href="../../ch1/parts-code">the last lesson</a>, the game controller uses the <code>Joystick</code> class (the joystick does use this class, but it is programmed in a different way), and you need to provide the joystick ID in the constructor. For the purposes of this tutorial, let&#x27;s say that you declared a pointer to a <code>Joystick</code> called <code>m_gamepad</code> at ID 0.</p>
-				<h4 class="tutorial"><a name="Buttons"></a>Buttons</h4>
+				<h4 class="tutorial"><a id="Buttons"></a>Buttons</h4>
 					<p>Buttons are the simplest to program. They use the following function:</p>
 					<pre lang="cpp">
 bool Joystick::GetRawButton(int button_index)
@@ -83,7 +83,7 @@ bool Joystick::GetRawButton(int button_index)
 					<p><span style="font-weight: bold;">WARNING</span>: The left and right stick buttons are pressed when the actual joystick on the controller is pressed down. Because they are tied in with the controller, a driver can hit either button inadvertantly. Use these with extreme caution, if at all.</p>
 					<p>This function returns true if the requested button is currently being held down.</p>
 					<p>Note that the triggers are not here. They are treated as controller joysticks (you will see why in a moment).</p>
-				<h4 class="tutorial"><a name="Controller_Joysticks"></a>Controller Joysticks</h4>
+				<h4 class="tutorial"><a id="Controller_Joysticks"></a>Controller Joysticks</h4>
 					<p>The joysticks on the game controller are accessed differently than you might think at first. Each joystick device is accessed in terms of its axes, and not the joystick as a whole (doing that would cause too many headaches).</p>
 					<p>To access the value on any axis, use the following function:</p>
 					<pre lang="cpp">
@@ -99,19 +99,19 @@ float Joystick::GetRawAxis(int axis_index)
 						<li>Right stick, Y axis = 5</li>
 					</ul>
 					<p style="font-style: italic;">These mappings are available as header definitions in <a href="http://www.hotteam67.org/wp-content/uploads/2015/01/Defines.h" target="_blank">Defines.h</a> as well.</p>
-					<h5 class="tutorial"><a name="The_Joysticks"></a>The Joysticks</h5>
+					<h5 class="tutorial"><a id="The_Joysticks"></a>The Joysticks</h5>
 						<p>The joysticks, or axes 0, 1, 4, and 5, act a bit differently than you might expect. Let&#x27;s look at axis 1, for example.</p>
 						<p>If you were to push the left joystick forward, using <code>GetRawAxis()</code> on axis 1 actually returns a negative value. Similarly, if you pulled it back, <code>GetRawAxis</code> returns a positive value.</p>
 						<p>Just like the vertical axes, the horizontal axes are also backwards. Using the <code>GetRawAxis()</code> on axis 0 would return a negative value if the joystick is pushed right, and a positive value if it is pushed left.</p>
 						<p>Another thing of note is that, when the joystick is pushed to its maximum extent, the <code>GetRawAxis()</code> function's return value for that axis will have an absolute value of 1. So, if you pushed axis 2 to its furthest extent forward, it would return a value of -1.</p>
-					<h5 class="tutorial"><a name="The_Triggers"></a>The Triggers</h5>
+					<h5 class="tutorial"><a id="The_Triggers"></a>The Triggers</h5>
 						<p>You may have noticed that the triggers of the game controller appear as axes 2 and 3. This is due to their capability of being able to tell exactly how far they are pressed down.</p>
 						<p>Unlike the other axes, the triggers do not ever return negative values, since unpressed is 0.</p>
 						<p>Generally, if you need to treat the triggers like a button, check if the axis is past a threshold of 0.4. However, if necessary, you can adjust this threshold to where the driver/operator is most comfortable.</p>
-				<h2 class="tutorial"><a name="SmartDashboard"></a>SmartDashboard</h2>
+				<h2 class="tutorial"><a id="SmartDashboard"></a>SmartDashboard</h2>
 					<p>One of the most important parts of programming in general is being able to do something that has a tangible result, even if it is a string of characters on a screen. To this point, you do not know how to make any visible result when you are programming the robot. For any programmer this is a problem.</p>
 					<p>In the past, teams used to be able to write messages on the driver station panel. However, this is no longer the case. Now, teams must output robot data to one of many dashboards. In this lesson, you will learn how to output to WPI's SmartDashboard.</p>
-					<h3 class="tutorial"><a name="Writing_to_SmartDashboard"></a>Writing to SmartDashboard</h3>
+					<h3 class="tutorial"><a id="Writing_to_SmartDashboard"></a>Writing to SmartDashboard</h3>
 						<p>Unlike all of the other components on the robot, you do not declare a SmartDashboard object in your code. Instead, you access each write function directly, using the scope operator (<code>::</code>)</p>
 						<p>Outputting data to SmartDasbhoard is different than outputting data to the terminal, like you're used to. When you write to SmartDashboard, you need to provide two things:</p>
 						<ul>
@@ -124,22 +124,22 @@ float Joystick::GetRawAxis(int axis_index)
 SmartDashboard::PutString("My robot is","awesome");
 						</pre>
 						<p>As soon as you call these functions, the data is immediately written to SmartDashboard on the driver station, no manual updating required.</p>
-						<h4 class="tutorial"><a name="Numbers_PutNumber"></a>Numbers: <code>PutNumber()</code></h4>
+						<h4 class="tutorial"><a id="Numbers_PutNumber"></a>Numbers: <code>PutNumber()</code></h4>
 							<p>For all number-based data, use the <code>PutNumber()</code> function. It takes a <code>double</code> value, but any numerical data type you use can be typecast to a <code>double</code>.</p>
 							<pre lang="cpp">
 void SmartDashboard::PutNumber(std::string key, double value)
 							</pre>
-						<h4 class="tutorial"><a name="Booleans_PutBoolean"></a>Booleans: <code>PutBoolean()</code></h4>
+						<h4 class="tutorial"><a id="Booleans_PutBoolean"></a>Booleans: <code>PutBoolean()</code></h4>
 							<p>For true/false data, use the <code>PutBoolean()</code> function.</p>
 							<pre lang="cpp">
 void SmartDashboard::PutBoolean(std::string key, bool value)
 							</pre>
-						<h4 class="tutorial"><a name="Strings_PutString"></a>Strings: <code>PutString()</code></h4>
+						<h4 class="tutorial"><a id="Strings_PutString"></a>Strings: <code>PutString()</code></h4>
 							<p>For strings, use the <code>PutString()</code> function. Because <code>std::string</code> derives from an array of <code>char</code>s (a C string), you can either pass a <code><q>string literal</q></code> or a C string as the <code>value</code> parameter.</p>
 							<pre lang="cpp">
 void SmartDashboard::PutString(std::string key, std::string value)
 							</pre>
-						<h3 class="tutorial"><a name="Reading_from_SmartDashboard"></a>Reading from SmartDashboard</h3>
+						<h3 class="tutorial"><a id="Reading_from_SmartDashboard"></a>Reading from SmartDashboard</h3>
 							<p>One of the unique things about SmartDashboard is that the person at the driver station can change the value directly in SmartDashboard using only the keyboard. However, you need to be able to fetch that new value in order to be able to do anything with it.</p>
 							<p>In order to do this, only one parameter is required:</p>
 							<ul>
@@ -147,26 +147,26 @@ void SmartDashboard::PutString(std::string key, std::string value)
 							</ul>
 							<p>The <code>key</code> should match to whatever you set that value to be initially in the code with the <code>Put</code> functions.</p>
 							<p>Like the <code>Put</code> functions, you call these using the scope operator, not by instantiating a <code>SmartDashboard</code> object. </p>
-							<h4 class="tutorial"><a name="Numbers_GetNumber"></a>Numbers: <code>GetNumber()</code></h4>
+							<h4 class="tutorial"><a id="Numbers_GetNumber"></a>Numbers: <code>GetNumber()</code></h4>
 								<pre lang="cpp">
 double SmartDashboard::GetNumber(std::string key)
 								</pre>
-							<h4 class="tutorial"><a name="Booleans_GetBoolean"></a>Booleans: <code>GetBoolean()</code></h4>
+							<h4 class="tutorial"><a id="Booleans_GetBoolean"></a>Booleans: <code>GetBoolean()</code></h4>
 								<pre lang="cpp">
 bool SmartDashboard::GetBoolean(std::string key)
 								</pre>
-							<h4 class="tutorial"><a name="Strings_GetString"></a>Strings: <code>GetString()</code></h4>
+							<h4 class="tutorial"><a id="Strings_GetString"></a>Strings: <code>GetString()</code></h4>
 								<pre lang="cpp">
 std::string SmartDashboard::GetString(std::string key)
 								</pre>
-				<h2 class="tutorial"><a name="Implementing"></a>Implementing</h2>
+				<h2 class="tutorial"><a id="Implementing"></a>Implementing</h2>
 					<p style="font-weight: bold; text-align: center;">This section just clarifies use of the functions we just discussed. If you feel confident, then you may <a href="#Programming_the_Robot">skip this section</a>.</p>
 					<p>If you&#x27;re still a little confused, this section will help you understand the content better (hopefully).</p>
-					<h3 class="tutorial"><a name="Quick_Note:_Periodic_Routines"></a>Quick Note: Periodic Routines</h3>
+					<h3 class="tutorial"><a id="Quick_Note:_Periodic_Routines"></a>Quick Note: Periodic Routines</h3>
 						<p>If you remember from <a href="../../ch1/program-structure#Periodic_Routines">lesson 1-2</a>, <code>TeleopPeriodic()</code> will loop until the robot shuts down or another mode is entered. So, you must remember that, for the cases of this program, what you write is constantly running in a loop.
 							Because it is already looping, you should write the <code>TeleopPeriodic()</code> function as if the whole thing were a loop. So, if you write something to the SmartDashboard in <code>TeleopPeriodic()</code>, it will write to SmartDashboard every time the CPU performs another loop.
 							<span style="font-style: italic;">Future note: that is actually good, because then you can write real-time values to SmartDashboard.</span></p>
-					<h3 class="tutorial"><a name="Button"></a>Button</h3>
+					<h3 class="tutorial"><a id="Button"></a>Button</h3>
 						<p>For example, let&#x27;s look at a program that prints <q>Hello World!</q> to the driver station when, and only when, the A button is pressed.</p>
 						<p>What we need:</p>
 						<ul>
@@ -226,15 +226,15 @@ public:
 
 //...
   						</pre>
-  					<h3 class="tutorial"><a name="Joystick"></a>Joystick</h3>
+  					<h3 class="tutorial"><a id="Joystick"></a>Joystick</h3>
   						<p>Now, we will write a program that prints a message to the driver station and tells if either trigger is pressed past a threshold of 0.4.</p>
   						<p>What we need:</p>
   						<ul>
   							<li>A <code>Joystick</code> object</li>
   						</ul>
-  						<pre lang="cpp">
+  						<pre lang="cpp" escaped="true">
 #include "WPILib.h"
-#include <cmath>
+#include &lt;cmath&gt;
 /** Because we want to know if
   * *either* trigger is pressed,
   * we need the axis' absolute
@@ -274,7 +274,7 @@ public:
   
 //...
 						</pre>
-				<h2 class="tutorial"><a name="Programming_the_Robot"></a>Programming the Robot</h2>
+				<h2 class="tutorial"><a id="Programming_the_Robot"></a>Programming the Robot</h2>
 					<p>Congratulations! You are now capable of making (the electronics on) the robot do something! Activities beyond this point will involve creating real robot programs. Again, one of the parts of programming is actually running the code to test its functionality.</p>
 					<p>This means actually downloading the code to the robot.</p>
 					<p>You may do so, provided that:</p>
@@ -295,7 +295,7 @@ public:
 						</ul>
 						<li>Once the robot code is back up, you may enable.</li>
 					</ol>
-				<h2 class="tutorial"><a name="Activity"></a>Activity</h2>
+				<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
 					<p>Write a program that does the following:</p>
 					<ul>
 						<li>Has a counter (use a <code>float</code> for this)</li>

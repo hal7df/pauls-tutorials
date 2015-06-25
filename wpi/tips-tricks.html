@@ -44,29 +44,29 @@
  		</ul>
  	</div>
  	<div id="tcontent">
- 		<h2 class="tutorial"><a name="Defined_Constants"></a>Defined Constants</h2>
+ 		<h2 class="tutorial"><a id="Defined_Constants"></a>Defined Constants</h2>
  			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
  			<p>You may have noticed in Lesson 2-1 that a file called <q><a href="http://www.hotteam67.org/wp-content/uploads/2015/01/Defines.h" target="_blank">Defines.h</a></q> was mentioned. This header file creates alias terms for the button and axis indices that are more easily understood by humans. This section will explain exactly how it works, and how you would implement them.</p>
  			<p>You can read more about constants <a href="http://www.cplusplus.com/doc/tutorial/constants/" target="_blank">here</a>.</p>
-			<h3 class="tutorial"><a name="The_Header_Definition"></a>The Header Definition</h3>
+			<h3 class="tutorial"><a id="The_Header_Definition"></a>The Header Definition</h3>
 				<p>Aside from providing functions and other utilities for use in a source file, header files can also define specific values that can be accessed using a custom name. Usually, this name is written in <code>ALL_CAPS_WITH_NO_SPACES</code>, utilizing underscores if necessary. A sample header definition is given below.</p>
 				<pre lang="cpp">
 #define MY_NUMBER 4
 				</pre>
 				<p>Essentially, we are telling the compiler's preprocessor to create a constant called <code>MY_NUMBER</code>, with a value of 4. The compiler will then replace any instance of <code>MY_NUMBER</code> in associated code with the number 4.</p>
 				<p>Remember that you need to include the header file in all other files with which you intend to use the constant.</p>
-			<h3 class="tutorial"><a name="Use"></a>Use</h3>
+			<h3 class="tutorial"><a id="Use"></a>Use</h3>
 				<p>The use of the header definition is quite simple. Simply write it instead of its value. So, if we had the function <code>void MyFunction(int)</code>, and we wanted to pass it <code>MY_NUMBER</code>, you would simply write:</p>
 				<pre lang="cpp">
 MyFunction(MY_NUMBER);
 				</pre>
 				<p>This would be equivalent to calling <code>MyFunction(4)</code>.</p>
-			<h3 class="tutorial"><a name="Why?"></a>Why?</h3>
+			<h3 class="tutorial"><a id="Why?"></a>Why?</h3>
 				<p>The use of a header definition depends on the application of the header file itself. In our case, we are using it to turn seemingly arbitrary numbers into a more easily understood format. If you were writing a library, you might use a header definition to avoid the difference of values that occurs between platforms.</p>
-		<h2 class="tutorial"><a name="Timers"></a>Timers</h2>
+		<h2 class="tutorial"><a id="Timers"></a>Timers</h2>
 			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-3</p>
 			<p>If you remember from Lesson 1-3, there was a <code>Timer</code> object that could be used to time events. This section will teach you how to use it.</p>
-			<h3 class="tutorial"><a name="Managing_the_timer"></a>Managing the timer</h3>
+			<h3 class="tutorial"><a id="Managing_the_timer"></a>Managing the timer</h3>
 				<p>The <code>Timer</code> object comes with the following functions to manage the timer:</p>
 				<pre lang="cpp">
 void Timer::Start()
@@ -77,7 +77,7 @@ void Timer::Reset()
 				<p>For one, you should keep in mind that the <code>Reset()</code> function does <span style="font-weight: bold;">not</span> stop the timer if it is running. The timer will continue to run, should you only call the <code>Reset()</code> function.</p>
 				<p>Secondly, the <code>Timer</code> object does not always function as planned. It has some issues, and as such, it should become habitual that you call the <code>Stop()</code> and <code>Reset()</code> functions (back-to-back, in that order) if you need to reset the timer, anyway. Should that not work, then call <code>Stop()</code>, <code>Start()</code>, and <code>Reset()</code> (the first two can switch, depending if you need the timer to continue running or not). Should that not work, then another course of action might be advisable.</p>
 				<p>You should note that an initialized timer that has not been started yet will have a value of 0, so, depending on what exactly you are using the <code>Timer</code> for, you may need to call the <code>Start()</code> function in the class constructor after in initializing the timer.</p>
-			<h3 class="tutorial"><a name="Checking_the_timer"></a>Checking the timer</h3>
+			<h3 class="tutorial"><a id="Checking_the_timer"></a>Checking the timer</h3>
 				<p>Of course, a timer would be not useful if it did not have some way to access its time.</p>
 				<pre lang="cpp">
 double Timer::Get()
@@ -85,20 +85,20 @@ bool Timer::HasPeriodPassed(double period)
 				</pre>
 				<p>The <code>Get()</code> function simply accesses the time (in seconds) that the timer has counted.</p>
 				<p>The <code>HasPeriodPassed()</code> function is like checking to see if the timer has gone off, so to speak. Its only parameter is the length, in seconds, of the timed period. Note that <code>HasPeriodPassed()</code> will continue to return <code>true</code> once the defined period has passed. In order to make it return false again, you need to reset the timer.</p>
-		<h2 class="tutorial"><a name="Timeouts"></a>Timeouts</h2>
+		<h2 class="tutorial"><a id="Timeouts"></a>Timeouts</h2>
 			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 2-1</p>
 			<p>One of the downsides of the <code>GetRawButton()</code> function is that it returns <code>true</code> if there is a button pressed, regardless of how long that it has been pressed for. Because the roboRIO is running the <code>TeleopPeriodic()</code> routine in a loop, one button press in the driver's perspective may register anywhere from 5 to 20 times in the roboRIO. Due to that, manipulating variables by set amounts (incrementing/decrementing) is trickier than it sounds. This section discusses how to create a button timeout.</p>
 			<p>It is recommended that you create a <a href="#Wrappers">wrapper class</a> to handle the timeout, as it makes keeping track of the button press a lot cleaner.</p>			
 			<p>There are two methods to do this.</p>
-			<h3 class="tutorial"><a name="Timer"></a>Timer</h3>
+			<h3 class="tutorial"><a id="Timer"></a>Timer</h3>
 				<p style="font-weight: bold; text-align: center;">Requires knowledge of how to use a <a href="#Timers">timer</a>.</p>
 				<p>This method is the easier method to implement, since it only requires checking the timer. However, this method is also less robust than the other, due to the generally high maintenance level of the <code>Timer()</code> object.</p>
-				<h4 class="tutorial"><a name="Required_Objects"></a>Required Objects</h4>
+				<h4 class="tutorial"><a id="Required_Objects"></a>Required Objects</h4>
 					<ul>
 						<li>A <code>Timer</code></li>
 						<li>A <code>Joystick</code></li>
 					</ul>
-				<h4 class="tutorial"><a name="Creating_a_Timeout_with_a_Timer"></a>Creating a Timeout with a <code>Timer</code></h4>
+				<h4 class="tutorial"><a id="Creating_a_Timeout_with_a_Timer"></a>Creating a Timeout with a <code>Timer</code></h4>
 					<p>For simplicity&#x27;s sake, let&#x27;s assume that you have already declared and initialized the above objects.</p>
 					<p>The first thing that you should do when creating any timeout is check to see if the timeout parameters have passed. This may seem odd at first, as when the <code>TeleopPeriodic()</code> routine is first entered, the timeout will not have occurred. However, you need to rembember that the same code will run over and over. Think 4<sup>th</sup>-dimensionally!</p>
 					<p>Here, we will use the <code>HasPeriodPassed()</code> function. A half a second should do for the timeout period. You should not forget that the timer will have a value of 0 upon entering the <code>TeleopPeriodic()</code> routine unless you start the timer at initialization.</p>
@@ -118,13 +118,13 @@ if (m_timer->HasPeriodPassed(0.5))
 }
 					</pre> 
 					<p>Because the timer is running on its own, that is all you need to do to implement a button timeout with a <code>Timer()</code>.</p>
-			<h3 class="tutorial"><a name="Button Watching Timeout"></a>Button Watching Timeout</h3>
+			<h3 class="tutorial"><a id="Button Watching Timeout"></a>Button Watching Timeout</h3>
 				<p>This method is more robust than the previous one, in large part because it does not rely on a timer. This method also allows for you to easily keep track of individually pressed buttons. It will also not register a long hold as several presses (a <code>Timer</code> timeout will). However, it is slightly harder to implement.</p>
-				<h4 class="tutorial"><a name="Required_Variable"></a>Required Variable</h4>
+				<h4 class="tutorial"><a id="Required_Variable"></a>Required Variable</h4>
 					<ul>
 						<li>A <code>bool</code> to keep track of the button press</li>
 					</ul>
-				<h4 class="tutorial"><a name="Creating_a_Button_Watching_Timeout"></a>Creating a Button Watching Timeout</h4>
+				<h4 class="tutorial"><a id="Creating_a_Button_Watching_Timeout"></a>Creating a Button Watching Timeout</h4>
 					<p>This method is not a true timeout, in the sense that it does not actually keep track of time throughout its function. There are two steps to implementing a button watching timeout.</p>
 					<p>The first step is to check for a button press. While you are checking for a button press, you also need to check to see if the button is currently being held down, using the bool flag that you declared.</p>
 					<p>Should that pass, then perform your action. Then, set your button flag to <code>true</code>.</p>
@@ -144,12 +144,12 @@ if (!m_joystick->GetRawButton(1) && m_pressed)
 }
 					</pre>
 					<p>In this case, once the driver releases the button, the second step will pass, which will enable the first step to register a button press again.</p>
-		<h2 class="tutorial"><a name="Wrappers"></a>Wrappers</h2>
+		<h2 class="tutorial"><a id="Wrappers"></a>Wrappers</h2>
 			<p style="font-weight: bold; text-align: center;">Recommended Level: Lesson 2-2</p>
 			<p style="font-style: italic; text-align: center;">Note: This concept is similar to <a href="https://code.google.com/p/hot67-programming-resources/wiki/WPI_Lesson10#Subsystem_Wrappers">subsystem wrappers</a> utilized with PID controllers, but not identical.</p>
 			<p>Sometimes, the classes provided by WPILib don't provide enough functionality to get a certain task done efficiently and in an organized manner. In order to fix this problem, you can create a class that wraps around (hence the term) a core WPILib class and add the functionality you want.</p>
 			<p>The way wrapper classes are written depends on the class that is being wrapped around. However, there are some basic concepts that can be discussed about wrappers.</p>
-			<h3 class="tutorial"><a name="What_a_Wrapper_Does"></a>What a Wrapper Does</h3>
+			<h3 class="tutorial"><a id="What_a_Wrapper_Does"></a>What a Wrapper Does</h3>
 				<p>More specifically, a wrapper is designed to automate tasks performed with a specific class so that they do not need to be rewritten and rewritten in your code. Usually, a wrapper carries out the functions of the core class via functions of the same name, but add extra functionality in the process.</p>
 				<p>Wrapper functions should be designed so that they interface with external code as much like the original class as possible. So, for example, say you were wrapping around a class with the following function:</p>
 				<pre lang="cpp">
@@ -173,7 +173,7 @@ enum ids {
 
 bool SomeClassWrapper::GetActive (ids id)
 				</pre>
-			<h3 class="tutorial"><a name="How_a_Wrapper_Works"></a>How a Wrapper Works</h3>
+			<h3 class="tutorial"><a id="How_a_Wrapper_Works"></a>How a Wrapper Works</h3>
 				<p>To create a wrapper, create a blank class. Do <span style="font-weight: bold;">NOT</span> inherit the class you're trying to wrap around (unlike <a href="https://code.google.com/p/hot67-programming-resources/wiki/WPI_Lesson10#Subsystem_Wrappers">subsystem wrappers</a>). Instead, instantiate an object of that class as a <code>private</code> member of the wrapper class.</p>
 				<p>The next thing you need to concern yourself with is the constructor. First, think about how many of the core class constructor's parameters should be available in the wrapper's constructor. Sometimes, the values in the core constructor remain constant in your implementation, so you can just hard-code those parameters into the core object initialization in your constructor and move on. If not, then add them as a parameter for your wrapper class.</p>
 				<p>Be sure to think about any initialization that your wrapper class might need in addition to the parameters needed by the core class. If you have any configurable functionality in your wrapper that is vital to its function, you should consider adding it to your constructor's parameter list.</p>
@@ -183,4 +183,3 @@ bool SomeClassWrapper::GetActive (ids id)
   </div>
   </body>
 </html>
-
