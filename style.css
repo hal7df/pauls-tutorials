@@ -10,16 +10,30 @@ body {
     	color: #ffffff;
     	font-family: 'Droid Sans', Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
-h1.tutorial {
+h1,h2,h3,h4,h5 {
 	color: #ffffff;
-	line-height: 60px;
 }
 h2.tutorial,
 h3.tutorial,
 h4.tutorial,
 h5.tutorial {
-	color: #ffffff;
 	text-align: center;
+}
+h1.tutorial {
+	line-height: 60px;
+	font-size: 3.0em;
+}
+h2.tutorial {
+	font-size: 2.25em;
+}
+h3.tutorial {
+	font-size: 1.5em;
+}
+h4.tutorial {
+	font-size: 1.25em;
+}
+h5.tutorial {
+	font-size: 1.125em;
 }
 img.tutorial {
 	display: block;
@@ -36,9 +50,9 @@ pre {
 }
 blockquote {
 	background-color: #f5f5f5;
+	color: #000000;
 }
 blockquote.tutorialexample {
-	color: #000000;
 	font-family: "monospace";
 }
 img.select {
