@@ -52,9 +52,9 @@
     "devices":false,
     "port-type":"multiple",
     "ports":[
-    	{"description":"PCM ID", "type": "CAN"}
+    	{"description":"PCM ID", "type": "CAN"},
     	{"description":"Solenoid channel", "type": "Solenoid"}
-    ]
+    ],
     "img":"http://team358.org/files/pneumatic/Festo24v.jpg",
     "params":"int CAN, int Solenoid",
     "extParams":false,
@@ -76,7 +76,7 @@
     "display":"Digital Input",
     "generic":false,
     "devices":[
-      {"name":"Limit switch", "img":"https://www.egr.msu.edu/eceshop/Parts_Inventory/images/spdt%20limit%20switch.jpg"}
+      {"name":"Limit switch", "img":"https://www.egr.msu.edu/eceshop/Parts_Inventory/images/spdt%20limit%20switch.jpg"},
       {"name":"Light sensor", "img":false}
     ],
     "port-type":"DIO",
@@ -99,7 +99,7 @@
     "extParams":{"name":"reverse", "description":"Measure in reverse", "type":"bool"},
     "extInit":[
       {"function":"SetDistancePerPulse","params":"float distance","description":"Measured distance per encoder pulse","range":[0.1,5.0]},
-      {"function":"SetMaxPeriod","params":"float period","description":"Maximum period","range":[0.5,2.0]},
+      {"function":"SetMaxPeriod","params":"float period","description":"Maximum period","range":[0.5,2.0]}
     ]
   },
   {"name":"GearTooth",
