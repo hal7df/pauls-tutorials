@@ -40,7 +40,7 @@
     "display":"Compressor",
     "generic":false,
     "devices":false,
-    "port-type":"CAN"
+    "port-type":"CAN",
     "img":"http://team358.org/files/pneumatic/Compressor2011.jpg",
     "params":"int CAN",
     "extParams":false,

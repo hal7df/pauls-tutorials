@@ -5,6 +5,9 @@
     <link rel="stylesheet" type="text/css" href="../../style.css"/>
   </head>
   <body>
+    <!-- ACTIVITY SCRIPT -->
+    <script type="text/javascript" src="../../files/activity/wpi/ch1/parts-code.js"></script>
+    
 	<!-- PAGE HEADER -->
   <h1 class="tutorial"><img src="http://www.hotteam67.org/wp-content/uploads/2015/01/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-3</span>&nbsp;Parts of the Robot: In Code</h1>
@@ -364,13 +367,25 @@ m_timer = new Timer;
   	  		<li>Component name: Talon</li>
   	  		<li>PWM 3</li>
   	  	</ul>
-  	  	<br>
   	  	<ul>
   	  		<li>Declaration: <code>Talon* m_talon;</code></li>
-  	  		<li>Initialization: <code>m_talon = new Talon (3)</code></li>
+  	  		<li>Initialization: <code>m_talon = new Talon (3);</code></li>
   	  	</ul>
   	  	
-  	  	<div id="activity">
+  	  	<button id="startActivity" onclick="activity_init()">Start</button>
+  	  	
+  	  	<div id="_activity" style="display: none; margin-top: 50px;">
+  	  		<a id="_activitystart"></a>
+  	  		<p id="progressIndicator" style="font-weight: bold; font-size: 1.5em; margin-bottom: 15px;">&nbsp;</p>
+  	  		<img class="tutorial" id="componentImage"/>
+  	  		<p id="componentName" style="text-align: center;">&nbsp;</p>
+  	  		<form>
+  	  			<label for="declare">Declaration: </label>
+  	  			<input type="text" name="declare" size="40"/><br><br>
+  	  			<label for="init">Initialization: </label><br>
+  	  			<textarea name="init" rows="3" cols="50"></textarea>
+  	  		</form>
+  	  		<button onclick="">Submit</button>
   	  	</div>
 
 <!-- NAVIGATION -->
