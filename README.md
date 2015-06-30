@@ -1,10 +1,41 @@
 # pauls-tutorials
 Source for Paul's Tutorials.
 
+The current implementation is at (the HOT Team website)[http://www.hotteam67.org/programming/pauls-tutorials], but this implementation is not as complete as what is in this repository. Once we get the pages working to our liking, we will post a new, complete implementation of the tutorials.
+
 Paul's Tutorials are the programming tutorials for FRC Team #67, the 'HOT' Team. They teach new programmers C++ and WPILib with C++.
 
-These are the updated versions from the [old version](https://code.google.com/p/hot67-programming-resources/wiki/Main_Page?tm=6), and are currently in the process of being updated.
+These pages are mostly complete, with C++ missing a few videos and WPI missing 
 
-These pages are not yet complete, and may be inconsistent (style, etc.).
+Note: This will not currently work completely off of a local drive -- the link structure is currently optimized for our WordPress site.
 
-Note: What is here is NOT a direct representation of what is on the official website. This version is oriented for running specifically off of a local drive.
+## Contributing
+We welcome your contributions! If you have anything to add to the wealth of knowledge contained here, or would like to improve the layout, style, or function of these pages, then please do:
+
+### Submitting issues
+If you see a problem with one of the pages or would like to see an improvement with the tutorials, you may submit an issue in the (issue tracker)[https://github.com/hal7df/pauls-tutorials/issues], following these guidelines:
+
+#### Submission template
+For any issue you submit (regardless of its nature), please use the following template for your post:
+
+```
+# Information
+Tutorial: (C++/WPI)
+Chapter-Lesson: X-X
+
+(for bugs only)
+Browser/Version: Chrome/43.0.2357.81
+OS: Windows
+
+# Description
+...
+```
+
+#### Bugs
+If you see an issue with a page's function or layout, then please leave an issue with the above template and the "bug" label.
+
+#### Improvements
+If you want to see something better with the tutorials, such as an improved activity, or improved information, then please leave an issue with the above template and the "enhancement" label.
+
+### Contributing code
+If you want to do the coding yourself, cool! Just fork this repository and give us a pull request!
