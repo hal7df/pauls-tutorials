@@ -26,7 +26,7 @@
     "display":"Compressor",
     "generic":false,
     "img":"http://team358.org/files/pneumatic/Compressor2011.jpg",
-    "params":{"type":"int", "port":"CAN", "optional":true, "optional-value":0, "abstractdef":true, "description":"PCM ID"},
+    "params":{"type":"int", "port":"CAN", "optional":true, "optionalValue":0, "abstractdef":true, "description":"PCM ID"},
     "extInit":false
   },
   {"name":"Solenoid",
@@ -43,7 +43,7 @@
     "display":"Potentiometer",
     "generic":false,
     "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Potentiometer.jpg/225px-Potentiometer.jpg",
-    "params": {"type":"int", "port":"Analog", "optional":false, "abstractdef":true, "description":"Analog channel"},
+    "params": {"type":"int", "port":"Analog", "optional":false, "abstractdef":true, "description":"Channel"},
     "extInit":false
   },
   {"name":"DigitalInput",
@@ -62,9 +62,9 @@
     "generic":false,
     "img":"http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg",
     "params":[
-    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Encoder Channel A"},
-    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Encoder Channel B"},
-    	{"type":"bool", "port":false, "optional":true, "optional-value":false, "abstractdef":true, "description":"Reversed"}
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Channel A"},
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Channel B"},
+    	{"type":"bool", "port":false, "optional":true, "optionalValue":false, "abstractdef":true, "description":"Reversed"}
     ],
     "extInit":[
       {"function":"SetDistancePerPulse","params":"float distance","description":"Measured distance per encoder pulse","range":[0.1,5.0]},
@@ -87,8 +87,8 @@
     ],
     "img":"http://www.robotshop.com/media/files/images/parallax-ping-ultrasonic-sensor-large.jpg",
     "params":[
-    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Ultrasonic output"},
-    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Ultrasonic input"}
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Output"},
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Input"}
     ],
     "extInit":false
   },

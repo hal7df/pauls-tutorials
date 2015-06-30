@@ -40,11 +40,16 @@ function get_parts_list()
 
 function generate_question()
 {	
+	for (var member in answer)
+		delete answer[member];
+	
 	var questionDisplay = new Object();
 	var chosenComponent;
 	var randComponent = Math.floor(Math.random() * partsList.length);
 	var useImg;
 	var objInfo;
+	var buf;
+	var flag;
 	
 	chosenComponent = partsList[randComponent];
 
@@ -58,6 +63,7 @@ function generate_question()
 	questionDisplay.info = document.getElementById("componentInfo");
 	
 	questionDisplay.info.innerHTML = "";
+	objInfo = "";
 	
 	if (chosenComponent.generic)
 	{
@@ -124,33 +130,79 @@ function generate_question()
 			answer.init = chosenComponent.name+"::GetInstance();";
 		else
 		{
-			answer.init = "new "+chosenComponent.name;
+			answer.init = "new " + chosenComponent.name + " (";
 			if (chosenComponent.params.constructor === Array)
 			{
-			
+				answer.params = new Array();
+				
+				for (var x = 0; x < chosenComponent.params.length; x++)
+				{
+					do
+					{
+						flag = false;
+						buf = read_param(chosenComponent.params[x])
+						
+						for (var y = x-1; y >= 0; y--)
+						{
+							if (buf.param.value == answer.params[y].value && chosenComponent.params[x].port == chosenComponent.params[y].port)
+								flag = true;
+						}
+					}while(flag);
+					
+					answer.params[x] = buf.param;
+					
+					answer.init += (buf.param.value + ", ");
+
+					objInfo += buf.info;
+				}
 			}
 			else
 			{
-				if (chosenComponent.params.port != false)
-					answer.port = getRandomPort(chosenComponent.params.port);
+				buf = read_param(chosenComponent.params);
 				
-				answer.paramsOptional = true;
-				answer.init += (" (" +answer.port+");");
+				answer.params = buf.param;
+				answer.init += (buf.param.value + ");");
 				
-				objInfo="<li>";
-				
-				if (chosenComponent.params.abstractdef)
-					objInfo += (chosenComponent.params.description + ": ");
-
-				if (chosenComponent.params.port != "USB")
-					objInfo += (chosenComponent.params.port + ' ');
-				
-				objInfo += (answer.port + "</li>");
-				
-				questionDisplay.info.innerHTML = objInfo;
+				objInfo = buf.info;
 			}
 		}
 	}
+	
+	questionDisplay.info.innerHTML = objInfo;
+}
+
+function read_param (param)
+{
+	var buf = new Object();
+	
+	buf.param = new Object();
+	
+	if (param.port != false)
+		buf.param.value = getRandomPort(param.port);
+	else
+	{
+		if (param.type == "bool")
+			buf.param.value = getRandomBool();
+		else if (param.type == "float")
+			buf.param.value = getRandomFloat(param.range[0], param.range[1]);
+	}
+	
+	buf.param.optional = param.optional
+	
+	if (param.optional)
+		buf.param.optionalValue = param.optionalValue;
+	
+	buf.info = "<li>";
+	
+	if (param.abstractdef)
+		buf.info += (param.description + ": ");
+	
+	if (param.port != "USB" && param.port != false)
+		buf.info += (param.port + ' ');
+	
+	buf.info += (buf.param.value + "</li>");
+	
+	return buf;
 }
 
 function run_finish_action()
@@ -195,21 +247,31 @@ function write_progress()
 function getRandomPort (port)
 {
 	if (port == "PWM" || port == "DIO")
-		return Math.floor(Math.random() * 10);
+		return getRandomInt(0,9);
 	else if (port == "Relay" || port == "Analog" || port == "USB")
-		return Math.floor(Math.random() * 4);
+		return getRandomInt(0,3);
 	else if (port == "Solenoid")
-		return Math.floor(Math.random() * 8);
+		return getRandomInt(0,7);
 	else if (port == "CAN")
 	{
 		if ((Math.floor(Math.random() + 0.5)) == 0)
 				return 0;
 		else
-			return (Math.floor(Math.random() * 62) + 1);
+			return getRandomInt (1,62);
 	}
 }
 
 function getRandomBool ()
 {
-	return (Math.floor(Math.random + 0.5) == 1);
+	return (Math.floor(Math.random() + 0.5) == 1);
+}
+
+function getRandomInt (lower,upper)
+{
+	return (Math.floor(Math.random() * ((upper - lower) + 0.5)) + lower);
+}
+
+function getRandomFloat (lower,upper)
+{
+	return ((Math.random() * (upper - lower)) + lower);
 }
