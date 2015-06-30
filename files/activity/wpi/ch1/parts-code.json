@@ -43,7 +43,7 @@
     "display":"Potentiometer",
     "generic":false,
     "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Potentiometer.jpg/225px-Potentiometer.jpg",
-    "params": {"type":"int", "port":"Analog", "optional":false, "abstract-def":true, "description":"Analog channel"}
+    "params": {"type":"int", "port":"Analog", "optional":false, "abstract-def":true, "description":"Analog channel"},
     "extInit":false
   },
   {"name":"DigitalInput",

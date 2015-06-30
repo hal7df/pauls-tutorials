@@ -20,7 +20,7 @@ function get_parts_list()
 	var xrq = new XMLHttpRequest();
 	var raw;
 	
-	//xrq.overrideMimeType("application/json");
+	xrq.responseType = "text";
 	xrq.open("GET", "https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/files/activity/wpi/ch1/parts-code.json", true);
 	
 	xrq.onreadystatechange = function () {
@@ -36,6 +36,9 @@ function get_parts_list()
 
 function generate_question()
 {
+	for (var i = 0; i < partsList.length; i++)
+		console.log(partsList[i].name);
+	
 	var questionDisplay = new Object();
 	var chosenComponent;
 	var randComponent = Math.floor(Math.random() * partsList.length);
@@ -88,7 +91,7 @@ function generate_question()
 			questionDisplay.name.display = "none";
 		}
 		
-		answer.decl = chosenComponent.name;
+		/*answer.decl = chosenComponent.name;
 		
 		if (!chosenComponent.params)
 			answer.init = "new "+chosenComponent.name+';';
@@ -107,7 +110,7 @@ function generate_question()
 					answer.port = getRandomPort(chosenComponent.params.port);
 				
 				answer.paramsOptional = true;
-				answer.init += (" (" +answer.port+");";
+				answer.init += (" (" +answer.port+");");
 				
 				questionDisplay.info.innerHTML="<li>";
 				
@@ -119,7 +122,7 @@ function generate_question()
 				
 				questionDisplay.info.innerHTML += (answer.port + "</li>");
 			}
-		}
+		}*/
 	}
 }
 
@@ -133,7 +136,7 @@ function getRandomPort (port)
 		return Math.floor(Math.random() * 8);
 	else if (port == "CAN")
 	{
-		if ((Math.floor(Math.random() + 0.5) == 0)
+		if ((Math.floor(Math.random() + 0.5)) == 0)
 				return 0;
 		else
 			return (Math.floor(Math.random * 62) + 1);
