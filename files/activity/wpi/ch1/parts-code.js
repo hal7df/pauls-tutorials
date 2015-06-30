@@ -1,16 +1,20 @@
 var answer;
+var numCorrect;
 var partsList;
 var questionNum;
+var displayingResults;
 
 function activity_init()
 {
 	answer = new Object();
 	questionNum = 1;
+	numCorrect = 0;
+	displayingResults = false;
 	get_parts_list();
 	
 	document.getElementById("_activity").style.display = "block";
 	document.getElementById("startActivity").style.display = "none";
-	document.getElementById("progressIndicator").innerHTML = questionNum + "/5";
+	write_progress();
 	
 	window.location.replace("#_activitystart");
 }
@@ -40,6 +44,7 @@ function generate_question()
 	var chosenComponent;
 	var randComponent = Math.floor(Math.random() * partsList.length);
 	var useImg;
+	var objInfo;
 	
 	chosenComponent = partsList[randComponent];
 
@@ -72,6 +77,29 @@ function generate_question()
 		}
 		
 		answer.decl = chosenComponent.devices[randComponent].name;
+		
+		if (!chosenComponent.params)
+			answer.init = "new "+chosenComponent.name+';';
+		else
+		{
+			if (chosenComponent.params.port != false)
+				answer.port = getRandomPort(chosenComponent.params.port);
+			
+			answer.paramsOptional = true;
+			answer.init += (" (" +answer.port+");");
+			
+			objInfo="<li>";
+			
+			if (chosenComponent.params.abstractdef)
+				objInfo += (chosenComponent.params.description + ": ");
+
+			if (chosenComponent.params.port != "USB")
+				objInfo += (chosenComponent.params.port + ' ');
+			
+			objInfo += (answer.port + "</li>");
+			
+			questionDisplay.info.innerHTML = objInfo;
+		}
 	}
 	else
 	{
@@ -85,7 +113,7 @@ function generate_question()
 		{
 			questionDisplay.img.style.display = "block";
 			questionDisplay.img.src = chosenComponent.img;
-			questionDisplay.name.display = "none";
+			questionDisplay.name.style.display = "none";
 		}
 		
 		answer.decl = chosenComponent.name;
@@ -109,18 +137,59 @@ function generate_question()
 				answer.paramsOptional = true;
 				answer.init += (" (" +answer.port+");");
 				
-				questionDisplay.info.innerHTML="<li>";
+				objInfo="<li>";
 				
 				if (chosenComponent.params.abstractdef)
-					questionDisplay.info.innerHTML = (chosenComponent.params.description + ": ");
+					objInfo += (chosenComponent.params.description + ": ");
 
 				if (chosenComponent.params.port != "USB")
-					questionDisplay.info.innerHTML += (chosenComponent.params.port + ' ');
+					objInfo += (chosenComponent.params.port + ' ');
 				
-				questionDisplay.info.innerHTML += (answer.port + "</li>");
+				objInfo += (answer.port + "</li>");
+				
+				questionDisplay.info.innerHTML = objInfo;
 			}
 		}
 	}
+}
+
+function run_finish_action()
+{
+	if (displayingResults)
+	{
+		if (questionNum < 5)
+		{
+			questionNum++;
+			write_progress();
+			displayingResults = false;
+			document.getElementById("nextAction").innerHTML="Submit";
+			generate_question();
+		}
+		else
+		{
+			window.location.replace("#Activity");
+			window.location.reload();
+		}
+	}
+	else
+	{
+		check_answer();
+		displayingResults = true;
+		if (questionNum < 5)
+			document.getElementById("nextAction").innerHTML="Next &gt;";
+		else
+			document.getElementById("nextAction").innerHTML="Retry";
+	}
+}
+
+function check_answer()
+{
+
+}
+
+function write_progress()
+{
+	document.getElementById("progressIndicator").innerHTML = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + (numCorrect/5) + '%';
 }
 
 function getRandomPort (port)
@@ -136,7 +205,7 @@ function getRandomPort (port)
 		if ((Math.floor(Math.random() + 0.5)) == 0)
 				return 0;
 		else
-			return (Math.floor(Math.random * 62) + 1);
+			return (Math.floor(Math.random() * 62) + 1);
 	}
 }
 

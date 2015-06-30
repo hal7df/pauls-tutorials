@@ -375,10 +375,12 @@ m_timer = new Timer;
   	  	<button id="startActivity" onclick="activity_init()">Start</button>
   	  	
   	  	<div id="_activity" style="display: none; margin-top: 50px;">
+  	  		<hr/>
   	  		<a id="_activitystart"></a>
-  	  		<p id="progressIndicator" style="font-weight: bold; font-size: 1.5em; margin-bottom: 15px;">&nbsp;</p>
-  	  		<img class="tutorial" id="componentImage"/>
-  	  		<p id="componentName" style="text-align: center; font-weight: bold;">&nbsp;</p>
+  	  		<p id="progressIndicator" style="text-align: center; font-weight: bold; font-size: 1.5em;">&nbsp;</p>
+  	  		<hr/>
+  	  		<img class="tutorial" id="componentImage" style="height: 200px;"/>
+  	  		<p id="componentName" style="margin-left: 1%; font-weight: bold;">&nbsp;</p>
   	  		<ul id="componentInfo"></ul>
   	  		<form>
   	  			<label for="declare">Declaration: </label>
@@ -386,7 +388,7 @@ m_timer = new Timer;
   	  			<label for="init">Initialization: </label><br>
   	  			<textarea class="code" name="init" rows="3" cols="50"></textarea>
   	  		</form>
-  	  		<button onclick="">Submit</button>
+  	  		<button id="nextAction" onclick="run_finish_action()">Submit</button>
   	  	</div>
 
 <!-- NAVIGATION -->
