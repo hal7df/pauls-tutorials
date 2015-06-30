@@ -5,7 +5,7 @@ The current implementation is at [the HOT Team website](http://www.hotteam67.org
 
 Paul's Tutorials are the programming tutorials for FRC Team #67, the 'HOT' Team. They teach new programmers C++ and WPILib with C++.
 
-These pages are mostly complete, with C++ missing a few videos and WPI missing 
+These pages are mostly complete, with C++ missing a few videos and WPI missing a few updated activities.
 
 Note: This will not currently work completely off of a local drive -- the link structure is currently optimized for our WordPress site.
 
