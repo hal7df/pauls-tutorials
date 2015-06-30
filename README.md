@@ -1,7 +1,7 @@
 # pauls-tutorials
 Source for Paul's Tutorials.
 
-The current implementation is at (the HOT Team website)[http://www.hotteam67.org/programming/pauls-tutorials], but this implementation is not as complete as what is in this repository. Once we get the pages working to our liking, we will post a new, complete implementation of the tutorials.
+The current implementation is at [the HOT Team website](http://www.hotteam67.org/programming/pauls-tutorials), but this implementation is not as complete as what is in this repository. Once we get the pages working to our liking, we will post a new, complete implementation of the tutorials.
 
 Paul's Tutorials are the programming tutorials for FRC Team #67, the 'HOT' Team. They teach new programmers C++ and WPILib with C++.
 
@@ -13,7 +13,7 @@ Note: This will not currently work completely off of a local drive -- the link s
 We welcome your contributions! If you have anything to add to the wealth of knowledge contained here, or would like to improve the layout, style, or function of these pages, then please do:
 
 ### Submitting issues
-If you see a problem with one of the pages or would like to see an improvement with the tutorials, you may submit an issue in the (issue tracker)[https://github.com/hal7df/pauls-tutorials/issues], following these guidelines:
+If you see a problem with one of the pages or would like to see an improvement with the tutorials, you may submit an issue in the [issue tracker](https://github.com/hal7df/pauls-tutorials/issues), following these guidelines:
 
 #### Submission template
 For any issue you submit (regardless of its nature), please use the following template for your post:
