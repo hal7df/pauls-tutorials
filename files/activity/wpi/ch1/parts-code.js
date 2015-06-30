@@ -35,10 +35,7 @@ function get_parts_list()
 }
 
 function generate_question()
-{
-	for (var i = 0; i < partsList.length; i++)
-		console.log(partsList[i].name);
-	
+{	
 	var questionDisplay = new Object();
 	var chosenComponent;
 	var randComponent = Math.floor(Math.random() * partsList.length);
@@ -91,7 +88,7 @@ function generate_question()
 			questionDisplay.name.display = "none";
 		}
 		
-		/*answer.decl = chosenComponent.name;
+		answer.decl = chosenComponent.name;
 		
 		if (!chosenComponent.params)
 			answer.init = "new "+chosenComponent.name+';';
@@ -114,7 +111,7 @@ function generate_question()
 				
 				questionDisplay.info.innerHTML="<li>";
 				
-				if (chosenComponent.params.abstract-def)
+				if (chosenComponent.params.abstractdef)
 					questionDisplay.info.innerHTML = (chosenComponent.params.description + ": ");
 
 				if (chosenComponent.params.port != "USB")
@@ -122,7 +119,7 @@ function generate_question()
 				
 				questionDisplay.info.innerHTML += (answer.port + "</li>");
 			}
-		}*/
+		}
 	}
 }
 

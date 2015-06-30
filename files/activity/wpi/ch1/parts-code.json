@@ -8,7 +8,7 @@
       {"name":"Servo", "img":"http://www.servocity.com/assets/images/HS-311.jpg"}
     ],
     "img":false,
-    "params":{"type":"int", "port":"PWM", "optional":false, "abstract-def":false},
+    "params":{"type":"int", "port":"PWM", "optional":false, "abstractdef":false},
     "extInit":false
   },
   {"name":"Relay",
@@ -19,14 +19,14 @@
       {"name":"Window motor", "img":"http://www.hamiltontaxservices.com/images/MB/W126%20left%20rear%20window%20motor.jpg"}
     ],
     "img":"http://www.robotmarketplace.com/products/images/IFIW-SP1_lg.jpg",
-    "params":{"type":"int", "port":"Relay", "abstract-def":false},
+    "params":{"type":"int", "port":"Relay", "abstractdef":false},
     "extInit":false
   },
   {"name":"Compressor",
     "display":"Compressor",
     "generic":false,
     "img":"http://team358.org/files/pneumatic/Compressor2011.jpg",
-    "params":{"type":"int", "port":"CAN", "optional":true, "optional-value":0, "abstract-def":true, "description":"PCM ID"},
+    "params":{"type":"int", "port":"CAN", "optional":true, "optional-value":0, "abstractdef":true, "description":"PCM ID"},
     "extInit":false
   },
   {"name":"Solenoid",
@@ -34,8 +34,8 @@
     "generic":false,
     "img":"http://team358.org/files/pneumatic/Festo24v.jpg",
     "params":[
-    	{"type":"int", "port":"CAN", "optional":true, "optional-port":0, "abstract-def":true, "description":"PCM ID"},
-    	{"type":"int", "port":"Solenoid", "optional":false, "abstract-def":false}
+    	{"type":"int", "port":"CAN", "optional":true, "optional-port":0, "abstractdef":true, "description":"PCM ID"},
+    	{"type":"int", "port":"Solenoid", "optional":false, "abstractdef":false}
     ],
     "extInit":false
   },
@@ -43,7 +43,7 @@
     "display":"Potentiometer",
     "generic":false,
     "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Potentiometer.jpg/225px-Potentiometer.jpg",
-    "params": {"type":"int", "port":"Analog", "optional":false, "abstract-def":true, "description":"Analog channel"},
+    "params": {"type":"int", "port":"Analog", "optional":false, "abstractdef":true, "description":"Analog channel"},
     "extInit":false
   },
   {"name":"DigitalInput",
@@ -54,7 +54,7 @@
       {"name":"Light sensor", "img":false}
     ],
     "img":false,
-    "params":{"type":"int", "port":"DIO", "optional":false, "abstract-def":false},
+    "params":{"type":"int", "port":"DIO", "optional":false, "abstractdef":false},
     "extInit":false
   },
   {"name":"Encoder",
@@ -62,9 +62,9 @@
     "generic":false,
     "img":"http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg",
     "params":[
-    	{"type":"int", "port":"DIO", "optional":false, "abstract-def":true, "description":"Encoder Channel A"},
-    	{"type":"int", "port":"DIO", "optional":false, "abstract-def":true, "description":"Encoder Channel B"},
-    	{"type":"bool", "port":false, "optional":true, "optional-value":false, "abstract-def":true, "description":"Reversed"}
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Encoder Channel A"},
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Encoder Channel B"},
+    	{"type":"bool", "port":false, "optional":true, "optional-value":false, "abstractdef":true, "description":"Reversed"}
     ],
     "extInit":[
       {"function":"SetDistancePerPulse","params":"float distance","description":"Measured distance per encoder pulse","range":[0.1,5.0]},
@@ -75,7 +75,7 @@
     "display":"Gear tooth sensor",
     "generic":false,
     "img":"http://i00.i.aliimg.com/photo/v5/126850556/Hall_Effect_Gear_Tooth_Sensor_CYGTS104U_for.jpg",
-    "params":{"type":"int", "port":"DIO", "optional":false, "abstract-def":false},
+    "params":{"type":"int", "port":"DIO", "optional":false, "abstractdef":false},
     "extInit":{"function":"EnableDirectionSensing","params":"bool direction","description":"Enable direction sensing"}
   },
   {"name":"Ultrasonic",
@@ -87,8 +87,8 @@
     ],
     "img":"http://www.robotshop.com/media/files/images/parallax-ping-ultrasonic-sensor-large.jpg",
     "params":[
-    	{"type":"int", "port":"DIO", "optional":false, "abstract-def":true, "description":"Ultrasonic output"},
-    	{"type":"int", "port":"DIO", "optional":false, "abstract-def":true, "description":"Ultrasonic input"}
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Ultrasonic output"},
+    	{"type":"int", "port":"DIO", "optional":false, "abstractdef":true, "description":"Ultrasonic input"}
     ],
     "extInit":false
   },
@@ -103,7 +103,7 @@
     "display":"Game Controller",
     "generic":false,
     "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Xbox-360-S-Controller.png/293px-Xbox-360-S-Controller.png",
-    "params":{"type":"int", "port":"USB", "optional":false, "abstract-def":true, "description":"Controller number"},
+    "params":{"type":"int", "port":"USB", "optional":false, "abstractdef":true, "description":"Controller number"},
     "extInit":false
   },
   {"name":"DriverStation",
@@ -131,8 +131,8 @@
     "display":"Robot Drive Object",
     "generic":false,
     "params":[
-    	{"type":"int", "port":"PWM", "optional":false, "abstract-def":true, "description":"Left motor"},
-    	{"type":"int", "port":"PWM", "optional":false, "abstract-def":true, "description":"Right motor"}	
+    	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Left motor"},
+    	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Right motor"}	
     ],
     "extInit":{"function":"SetSafetyEnabled","params":"bool safety","description":"Safety (watchdog) enabled"}
   },
@@ -141,10 +141,10 @@
     "generic":false,
     "img":false,
     "params":[
-    	{"type":"int", "port":"PWM", "optional":false, "abstract-def":true, "description":"Left Front motor"},
-    	{"type":"int", "port":"PWM", "optional":false, "abstract-def":true, "description":"Left Rear motor"},
-    	{"type":"int", "port":"PWM", "optional":false, "abstract-def":true, "description":"Right Front motor"},
-    	{"type":"int", "port":"PWM", "optional":false, "abstract-def":true, "description":"Right Rear motor"}
+    	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Left Front motor"},
+    	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Left Rear motor"},
+    	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Right Front motor"},
+    	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Right Rear motor"}
     ],
     "extInit":{"function":"SetSafetyEnabled","params":"bool safety","description":"Safety (watchdog) enabled"}
   }
