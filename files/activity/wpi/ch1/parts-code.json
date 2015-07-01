@@ -78,7 +78,7 @@
       	"name":"SetMaxPeriod",
       	"params":{"type":"float", "port":false, "range":[0.5,2.0], "optional":false, "abstractdef":true, "description":"Maximum period"}
       }
-    ]
+	]
   },
   {"name":"GearTooth",
     "display":"Gear tooth sensor",
@@ -163,7 +163,7 @@
     ],
     "extInit":{
     	"name":"SetSafetyEnabled",
-    	"params":{"type":"bool", "port":false, "optional":true, "optionalValue":true, "abstractdef":true, "description":"Enable safety (watchdog)"}}
+    	"params":{"type":"bool", "port":false, "optional":true, "optionalValue":true, "abstractdef":true, "description":"Enable safety (watchdog)"}
     }
   }
 ]
