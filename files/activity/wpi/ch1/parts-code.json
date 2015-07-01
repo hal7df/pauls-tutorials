@@ -86,7 +86,7 @@
     "img":"http://i00.i.aliimg.com/photo/v5/126850556/Hall_Effect_Gear_Tooth_Sensor_CYGTS104U_for.jpg",
     "params":{"type":"int", "port":"DIO", "optional":false, "abstractdef":false},
     "extInit":{
-    	"nane":"EnableDirectionSensing",
+    	"name":"EnableDirectionSensing",
 		"params":{"type":"bool", "port":false, "optional":false, "abstractdef":true, "description":"Enable direction sensing"}
 	}
   },
