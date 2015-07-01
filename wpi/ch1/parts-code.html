@@ -106,22 +106,35 @@ class Robot: public IterativeRobot
 		<h3 class="tutorial"><a id="Motor_Controllers"></a>Motor Controllers</h3>
 			<h4 class="tutorial"><a id="RobotDrive"></a><code>RobotDrive</code></h4>
 				<p>The class <code>RobotDrive</code> is not actually a part on the robot, but it is an abstraction object that handles the drivetrain motors. A drivetrain can either consist of 2 or 4 drive controllers.
-					On our team, we use PWM splitter cables such that there are only 2 PWM channels being used, but there are actually 4 drive controllers running the robot. Treat it like a 2-controller drivetrain.</p>
+					It is possible to split the PWM output coming out of the roboRIO into two cables to double the signal, if two drive controllers should always be driven at the same speed and direction.
+					You will often find that this is done with the drivetrain controllers, since they are the most abundant. If your robot is wired like this, treat it like a 2-controller drivetrain.</p>
 				<p>In the initialization, provide all of the drive controllers that are part of the drivetrain. Provide the left controller(s) first, then the right controller(s). Ensure that you initialize the <code>RobotDrive</code>
 					<span style="font-weight: bold;">AFTER</span> you have initialized the individual drivetrain controllers.</p>
+				<p>For the four-motor configuration, the process is much the same, however there is an additional front-to-back differentiation. You still initialize left and then right, but for both sides you initialize the front first, and then the rear motor.</p>
 				<p>You should disable the safety (watchdog) unless you know how to use it. The watchdog is run by the drivetrain in order to detect errors. The watchdog is quite needy, as it needs to be fed data or it will disable the drive.
 					If you are confident about what you're doing, you may keep the watchdog on, but for now, just disable it.</p>
 				<pre lang="cpp">
 //RobotDrive declaration
 RobotDrive *m_robotDrive;
 /** You will see how to declare drive controllers momentarily
-  * Let;s assume we've declared two Victors, m_lDrive and m_rDrive
+  * Let's assume we've declared two Talons, m_lDrive and m_rDrive
   */
 
 //RobotDrive initialization
 m_robotDrive = new RobotDrive (m_lDrive, m_rDrive);
 
+// Now for the four-motor configuration with four Talons: m_lfDrive, m_lrDrive, m_rfDrive, m_rrDrive
+m_robotDrive = new RobotDrive (m_lfDrive, m_lrDrive, m_rfDrive, m_rrDrive);
+
 m_robotDrive->SetSafetyEnabled(false);
+				</pre>
+				<p>Alternatively, <code>RobotDrive</code> can also take the PWM channel number for each motor instead, if you do not plan to need to access the individual motors themselves in the code.
+				<pre lang="cpp">
+//RobotDrive with two motors
+m_robotDrive = new RobotDrive (0,1);
+
+//RobotDrive with four motors
+m_robotDrive = new RobotDrive (0,1,2,3);
 				</pre>
 			<h4 class="tutorial"><a id="Victor"></a>Victor</h4>
 				<p>A Victor (which you have seen declared before) is of type <code>Victor</code> (with a capital V). It encompasses both Victor motor controllers and VEX motor controllers.</p>
@@ -362,6 +375,8 @@ m_timer = new Timer;
   				</pre>
   	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
   	  	<p>In this activity, you will be given either the name of a component or a picture of a component. You will be given all of the necessary information to initialize the component. Using this information, write both a component declaration and initialization line.</p>
+  	  	<p>There are 5 questions.</p>
+  	  	<p style="font-weight: bold; text-align: center; color: #ff0000;"><noscript>JavaScript is required for this activity. Please turn it on or switch to a browser with JavaScript.</noscript></p>
   	  	<p style="font-weight: bold; text-align: center;">Example</p>
   	  	<ul>
   	  		<li>Component name: Talon</li>
@@ -386,7 +401,7 @@ m_timer = new Timer;
   	  			<label for="declare">Declaration: </label>
   	  			<input class="code" type="text" name="declare" size="40"/><br><br>
   	  			<label for="init">Initialization: </label><br>
-  	  			<textarea class="code" name="init" rows="3" cols="50"></textarea>
+  	  			<textarea class="code" name="init" rows="4" cols="50"></textarea>
   	  		</form>
   	  		<button id="nextAction" onclick="run_finish_action()">Submit</button>
   	  	</div>

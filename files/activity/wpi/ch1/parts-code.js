@@ -14,7 +14,7 @@ function activity_init()
 {
 	answer = new Object();
 	questionNum = 1;
-	numCorrect = 0;
+	percentCorrect = 0;
 	displayingResults = false;
 	get_parts_list();
 	
@@ -221,7 +221,7 @@ function generate_question()
 			{
 				buf = read_param(chosenComponent.extInit[x].params);
 				
-				answer.extInit[x].params = buf.param;
+				answer.extInit[x]= buf.param;
 				answer.init[x+1] = (chosenComponent.extInit[x].name + " (" + buf.param.value + ");");
 				
 				objInfo += buf.info;
@@ -266,7 +266,7 @@ function read_param (param)
 		if (param.type == "bool")
 			buf.param.value = getRandomBool();
 		else if (param.type == "float")
-			buf.param.value = getRandomFloat(param.range[0], param.range[1], 0.1);
+			buf.param.value = getRandomFloat(param.range[0], param.range[1], 1);
 	}
 	
 	//** read in information about a default parameter
@@ -343,7 +343,7 @@ function check_answer()
  */
 function write_progress()
 {
-	document.getElementById("progressIndicator").innerHTML = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + (numCorrect/5) + '%';
+	document.getElementById("progressIndicator").innerHTML = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + percentCorrect + '%';
 }
 
 /** GET RANDOM PORT
@@ -394,17 +394,13 @@ function getRandomInt (lower,upper)
  *  ----------------
  * @param lower: the lower boundary of the range to generate numbers in.
  * @param upper: the upper boundary of the range to generate numbers in.
- * @param precision: decimal precision to generate numbers to.
+ * @param precision: decimal places to generate numbers to.
  * @returns ... a random float
  */
 function getRandomFloat (lower,upper,precision)
 {
 	var num;
+	num = ((Math.random() * (upper - lower)) + lower);
 	
-	lower /= precision;
-	upper /= precision;
-	
-	num = getRandomInt(lower,upper);
-	
-	return num*precision;
+	return parseFloat(num.toFixed(precision));
 }
