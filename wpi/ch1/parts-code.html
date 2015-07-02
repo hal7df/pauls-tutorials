@@ -398,12 +398,22 @@ m_timer = new Timer;
   	  		<img class="tutorial" id="componentImage" style="height: 200px;"/>
   	  		<p id="componentName" style="margin-left: 1%; font-weight: bold;">&nbsp;</p>
   	  		<ul id="componentInfo"></ul>
-  	  		<form>
+  	  		<form name="responseform">
   	  			<label for="declare">Declaration: </label>
   	  			<input class="code" type="text" name="declare" size="40"/><br><br>
   	  			<label for="init">Initialization: </label><br>
   	  			<textarea class="code" name="init" rows="4" cols="50"></textarea>
   	  		</form>
+  	  		<div id="answers" style="display: none;">
+  	  		<ul>
+	  	  		<li>Declaration</li>
+	  	  		<ul id="decl_answer">
+	  	  		</ul>
+	  	  		<li>Initialization</li>
+	  	  		<ul id="init_answer">
+	  	  		</ul>
+  	  		</ul>
+  	  		</div>
   	  		<button id="nextAction" onclick="run_finish_action()">Submit</button>
   	  	</div>
 

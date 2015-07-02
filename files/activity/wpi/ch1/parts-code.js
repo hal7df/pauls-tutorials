@@ -306,6 +306,7 @@ function run_finish_action()
 			questionNum++;
 			write_progress();
 			displayingResults = false;
+			document.forms["responseform"].reset();
 			document.getElementById("nextAction").innerHTML="Submit";
 			generate_question();
 		}
@@ -334,7 +335,179 @@ function run_finish_action()
  */
 function check_answer()
 {
+	var response = new Object();
+	var ansDisp = new Object();
+	var objName;
+	var correct = new Object();
+	var buf;
+	var pos = new Object();
+	
+	//** get the response
+	response.decl = document.forms["responseform"]["declare"].value;
+	response.init = document.forms["responseform"]["init"].value;
 
+	//** get the individual lines of the initialization
+	response.init = response.init.split("/\n/");
+	
+	//** get all of the answer display elements
+	ansDisp.div = document.getElementById("answers");
+	ansDisp.decl = document.getElementById("decl_answer");
+	ansDisp.init = document.getElementById("init_answer");
+	
+	correct.decl = true;
+	correct.init = true;
+	
+	response.decl = response.decl.trim();
+	
+	for (var x = 0; x < response.init.length; x++)
+		response.init[x].trim();
+	
+	//** begin correcting the declaration ** -----------------------
+	buf = response.decl.split(' ')[0];
+	
+	//** if they don't use the right component
+	if (buf.indexOf(answer.decl) == -1)
+		correct.decl = false;
+	
+	//** check to make sure that there are just two keywords
+	correct.decl = decl_check_keywords(response.decl);
+	
+	//** find the object's declared name
+	objName = decl_get_obj_name(response.decl);
+
+	//** validate the name
+	if (objName[0] == '!')
+	{
+		objName = objName.substr(1);
+		correct.decl = false;
+	}
+	else if (objName == "")
+	{
+		objName = "m_foo";
+		correct.decl = false;
+	}
+	
+	if (correct.decl)
+	{			
+		//** ensure that they declared it as a pointer!
+		pos.start = response.decl.indexOf(answer.decl);
+		pos.end = response.decl.indexOf(objName);
+		pos.loc = response.decl.indexOf('*');
+		
+		if ((pos.start < pos.loc) && (pos.loc < pos.end))
+		{
+			if (response.decl.indexOf('*',(pos.loc + 1)) != -1)
+				correct.decl = false;
+			else if (response.decl.indexOf(';') < pos.end)
+					correct.decl = false;
+		}
+		else
+			correct.decl = false;					
+	}
+	
+	console.log("Declaration correct: ",correct.decl);
+}
+
+/** CHECK DECLARATION STRING
+ *  ------------------------
+ *  Checks the string to ensure that the only alphabetic
+ *  contents (theoretically) are the type keyword and
+ *  the object name.
+ *  
+ *  @param decl: the declaration string.
+ *  @returns whether or not there are only 2 alphabetic keywords
+ */
+function decl_check_keywords (decl)
+{
+	var numAlpha;
+	
+	decl = decl.split(' ');
+	
+	numAlpha = 0;
+	
+	for (var x = 0; x < decl.length; x++)
+	{
+		if (decl[x].search("[A-Za-z0-9_]") != -1)
+			numAlpha++;
+	}
+	
+	return numAlpha == 2;
+}
+
+/** GET OBJECT NAME
+ *  ---------------
+ *  Parse a declaration string and get the declared
+ *  name of an object. Also validates and corrects the
+ *  name if it is illegal
+ * 
+ * @param decl: the declaration string
+ * @returns {String}: the name of the object
+ */
+function decl_get_obj_name (decl)
+{
+	var objName;
+	var buf;
+	var pos;
+	var flag;
+	
+	//** split apart declaration line by spaces
+	decl = decl.split(' ');
+	
+	//** initialize empty object name
+	objName = "";
+	
+	//** find first alpha keyword that isn't the type keyword
+	for (var x = 1; x < decl.length; x++)
+	{
+		if (decl[x].search("[A-Za-z0-9_]") != -1)
+		{
+			objName = decl[x];
+			break;
+		}	
+	}
+
+	//** weed out illegal characters (hopefully * and ; at the beginning and end)
+	pos = objName.search("[^A-Za-z0-9_]");
+	flag = false;
+	
+	while (pos != -1)
+	{
+		if (pos == (objName.length - 1))
+		{
+			if (objName.charAt(pos) != ';')
+				flag = true;
+			
+			objName = objName.substr(0, (objName.length - 1));
+		}
+		else if (pos == 0)
+		{
+			if (objName.charAt(pos) != '*')
+				flag = true;
+			
+			objName = objName.substr(1);
+		}
+		else
+		{
+			buf = objName.substring(0, pos);
+			buf.concat(objName.substr(pos+1));
+			objName = buf;
+			flag = true;
+		}
+		pos = objName.search("[^A-Za-z0-9_]");
+	}
+	
+	//** make sure the leading character is not numeric
+	if (!isNaN(objName.charAt(0)))
+	{
+		objName = objName.substr(1);
+		flag = true;
+	}
+	
+	//** throw a flag in the name in case there were illegal characters
+	if (flag)
+		objName = "!"+objName;
+	
+	return objName;
 }
 
 /** UPDATE THE PROGRESS INFORMATION
