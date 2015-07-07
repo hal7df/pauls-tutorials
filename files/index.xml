@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tutorials>
+	<tutorial id="cpp">
+		<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp.html">C++ Guided Tutorial</overview>
+		<contents>
+			<chapter id="1">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch1.html">Basics</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch1/basics.html">Basics</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch1/if-else.html">If and Else</lesson>
+					<lesson id="3" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch1/loops.html">Loops</lesson>
+					<lesson id="4" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch1/switch-case.html">Switch/Case Statements</lesson>
+				</contents>
+			</chapter>
+			<chapter id="2">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch2.html">Organization</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch2/functions.html">Functions</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch2/arrays.html">Arrays</lesson>
+					<lesson id="3" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch2/structures.html">Structures</lesson>
+				</contents>
+			</chapter>
+			<chapter id="3">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch3.html">Advanced C++</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch3/pointers.html">Pointers</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/ch3/classes.html">Classes</lesson>
+				</contents>
+			</chapter>
+			<lesson href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/cpp/tips-tricks.html">Tips and Tricks</lesson>
+		</contents>
+	</tutorial>
+	<tutorial id="wpi">
+		<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi.html">WPILib Tutorial</overview>
+		<contents>
+			<chapter id="1">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch1.html">Basics</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch1/parts.html">Parts of the Robot</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch1/program-structure.html">Program Structure</lesson>
+					<lesson id="3" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch1/parts-code.html">Parts of the Robot: In Code</lesson>
+				</contents>
+			</chapter>
+			<chapter id="2">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch2.html">Driving and User Input</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch2/user-input.html">Using User Input</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch2/motors.html">Controlling Motors</lesson>
+					<lesson id="3" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch2/driving.html">Earning Your Driver's License: Driving</lesson>
+					<lesson id="4" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch2/pneumatics.html">Pneumatics</lesson>
+				</contents>
+			</chapter>
+			<chapter id="3">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch3.html">Control</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch3/sensors.html">Sensors and Information</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch3/pid1.html">PID Part 1: PID Theory</lesson>
+					<lesson id="3" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch3/pid2.html">PID Part 2: Implementing a PID</lesson>
+					<lesson id="4" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch3/pid3.html">PID Part 3: Advanced PID Programming</lesson>
+				</contents>
+			</chapter>
+			<chapter id="4">
+				<overview href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch4.html">Routines</overview>
+				<contents>
+					<lesson id="1" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch4/init.html">Initialization Routines</lesson>
+					<lesson id="2" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch4/disabled.html">Disabled Routines</lesson>
+					<lesson id="3" href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/ch4/autonomous.html">Autonomous Routines</lesson>
+				</contents>
+			</chapter>
+			<lesson href="https://raw.githubusercontent.com/hal7df/pauls-tutorials/master/wpi/tips-tricks.html">Tips and Tricks</lesson>
+		</contents>
+	</tutorial>
+</tutorials>
