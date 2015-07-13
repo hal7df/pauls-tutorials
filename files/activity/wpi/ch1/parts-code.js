@@ -140,11 +140,17 @@ function generate_question()
 	
 	//** if the component does not use any parameters in the constructor
 	if (!chosenComponent.params)
+	{
 		answer.init = "new "+ answer.decl + ';';
+		answer.params = false;
+	}
 	
 	//** if the component grabs a currently running instance of the object
 	else if (chosenComponent.params == "GetInstance")
+	{
 		answer.init = answer.decl + "::GetInstance();";
+		answer.params = "GetInstance";
+	}
 	
 	//** component uses parameters in the constructor
 	else
@@ -269,11 +275,11 @@ function read_param (param)
 			buf.param.value = getRandomFloat(param.range[0], param.range[1], 1);
 	}
 	
-	//** read in information about a default parameter
-	buf.param.optional = param.optional;
+	//** save the type of the parameter
+	buf.param.type = param.type;
 	
-	if (param.optional)
-		buf.param.optionalValue = param.optionalValue;
+	//** read in information about a default parameter
+	buf.param.optional = (param.optional && (buf.param.value == param.optionalValue));
 	
 	//** construct an information string
 	buf.info = "<li>";
@@ -340,6 +346,7 @@ function check_answer()
 	var objName;
 	var correct = new Object();
 	var buf;
+	var param, paramList;
 	var pos = new Object();
 	
 	//** get the response
@@ -347,7 +354,7 @@ function check_answer()
 	response.init = document.forms["responseform"]["init"].value;
 
 	//** get the individual lines of the initialization
-	response.init = response.init.split("/\n/");
+	response.init = response.init.split("\n");
 	
 	//** get all of the answer display elements
 	ansDisp.div = document.getElementById("answers");
@@ -355,14 +362,14 @@ function check_answer()
 	ansDisp.init = document.getElementById("init_answer");
 	
 	correct.decl = true;
-	correct.init = true;
+	correct.init = new Array();
 	
 	response.decl = response.decl.trim();
 	
 	for (var x = 0; x < response.init.length; x++)
-		response.init[x].trim();
+		response.init[x] = response.init[x].trim();
 	
-	//** begin correcting the declaration ** -----------------------
+	//** begin correcting the declaration ** ------------------------
 	buf = response.decl.split(' ')[0];
 	
 	//** if they don't use the right component
@@ -405,7 +412,114 @@ function check_answer()
 			correct.decl = false;					
 	}
 	
-	console.log("Declaration correct: ",correct.decl);
+	console.log("Declaration correct:",correct.decl);
+	
+	// ** begin correcting the initialization ** --------------------
+	
+	// ** make sure that they begin the initialization with the variable name
+	correct.init[0] = (response.init[0].search(objName) == 0);
+	
+	if (correct.init[0])
+	{
+		console.log("Object name verified.");
+		
+		buf = response.init[0].substr(objName.length);
+		buf = buf.trim();
+		
+		// ** the constructor needs to be called via the assignment operator
+		correct.init[0] = (buf.indexOf('=') == 0);
+		
+		if (correct.init[0])
+		{
+			console.log("Assignment verified");
+			buf = buf.substr(1);
+			buf = buf.trim();
+			
+			correct.init[0] = (buf.indexOf("new") == 0);
+			
+			if (correct.init[0])
+			{
+				console.log("New keyword present.");
+				buf = buf.substr(3);
+				buf = buf.trim();
+				
+				// ** next comes the class name
+				correct.init[0] = (buf.indexOf(answer.decl) == 0);
+				
+				if (correct.init[0])
+				{
+					console.log("Class name verified.");
+					buf = buf.substr(answer.decl.length);
+					buf = buf.trim();
+					
+					// ** if there are multiple parameters taken by the constructor
+					if (answer.params != false && answer.params.constructor === Array)
+					{
+						// ** just get the parameter string
+						paramList = buf.substring(buf.indexOf('(') + 1, buf.indexOf(')'));
+						paramList = paramList.trim();
+						paramList = paramList.split(',');
+						
+						// ** get an array of the parameters given by the user (in order)
+						correct.init[0] = (paramList.length === answer.params.length);
+						
+						if (correct.init[0])
+						{
+							for (var x = 0; x < paramList.length; x++)
+							{
+								paramList[x] = paramList[x].trim();
+								
+								if (correct.init[0])
+									correct.init[0] = check_param(paramList[x], answer.params[x]);
+							}
+						}
+					}
+					
+					// ** otherwise
+					else
+					{
+						// ** decide if parameters are even used
+						var skipParentheses;
+						
+						skipParentheses = (!(answer.params));
+						skipParentheses = (skipParentheses || (answer.params.optional && (buf.search("\\(+.+\\)") == -1)));
+						
+						// ** we can't
+						if (!skipParentheses)
+						{
+							paramList = buf.substring(buf.indexOf('(') + 1, buf.indexOf(')'));
+							paramList = paramList.trim();
+							
+							correct.init[0] = check_param(paramList, answer.params);
+						}
+					}
+					
+					console.log("Parameters correct:",correct.init[0]);
+					
+					// ** don't forget your semicolon!
+					if (correct.init[0])
+					{
+						buf = buf.substr(buf.indexOf(')') + 1);
+						buf = buf.trim();
+						correct.init[0] = (buf == ';');
+						console.log("Semicolon check:",correct.init[0]);
+					}
+				}
+			}
+		}
+	}
+	
+	console.log("First initialization correct:",correct.init[0]);
+	
+	// ** multi-step initialization
+	if (answer.init.constructor === Array)
+	{
+		correct.initMismatch = (response.init.length != answer.init.length);
+	}
+	else
+		correct.initMismatch = (response.init.length != 1);
+	
+	console.log("Mismatching init",correct.initMismatch);
 }
 
 /** CHECK DECLARATION STRING
@@ -508,6 +622,55 @@ function decl_get_obj_name (decl)
 		objName = "!"+objName;
 	
 	return objName;
+}
+
+/** CHECK A PARAMETER GIVEN BY THE USER
+ *  -----------------------------------
+ *  Parse the correct data type out of the response
+ *  string and check it against the value chosen by the computer.
+ * 
+ * @param given: the given parameter (String)
+ * @param param: the param object associated with this parameter
+ * @returns whether or not the parameter is correct
+ */
+function check_param (given, param)
+{
+	var parsed;
+	var correct;
+	
+	correct = true;
+	
+	// ** parse the right data type out of the string
+	if (param.type === "int")
+	{
+		// ** make sure only an integer was given
+		correct = (given.search("[^0-9]") == -1);
+		
+		if (correct)
+			parsed = parseInt(given, 10);
+	}
+	else if (param.type === "float")
+	{
+		// ** make sure only a float was given
+		correct = (given.search("[^0-9.]"));
+		
+		if (correct)
+			parsed = parseFloat(given);
+	}
+	else if (param.type === "bool")
+	{
+		// ** make sure that only 'true' or 'false' was given
+		correct = (given === "true" || given === "false")
+		
+		if (correct)
+			parsed = (given === "true");
+	}
+	
+	// ** check the parameter
+	if (correct)
+		correct = (parsed === param.value);
+	
+	return correct;
 }
 
 /** UPDATE THE PROGRESS INFORMATION
