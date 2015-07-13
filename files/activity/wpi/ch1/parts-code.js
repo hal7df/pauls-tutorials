@@ -435,76 +435,119 @@ function check_answer()
 			buf = buf.substr(1);
 			buf = buf.trim();
 			
-			correct.init[0] = (buf.indexOf("new") == 0);
-			
-			if (correct.init[0])
+			// ** in case the object is initialized via the GetInstance function
+			if (answer.param == "GetInstance")
 			{
-				console.log("New keyword present.");
-				buf = buf.substr(3);
-				buf = buf.trim();
-				
-				// ** next comes the class name
+				// ** order: ObjectName, ::, GetInstance()
 				correct.init[0] = (buf.indexOf(answer.decl) == 0);
 				
 				if (correct.init[0])
 				{
-					console.log("Class name verified.");
 					buf = buf.substr(answer.decl.length);
 					buf = buf.trim();
 					
-					// ** if there are multiple parameters taken by the constructor
-					if (answer.params != false && answer.params.constructor === Array)
-					{
-						// ** just get the parameter string
-						paramList = buf.substring(buf.indexOf('(') + 1, buf.indexOf(')'));
-						paramList = paramList.trim();
-						paramList = paramList.split(',');
-						
-						// ** get an array of the parameters given by the user (in order)
-						correct.init[0] = (paramList.length === answer.params.length);
-						
-						if (correct.init[0])
-						{
-							for (var x = 0; x < paramList.length; x++)
-							{
-								paramList[x] = paramList[x].trim();
-								
-								if (correct.init[0])
-									correct.init[0] = check_param(paramList[x], answer.params[x]);
-							}
-						}
-					}
+					correct.init[0] = (buf.indexOf("::") == 0);
 					
-					// ** otherwise
-					else
+					if (correct.init[0])
 					{
-						// ** decide if parameters are even used
-						var skipParentheses;
+						buf = buf.substr(2);
+						buf = buf.trim();
 						
-						skipParentheses = (!(answer.params));
-						skipParentheses = (skipParentheses || (answer.params.optional && (buf.search("\\(+.+\\)") == -1)));
+						correct.init[0] = (buf.indexOf("GetInstance()") == 0);
+					}
+				}
+			}
+			
+			// ** otherwise
+			else
+			{
+				correct.init[0] = (buf.indexOf("new") == 0);
+				
+				if (correct.init[0])
+				{
+					console.log("New keyword present.");
+					buf = buf.substr(3);
+					buf = buf.trim();
+					
+					// ** next comes the class name
+					correct.init[0] = (buf.indexOf(answer.decl) == 0);
+					
+					if (correct.init[0])
+					{
+						console.log("Class name verified.");
+						buf = buf.substr(answer.decl.length);
+						buf = buf.trim();
 						
-						// ** we can't
-						if (!skipParentheses)
+						// ** if there are multiple parameters taken by the constructor
+						if (answer.params != false && answer.params.constructor === Array)
 						{
+							// ** just get the parameter string
 							paramList = buf.substring(buf.indexOf('(') + 1, buf.indexOf(')'));
 							paramList = paramList.trim();
 							
-							correct.init[0] = check_param(paramList, answer.params);
+							// ** get an array of the parameters given by the user (in order)
+							paramList = paramList.split(',');
+							
+							if (paramList.length != answer.params.length)
+							{
+								var optionalCount = 0;
+								
+								for (var x = 0; x < answer.params.length; x++)
+								{
+									if (answer.params[x].optional)
+										optionalCount++;
+								}
+								
+								correct.init[0] = ((answer.params.length - paramList.length) == optionalCount);
+							}
+							
+							if (correct.init[0])
+							{
+								var answerOffset = 0;
+								for (var x = 0; x < paramList.length; x++)
+								{
+									paramList[x] = paramList[x].trim();
+									
+									if (answer.params[x].optional)
+										answerOffset++;
+									
+									if (correct.init[0] && ((x + answerOffset) < answer.params.length))
+										correct.init[0] = check_param(paramList[x], answer.params[x + answerOffset]);
+								}
+							}
 						}
-					}
-					
-					console.log("Parameters correct:",correct.init[0]);
-					
-					// ** don't forget your semicolon!
-					if (correct.init[0])
-					{
-						buf = buf.substr(buf.indexOf(')') + 1);
-						buf = buf.trim();
-						correct.init[0] = (buf == ';');
-						console.log("Semicolon check:",correct.init[0]);
+						
+						// ** otherwise
+						else
+						{
+							// ** decide if parameters are even used
+							var skipParentheses;
+							
+							skipParentheses = (!(answer.params));
+							skipParentheses = (skipParentheses || (answer.params.optional && (buf.search("\\(+.+\\)") == -1)));
+							
+							// ** we can't
+							if (!skipParentheses)
+							{
+								paramList = buf.substring(buf.indexOf('(') + 1, buf.indexOf(')'));
+								paramList = paramList.trim();
+								
+								correct.init[0] = check_param(paramList, answer.params);
+							}
+						}
+						
+						console.log("Parameters correct:",correct.init[0]);
 					}
 				}
+			}
+			
+			// ** don't forget your semicolon!
+			if (correct.init[0])
+			{
+				buf = buf.substr(buf.indexOf(')') + 1);
+				buf = buf.trim();
+				correct.init[0] = (buf == ';');
+				console.log("Semicolon check:",correct.init[0]);
 			}
 		}
 	}

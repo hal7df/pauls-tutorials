@@ -21,7 +21,7 @@
       {"name":"Window motor", "img":"http://www.hamiltontaxservices.com/images/MB/W126%20left%20rear%20window%20motor.jpg"}
     ],
     "img":"http://www.robotmarketplace.com/products/images/IFIW-SP1_lg.jpg",
-    "params":{"type":"int", "port":"Relay", "abstractdef":false},
+    "params":{"type":"int", "port":"Relay", "optional"false, "abstractdef":false},
     "extInit":false
   },
   {"name":"Compressor",
@@ -36,7 +36,7 @@
     "generic":false,
     "img":"http://team358.org/files/pneumatic/Festo24v.jpg",
     "params":[
-    	{"type":"int", "port":"CAN", "optional":true, "optional-port":0, "abstractdef":true, "description":"PCM ID"},
+    	{"type":"int", "port":"CAN", "optional":true, "optionalValue":0, "abstractdef":true, "description":"PCM ID"},
     	{"type":"int", "port":"Solenoid", "optional":false, "abstractdef":false}
     ],
     "extInit":false
