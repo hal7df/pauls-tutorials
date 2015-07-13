@@ -225,9 +225,11 @@ function generate_question()
 		
 			for (var x = 0; x < chosenComponent.extInit.length; x++)
 			{
+				answer.extInit[x] = new Object();
 				buf = read_param(chosenComponent.extInit[x].params);
 				
-				answer.extInit[x]= buf.param;
+				answer.extInit[x].params = buf.param;
+				answer.extInit[x].name = chosenComponent.extInit[x].name;
 				answer.init[x+1] = (chosenComponent.extInit[x].name + " (" + buf.param.value + ");");
 				
 				objInfo += buf.info;
@@ -241,6 +243,7 @@ function generate_question()
 			buf = read_param(chosenComponent.extInit.params);
 			
 			answer.extInit.params = buf.param;
+			answer.extInit.name = chosenComponent.extInit.name;
 			answer.init[1] = (chosenComponent.extInit.name + " (" + buf.param.value + ");");
 			
 			objInfo += buf.info;
@@ -417,12 +420,10 @@ function check_answer()
 	// ** begin correcting the initialization ** --------------------
 	
 	// ** make sure that they begin the initialization with the variable name
-	correct.init[0] = (response.init[0].search(objName) == 0);
+	correct.init[0] = (response.init[0].indexOf(objName) == 0);
 	
 	if (correct.init[0])
-	{
-		console.log("Object name verified.");
-		
+	{		
 		buf = response.init[0].substr(objName.length);
 		buf = buf.trim();
 		
@@ -431,12 +432,11 @@ function check_answer()
 		
 		if (correct.init[0])
 		{
-			console.log("Assignment verified");
 			buf = buf.substr(1);
 			buf = buf.trim();
 			
 			// ** in case the object is initialized via the GetInstance function
-			if (answer.param == "GetInstance")
+			if (answer.params == "GetInstance")
 			{
 				// ** order: ObjectName, ::, GetInstance()
 				correct.init[0] = (buf.indexOf(answer.decl) == 0);
@@ -465,7 +465,6 @@ function check_answer()
 				
 				if (correct.init[0])
 				{
-					console.log("New keyword present.");
 					buf = buf.substr(3);
 					buf = buf.trim();
 					
@@ -474,7 +473,6 @@ function check_answer()
 					
 					if (correct.init[0])
 					{
-						console.log("Class name verified.");
 						buf = buf.substr(answer.decl.length);
 						buf = buf.trim();
 						
@@ -535,8 +533,6 @@ function check_answer()
 								correct.init[0] = check_param(paramList, answer.params);
 							}
 						}
-						
-						console.log("Parameters correct:",correct.init[0]);
 					}
 				}
 			}
@@ -547,7 +543,6 @@ function check_answer()
 				buf = buf.substr(buf.indexOf(')') + 1);
 				buf = buf.trim();
 				correct.init[0] = (buf == ';');
-				console.log("Semicolon check:",correct.init[0]);
 			}
 		}
 	}
@@ -557,7 +552,118 @@ function check_answer()
 	// ** multi-step initialization
 	if (answer.init.constructor === Array)
 	{
-		correct.initMismatch = (response.init.length != answer.init.length);
+		var funcName;
+		var chosenFunc;
+		
+		correct.alreadyUsed = new Array();
+		
+		// ** make sure that the user has given the appropriate number of initialization steps
+		if (response.init.length != answer.init.length)
+		{
+			if (answer.extInit.constructor === Array)
+			{
+				var optionalInit = 0;
+				
+				for (var x = 0; x < answer.extInit.length; x++)
+				{
+					if (answer.extInit[x].params.optional)
+						optionalInit++;
+				}
+				
+				correct.initMismatch = ((answer.init.length - response.init.length) != optionalInit);
+			}
+			else
+			{
+				if (answer.extInit.params.optional)
+					correct.initMismatch = (response.init.length != 1);
+				else
+					correct.initMismatch = (response.init.length != answer.init.length);
+			}
+		}
+		else
+			correct.initMismatch = false;
+		
+		if (response.init.length > 1)
+		{
+			for (var x = 1; x < response.init.length; x++)
+			{
+				correct.init[x] = (response.init[x].indexOf(objName) == 0);
+				
+				if (correct.init[x])
+				{
+					buf = response.init[x].substr(objName.length);
+					buf = buf.trim();
+					
+					correct.init[x] = (buf.indexOf("->") == 0);
+					
+					if (correct.init[x])
+					{
+						buf = buf.substr(2);
+						buf = buf.trim();
+						
+						funcName = buf.substring(0, buf.indexOf('('));
+						funcName = funcName.trim();
+						
+						if (answer.extInit.constructor === Array)
+						{
+							for (var y = 0; y < answer.extInit.length; y++)
+							{
+								if (funcName === answer.extInit[y].name)
+								{
+									if (!(answer.extInit[y].used))
+									{
+										answer.extInit[y].used = true;
+										chosenFunc = y;
+									}
+									else
+									{
+										correct.init[x] = false;
+										correct.alreadyUsed.push(x);
+									}
+									
+									break;
+								}
+							}
+							
+							if (correct.init[x])
+							{
+								buf = buf.substr(funcName.length);
+								buf = buf.trim();
+								
+								paramList = buf.substring((buf.indexOf('(') + 1), buf.indexOf(')'));
+								paramList = paramList.trim();
+								
+								correct.init[x] = check_param(paramList, answer.extInit[chosenFunc].params);
+							}
+						}
+						else
+						{
+							correct.init[x] = (funcName === answer.extInit.name);
+							
+							if (correct.init[x])
+							{
+								buf = buf.substr(funcName.length);
+								buf = buf.trim();
+								
+								paramList = buf.substring((buf.indexOf('(') + 1), buf.indexOf(')'));
+								paramList = paramList.trim();
+								
+								correct.init[x] = check_param(paramList, answer.extInit.params);
+							}
+						}
+					}
+					
+					if (correct.init[x])
+					{
+						buf = buf.substr(buf.indexOf(')') + 1);
+						buf = buf.trim();
+						correct.init[x] = (buf === ';');
+					}
+					
+					console.log("Initialization line",x,"correct:",correct.init[x]);
+				}
+			}
+		}
 	}
 	else
 		correct.initMismatch = (response.init.length != 1);

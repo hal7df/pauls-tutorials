@@ -142,6 +142,7 @@
   {"name":"RobotDrive",
     "display":"Robot Drive Object",
     "generic":false,
+    "img":false,
     "params":[
     	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Left motor"},
     	{"type":"int", "port":"PWM", "optional":false, "abstractdef":true, "description":"Right motor"}	
