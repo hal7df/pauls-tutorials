@@ -21,7 +21,7 @@
       {"name":"Window motor", "img":"http://www.hamiltontaxservices.com/images/MB/W126%20left%20rear%20window%20motor.jpg"}
     ],
     "img":"http://www.robotmarketplace.com/products/images/IFIW-SP1_lg.jpg",
-    "params":{"type":"int", "port":"Relay", "optional"false, "abstractdef":false},
+    "params":{"type":"int", "port":"Relay", "optional":false, "abstractdef":false},
     "extInit":false
   },
   {"name":"Compressor",
