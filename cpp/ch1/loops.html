@@ -4,6 +4,13 @@
     <title>1-3 Loops (C++)</title>
     <meta content="">
     <link rel="stylesheet" type="text/css" href="../../style.css" />
+    
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
   </head>
   <body>
   <!-- PAGE HEADER -->
@@ -59,13 +66,12 @@
          	</blockquote>
          	<p>Don&#x27;t use ten cout statements; use <span style="font-weight: bold;">two nested loops</span> (a loop in a loop) instead.
          		You&#x27;ll have to use braces around the body of the outer loop if it contains multiple statements:</p>
-         	<pre lang="cpp" escaped="true">
+         	<pre class="brush: cpp">
 for(i = 1; i &lt;= 10; i = i + 1)
 {
 	/* multiple statements
  	 * can go in here */
-}
-         	</pre>
+}</pre>
          	<p>(Hint: a string you hand to <code>cout</code> does not have to contain the newline character <code>\n</code> or the newline function <code>endl</code>).</p>
        <h4 class="tutorial"><a id="Extra_Practice"></a>Extra Practice</h4>
        	<p>Rewrite this program to allow the user to pick the height of the triangle, still following the same line pattern. You may want to use an <code>unsigned int</code> in combination with an
