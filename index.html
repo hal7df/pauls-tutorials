@@ -4,52 +4,22 @@
     <title>Paul's Tutorials</title>
     <meta content="">
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="selector.css"/>
+    
+    <script type="text/javascript" src="files/scripts/platform.js"></script>
+    <script type="text/javascript" src="files/scripts/landing.js"></script>
   </head>
-  <body>  		
-  <!-- DO NOT EDIT THIS PAGE IN THE "VISUAL" TAB. YOU WILL MAKE THE PAGE EXPLODE. -->
-  		<script type="text/javascript" >
-  		<!--
-		function cppSelected ()
-		{
-			document.getElementById("tutorialLevel").innerHTML="This is for people either new to programming entirely or new to the C++ language."
-			document.getElementById("tutorialDescription").innerHTML="This will guide you through the tutorial at cplusplus.com and provide numerous practice activities to test your skills.";
-		}
-		
-		function wpiSelected ()
-		{
-			document.getElementById("tutorialLevel").innerHTML="This is for new robot programmers who have the basics of C++ down.";
-			document.getElementById("tutorialDescription").innerHTML="This is an in-depth tutorial of the WPI library for C++.  <span style='font-style: italic;'>We are currently moving this tutorial. Some pages are not available.</span>";
-		}
-		
-		function resetAll()
-		{
-			document.getElementById("tutorialLevel").innerHTML="&nbsp;";
-			document.getElementById("tutorialDescription").innerHTML="&nbsp;";
-		}  		
-		//-->
-  		</script>
-  		
-  		<!-- PAGE HEADER --> 
-  		<h1 class="tutorial"><img src="files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  			style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;Welcome to Paul's Tutorials!</h1>
-  		<hr />
-  		
-  		<div><a href="../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;Paul's Tutorials</div>
-  		<hr />
-  		
+  <body>	
   		<!-- PAGE BODY -->
-  		<h2 class="tutorial">Select tutorial</h2>
+  		<h2 class="tutorial" id="tname">Paul's Tutorials</h2>
   		
-  		<div id="selectTutorial" style="text-align: center;">
-  			<span id="c++" class="select" style="font-size: 100px;" onmouseover="cppSelected()" onmouseout="resetAll()"><a style="color: #ffffff; text-decoration: none;" href="cpp">C++</a></span>
-  			
-  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  			
-  			<span id="wpi" class="select" style="font-size: 100px;" onmouseover="wpiSelected()" onmouseout="resetAll()"><a style="color: #ffffff; text-decoration: none;" href="wpi">WPI</a></span>
-  		</div>
+  		<ul class="select">
+  			<li onmouseover="cppSelected()" onmouseout="resetAll()"><a href="cpp.html">C++</a></li>
+  			<li onmouseover="wpiSelected()" onmouseout="resetAll()"><a href="wpi.html">WPI</a></li>
+  			<li onmouseover="aboutSelected()" onmouseout="resetAll()"><a href="about.html">&nbsp;?&nbsp;</a></li>
+  		</ul>
   		
-  		<p id="tutorialDescription" style="text-align: center;">&nbsp;</p>
-  		<p id="tutorialLevel" style="text-align: center;">&nbsp;</p>
+  		<p id="tdesc" style="text-align: center;">Select an option.</p>
   		
   		<noscript><p style="text-align: center;">JavaScript is disabled/unavailable. You may not be able to enjoy the full features of this site.</p></noscript>
   		

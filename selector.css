@@ -1,0 +1,39 @@
+/** SELECTOR **/
+img.select {
+	opacity: 0.5;
+}
+img.select:hover {
+	opacity: 1;
+}
+span.select {
+	opacity: 0.5;
+}
+span.select:hover {
+	opacity: 1;
+}
+
+ul.select {
+	display: block;
+	line-height: 200px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+ul.select > li {
+	display: inline-block;
+	vertical-align: middle;
+	opacity: 0.5;
+	font-size: 80px;
+	margin-right: 40px;
+	color: #ffffff;
+}
+
+ul.select > li:hover {
+	opacity: 1;
+	font-size: 160px;
+}
+
+ul.select a {
+	color: #ffffff;
+	text-decoration: none;
+}
