@@ -87,6 +87,7 @@ function generate_question()
 	//** initialize information variables
 	questionDisplay.info.innerHTML = "";
 	objInfo = "";
+	answer.init = new Array();
 	
 	//** use if the component is actually a class of components
 	if (chosenComponent.generic)
@@ -141,14 +142,14 @@ function generate_question()
 	//** if the component does not use any parameters in the constructor
 	if (!chosenComponent.params)
 	{
-		answer.init = "new "+ answer.decl + ';';
+		answer.init[0] = "new "+ answer.decl + ';';
 		answer.params = false;
 	}
 	
 	//** if the component grabs a currently running instance of the object
 	else if (chosenComponent.params == "GetInstance")
 	{
-		answer.init = answer.decl + "::GetInstance();";
+		answer.init[0] = answer.decl + "::GetInstance();";
 		answer.params = "GetInstance";
 	}
 	
@@ -156,7 +157,7 @@ function generate_question()
 	else
 	{
 		//** set up the initialization string
-		answer.init = "new " + answer.decl + " (";
+		answer.init[0] = "new " + answer.decl + " (";
 		
 		//** if there are multiple parameters in the constructor
 		if (chosenComponent.params.constructor === Array)
@@ -184,18 +185,18 @@ function generate_question()
 				answer.params[x] = buf.param;
 				
 				//** construct the initialization string
-				answer.init += buf.param.value;
+				answer.init[0] += buf.param.value;
 				
 				//** add a comma if this is not the last parameter
 				if (x < (chosenComponent.params.length - 1))
-					answer.init += ", ";
+					answer.init[0] += ", ";
 
 				//** append initialization info to be displayed on screen
 				objInfo += buf.info;
 			}
 			
 			//** close initialization string
-			answer.init += ");"
+			answer.init[0] += ");"
 		}
 		else
 		{
@@ -204,7 +205,7 @@ function generate_question()
 			
 			//** save parameter information and construct the initialization string
 			answer.params = buf.param;
-			answer.init += (buf.param.value + ");");
+			answer.init[0] += (buf.param.value + ");");
 			
 			//** add initialization info to be displayed on screen
 			objInfo = buf.info;
@@ -213,11 +214,7 @@ function generate_question()
 	
 	//** load extra initialization steps
 	if (chosenComponent.extInit != false)
-	{
-		strbuf = answer.init;
-		answer.init = new Array();
-		answer.init[0] = strbuf;
-		
+	{		
 		//** if there are multiple steps in initialization beyond the constructor
 		if (chosenComponent.extInit.constructor === Array)
 		{
@@ -249,6 +246,8 @@ function generate_question()
 			objInfo += buf.info;
 		}
 	}
+	else
+		answer.extInit = false;
 	
 	//** show initialization info
 	questionDisplay.info.innerHTML = objInfo;
@@ -315,9 +314,14 @@ function run_finish_action()
 			questionNum++;
 			write_progress();
 			displayingResults = false;
+			
 			document.forms["responseform"].reset();
+			document.forms["responseform"].style.display = "block";
+			document.getElementById("answers").style.display = "none";
+			
 			document.getElementById("nextAction").innerHTML="Submit";
 			generate_question();
+			window.location.replace("#_activitystart");
 		}
 		//** reload page
 		else
@@ -329,12 +333,18 @@ function run_finish_action()
 	//** check answer
 	else
 	{
-		check_answer();
+		var correct;
+		correct = check_answer();
+		score_answer(correct);
+		report_answer(correct);
+		write_progress();
 		displayingResults = true;
 		if (questionNum < 5)
 			document.getElementById("nextAction").innerHTML="Next &gt;";
 		else
 			document.getElementById("nextAction").innerHTML="Retry";
+		
+		window.location.replace("#_activitystart");
 	}
 }
 
@@ -346,7 +356,6 @@ function check_answer()
 {
 	var response = new Object();
 	var ansDisp = new Object();
-	var objName;
 	var correct = new Object();
 	var buf;
 	var param, paramList;
@@ -366,6 +375,7 @@ function check_answer()
 	
 	correct.decl = true;
 	correct.init = new Array();
+	correct.alreadyUsed = new Array();
 	
 	response.decl = response.decl.trim();
 	
@@ -373,58 +383,73 @@ function check_answer()
 		response.init[x] = response.init[x].trim();
 	
 	//** begin correcting the declaration ** ------------------------
-	buf = response.decl.split(' ')[0];
+	
+	response.decl = response.decl.trim();
 	
 	//** if they don't use the right component
-	if (buf.indexOf(answer.decl) == -1)
-		correct.decl = false;
-	
-	//** check to make sure that there are just two keywords
-	correct.decl = decl_check_keywords(response.decl);
-	
-	//** find the object's declared name
-	objName = decl_get_obj_name(response.decl);
-
-	//** validate the name
-	if (objName[0] == '!')
-	{
-		objName = objName.substr(1);
-		correct.decl = false;
-	}
-	else if (objName == "")
-	{
-		objName = "m_foo";
-		correct.decl = false;
-	}
+	correct.decl = (response.decl.indexOf(answer.decl) == 0);
 	
 	if (correct.decl)
-	{			
-		//** ensure that they declared it as a pointer!
-		pos.start = response.decl.indexOf(answer.decl);
-		pos.end = response.decl.indexOf(objName);
-		pos.loc = response.decl.indexOf('*');
+	{
+		//** check to make sure that there are just two keywords
+		correct.decl = decl_check_keywords(response.decl);
 		
-		if ((pos.start < pos.loc) && (pos.loc < pos.end))
+		//** find the object's declared name
+		correct.objName = decl_get_obj_name(response.decl);
+		
+		//** validate the name
+		if (correct.objName[0] == '!')
 		{
-			if (response.decl.indexOf('*',(pos.loc + 1)) != -1)
-				correct.decl = false;
-			else if (response.decl.indexOf(';') < pos.end)
-					correct.decl = false;
+			correct.objName = correct.objName.substr(1);
+			correct.decl = false;
+			
+			if (correct.objName == "")
+				correct.objName = "m_foo";
 		}
-		else
-			correct.decl = false;					
+		else if (correct.objName == "")
+		{
+			correct.objName = "m_foo";
+			correct.decl = false;
+		}
+		
+		if (correct.decl)
+		{			
+			//** ensure that they declared it as a pointer!
+			buf = response.decl.substr(answer.decl.length);
+			buf = buf.trim();
+			
+			correct.decl = (buf.indexOf('*') == 0);
+			
+			//** and, finally, the semicolon.
+			if (correct.decl)
+			{
+				buf = buf.substr(1);
+				buf = buf.trim();
+				
+				correct.decl = (buf.indexOf('*') == -1);
+				
+				if (correct.decl)
+				{
+					buf = buf.substr(buf.search("[A-Za-z0-9]"));
+					buf = buf.substr(buf.search("[ ;]"));
+					buf = buf.trim();
+					
+					correct.decl = (buf == ';');
+					console.log("Semicolon verified",correct.decl);
+					console.log("Remaining string:",buf);
+				}
+			}
+		}
 	}
-	
-	console.log("Declaration correct:",correct.decl);
 	
 	// ** begin correcting the initialization ** --------------------
 	
 	// ** make sure that they begin the initialization with the variable name
-	correct.init[0] = (response.init[0].indexOf(objName) == 0);
+	correct.init[0] = (response.init[0].indexOf(correct.objName) == 0);
 	
 	if (correct.init[0])
 	{		
-		buf = response.init[0].substr(objName.length);
+		buf = response.init[0].substr(correct.objName.length);
 		buf = buf.trim();
 		
 		// ** the constructor needs to be called via the assignment operator
@@ -547,13 +572,12 @@ function check_answer()
 		}
 	}
 	
-	console.log("First initialization correct:",correct.init[0]);
-	
 	// ** multi-step initialization
 	if (answer.init.constructor === Array)
 	{
 		var funcName;
 		var chosenFunc;
+		var optionalInit = 0;
 		
 		correct.alreadyUsed = new Array();
 		
@@ -562,8 +586,6 @@ function check_answer()
 		{
 			if (answer.extInit.constructor === Array)
 			{
-				var optionalInit = 0;
-				
 				for (var x = 0; x < answer.extInit.length; x++)
 				{
 					if (answer.extInit[x].params.optional)
@@ -574,7 +596,7 @@ function check_answer()
 			}
 			else
 			{
-				if (answer.extInit.params.optional)
+				if (answer.extInit && answer.extInit.params.optional)
 					correct.initMismatch = (response.init.length != 1);
 				else
 					correct.initMismatch = (response.init.length != answer.init.length);
@@ -583,17 +605,24 @@ function check_answer()
 		else
 			correct.initMismatch = false;
 		
-		if (response.init.length > 1)
+		if (!correct.initMismatch && response.init.length == 1 && response.init[0] === "")
+			correct.initMismatch = true;
+		
+		// ** if the user put in multiple initialization lines and were correct to do so
+		if (response.init.length > 1 && answer.extInit)
 		{
+			// ** parse through all of the initialization lines
 			for (var x = 1; x < response.init.length; x++)
 			{
-				correct.init[x] = (response.init[x].indexOf(objName) == 0);
+				// ** first check if the object's name is there
+				correct.init[x] = (response.init[x].indexOf(correct.objName) == 0);
 				
 				if (correct.init[x])
 				{
-					buf = response.init[x].substr(objName.length);
+					buf = response.init[x].substr(correct.objName.length);
 					buf = buf.trim();
 					
+					// ** then check for the arrow operator (because they should be using pointers!)
 					correct.init[x] = (buf.indexOf("->") == 0);
 					
 					if (correct.init[x])
@@ -604,8 +633,10 @@ function check_answer()
 						funcName = buf.substring(0, buf.indexOf('('));
 						funcName = funcName.trim();
 						
+						// ** if there are multiple initialization steps to be had
 						if (answer.extInit.constructor === Array)
 						{
+							chosenFunc = -1;
 							for (var y = 0; y < answer.extInit.length; y++)
 							{
 								if (funcName === answer.extInit[y].name)
@@ -625,6 +656,9 @@ function check_answer()
 								}
 							}
 							
+							if (chosenFunc < 0)
+								correct.init[x] = false;
+							
 							if (correct.init[x])
 							{
 								buf = buf.substr(funcName.length);
@@ -636,12 +670,14 @@ function check_answer()
 								correct.init[x] = check_param(paramList, answer.extInit[chosenFunc].params);
 							}
 						}
+						//** otherwise
 						else
 						{
 							correct.init[x] = (funcName === answer.extInit.name);
 							
 							if (correct.init[x])
 							{
+								answer.extInit.used = true;
 								buf = buf.substr(funcName.length);
 								buf = buf.trim();
 								
@@ -650,6 +686,8 @@ function check_answer()
 								
 								correct.init[x] = check_param(paramList, answer.extInit.params);
 							}
+							else
+								answer.extInit.used = false;
 						}
 					}
 					
@@ -659,8 +697,6 @@ function check_answer()
 						buf = buf.trim();
 						correct.init[x] = (buf === ';');
 					}
-					
-					console.log("Initialization line",x,"correct:",correct.init[x]);
 				}
 			}
 		}
@@ -668,7 +704,7 @@ function check_answer()
 	else
 		correct.initMismatch = (response.init.length != 1);
 	
-	console.log("Mismatching init",correct.initMismatch);
+	return correct;
 }
 
 /** CHECK DECLARATION STRING
@@ -822,13 +858,210 @@ function check_param (given, param)
 	return correct;
 }
 
+/** SCORE AN ANSWER
+ *  ---------------
+ *  Appropriately scores a given response.
+ * 
+ * @param correct: the correct object generated by check_answer()
+ */
+function score_answer (correct)
+{
+	var initPoints;
+	
+	if (correct.decl)
+		percentCorrect += 10;
+	
+	// ** if they did not provide the correct number of initialization steps, dock points
+	if (correct.initMismatch)
+		initPoints = (10 / (correct.init.length + 1));
+	else
+		initPoints = (10 / correct.init.length);
+	
+	for (var x = 0; x < correct.init.length; x++)
+	{
+		if (correct.init[x])
+			percentCorrect += initPoints;
+	}
+}
+
+/** REPORT AN ANSWER
+ *  ----------------
+ *  Displays the results of a response.
+ * 
+ * @param correct: the correct object generated by check_answer()
+ */
+function report_answer(correct)
+{
+	// ** hide the form, show the report
+	document.forms["responseform"].style.display = "none";
+	
+	// ** get the necessary elements
+	var declList = document.getElementById("decl_answer");
+	var initList = document.getElementById("init_answer");
+	var response = new Object();
+	var pos = new Object();
+	var funcName, funcIndex;
+	var unusedFunctions = false;
+	var buf;
+	
+	//** get the response
+	response.decl = document.forms["responseform"]["declare"].value;
+	response.init = document.forms["responseform"]["init"].value;
+
+	//** get the individual lines of the initialization
+	response.init = response.init.split("\n");
+	
+	// ** report the declaration answer
+	
+	buf = "<li>Your answer: <code>" + response.decl + "</code> ";
+	
+	// ** write a green checkmark if they are right
+	if (correct.decl)
+		buf += "<span style='color: #00cc00; font-size: 1.5em;'>&#10004;</span></li>";
+	
+	// ** write a red X and the correct answer if not
+	else
+	{
+		buf += "<span style='color: #ff0000; font-size: 1.5em;'>&#10008;</span></li>";
+		buf += "<li>Correct answer: <code>" + answer.decl + "* " + correct.objName + "&#59;</code></li>";
+	}
+	
+	declList.innerHTML = buf;
+	
+	// ** report the initialization answers
+	
+	// ** did they succeed at task #1?
+	buf = "<li>Correct number of initialization steps: ";
+	if (correct.initMismatch)
+		buf += "<span style='color: #ff0000; font-size: 1.5em;'>&#10008;</span></li>";
+	else
+		buf += "<span style='color: #00cc00; font-size: 1.5em;'>&#10004;</span></li>";
+	
+	// ** parse through all of the initialization steps
+	for (var x = 0; x < correct.init.length; x++)
+	{
+		buf += "<li>Initialization line " + (x + 1);
+		
+		if (correct.init[x])
+			buf += " <span style='color: #00cc00; font-size: 1.5em;'>&#10004;</span></li><ul>";
+		else
+			buf += " <span style='color: #ff0000; font-size: 1.5em;'>&#10008;</span></li><ul>";
+		
+		buf += "<li>Your answer: <code>" + response.init[x] + "</code></li>";
+		
+		// ** show some sort of correction if it is wrong
+		if (!correct.init[x])
+		{
+			// ** if they already called the function
+			if (correct.alreadyUsed.indexOf(x) != -1)
+				buf += "<li>You already called this function</li>";
+			
+			// ** if it is an extra initialization step
+			else if (x > 0)
+			{
+				pos.start = (response.init[x].indexOf("->") + 2);
+				pos.end = response.init[x].indexOf('(');
+				
+				funcName = response.init[x].substring(pos.start, pos.end);
+				funcName = funcName.trim;
+				
+				funcIndex = -1;
+				
+				if (answer.extInit.constructor === Array)
+				{
+					for (var y = 0; y < answer.extInit.length; y++)
+					{
+						if (funcName === answer.extInit[y].name)
+						{
+							funcIndex = y;
+							break;
+						}
+					}
+					
+					if (funcIndex == -1)
+						buf += "<li>Unknown function (did you misspell it?)</li>";
+					else
+					{
+						buf += "<li>Correct answer: <code>";
+						buf += (correct.objName + "->" + answer.init[funcIndex + 1]);
+						buf += "</code></li>";
+					}
+				}
+				else
+				{
+					if (funcName === answer.extInit.name)
+					{
+						buf += "<li>Correct answer: <code>";
+						buf += (correct.objName + "->" + answer.init[1]);
+						buf += "</code></li>";
+					}
+					else
+						buf += "<li>Unknown function (did you misspell it?)</li>";
+				}
+			}
+			
+			// ** if it is the first initialization step
+			else
+			{
+				buf += "<li>Correct answer: <code>";
+				buf += (correct.objName + " = " + answer.init[0]);
+				buf += "</code></li>";
+			}
+		}
+		
+		buf += "</ul>";
+	}
+	
+	// ** don't forget neglected functions! (I will never forget you...)
+	if (answer.extInit.constructor === Array)
+	{
+		for (var x = 0; x < answer.extInit.length; x++)
+		{
+			if ((!(answer.extInit[x].used)) && (!(answer.extInit[x].params.optional)))
+			{
+				if (!unusedFunctions)
+				{
+					buf += "<li>Uncalled functions</li><ul>";
+					unusedFunctions = true;
+				}
+				buf += "<li><code>" + correct.objName + "->" + answer.init[x+1] + "</li></code>";
+			}
+		}
+		
+		if (unusedFunctions)
+			buf += "</ul>"
+	}
+	else if (answer.extInit && response.init.length == 1)
+	{
+		if (!(answer.extInit.params.optional))
+		{
+			buf += "<li>Uncalled functions</li><ul><li><code>";
+			buf += correct.objName + "->" + answer.init[1] + "</li></code></ul>";
+		}
+	}
+	
+	//** if they tried calling functions during initialization when they didn't need to
+	if (correct.init.length < response.init.length)
+	{
+		buf += "<li>Initialization line 2</li><ul><li>";
+		buf += "Your answer: <code>" + response.init[1];
+		buf += "</code></li>";
+		buf += "<li>Unknown function</li></ul>";
+	}
+	
+	initList.innerHTML = buf;
+		
+	document.getElementById("answers").style.display = "block";
+}
+
+
 /** UPDATE THE PROGRESS INFORMATION
  *  -------------------------------
  *  Writes progress information to the progress indicator.
  */
 function write_progress()
 {
-	document.getElementById("progressIndicator").innerHTML = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + percentCorrect + '%';
+	document.getElementById("progressIndicator").innerHTML = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + percentCorrect.toFixed(1) + '%';
 }
 
 /** GET RANDOM PORT
