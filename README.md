@@ -20,12 +20,13 @@ For any issue you submit (regardless of its nature), please use the following te
 
 ```
 # Information
-Tutorial: (C++/WPI)
-Chapter-Lesson: X-X
+**Tutorial**: (C++/WPI)
+**Chapter-Lesson**: X-X
 
 (for bugs only)
-Browser/Version: Chrome/43.0.2357.81
-OS: Windows
+**Browser/Version**: Chrome/43.0.2357.81
+**OS**: Windows
+**Steps to reproduce**: ...
 
 # Description
 ...

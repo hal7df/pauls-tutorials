@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Paul's Tutorials</title>
+    <title>Programming</title>
     <meta content="">
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" type="text/css" href="selector.css"/>
@@ -11,6 +11,7 @@
   </head>
   <body>	
   		<!-- PAGE BODY -->
+  		<div style="background: url(files/img/PaulsTutorials-background.png) no-repeat center center">
   		<h2 class="tutorial" id="tname">Paul's Tutorials</h2>
   		
   		<ul class="select">
@@ -20,47 +21,17 @@
   		</ul>
   		
   		<p id="tdesc" style="text-align: center;">Select an option.</p>
+  		</div>
   		
-  		<noscript><p style="text-align: center;">JavaScript is disabled/unavailable. You may not be able to enjoy the full features of this site.</p></noscript>
-  		
-  		<h2 class="tutorial">News</h2>
-		  <ul>
-			  <li>Paul's Tutorials is moving to the HOT Team website!
-		  <ul>
-			  <li>Please note that, during this transition, pages may not be available. We're working on it.</li>
-		  </ul>
-		  </li>
-			  <li>We're working on a number of improvements to the tutorials. They're not finished yet, but will be ready come build season.
-		  <ul>
-			  <li>The C++ Guided Tutorial is getting companion videos for each lesson. Currently, lessons 1-1 through 3-1 have videos. We're working on the rest.</li>
-			  <li>The WPI Tutorial is receiving updated interactive activities. For timing reasons, we are working on getting the content moved. The activities will be added later.</li>
-		  </ul>
-		  </li>
-		  </ul>
-		  <h2 class="tutorial">About</h2>
-		  <p>Paul's Tutorials is a series of in-depth tutorials designed to teach beginning programmers everything they need to know in order to program a robot. It includes a guided tutorial
-		  through the <a href="http://www.cplusplus.com/doc/tutorial" target="_blank">C++ tutorial at cplusplus.com</a> and a thorough tutorial through WPILib.</p>
-		  <p>If you have any suggestions or other feedback regarding the tutorials, please email <a href="mailto:heroesoftomorrowhot67@gmail.com">heroesoftomorrowhot67@gmail.com</a>.</p>
-		  <h3 class="tutorial">Note to other teams</h3>
-		  If you're from another team, cool! I hope you find this tutorial useful. However, I would like to point out that some of the activities are optimized for the resources we have
-		  available for training new team members (largely robots from previous years). I encourage you to adjust these activities to fit the needs of your team. Please talk to a mentor or
-		  an experienced team member about what you should do.
-
-		  Also note that this tutorial teaches to program directly into the <code>BuiltinDefaultCode</code> template provided by WPI. While there are a few notes for the style provided by
-		  RobotBuilder, programming using that method is not explored in this tutorial.
-		  <p style="font-size: 0.75em; font-style: italic;">The WPILib tutorial is written and maintained by a student and as such is neither endorsed nor written by WPI.</p>
-
+  		<noscript><p style="text-align: center; color: #ff0000;">JavaScript is disabled/unavailable. You may not be able to enjoy the full features of this site.</p></noscript>
   		
   		<hr />
-  		<h2 class="tutorial">Acknowledgements</h2>
-  		<p>The <a href="http://www.cplusplus.com/doc/tutorial" target="_blank">C++ tutorial</a> used with the C++ Guided Tutorial is written by authors at cplusplus.com</p>
-  		<p>Some C++ tutorial activities adapted these web resources:</p>
-  		<ul>
-  			<li><a href="http://www.cplusplus.com/forum/articles/12974" target="_blank">Beginner Exercises - cplusplus.com</a></li>
-  			<li><a href="http://www.math.ucla.edu/~wittman/10a.1.10w/Homework/HW7/homework7.html" target="_blank">PIC 10A Homework 7 - math.ucla.edu</a></li>
+  		<h2 class="tutorial" id="extname">External Resources</h2>
+  		<ul class="select">
+  			<li onmouseover="scrSelected()" onmouseout="resetAll()"><a href="https://wpilib.screenstepslive.com/s/4485" target="_blank"><img alt="SCR" src="files/img/screensteps.png"/></a></li>
+  			<li onmouseover="doxSelected()" onmouseout="resetAll()"><a href="http://first.wpi.edu/FRC/roborio/release/docs/cpp/" target="_blank"><img alt="DOX" src="files/img/doxygen.png"/></a></li>
+  			<li onmouseover="gitSelected()" onmouseout="resetAll()"><a href="https://github.com/hot67" target="_blank"><img alt="GIT" src="files/img/github.png"/></a></li>
   		</ul>
-  		
-  		<p>WPI Lesson 8 Activity -- from Carnegie Mellon University (<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15494-s11/lectures/manipulation_with_friction_files/PID%20Simulation.xls">original file</a>)</p>
-  
+  		<p id="extdesc" style="text-align: center;">&nbsp;</p>
   </body>
 </html>
