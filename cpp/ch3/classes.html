@@ -3,15 +3,15 @@
   <head>
     <title>3-2 Classes (C++)</title>
     <meta content="">
-    <link rel="stylesheet" type="text/css" href="../../style.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
   </head>
   <body>
   <h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">3-2</span>&nbsp;Classes</h1>
   	<hr />
-  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>
-  		&gt;&nbsp;<a href="../../" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
- 		&gt;&nbsp;<a href="../" title="Chapter 3: Advanced C++">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 2
+  	<div><a href="../../index.html" title="Programming Home">Programming Home</a>
+  		&gt;&nbsp;<a href="../index.html" title="C++ Guided Tutorial">C++ Guided Tutorial</a>
+ 		&gt;&nbsp;<a href="index.html" title="Chapter 3: Advanced C++">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 2
   		</div>	
   	<hr />
   	
@@ -122,7 +122,7 @@ card1 &lt; card2
 						</pre>
 						<p>is a true statement. The suit has no effect on how the cards are compared. Your operator should make use of the public function <code>rank2num()</code>, which you may want to define first.</p>
 						<p>The default constructor for the Card class should assign a random suit and rank to the card. This allows us to <q>draw</q> a new card every time we call the constructor.</p>
-						<p>In order to generate random numbers, use the <a href="../../tips-tricks#Random_Numbers" target="_blank"><code style="color: #e84747;">rand()</code></a> function. The <code>cstdlib</code> and <code>ctime</code> libraries have already been included for you in cards.h, so you don't have to.</p>
+						<p>In order to generate random numbers, use the <a href="../tips-tricks.html#Random_Numbers" target="_blank"><code>rand()</code></a> function. The <code>cstdlib</code> and <code>ctime</code> libraries have already been included for you in cards.h, so you don't have to.</p>
 						<p>For example, you could set the suit like this:</p>
 						<pre lang="cpp" escaped="true">
 int rand_num = 1 + rand() % 4;  //Random # between 1 and 4.
@@ -155,9 +155,9 @@ switch(rand_num) {
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 30%;"><a href="../pointers">&#8592; 3-1 Pointers</a></td>
+  				<td style="text-align: right; width: 30%;"><a href="pointers.html">&#8592; 3-1 Pointers</a></td>
   				<td style="text-align: center; font-weight: bold; width: 40%;">3-2 Classes</td>
-  				<td style="text-align: left; width: 30%;"><a href="../../../wpi">WPI Tutorial &#8594;</a></td>
+  				<td style="text-align: left; width: 30%;"><a href="../../wpi/index.html">WPI Tutorial &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>  
