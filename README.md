@@ -7,8 +7,6 @@ Paul's Tutorials are the programming tutorials for FRC Team #67, the 'HOT' Team.
 
 These pages are mostly complete, with C++ missing a few videos and WPI missing a few updated activities.
 
-Note: This will not currently work completely off of a local drive -- the link structure is currently optimized for our WordPress site.
-
 ## Contributing
 We welcome your contributions! If you have anything to add to the wealth of knowledge contained here, or would like to improve the layout, style, or function of these pages, then please do:
 
