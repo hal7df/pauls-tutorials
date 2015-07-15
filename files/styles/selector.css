@@ -1,17 +1,3 @@
-/** SELECTOR **/
-img.select {
-	opacity: 0.5;
-}
-img.select:hover {
-	opacity: 1;
-}
-span.select {
-	opacity: 0.5;
-}
-span.select:hover {
-	opacity: 1;
-}
-
 ul.select {
 	display: block;
 	line-height: 200px;
