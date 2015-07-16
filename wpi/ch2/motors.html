@@ -3,6 +3,12 @@
  <head>
   <title>2-2 Controlling Motors (WPI)</title>
   <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
  </head>
  <body>
 	<!-- ACTIVITY SCRIPT -->
@@ -65,7 +71,7 @@
 				However, you will still need to make sure that you are declaring the correct controller.</p>
 			<p>Another thing that you should take into consideration when programming the robot&#x27;s motors is the PWM of the motor that you are programming. You should always be sure that you 1) initialize the motor, and 2) initialize it on the right PWM! </p>
 			<p>For simplicity, the declaration of all of the components used in the code snippets below has been left out. You can assume the following: </p>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 /** Declarations **/
 Joystick* m_gamepad;
 Talon* m_arm;
@@ -74,12 +80,11 @@ Talon* m_launcher;
 /** Initialization **/
 m_gamepad = new Joystick (1);
 m_arm = new Talon (0);
-m_launcher = new Talon (1);
-		</pre>
+m_launcher = new Talon (1);</pre>
 
 			<h3 class="tutorial"><a id="Moving"></a>Moving</h3>
 				<p>Controlling the drive controllers is fairly simple. For basic control, you would use the following functions: </p>
-				<pre lang="cpp">
+				<pre class= "brush: cpp">
 Victor::Set(double speed)
 Jaguar::Set(double speed)
 Talon::Set(double speed)
@@ -91,14 +96,14 @@ Talon::Set(double speed)
 					</ul>
 				<h4 class="tutorial"><a id="Set_use"></a><code>Set()</code> use</h4>
 					<p>You can use <code>Set()</code> in a variety of ways. If you need fine control over the speed of the motor, you would use <code>Set()</code> in conjunction with a <code>GetRawAxis()</code> call from one of your controllers (almost always controller 1 -- the joysticks on controller 0 are always reserved for driving), like so:</p>
-					<pre lang="cpp">
+					<pre class= "brush: cpp">
 m_arm->Set(-m_gamepad->GetRawAxis(2)); //remember that the Y axis is backwards!!!
 					</pre>
   					<p>The above code, along with the declaration and initialization at the beginning of the lesson, sets up controller 1, a <code>Talon</code> for controlling an arm on PWM 0, and then uses the left Y axis to move the arm up and down.</p>
 					<p>The other way you would use <code>Set()</code> would be to bring a motor to a specific (relative) speed. This would be useful for powering up a launcher motor, etc. There is a way to get it to run at a more specific speed, but that will be described in thorough detail throughout the next chapter. For now, stick with this method.</p>
 					<p>In this case, you would use the controller buttons (usually A, B, X, and Y) to set the speed. B should generally be your <q>cancel</q> button, or speed of 0.</p>
 					<p>You might use it like this: </p>
-  					<pre lang="cpp">
+  					<pre class= "brush: cpp">
 if (m_gamepad->GetRawButton(1)) //if the A button is pressed, full forward
     m_launcher->Set(1.0);
 else if (m_gamepad->GetRawButton(3)) //if the X button is pressed, full reverse
@@ -109,7 +114,7 @@ else if (m_gamepad->GetRawButton(2)) //if the B button is pressed, cancel
 					<p>In this case, a button timeout would not be required, because you are setting the motor to the same value while the button is pressed.</p>
 			<h3 class="tutorial"><a id="How_Fast?"></a>How Fast?</h3>
 				<p>If you set one motor to different speeds throughout your program, or the <code>Set()</code> function is controlled by a controller joystick, you may find yourself at some point needing to figure out what that motor is currently set to. There is a function for that.</p>
-				<pre lang="cpp">
+				<pre class= "brush: cpp">
 float Victor::Get()
 float Jaguar::Get()
 float Talon::Get()
@@ -120,7 +125,7 @@ float Talon::Get()
 		<h2 class="tutorial"><a id="The_Relay"></a>The Relay</h2>
 			<p>One of the other controllers that was mentioned in lesson 1 was the <a href="../ch1/parts.html#Spikes%2FRelays">Spike</a>, which ran off of a relay. Since these devices are basically like light switches (with the added bonus of being able to go in reverse as well), they are programmed differently.</p>
 			<p>For this section, you can further assume that two relays have been set up like this: </p>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 Relay* m_roller;
 Relay* m_light;
 m_roller = new Relay (0);
@@ -128,7 +133,7 @@ m_light = new Relay (1);
 			</pre>
 			<h3 class="tutorial"><a id="Relay_Set"></a>Relay <code>Set()</code></h3>
 				<p>Like the other controllers, relays use the <code>Set()</code> function. However, it is used differently than the other functions.</p>
-				<pre lang="cpp">
+				<pre class= "brush: cpp">
 Relay::Set(enum relay_state)
 				</pre>
 				<h4 class="tutorial"><a id="Relay_Set_parameters"></a>Relay <code>Set()</code> parameters</h4>
@@ -143,7 +148,7 @@ Relay::Set(enum relay_state)
 					<p>Again, you need to be careful, as the <code>kForward</code> and <code>kReverse</code> states are determined from the wiring and the orientation of the motor.</p>
 				<h4 class="tutorial"><a id="Relay_Set_use"></a>Relay <code>Set()</code> use</h4>
 					<p>You would use <code>Set()</code> like you might expect, calling it to enable (forward or reverse) or disable the relay.</p>
-					<pre lang="cpp">
+					<pre class= "brush: cpp">
 if (m_gamepad->GetRawButton(1))
 	m_roller->Set(Relay::kForward);
 else if (m_gamepad->GetRawButton(2))
@@ -153,7 +158,7 @@ else
 					</pre>
 					<p>The above code will make a roller move in one direction if the A button is held, and in the other direction if the B button is held.</p>
 					<p>One thing that should be noted is that lights almost always are wired to relays (unless they are unmanaged). Because they are lights, you should only ever use the <code>Relay:kOff</code> and <code>Relay::kForward</code> states.</p>
-					<pre lang="cpp">
+					<pre class= "brush: cpp">
 if (m_gamepad->GetRawButton(4))
 	m_light->Set(Relay::kForward);
 else
@@ -163,9 +168,8 @@ else
 
 			<h3 class="tutorial"><a id="What_State?"></a>What State?</h3>
 				<p>Similar to the previous three, Relays also have a method to get what the controller is currently set to.</p>
-				<pre lang="cpp">
-enum Relay::Get()
-				</pre>
+				<pre class= "brush: cpp">
+enum Relay::Get()</pre>
   				<p>This returns the enumeration (from <a href="#Relay_Set_parameters">above</a>) that represents the current state of the relay.</p>
 	</div>
 	<div id="activity">

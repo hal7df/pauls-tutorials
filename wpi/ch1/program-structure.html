@@ -4,6 +4,12 @@
     <title>1-2 Program Structure (WPI)</title>
     <meta content="">
     <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+      <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
   </head>
   <body>
     	<!-- ACTIVITY SCRIPT -->
@@ -78,44 +84,39 @@
   		This will load an empty robot template into the workspace for you. The file you want is in the <q>src</q> directory, <q>Robot.cpp</q>.</p>
   		<p>Templates since the 2015 controls system upgrade don't have all of the functions that are listed here, but each of these functions are still accessible through the <code>IterativeRobot</code> class. If you wish to use a function that is not present in the template, simply write it in.</p>
   		<p>Let&#x27;s examine what it has done for us: </p>
-  		<pre lang="cpp" escaped="true">
-#include &quot;WPILib.h&quot;
-		</pre>
+  		<pre class= "brush: cpp">
+#include &quot;WPILib.h&quot;</pre>
 		<p>This includes the library which, in turn, includes all of the functions of the robot that you could ever want.</p>
-		<pre lang="cpp">
-class Robot: public IterativeRobot
-		</pre>
+		<pre class= "brush: cpp">
+class Robot: public IterativeRobot</pre>
 		<p>This creates a new class called <code>Robot</code> that you will program. It inherits the <code>IterativeRobot</code> class, the class the roboRIO treats the robot as.
 		Your class <span style="font-weight: bold;">MUST</span> inherit <code>IterativeRobot</code>, otherwise it will not work.</p>
 		<p>Now, we will look at the structure of the robot class.</p>
 	<h2 class="tutorial"><a id="Class_Members"></a>Class Members</h2>
-		<pre lang="cpp">
+		<pre class= "brush: cpp">
 class Robot: public IterativeRobot
 {
   	/*Put the components of your robot here.
   	 *...
-  	 */
-   	</pre>
+  	 */</pre>
    	<p>Here is where you declare everything that your robot has: drive controllers, sensors, etc. You also declare variables that you will use for control here, as well.</p>
    	<p>There is a specific way in which we declare robot components -- that is, using pointers. But we&#x27;ll get into that later.</p>
    <h2 class="tutorial"><a id="Class_Constructor"></a>Class Constructor</h2>
 		<p>The default code actually does not include this part, but you should write it in. If you remember from the C++ Guided Tutorial, the constructor is the part of the class where it initializes itself.</p>
-   	<pre lang="cpp">
+   	<pre class= "brush: cpp">
 Robot::Robot()
 {
 	//Initialize robot components here
-}
-		</pre>
+}</pre>
 		<p>The class constructor is used to initialize parts of the robot and to set variables for their initial run. This is called before the <a href="#RobotInit">RobotInit()</a> method in the program.
 			An example usage of the constructor: </p>
-		<pre lang="cpp">
+		<pre class= "brush: cpp">
 public:
 	Robot::Robot()
 	{
 		m_Victor1 = new Victor(1);
 		m_Counter = 0;
-	}
-		</pre>
+	}</pre>
 		<p>Again, how to initialize specific robot components will be reviewed in <a href="../parts-code">Lesson 1-3</a>.</p>
 		<p>You may notice the <code>public:</code> keyword before the class constructor. Everything declared before is private, to avoid memory overflow.</p>
 	<h2 class="tutorial"><a id="Initialization_Routines"></a>Initialization Routines</h2>
@@ -124,76 +125,68 @@ public:
 		<p>One important concept to note at this point is that the roboRIO operates in loops. It runs an init routine in one loop, then it switches to the corresponding periodic routine.
 			The periodic routine runs once per loop until the mode is changed, and the process is repeated again for the new mode.</p>
 		<h3 class="tutorial"><a id="RobotInit"></a><code>RobotInit()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void RobotInit()
 {
   // Actions which would be performed once (and only once) upon initialization of the
   // robot would be put here.
-}
-			</pre>
+}</pre>
 			<p>The comment says it all -- everything that is not component and variable initialization that you want to do before the robot does anything else (e.g. sending data to the dashboard as part of a disabled routine).</p>
 		<h3 class="tutorial"><a id="DisabledInit"></a><code>DisabledInit()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void DisabledInit()
 {
 	// Actions that are to be called as the robot enters disabled mode would be put here
-}
-			</pre>
+}</pre>
 			<p>Disabled routines, or when <q>Disabled</q> is selected in the driver station, are routines in which you can change variables, but you cannot change the state of the robot (i.e. activate motors). The most common use for this mode is to change between autonomous modes.
 				In the <code>DisabledInit</code> portion of the program, you would put statements that you want run as the robot enters disabled mode.</p>
 		<h3 class="tutorial"><a id="AutonomousInit"></a><code>AutonomousInit()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void AutonomousInit()
 {
 	// Put actions that should be run as the autonomous period of the match starts here.
-}
-			</pre>
+}</pre>
 			<p>Autonomous is the part of the match where the robot functions without input from the drivers (with the exception of the Kinect and other video devices).
 				If there are some actions that need to be run as you enter autonomous, put them here.</p>
 		<h3 class="tutorial"><a id="TeleopInit"></a><code>TeleopInit()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TeleopInit()
 {
 	// Put actions that should be run once teleoperated operation starts here.
-}
-			</pre>
+}</pre>
 			<p>Teleop, short for teleoperated, is when the drivers control the robot through the controls. This initialization routine is important, as it is often used to stop any leftover autonomous commands, should they run past their allocated period. It can also be used to reset the robot to a certain state after autonomous ends.</p>
 		<h3 class="tutorial"><a id="TestInit"></a><code>TestInit()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TestInit()
 {
 	// Put setup for diagnostics here
-}
-			</pre>
+}</pre>
 			<p>Test mode is an important mode: you can use it to test the functionality of your robot. Essentially, it is a diagnostic mode that you can use to determine exactly what is wrong with your robot.</p>
 			<p>In TestInit, you would set your robot up for diagnostics, if any are needed.</p>
 	<h2 class="tutorial"><a id="Periodic_Routines"></a>Periodic Routines</h2>
 		<p>These are all routines that are run once the roboRIO has finished the initialization stage for that specific mode (e.g. teleop). These continue to run, once per loop until the robot is disabled (in matches, the robot is disabled for a short period of time after autonomous to switch to teleop).
 			Because they loop automatically, you should <span style="font-weight: bold;">never</span> write a loop into these routines.</p>
 		<h3 class="tutorial"><a id="DisabledPeriodic"></a><code>DisabledPeriodic()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void DisabledPeriodic()
 {
 	//Put methods to be run while your robot is disabled here
-}
-			</pre>
+}</pre>
 			<p>Here is where you would program your robot to change autonomous modes, tune in a shot height, etc. Again, you cannot interact with drive controllers or anything that actuates parts of the robot here.</p>
 		<h3 class="tutorial"><a id="AutonomousPeriodic"></a><code>AutonomousPeriodic()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void AutonomousPeriodic()
 {
 	//Put methods that make up your autonomous routine here.
-}
-			</pre>
+}</pre>
 			<p><code>AutonomousPeriodic()</code> is what runs during the autonomous portion of the match. Here, you write the robot&#x27;s autonomous routine.</p>
 			<p>Note that, depending on the complexity of your autonomous, this can be the part of your program that requires the most logic.</p>
 		<h3 class="tutorial"><a id="TeleopPeriodic"></a><code>TeleopPeriodic()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TeleopPeriodic()
 {
 	//Put methods that would be run during teleop here.
-}
-			</pre>
+}</pre>
 			<p>Here is where you put in all of your teleop functionality, which includes but is not limited to:</p>
 			<ul>
 				<li>Driving</li>
@@ -202,7 +195,7 @@ void TeleopPeriodic()
 			</ul>
 			<p>Because this is easily one of the largest parts of the program (although there are a few exceptions), it is better to organize this, such that all of your teleop functionality is split up amongst organized functions.
 				For example, if you wanted to drive your robot and update the dashboard, your <code>TeleopPeriodic()</code> would look like this:</p>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TeleopPeriodic()
 {
 	TeleopDrive();
@@ -217,17 +210,15 @@ void TeleopDrive()
 void TeleopDashboardUpdate()
 {
 	//Update the driver station here
-}
-			</pre>
+}</pre>
 			<p><span style="font-weight: bold;">Note:</span> This will become even more apparent as the tutorial progresses, but <span style="font-weight: bold;">PLEASE</span> name your functions and variables with relevant names.
 				Not doing so will cause a lot of ripped-out hair and shouting voices.</p>
 		<h3 class="tutorial"><a id="TestPeriodic"></a><code>TestPeriodic()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TestPeriodic()
 {
 	// Put diagnostic routines here.
-}
-			</pre>
+}</pre>
 			<p>Here, you would put all of your diagnostics. In the case of this tutorial, you would use game controller buttons to test individual motors and specific robot functions.</p>
 			<p>Diagnostics are important because they help you determine the exact problem with your robot, should one arise. You should always program a diagnostic mode.</p>
 	<h2 class="tutorial"><a id="Continuous_Routines"></a>Continuous Routines</h2>
@@ -235,40 +226,36 @@ void TestPeriodic()
 		<p>Continuous routines are similar to periodic routines, in that they are called over and over again. However, they can run multiple times per loop, and they take higher priority over periodic routines.
 			Because of this, using these too much can lead to a runaway process thread and memory issues. Use these with caution, if at all.</p>
 		<h3 class="tutorial"><a id="DisabledContinuous"></a><code>DisabledContinuous()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void DisabledContinuous()
 {
 	//...
-}
-			</pre>
+}</pre>
 			<p>This is the continuous routine that runs in disabled mode.</p>
 		<h3 class="tutorial"><a id="AutonomousContinuous"></a><code>AutonomousContinuous()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void AutonomousContinuous()
 {
 	//...
-}
-			</pre>
+}</pre>
 			<p>This is the continuous routine that runs in autonomous.</p>
 		<h3 class="tutorial"><a id="TeleopContinuous"></a><code>TeleopContinuous()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TeleopContinuous()
 {
 	//...
-}
-			</pre>
+}</pre>
 			<p>This is the continuous routine that runs in teleop.</p>
 		<h3 class="tutorial"><a id="TestContinuous"></a><code>TestContinuous()</code></h3>
-			<pre lang="cpp">
+			<pre class= "brush: cpp">
 void TestContinuous()
 {
 	//...
-}
-			</pre>
+}</pre>
 			<p>This is the continuous routine that runs in test mode.</p>
 	<h2 class="tutorial"><a id="End_of_the_Program"></a>End of the Program</h2>
 		<p>At the end of the program, you may notice the following line:</p>
-		<pre lang="cpp">
+		<pre class= "brush: cpp">
 START_ROBOT_CLASS(Robot);
 		</pre><p>This is a macro that basically tells the roboRIO that the class <code>Robot</code> is the class to load and use on the robot.</p>
 	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
@@ -336,24 +323,22 @@ START_ROBOT_CLASS(Robot);
 	<p>If you run out of space in the text boxes, you can resize them with the handle in the lower-right corner.</p>
 	<p>There is no auto-check for this activity. If you want to check your work, talk to a mentor or veteran team member.</p>
 	<hr>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 #include "WPILib.h"
 	
 class Lesson2: public IterativeRobot
 {
-	/*
-	</pre>
+	/*</pre>
 	<textarea style="margin-left: 70px;" rows="10" cols="50" placeholder="Declarations"></textarea>
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
  	 */
 	     
 public:
 	Lesson2 ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Object/Variable init"></textarea>
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 
@@ -361,37 +346,33 @@ public:
 		
 	void RobotInit ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Robot init"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */     
 	}
 		
 	void DisabledInit ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Initialization for disabled mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
 	void AutonomousInit ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Initialization for autonomous mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
 	void TestInit ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Initialization for test mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
@@ -402,7 +383,7 @@ public:
 		/*
 	</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Disabled mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
@@ -411,25 +392,23 @@ public:
 		/*
 	</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Autonomous mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
 	void TeleopPeriodic ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Teleoperated mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
 	void TestPeriodic ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Test mode"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
@@ -439,10 +418,9 @@ public:
 		
 	void DisabledContinuous ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Disabled continuous"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
@@ -451,25 +429,23 @@ public:
 		/*
 	</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Autonomous continuous"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
 	void TeleopContinuous ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Teleoperated continuous"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
 	void TestContinuous ()
 	{
-		/*
-	</pre>
+		/*</pre>
 	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Test continuous"></textarea>	
-	<pre lang="cpp">
+	<pre class= "brush: cpp">
 		 */
 	}
 		
@@ -481,14 +457,11 @@ public:
 	 * like printing data). Note that I haven't put the box in a comment -- 
 	 * this means that you need to write the function syntax and put 
 	 * the comment in there! (Indentation is not necessary FOR THIS ACTIVITY ONLY)
-	 */
-		 
-	</pre>
+	 */</pre>
 	<textarea style="margin-left: 70px;" rows="10" cols="50" placeholder="Miscellaneous functions"></textarea>
-	<pre lang="cpp"> 
+	<pre class= "brush: cpp"> 
 };
-START_ROBOT_CLASS(Lesson2);
-	</pre>
+START_ROBOT_CLASS(Lesson2);</pre>
 	
 	<!-- NAVIGATION -->
   	<div style="clear: both;">

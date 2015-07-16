@@ -281,7 +281,7 @@ Ultrasonic *m_proximityDetect;
 m_proximityDetect = new Ultrasonic (5,4);</pre>
 			<h4 class="tutorial"><a id="Gyroscope"></a>Gyroscope</h4>
 				<p>A gyroscope is of class <code>Gyro</code> (capital G). In the initialization, provide the analog channel of the gyroscope, and set its sensitivity.</p>
-				<pre calss= "brush: cpp">
+				<pre class= "brush: cpp">
 //Gyroscope declaration
 Gyro *m_gyro;
 
@@ -296,15 +296,14 @@ m_gyro->SetSensitivity(2.00);</pre>
 					<li>Set the voltage change per 1G (Earth gravity) change</li>
 					<li>Set the voltage output at 0G (no gravity)</li>
 				</ul>
-				<pre lang="cpp">
+				<pre class= "brush: cpp">
 //Accelerometer declaration
 Accelerometer *m_accel;
 
 //Accelerometer initialization on analog channel 2, voltage change of 2, and zero-G voltage of 1
 m_accel = new Accelerometer (2);
 m_accel->SetSensitivity(2.0);
-m_accel->SetZero(1.0);
-				</pre>
+m_accel->SetZero(1.0);</pre>
 		<h3 class="tutorial"><a id="Driver_Station_Components"></a>Driver Station Components</h3>
 			<p>There are a few components on the driver&#x27;s side that you need to declare.</p>
 			<h4 class="tutorial"><a id="Game_Controller"></a>Game Controller</h4>
@@ -318,15 +317,14 @@ m_accel->SetZero(1.0);
 				</ul>
 				<p>The actual ID of the joystick depends on when it was plugged in (first plugged in - 0, second - 1, and so on). There are a total of 4 available slots.
 					Some teams use 3 or 4 if they use Attack3-like joysticks (multiple joysticks per driver), but we only ever use 2.</p>
-				<pre lang="cpp">
+				<pre class= "brush: cpp">
 //Game controller declaration
 Joystick *m_driver;
 Joystick *m_operator;
 
 //Game controller initialization
 m_driver = new Joystick (0);
-m_operator = new Joystick (1);
-				</pre>
+m_operator = new Joystick (1);</pre>
 			<h4 class="tutorial"><a id="Driver_Station"></a>Driver Station</h4>
 				<p>Believe it or not, the driver station (computer) has a few components that need to be declared. These are either useful debugging tools or methods to access information about the field.</p>
 				<p>Note that, unlike everything above, you do not use the <code>new</code> keyword to initialize the object, because the object is already running on the driver station (and hence is not new).
@@ -340,28 +338,26 @@ m_operator = new Joystick (1);
 						<li>Whether the Field Management System (FMS) is connected (in other words, whether you're on a competition field)</li>
 					</ul>
 					<p>To initialize it, just grab the pointer to the currently running <code>DriverStation</code> instance using the <code>GetInstance()</code> method.</p>
-					<pre lang="cpp">
+					<pre class= "brush: cpp">
 //DriverStation declaration
 DriverStation *m_ds;
 
 //DriverStation initialization
-m_ds = DriverStation::GetInstance();
-					</pre>
+m_ds = DriverStation::GetInstance();</pre>
 				<h5 class="tutorial"><a id="Live_Window"></a>Live Window</h5>
 					<p>Smart Dashboard provides an option to manipulate robot components in real time. This feature is known as <span style="font-style: italic;">Live Window mode</span>, and is used in the <code>Test</code> routines in your program.
 						You manage Live Window with the <code>LiveWindow</code> object.</p>
-					<pre lang="cpp">
+					<pre class= "brush: cpp">
 //Live Window declaration
 LiveWindow *m_lw;
 
 //Live Window initialization
-m_lw = LiveWindow::GetInstance();
-					</pre>
+m_lw = LiveWindow::GetInstance();</pre>
 		<h3 class="tutorial"><a id="Miscellaneous"></a>Miscellaneous</h3>
 			<h4 class="tutorial"><a id="Timer"></a>Timer</h4>
 				<p>A <code>Timer</code>, is, well, a timer. This is useful for creating timed actions.</p>
 				<p>It is of type <code>Timer</code>. It has no special initialization.</p>
-				<pre lang="cpp" escaped="true">
+				<pre class= "brush: cpp">
 //Timer declaration
 Timer *m_timer;
 
@@ -371,8 +367,7 @@ m_timer = new Timer;
 /** Notice how no parentheses were added after the 'Timer'
   * statement in the initialization. It's not necessary, so
   * just leave it out.
-  */
-  				</pre>
+  */</pre>
   	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
   	  	<p>In this activity, you will be given either the name of a component or a picture of a component. You will be given all of the necessary information to initialize the component. Using this information, write both a component declaration and initialization line.</p>
   	  	<p>There are 5 questions.</p>
