@@ -3,7 +3,14 @@
   <head>
     <title>2-4 Pneumatics (WPI)</title>
     <meta content="">
-    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css"/>\
+    
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
   </head>
   <body>
   	<!-- PAGE HEADER -->
@@ -46,22 +53,17 @@
   				In order to shift into low gear, the valve had to be opened. Essentially, it is important to realize that the solenoid's closed state is not necessarily inert or unuseful.</p>
   		<h2 class="tutorial"><a id="solenoids"></a>Solenoids</h2>  			
   			<p>Just like motors, Solenoids are controlled using the <code>Set()</code> function.</p>
-  			<pre lang="cpp">
-void Solenoid::Set(bool state)
-  			</pre>
+  			<pre class="brush: cpp">void Solenoid::Set(bool state)</pre>
   			<h3 class="tutorial"><a id="solenoid-set-params"></a>Solenoid <code>Set()</code> parameters</h3>
   				<p>The only parameter for the <code>Set()</code> function is a <code>true</code> or <code>false</code> value. These map to open and closed, respectively.</p>
   			<h3><a id="solenoid-set-use"></a>Solenoid <code>Set()</code> use</h3>
-  				<pre lang="cpp">
+  				<pre class="brush: cpp">
 m_solenoid->Set(true); //open valve
-m_solenoid->Set(false); //close valve
-  				</pre>
+m_solenoid->Set(false); //close valve</pre>
   			<h3 class="tutorial"><a id="what-state"></a>What state?</h3>
   				<p>Again, you may be in a situation where you need to know what state a solenoid is currently in. You can get this with the <code>Solenoid Get()</code>  function.
   					The return value is a boolean that is true when the valve is open and false when it is closed.</p>
-  				<pre lang="cpp">
-bool Solenoid::Get()
-  				</pre>
+  				<pre class="brush: cpp">bool Solenoid::Get()</pre>
   		<h2 class="tutorial"><a id="compressor"></a>Compressor</h2>
   			<p>One of the important things about a pneumatic system is that the pressure in the system must be kept at safe levels. 
   				In the past, teams had to program this safety feature into their code, but since the 2015 season, this has been automatically controlled by the controls system.</p>
@@ -72,9 +74,7 @@ bool Solenoid::Get()
   			<h3 class="tutorial"><a id="reading-pressure"></a>Reading from the Pressure Switch</h3>
   				<p>If you remember from <a href="parts.html#Pressure_switch">lesson 1-1</a>, the pressure switch only gives you a true or a false value.
   					You can use the following function to get that value:</p>
-  				<pre lang="cpp">
-bool Compressor::GetPressureSwitchValue()
-  				</pre>
+  				<pre class="brush: cpp">bool Compressor::GetPressureSwitchValue()</pre>
   				<p><code>GetPressureSwitchValue()</code> will return:</p>
   				<ul>
   					<li><code>true</code> if the switch is closed (high pressure).</li>
@@ -83,17 +83,14 @@ bool Compressor::GetPressureSwitchValue()
   			<h3 class="tutorial"><a id="setting-compressor"></a>Setting the Compressor</h3>
   				<p>Of course, the other important thing that you need to be able to do with the compressor is control whether it is on or off.
   					You can do this with the following two functions:</p>
-  				<pre lang="cpp">
+  				<pre class="brush: cpp">
 void Compressor::Enable()
-void Compressor::Disable()
-  				</pre>
+void Compressor::Disable()</pre>
   				<p>Running the appropriate function will enable or disable the compressor.</p>
   				<h4 class="tutorial"><a id="is-enabled"></a>Is it enabled?</h4>
   					<p>In addition to being able to set the compressor, much like everything else, sometimes it is also helpful to know what the compressor is currently set to.
   						You can use the following function to do this:</p>
-  					<pre lang="cpp">
-bool Compressor::Enabled()
-					</pre>
+  					<pre class="brush: cpp">bool Compressor::Enabled()</pre>
 				<p>This function will return <code>true</code> if the compressor is enabled, <code>false</code> otherwise.</p>
   	</div>
   	<div id="activity">

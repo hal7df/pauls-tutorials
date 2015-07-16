@@ -3,6 +3,13 @@
  <head>
  	<title>3-1 Sensors and Information (WPI)</title>
  	<link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+ 	
+ 	<link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
  </head>
  <body>
  
@@ -79,7 +86,7 @@
 
 		<p>Most sensors should have this function: </p>
 
-		<pre lang="cpp">int PIDGet()</pre>
+		<pre class="brush: cpp">int PIDGet()</pre>
 
 		<p>This function is special, because it will always return the sensor's main reading. This is important for later, because this provides the input to the <a href="pid2.html"><code>PIDController</code></a> that you will learn to use in lesson 3-3.</p>
 
@@ -90,7 +97,7 @@
 				<p><a href="../ch1/parts-code.html#AnalogInput">Analog</a> devices use voltage as a means of measurement. What the voltage range is depends on the sensor being used.
 					Potentiometers, the device most commonly used that falls under this class, have a range of about 0-6 volts.</p>
 
-				<pre lang="cpp">float AnalogInput::GetAverageVoltage()</pre>
+				<pre class="brush: cpp">float AnalogInput::GetAverageVoltage()</pre>
 
 		<h3 class="tutorial"><a id="Digital_Sensors"></a>Digital Sensors</h3>
 
@@ -98,7 +105,7 @@
 
 				<p>Devices that use the <a href="../ch1/parts-code.html#DigitalInput">DigitalInput</a> class return true/false values, as they are all switches of some sort.</p>
 
-				<pre lang="cpp">bool DigitalInput::Get()</pre>
+				<pre class="brush: cpp">bool DigitalInput::Get()</pre>
 
 			<h4 class="tutorial"><a id="Encoder"></a>Encoder</h4>
 
@@ -107,7 +114,7 @@
 					Should you do something that will only work when a certain value is hit, then you should reset the encoder.</p>
 				<p>The following are functions that you might commonly use with an encoder:</p>
 
-				<pre lang="cpp">
+				<pre class="brush: cpp">
 //Get the distance recorded by the encoder as per Encoder::SetDistancePerPulse()
 double Encoder::GetDistance()
 
@@ -115,19 +122,17 @@ double Encoder::GetDistance()
 float Encoder::GetRate()
 
 //Reset the encoder count
-void Encoder::Reset()
-				</pre>
+void Encoder::Reset()</pre>
 
 			<h4 class="tutorial"><a id="Accelerometer"></a>Accelerometer</h4>
 
 				<p style="font-style: italic;">Note: Different accelerometers (such as the onboard accelerometer in the roboRIO or external accelerometers) will use different class names, but they all inherit <code>Acceleromter</code>, so these functions will be available in any accelerometer object.</p>
 				<p>Since <a href="../ch1/parts-code.html#Accelerometer">accelerometers</a> can measure acceleration on multiple axes, you need to call the function with the appropriate axis.</p>
 
-				<pre lang="cpp">
+				<pre class="brush: cpp">
 double Accelerometer::GetX()
 double Accelerometer::GetY()
-double Accelerometer::GetZ()
-				</pre>
+double Accelerometer::GetZ()</pre>
 				
  </div>
  <div id="activity">

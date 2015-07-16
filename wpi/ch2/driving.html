@@ -3,6 +3,13 @@
  <head>
   <title>2-3 Earning Your Driver's License: Driving (WPI)</title>
   <link rel="stylesheet" type="text/css" href="../../files/styles/style.css"/>
+  
+  <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+  <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+  <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+  <script type="text/javascript">SyntaxHighlighter.all();</script>
  </head>
 <body>
  <!-- PAGE HEADER -->
@@ -38,7 +45,7 @@
 		<p>You may remember the <a href="../ch1/parts-code.code#RobotDrive">RobotDrive</a> object from lesson 1-3. This object provides various functions to make managing the drive system simpler.
 			There are two functions that you will see most often: <code>ArcadeDrive()</code> and <code>TankDrive()</code>.</p>
 		<p>For all of the following examples, assume the following have all been declared:</p>
-		<pre lang="cpp">
+		<pre class="brush: cpp">
 //Declarations
 Talon* m_lDrive;
 Talon* m_rDrive;
@@ -53,13 +60,10 @@ m_rDrive = new Talon (2);
  
 m_robotDrive = new RobotDrive (m_lDrive, m_rDrive);
 
-m_timer = new Timer;
-		</pre>
+m_timer = new Timer;</pre>
 		<h3 class="tutorial"><a id="Arcade_Drive"></a>Arcade Drive</h3>
 			<p>This is the drive method that we most commonly use.</p>
-			<pre lang="cpp">
-void RobotDrive::ArcadeDrive(float velocity, float rotation)
-			</pre>
+			<pre class="brush: cpp">void RobotDrive::ArcadeDrive(float velocity, float rotation)</pre>
 			<h4 class="tutorial"><a id="ArcadeDrive-parameters"></a><code>ArcadeDrive()</code> parameters</h4>
 			<ul>
 				<li><code>float velocity</code>: The desired relative velocity of the robot (forwards/backwards)</li>
@@ -68,22 +72,17 @@ void RobotDrive::ArcadeDrive(float velocity, float rotation)
 			<h4 class="tutorial"><a id="ArcadeDrive-use"></a><code>ArcadeDrive()</code> use</h4>
 				<p>How you use <code>ArcadeDrive()</code> depends on which routine you are programming.
 					If you are programming in Teleop, you give it the opposite of the left Y axis and the right X axis (so that the robot doesn&#x27;t drift sideways if the left Y is being used), like so:</p>
-				<pre lang="cpp" escaped=true>
-m_robotDrive-&gt;ArcadeDrive(-m_gamepad-&gt;GetRawAxis(2), -m_gamepad-&gt;GetRawAxis(4));
-				</pre>
+				<pre class="brush: cpp">m_robotDrive-&gt;ArcadeDrive(-m_gamepad-&gt;GetRawAxis(2), -m_gamepad-&gt;GetRawAxis(4));</pre>
 				<p>However, in autonomous, you would feed <code>ArcadeDrive()</code> either set or calculated values. If you are using set values, you would use it in conjunction with a <code>Timer</code> or an encoder.</p>
-				<pre lang="cpp" escaped="true">
+				<pre class="brush: cpp">
 if (!m_timer-&gt;Get() &lt; 2.0)
    m_robotDrive-&gt;ArcadeDrive(0.75,0.75);
 else
-   m_robotDrive-&gt;ArcadeDrive(0.0,0.0);
-				</pre>
+   m_robotDrive-&gt;ArcadeDrive(0.0,0.0);</pre>
 				<p>The above code will run the robot in a curve to the right for two seconds, and then stop.</p>
 		<h3 class="tutorial"><a id="Tank_Drive"></a>Tank Drive</h3>
 			<p>The other driving function can achieve essentially the same effect as the <code>ArcadeDrive()</code>, but the mechanism it uses is different.</p>
-			<pre lang="cpp">
-void RobotDrive::TankDrive(float left_power, float right_power)
-			</pre>
+			<pre class="brush: cpp">void RobotDrive::TankDrive(float left_power, float right_power)</pre>
 			<h4 class="tutorial"><a id="TankDrive-parameters"></a><code>TankDrive()</code> parameters</h4>
 				<ul>
 					<li><code>float left_power</code>: The relative power (-1.0 to 1.0) going to the left drive.</li>
@@ -92,12 +91,11 @@ void RobotDrive::TankDrive(float left_power, float right_power)
 			<h4 class="tutorial"><a id="TankDrive-use"></a><code>TankDrive()</code> use</h4>
 				<p>How you use <code>TankDrive()</code> is determined in the same way as <code>ArcadeDrive()</code>. However, the game controllers do not lend themselves to this driving method.
 					Instead, <code>TankDrive()</code> is actually the preferred method for driving in autonomous (since it is generally easier to control the heading of the robot that way).</p>
-				<pre lang="cpp" escaped="true">
+				<pre class="brush: cpp">
 if (m_timer-&gt;Get() &lt; 2.0)
    m_robotDrive-&gt;TankDrive(0.5,1.0);
 else
-   m_robotDrive(0.0,0.0);
-				</pre>
+   m_robotDrive(0.0,0.0);</pre>
 				<p>The above code will run the robot in a left turn, moving forward, for two seconds, and then stop.</p>
 	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
 		<p>Program the robot to do the following:</p>

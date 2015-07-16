@@ -4,6 +4,12 @@
 	<title>3-3 PID Part 2: Implementing a PID (WPI)</title>
 	<link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
 	
+	<link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
  </head>
  <body>
  
@@ -49,9 +55,7 @@
  	<p>WPILib comes with a builtin PID controller class, named, quite creatively, <code>PIDController</code>. Declare it like you would any other robot component (as a pointer).</p>
  	<h3 class="tutorial"><a id="Initialization"></a>Initialization</h3>
  		<p>The <code>PIDController</code> constructor has 5 basic parameters for initialization.</p>
- 		<pre lang="cpp">
-PIDController::PIDController(float p, float i, float d, PIDSource* source, PIDOutput* output)
-		</pre>
+ 		<pre class="brush: cpp">PIDController::PIDController(float p, float i, float d, PIDSource* source, PIDOutput* output)</pre>
 		<ul>
 			<li><code>float p</code>: The value of P, or the proportional constant.</li>
 			<li><code>float i</code>: The value of I, or the integral constant.</li>
@@ -61,21 +65,13 @@ PIDController::PIDController(float p, float i, float d, PIDSource* source, PIDOu
 		</ul>
 	<h3 class="tutorial"><a id="Use"></a>Use</h3>
 		<p>Firstly, the <code>PIDController</code> has an on/off switch, which is off to start. In order to use it, it must first be enabled.</p>
-		<pre lang="cpp">
-void PIDController::Enable()
-		</pre>
+		<pre class="brush: cpp">void PIDController::Enable()</pre>
 		<p>Similarly, it can be disabled:</p>
-		<pre lang="cpp">
-void PIDController::Disable()
-		</pre>
+		<pre class="brush: cpp">void PIDController::Disable()</pre>
 		<p>Once enabled, all you need to do is set the setpoint. As soon as the robot reaches that point in the code, it will automatically move the output such that the input matches the setpoint.</p>
-		<pre lang="cpp">
-void PIDController::SetSetpoint(float setpoint)
-		</pre>
+		<pre class="brush: cpp">void PIDController::SetSetpoint(float setpoint)</pre>
 		<p>You can also check what the current setpoint is, as well.</p>
-		<pre lang="cpp">
-float PIDController::GetSetpoint()
-		</pre>
+		<pre class="brush: cpp">float PIDController::GetSetpoint()</pre>
  
  <h2 class="tutorial"><a id="Tuning_a_PID"></a>Tuning a PID</h2>
  	<p>Writing a PID is one thing. Making it work is another thing.</p>

@@ -3,6 +3,13 @@
  <head>
  <title>3-4 PID Part 3: Advanced PID Programiming (WPI)</title>
  <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+ 
+ <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
  </head>
  <body>
 
@@ -51,7 +58,7 @@
  	<h3 class="tutorial"><a id="Inheritance"></a>Inheritance</h3>
  		<p>One concept that was not covered in the C++ tutorial was <a href="http://www.cplusplus.com/doc/tutorial/inheritance/#inheritance" target="_blank">inheritance</a>. This is a method that allows you to create new classes that extend existing classes. </p>
  		<p>In this case, you need your subsystem wrapper to inherit the class <code>PIDOutput</code> in order for the <code>PIDController</code> to accept it as an output. </p>
- 		<pre lang="cpp">
+ 		<pre class="brush: cpp">
 class MySubsystemWrapper: public PIDOutput
 {
 //...
@@ -62,7 +69,7 @@ class MySubsystemWrapper: public PIDOutput
 		<p>To do this, you need to declare all of the components that you need with the subsystem as <code>private</code> members of this class. Declare them like you would declare the components in the root class (as pointers -- this is important!!). </p>
 		<p>Your constructor&#x27;s parameters will be all of the required components (and ONLY the required components) as pointers. Then, in the constructor, simply set the class&#x27; components equal to the components provided through the parameters. This way, you can actually skip the initialization of these components. </p>
 		<p>Let&#x27;s say that you are trying to write a PID that writes to two <code>Victors</code>. </p>
-		<pre lang="cpp">
+		<pre class="brush: cpp">
 //class header file
 class MySubsystemWrapper: public PIDOutput
 {
@@ -78,16 +85,13 @@ MySubsystemWrapper::MySubsystemWrapper(Victor* m_motor1, Victor* m_motor2)
 {
   m_lMotor = m_motor1;
   m_rMotor = m_motor2;
-}
-		</pre>
+}</pre>
 	<h3 class="tutorial"><a id="Writing_to_the_Outputs"></a>Writing to the Outputs</h3>
 		<p>The <code>PIDOutput</code> class contains a (virtual) function that the <code>PIDController</code> uses to write the output of the PID. However, the one provided by the <code>PIDOutput</code> class does not do anything useful for this purpose, so we must write our own. </p>
 		<p>This function, called <code>PIDWrite()</code>, takes the following form: </p>
-		<pre lang="cpp">
-void PIDOutput::PIDWrite(float output)
-		</pre>
+		<pre class="brush: cpp">void PIDOutput::PIDWrite(float output)</pre>
 		<p>Since we now have the motors available to us, we can simply write a function that redirects this output at both motors. </p>
-		<pre lang="cpp" escaped="true">
+		<pre class="brush: cpp">
 //class header file
 class MySubsystemWrapper: public PIDOutput
 {
@@ -104,23 +108,19 @@ void MySubsystemWrapper::PIDWrite(float output)
 {
   m_lMotor-&gt;Set(output);
   m_rMotor-&gt;Set(output);
-}
-		</pre>
+}</pre>
  <h2 class="tutorial"><a id="Interfacing_with_the_PIDController"></a>Interfacing with the <code>PIDController</code></h2>
  	<p>Now that you have written the subsystem wrapper, you need to come back to the root class to put it all together. </p>
  	<p>Firstly, you need to include the class header file (so you have access to it). Keep it in the same directory as your main file, to keep things simple. Make sure that, when you include it, you use quotes and not the &quot;<code>&lt;&gt;</code>&quot; brackets when you include the file. </p>
  	<p>Secondly, declare an object of that class. Declare it and initialize it like you would any other component, but make sure that you initialize the subsystem wrapper <span style="font-weight: bold;">AFTER</span> you have initialized all of the components that the subsystem wrapper requires. </p>
- 	<pre lang="cpp">
+ 	<pre class="brush: cpp">
 //Declaration example
 MySubsystemWrapper* m_subsysWrap;
 
 //Initialization example -- after initialization of m_lMotor and m_rMotor
-m_subsysWrap = new MySubsystemWrapper(m_lMotor, m_rMotor);
-	</pre>
+m_subsysWrap = new MySubsystemWrapper(m_lMotor, m_rMotor);</pre>
 	<p>Then, when you initialize the <code>PIDController</code> (this must be <span style="font-weight: bold;">after</span> the initialization of the subsystem wrapper), simply pass the subsystem wrapper to the <code>PIDController</code> as the output. </p>
-	<pre lang="cpp">
-m_PIDController = new PIDController (m_p, m_i, m_d, m_sensor, m_subsysWrap);
-	</pre>
+	<pre class="brush: cpp;">m_PIDController = new PIDController (m_p, m_i, m_d, m_sensor, m_subsysWrap);</pre>
 	<p>That is all you have to do. The robot will output to both motors when it writes output from that point forward. </p>
  </div>
  
