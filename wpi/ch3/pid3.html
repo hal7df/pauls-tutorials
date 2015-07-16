@@ -2,7 +2,7 @@
 <html>
  <head>
  <title>3-4 PID Part 3: Advanced PID Programiming (WPI)</title>
- <link rel="stylesheet" type="text/css" href="../../style.css" />
+ <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
  </head>
  <body>
 
@@ -11,8 +11,9 @@
 	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">3-4</span>&nbsp;PID Part 3: Advanced PID Programming</h1>
 	<hr />
 	<div>
-		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
-		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 4
+		<a href="../../index.html" title="Programming Home">Programming Home</a>
+		&gt;&nbsp;<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+		&gt;&nbsp;<a href="index.html" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 4
 	</div>
 	<hr /> 
 
@@ -48,7 +49,7 @@
  		<p> <span style="font-style: italic;">Do <span style="font-weight: bold;">NOT</span> put an <code>m_</code> prefix in the class name! That is for individual objects.</span> </p>
  		<p>Make sure you add <code>#include &quot;WPILib.h&quot;</code> to your header file, so you have access to everything. </p>
  	<h3 class="tutorial"><a id="Inheritance"></a>Inheritance</h3>
- 		<p>One concept that was not covered in the C++ tutorial was <a href="http://www.cplusplus.com/doc/tutorial/inheritance/#inheritance" rel="nofollow">inheritance</a>. This is a method that allows you to create new classes that extend existing classes. </p>
+ 		<p>One concept that was not covered in the C++ tutorial was <a href="http://www.cplusplus.com/doc/tutorial/inheritance/#inheritance" target="_blank">inheritance</a>. This is a method that allows you to create new classes that extend existing classes. </p>
  		<p>In this case, you need your subsystem wrapper to inherit the class <code>PIDOutput</code> in order for the <code>PIDController</code> to accept it as an output. </p>
  		<pre lang="cpp">
 class MySubsystemWrapper: public PIDOutput
@@ -126,12 +127,13 @@ m_PIDController = new PIDController (m_p, m_i, m_d, m_sensor, m_subsysWrap);
  <!-- NAVIGATION -->
   <div style="clear: both;">
   	<hr />
+	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="../pid2">&#8592; 3-3 PID Part 2: Implementing a PID</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="pid2.html">&#8592; 3-3 PID Part 2: Implementing a PID</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">3-4 PID Part 3: Advanced PID Programming</td>
-  				<td style="text-align: left; width: 40%;"><a href="../../ch4">Chapter 4: Routines &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="../ch4/index.html">Chapter 4: Routines &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>
