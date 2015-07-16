@@ -3,7 +3,7 @@
   <head>
     <title>1-2 Program Structure (WPI)</title>
     <meta content="">
-    <link rel="stylesheet" type="text/css" href="../../style.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
   </head>
   <body>
     	<!-- ACTIVITY SCRIPT -->
@@ -29,7 +29,9 @@
 	<h1 class ="tutorial" style="line-height: 60px;"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-2</span>&nbsp;Program Structure</h1>
   	<hr />
-  	<div><a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 2
+  	<div><a href="../../index.html" title="Programming Home">Programming Home</a>
+		 &gt;&nbsp;<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+		 &gt;&nbsp;<a href="index.html" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 2
   		</div>	
   	<hr />
   	
@@ -43,25 +45,25 @@
   		<li><a href="#Class_Constructor">Class Constructor</a></li>
   		<li><a href="#Initialization_Routines">Initialization Routines</a></li>
   		<ul>
-  			<li><a href="#RobotInit"><code style="color: #e84747;">RobotInit()</code></a></li>
-  			<li><a href="#DisabledInit"><code style="color: #e84747;">DisabledInit()</code></a></li>
-  			<li><a href="#AutonomousInit"><code style="color: #e84747;">AutonomousInit()</code></a></li>
-  			<li><a href="#TeleopInit"><code style="color: #e84747;">TeleopInit()</code></a></li>
-  			<li><a href="#TestInit"><code style="color: #e84747;">TestInit</code></a></li>
+  			<li><a href="#RobotInit"><code>RobotInit()</code></a></li>
+  			<li><a href="#DisabledInit"><code>DisabledInit()</code></a></li>
+  			<li><a href="#AutonomousInit"><code>AutonomousInit()</code></a></li>
+  			<li><a href="#TeleopInit"><code>TeleopInit()</code></a></li>
+  			<li><a href="#TestInit"><code>TestInit</code></a></li>
   		</ul>
   		<li><a href="#Periodic_Routines">Periodic Routines</a></li>
   		<ul>
-  			<li><a href="#DisabledPeriodic"><code style="color: #e84747;">DisabledPeriodic()</code></a></li>
-  			<li><a href="#AutonomousPeriodic"><code style="color: #e84747;">AutonomousPeriodic()</code></a></li>
-  			<li><a href="#TeleopPeriodic"><code style="color: #e84747;">TeleopPeriodic()</code></a></li>
-  			<li><a href="#TestPeriodic"><code style="color: #e84747;">TestPeriodic</code></a></li>
+  			<li><a href="#DisabledPeriodic"><code">DisabledPeriodic()</code></a></li>
+  			<li><a href="#AutonomousPeriodic"><code>AutonomousPeriodic()</code></a></li>
+  			<li><a href="#TeleopPeriodic"><code>TeleopPeriodic()</code></a></li>
+  			<li><a href="#TestPeriodic"><code>TestPeriodic()</code></a></li>
   		</ul>
   		<li><a href="#Continuous_Routines">Continuous Routines</a></li>
   		<ul>
-  			<li><a href="#DisabledContinuous"><code style="color: #e84747;">DisabledContinuous()</code></a></li>
-  			<li><a href="#AutonomousContinuous"><code style="color: #e84747;">AutonomousContinuous()</code></a></li>
-  			<li><a href="#TeleopContinuous"><code style="color: #e84747;">TeleopContinuous()</code></a></li>
-  			<li><a href="#TestContinuous"><code style="color: #e84747;">TestContinuous()</code></a></li>
+  			<li><a href="#DisabledContinuous"><code>DisabledContinuous()</code></a></li>
+  			<li><a href="#AutonomousContinuous"><code>AutonomousContinuous()</code></a></li>
+  			<li><a href="#TeleopContinuous"><code>TeleopContinuous()</code></a></li>
+  			<li><a href="#TestContinuous"><code>TestContinuous()</code></a></li>
   		</ul>
   		<li><a href="#End_of_the_Program">End of the Program</a></li>
   		<li><a href="#Activity">Activity</a></li>
@@ -73,7 +75,9 @@
   		<p>The underlying program on the roboRIO reads the class that you wrote, and applies it to the robot. So, essentially, you are treating the robot as if it were a class.</p>
   	<h2 class="tutorial"><a id="Getting_Started"></a>Getting Started</h2>
   		<p>When you installed the WPI Eclipse extension, you installed a robot class template. In order to get it, go to File &gt; New &gt; Project. In the dialog, select <q>Robot C++ Project</q>, then <q>Iterative Robot</q>, then give your project a name.
-  		This will load all of the required files into your workspace (there are some other underlying files that you don&#x27;t touch). The file you want is in the <q>src</q> directory, <q>Robot.cpp</q>. Let&#x27;s examine what it has done for us: </p>
+  		This will load an empty robot template into the workspace for you. The file you want is in the <q>src</q> directory, <q>Robot.cpp</q>.</p>
+  		<p>Templates since the 2015 controls system upgrade don't have all of the functions that are listed here, but each of these functions are still accessible through the <code>IterativeRobot</code> class. If you wish to use a function that is not present in the template, simply write it in.</p>
+  		<p>Let&#x27;s examine what it has done for us: </p>
   		<pre lang="cpp" escaped="true">
 #include &quot;WPILib.h&quot;
 		</pre>
@@ -121,16 +125,16 @@ public:
 			The periodic routine runs once per loop until the mode is changed, and the process is repeated again for the new mode.</p>
 		<h3 class="tutorial"><a id="RobotInit"></a><code>RobotInit()</code></h3>
 			<pre lang="cpp">
-void Robot::RobotInit()
+void RobotInit()
 {
   // Actions which would be performed once (and only once) upon initialization of the
   // robot would be put here.
 }
 			</pre>
-			<p>The comment says it all -- everything that is not component and variable initialization that you want to do before the robot does anything else (e.g. sending things to the dashboard, if necessary).</p>
+			<p>The comment says it all -- everything that is not component and variable initialization that you want to do before the robot does anything else (e.g. sending data to the dashboard as part of a disabled routine).</p>
 		<h3 class="tutorial"><a id="DisabledInit"></a><code>DisabledInit()</code></h3>
 			<pre lang="cpp">
-void BuiltinDefaultCode::DisabledInit()
+void DisabledInit()
 {
 	// Actions that are to be called as the robot enters disabled mode would be put here
 }
@@ -139,7 +143,7 @@ void BuiltinDefaultCode::DisabledInit()
 				In the <code>DisabledInit</code> portion of the program, you would put statements that you want run as the robot enters disabled mode.</p>
 		<h3 class="tutorial"><a id="AutonomousInit"></a><code>AutonomousInit()</code></h3>
 			<pre lang="cpp">
-void Robot::AutonomousInit()
+void AutonomousInit()
 {
 	// Put actions that should be run as the autonomous period of the match starts here.
 }
@@ -148,7 +152,7 @@ void Robot::AutonomousInit()
 				If there are some actions that need to be run as you enter autonomous, put them here.</p>
 		<h3 class="tutorial"><a id="TeleopInit"></a><code>TeleopInit()</code></h3>
 			<pre lang="cpp">
-void Robot::TeleopInit()
+void TeleopInit()
 {
 	// Put actions that should be run once teleoperated operation starts here.
 }
@@ -156,7 +160,7 @@ void Robot::TeleopInit()
 			<p>Teleop, short for teleoperated, is when the drivers control the robot through the controls. This initialization routine is important, as it is often used to stop any leftover autonomous commands, should they run past their allocated period. It can also be used to reset the robot to a certain state after autonomous ends.</p>
 		<h3 class="tutorial"><a id="TestInit"></a><code>TestInit()</code></h3>
 			<pre lang="cpp">
-void Robot::TestInit()
+void TestInit()
 {
 	// Put setup for diagnostics here
 }
@@ -168,7 +172,7 @@ void Robot::TestInit()
 			Because they loop automatically, you should <span style="font-weight: bold;">never</span> write a loop into these routines.</p>
 		<h3 class="tutorial"><a id="DisabledPeriodic"></a><code>DisabledPeriodic()</code></h3>
 			<pre lang="cpp">
-void Robot::DisabledPeriodic()
+void DisabledPeriodic()
 {
 	//Put methods to be run while your robot is disabled here
 }
@@ -176,7 +180,7 @@ void Robot::DisabledPeriodic()
 			<p>Here is where you would program your robot to change autonomous modes, tune in a shot height, etc. Again, you cannot interact with drive controllers or anything that actuates parts of the robot here.</p>
 		<h3 class="tutorial"><a id="AutonomousPeriodic"></a><code>AutonomousPeriodic()</code></h3>
 			<pre lang="cpp">
-void Robot::AutonomousPeriodic()
+void AutonomousPeriodic()
 {
 	//Put methods that make up your autonomous routine here.
 }
@@ -185,7 +189,7 @@ void Robot::AutonomousPeriodic()
 			<p>Note that, depending on the complexity of your autonomous, this can be the part of your program that requires the most logic.</p>
 		<h3 class="tutorial"><a id="TeleopPeriodic"></a><code>TeleopPeriodic()</code></h3>
 			<pre lang="cpp">
-void Robot::TeleopPeriodic()
+void TeleopPeriodic()
 {
 	//Put methods that would be run during teleop here.
 }
@@ -199,47 +203,48 @@ void Robot::TeleopPeriodic()
 			<p>Because this is easily one of the largest parts of the program (although there are a few exceptions), it is better to organize this, such that all of your teleop functionality is split up amongst organized functions.
 				For example, if you wanted to drive your robot and update the dashboard, your <code>TeleopPeriodic()</code> would look like this:</p>
 			<pre lang="cpp">
-void Robot::TeleopPeriodic()
+void TeleopPeriodic()
 {
 	TeleopDrive();
 	TeleopDashboardUpdate();
 }
 
-void Robot::TeleopDrive()
+void TeleopDrive()
 {
 	//Methods for driving the robot here
 }
 
-void Robot::TeleopDashboardUpdate()
+void TeleopDashboardUpdate()
 {
 	//Update the driver station here
 }
 			</pre>
 			<p><span style="font-weight: bold;">Note:</span> This will become even more apparent as the tutorial progresses, but <span style="font-weight: bold;">PLEASE</span> name your functions and variables with relevant names.
 				Not doing so will cause a lot of ripped-out hair and shouting voices.</p>
-		<h3 class="tutorial"><a name="TestPeriodic"></a><code>TestPeriodic()</code></h>
+		<h3 class="tutorial"><a id="TestPeriodic"></a><code>TestPeriodic()</code></h3>
 			<pre lang="cpp">
-void Robot::TestPeriodic()
+void TestPeriodic()
 {
 	// Put diagnostic routines here.
 }
 			</pre>
 			<p>Here, you would put all of your diagnostics. In the case of this tutorial, you would use game controller buttons to test individual motors and specific robot functions.</p>
 			<p>Diagnostics are important because they help you determine the exact problem with your robot, should one arise. You should always program a diagnostic mode.</p>
-	<h2 class="tutorial"><a name="Continuous_Routines"></a>Continuous Routines</h2>
+	<h2 class="tutorial"><a id="Continuous_Routines"></a>Continuous Routines</h2>
+		<p>These routines don't appear in your class template, but they are still overrideable functions in the <code>IterativeRobot</code> class.</p>
 		<p>Continuous routines are similar to periodic routines, in that they are called over and over again. However, they can run multiple times per loop, and they take higher priority over periodic routines.
 			Because of this, using these too much can lead to a runaway process thread and memory issues. Use these with caution, if at all.</p>
-		<h3 class="tutorial"><a name="DisabledContinuous"></a><code>DisabledContinuous()</code></h3>
+		<h3 class="tutorial"><a id="DisabledContinuous"></a><code>DisabledContinuous()</code></h3>
 			<pre lang="cpp">
-void Robot::DisabledContinuous()
+void DisabledContinuous()
 {
 	//...
 }
 			</pre>
 			<p>This is the continuous routine that runs in disabled mode.</p>
-		<h3 class="tutorial"><a name="AutonomousContinuous"></a><code>AutonomousContinuous()</code></h3>
+		<h3 class="tutorial"><a id="AutonomousContinuous"></a><code>AutonomousContinuous()</code></h3>
 			<pre lang="cpp">
-void Robot::AutonomousContinuous()
+void AutonomousContinuous()
 {
 	//...
 }
@@ -247,7 +252,7 @@ void Robot::AutonomousContinuous()
 			<p>This is the continuous routine that runs in autonomous.</p>
 		<h3 class="tutorial"><a id="TeleopContinuous"></a><code>TeleopContinuous()</code></h3>
 			<pre lang="cpp">
-void Robot::TeleopContinuous()
+void TeleopContinuous()
 {
 	//...
 }
@@ -255,7 +260,7 @@ void Robot::TeleopContinuous()
 			<p>This is the continuous routine that runs in teleop.</p>
 		<h3 class="tutorial"><a id="TestContinuous"></a><code>TestContinuous()</code></h3>
 			<pre lang="cpp">
-void Robot::TestContinuous()
+void TestContinuous()
 {
 	//...
 }
@@ -328,6 +333,7 @@ START_ROBOT_CLASS(Robot);
 		<li>It must also have a diagnostic mode.</li>
 	</ul>
 	</noscript>
+	<p>If you run out of space in the text boxes, you can resize them with the handle in the lower-right corner.</p>
 	<p>There is no auto-check for this activity. If you want to check your work, talk to a mentor or veteran team member.</p>
 	<hr>	
 	<pre lang="cpp">
@@ -337,16 +343,16 @@ class Lesson2: public IterativeRobot
 {
 	/*
 	</pre>
-	<textarea style="margin-left: 70px;" rows="5" cols="25" placeholder="Declarations"></textarea>
+	<textarea style="margin-left: 70px;" rows="10" cols="50" placeholder="Declarations"></textarea>
 	<pre lang="cpp">
  	 */
 	     
 public:
-	BulitinDefaultCode ()
+	Lesson2 ()
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Object/Variable init"></textarea>
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Object/Variable init"></textarea>
 	<pre lang="cpp">
 		 */
 	}
@@ -357,7 +363,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Robot init"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Robot init"></textarea>	
 	<pre lang="cpp">
 		 */     
 	}
@@ -366,7 +372,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Initialization for disabled mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Initialization for disabled mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -375,7 +381,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Initialization for autonomous mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Initialization for autonomous mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -384,7 +390,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Initialization for test mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Initialization for test mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -395,7 +401,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Disabled mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Disabled mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -404,7 +410,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Autonomous mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Autonomous mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -413,7 +419,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Teleoperated mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Teleoperated mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -422,7 +428,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Test mode"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Test mode"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -435,7 +441,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Disabled continuous"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Disabled continuous"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -444,7 +450,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Autonomous continuous"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Autonomous continuous"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -453,7 +459,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Teleoperated continuous"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Teleoperated continuous"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -462,7 +468,7 @@ public:
 	{
 		/*
 	</pre>
-	<textarea style="margin-left: 135px;" rows="5" cols="25" placeholder="Test continuous"></textarea>	
+	<textarea style="margin-left: 135px;" rows="10" cols="50" placeholder="Test continuous"></textarea>	
 	<pre lang="cpp">
 		 */
 	}
@@ -491,9 +497,9 @@ START_ROBOT_CLASS(Lesson2);
   		<table border="0" style="width: 100%;">
   			<tbody>
   				<tr>
-  					<td style="text-align: right; width: 40%;"><a href="../parts">&#8592; 1-1 Parts of the Robot</a></td>
+  					<td style="text-align: right; width: 40%;"><a href="parts.html">&#8592; 1-1 Parts of the Robot</a></td>
   					<td style="text-align: center; font-weight: bold; width: 20%;">1-2 Program Structure</td>
-  					<td style="text-align: left; width: 40%;"><a href="../parts-code">1-3 Parts of the Robot: In Code &#8594;</a></td>
+  					<td style="text-align: left; width: 40%;"><a href="parts-code.html">1-3 Parts of the Robot: In Code &#8594;</a></td>
   				</tr>
   			</tbody>
   		</table>

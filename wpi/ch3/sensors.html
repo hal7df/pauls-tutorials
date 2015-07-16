@@ -2,12 +2,13 @@
 <html>
  <head>
  	<title>3-1 Sensors and Information (WPI)</title>
- 	<link rel="stylesheet" type="text/css" href="../../style.css" />
+ 	<link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
  </head>
  <body>
  
  <!-- ACTIVITY SCRIPTS -->
  <script type="text/javascript">
+ <!--
  function toggleDesc()
  {
 	var schem = document.getElementById("wiring");
@@ -24,6 +25,7 @@
 		button.innterHTML = "Show wiring schematic";
 	}
  }
+ //-->
  </script>
  
  <!-- PAGE HEADER -->
@@ -31,8 +33,9 @@
 		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">3-1</span>&nbsp;Sensors and Information</h1>
 		<hr />
 		<div>
-			<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
-			<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 1
+			<a href="../../index.html" title="Programming Home">Programming Home</a>
+			&gt;&nbsp;<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+			&gt;&nbsp;<a href="index.html" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 1
 		</div>
 		<hr />
 	
@@ -64,32 +67,9 @@
  <div id="tcontent">
  <h2 class="tutorial"><a id="Providing_Information"></a>Providing Information</h2>
  
- 	<p>Sensors are useless if you can&#x27;t get a reading from them. While this can be done in the code, you still need hard values from the sensors in order to do anything with them. So, you need to find a way to print this data to the screen. </p>
-	<p>We use software called a <span style="font-style: italic;">dashboard</span> in order to get readings from sensors. Most teams that use C++ use the dashboard provided by WPI, SmartDashboard.</p>
- 
- 	<h3 class="tutorial"><a id="SmartDashboard"></a>SmartDashboard</h3>
- 		<p>The other way is to use an application called SmartDashboard. SmartDashboard is a program designed to provide data from the robot. It is the C++/Java equivalent of the FRC Dashboard.
-			It also provides a function called <a href="../../ch1/parts-code#Live_Window">live window mode</a>, which you may remember from lesson 3.</p>
- 		<p>However, how you print data to SmartDashboard is quite different than how you print data to the driver station. As a matter of fact, an object for SmartDashboard is not even required to do so. </p>
- 		<p>What you do depends on the type of variable you want to display on SmartDashboard. </p>
- 
- 		<pre lang="cpp">void SmartDashboard::PutNumber(const char* name, double value)void SmartDashboard::PutBoolean(const char* name, bool value)</pre>
-
-		<h4 class="tutorial"><a id="SmartDashboard-parameters"></a>SmartDashboard parameters</h4>
-
-			<ul>
-				<li><code>const char* name</code>: Name/identifier of the variable in SmartDashboard.</li>
-				<li><code>value</code>: The variable.</li>
-			</ul>
-		
-		<h4 class="tutorial"><a id="SmartDashboard-use"></a>SmartDashboard use</h4>
-
-			<p>Because there is no object (outside of Live Window) that is required to manage SmartDashboard, so when you want to call these functions, you need to include the <code>SmartDashboard::</code> prefix in order for your code to compile.</p>
-
-			<pre lang="cpp" escaped="true">
-//PutNumber example
-SmartDashboard::PutNumber(&quot;Sensor Value: &quot;,m_sensorValue);
-			</pre>
+ 	<p>Sensors are useless unless you can get a reading from them. During competition, the robot monitors these sensors and acts upon the values it receives completely of its own accord, but the robot does not know what values to act upon unless you tell the robot those values.</p>
+ 	<p>So, the important thing when you start dealing with sensors is that you output the value of the sensor directly to SmartDashboard, so you can see the raw value of the sensor at any given moment and gather the necessary data from it.
+		You can do this by feeding the sensor's read function directly into the <code>value</code> parameter of the <code>Put</code> functions.</p>
 
  <h2 class="tutorial"><a id="Reading_from_Sensors"></a>Reading from Sensors</h2>
 
@@ -101,13 +81,13 @@ SmartDashboard::PutNumber(&quot;Sensor Value: &quot;,m_sensorValue);
 
 		<pre lang="cpp">int PIDGet()</pre>
 
-		<p>This function is special, because it will always return the sensor's main reading. This is important for later, because this provides the input to the <a href="../pid2">PIDController</a> that you will learn to use in lesson 3-3.</p>
+		<p>This function is special, because it will always return the sensor's main reading. This is important for later, because this provides the input to the <a href="pid2.html"><code>PIDController</code></a> that you will learn to use in lesson 3-3.</p>
 
 		<h3 class="tutorial"><a id="Analog_Sensors"></a>Analog Sensors</h3>
 
-			<h4 class="tutorial"><a id="AnalogInput"></a>AnalogChannel</h4>
+			<h4 class="tutorial"><a id="AnalogInput"></a><code>AnalogInput</code></h4>
 
-				<p><a href="../../ch1/parts-code#AnalogInput">Analog Channel</a> devices use voltage as a means of measurement. What the voltage range is depends on the sensor being used.
+				<p><a href="../ch1/parts-code.html#AnalogInput">Analog</a> devices use voltage as a means of measurement. What the voltage range is depends on the sensor being used.
 					Potentiometers, the device most commonly used that falls under this class, have a range of about 0-6 volts.</p>
 
 				<pre lang="cpp">float AnalogInput::GetAverageVoltage()</pre>
@@ -116,13 +96,14 @@ SmartDashboard::PutNumber(&quot;Sensor Value: &quot;,m_sensorValue);
 
 			<h4 class="tutorial"><a id="DigitalInput"></a>DigitalInput</h4>
 
-				<p>Devices that use the <a href="../../ch1/parts-code#DigitalInput">DigitalInput</a> class return true/false values, as they are all switches of some sort.</p>
+				<p>Devices that use the <a href="../ch1/parts-code.html#DigitalInput">DigitalInput</a> class return true/false values, as they are all switches of some sort.</p>
 
 				<pre lang="cpp">bool DigitalInput::Get()</pre>
 
 			<h4 class="tutorial"><a id="Encoder"></a>Encoder</h4>
 
-				<p>When you are dealing with an <a href="../../ch1/parts-code#Encoder">encoder</a>, you should think of it as the trip odometer in your car. You use its input to determine if something needs to be done, and how it needs to be done.
+				<p>When you are dealing with an <a href="../ch1/parts-code.html#Encoder">encoder</a>, you should think of it as the trip odometer in your car. It counts up in the direction it deems forward, and then down if driven backward.
+					You use its input to determine if something needs to be done, and how it needs to be done.
 					Should you do something that will only work when a certain value is hit, then you should reset the encoder.</p>
 				<p>The following are functions that you might commonly use with an encoder:</p>
 
@@ -140,7 +121,7 @@ void Encoder::Reset()
 			<h4 class="tutorial"><a id="Accelerometer"></a>Accelerometer</h4>
 
 				<p style="font-style: italic;">Note: Different accelerometers (such as the onboard accelerometer in the roboRIO or external accelerometers) will use different class names, but they all inherit <code>Acceleromter</code>, so these functions will be available in any accelerometer object.</p>
-				<p>Since <a href="../../parts-code#Accelerometer">accelerometers</a> can measure acceleration on multiple axes, you need to call the function with the appropriate axis.</p>
+				<p>Since <a href="../ch1/parts-code.html#Accelerometer">accelerometers</a> can measure acceleration on multiple axes, you need to call the function with the appropriate axis.</p>
 
 				<pre lang="cpp">
 double Accelerometer::GetX()
@@ -225,12 +206,13 @@ double Accelerometer::GetZ()
   <!-- NAVIGATION -->
   <div style="clear: both;">
   	<hr />
+	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="../">&#8592; Chapter 3 Overview</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="index.html">&#8592; Chapter 3 Overview</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">3-1 Sensors and Information</td>
-  				<td style="text-align: left; width: 40%;"><a href="../pid1">3-2 PID Part 1: PID Theory &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="pid1.html">3-2 PID Part 1: PID Theory &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>

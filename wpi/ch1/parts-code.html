@@ -3,17 +3,18 @@
   <head>
     <title>1-3 Parts of the Robot: In Code (WPI)</title>
     <meta content="">
-    <link rel="stylesheet" type="text/css" href="../../style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css"/>
+    
+    <script type="text/javascript" src="../../files/activity/wpi/ch1/parts-code.js"></script>
   </head>
   <body>
-    <!-- ACTIVITY SCRIPT -->
-    <script type="text/javascript" src="../../files/activity/wpi/ch1/parts-code.js"></script>
-    
 	<!-- PAGE HEADER -->
   <h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
   		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-3</span>&nbsp;Parts of the Robot: In Code</h1>
   	<hr />
-  	<div><a href="http://hotteam67.org/programming" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;&nbsp;<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 3
+  	<div><a href="../../index.html" title="Programming Home">Programming Home</a>
+		 &gt;&nbsp;<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+		 &gt;&nbsp;<a href="index.html" title="Chapter 1: Basics">Chapter 1</a>&nbsp;&gt;&nbsp;Lesson 3
   		</div>	
   	<hr />
   	
@@ -49,7 +50,8 @@
  			<pre lang="cpp">
 TypeIdentifier m_DescriptiveLabel;
 			</pre>
-			<p>The <code>m_</code> prefix stands for <q>member</q>. It is a coding practice that has been in place for a long time (before FIRST came into existence), and while it isn&#x27;t quite necessary, it is usually still included for clarity purposes.</p>
+			<p>The <code>m_</code> prefix stands for <q>member</q>. It is a coding practice that has been in place for a long time (before FIRST came into existence), and while it isn&#x27;t quite necessary, it is usually still included for clarity purposes.
+				Additionally, a <code>f_</code> prefix can also be used for boolean flags.</p>
 			<p>The <code>DescriptiveLabel</code> part should be a <span style="font-weight: bold;">descriptive label</span>. You should be able to tell what the variable does without having to look at the code that it is used in. Do not use any irrelevant or confusing labels. For example:</p>
 			<p style="font-weight: bold; color: #009900;">GOOD</p>
 			<pre lang="cpp">
@@ -87,10 +89,10 @@ class Robot: public IterativeRobot
 				</pre>
 				<p style="font-style: italic;">RobotBuilder Note: If you are using RobotBuilder, this is done automatically. You should still know how to do this, however.</p>
 	<h2 class="tutorial"><a id="Robot_Parts"></a>Robot Parts</h2>
-		<p>Only parts listed in the <a href="../parts#Programmed_Components">Programmed Components</a> section of Lesson 1 can be declared as components in the program.
-			Even then, the <a href="../parts#rRIO">roboRIO</a> and the <a href="../parts#Pneumatic_Control_Module">Pneumatic Control Module</a>, and <a href="../parts#Motors">motors</a> are not declared.</p>
+		<p>Only parts listed in the <a href="parts.html#Programmed_Components">Programmed Components</a> section of Lesson 1 can be declared as components in the program.
+			Even then, the <a href="parts.html#roboRIO">roboRIO</a>, <a href="parts.html#Pneumatic_Control_Module">Pneumatic Control Module</a>, and <a href="parts.html#Motors">motors</a> are not declared.</p>
 		<p>Note that you do not need to declare all of the parts on the robot for your code to work. Of course, you will only be able to control what is declared. Also note that the roboRIO cannot possibly detect the correct address (e.g. PWM or relay channel) of various components, so make sure that your assignment is correct.</p>
-		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="../parts#rRIO">roboRIO</a>).</p>
+		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="parts.html#roboRIO">roboRIO</a>).</p>
 		<p>Note that the location of each statement is not shown in the declaration example. The actual declaration belongs in the class list, and the initialization belongs in the class constructor.</p>
 		<p>NOTE: If you declare standard variables, such as <code>int</code>s or <code>bool</code>s, <span style="font-weight: bold;">you need to set a default value in the constructor</span>, like so:</p>
 		<pre lang="cpp">
@@ -186,7 +188,7 @@ Relay *m_relay1;
 m_relay1 = new Relay (0);
 				</pre>
 			<h4 class="tutorial"><a id="Digital_Outputs"></a>Digital Outputs</h4>
-				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="../parts#rRIO">digital output</a> on the roboRIO, use this class.</p>
+				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="parts.html#roboRIO">digital output</a> on the roboRIO, use this class.</p>
 				<p>A digital output is of type <code>DigitalOutput</code> (with a capital D and O, no space). In the initialization, provide the digital output channel on the Digital Sidecar.</p>
 				<pre lang="cpp">
 //Digital Output declaration
@@ -198,22 +200,30 @@ m_do = new DigitalOutput (0);
 			<h4 class="tutorial"><a id="Pneumatics"></a>Pneumatics</h4>
 				<h5 class="tutorial"><a id="Compressor"></a>Compressor</h5>
 					<p>A compressor is of type <code>Compressor</code> (capital C). In initialization, provide the CAN ID of the pneumatic control module.</p>
+					<p>If the pneumatic control module's CAN ID is 0, then you may omit the CAN ID.</p>
 					<pre lang="cpp">
 //Compressor declaration
 Compressor *m_compressor;
 
 //Compressor initialization with CAN ID 0
-m_compressor = new Compressor (0);
+m_compressor = new Compressor;
+
+//Compressor initialization with CAN ID 4
+m_compressor = new Compressor (4);
 					</pre>
 					<p>This class is unnecessary to declare if you intend just to use the Pneumatic Control Module's automatic compressor handling.</p>
 				<h5 class="tutorial"><a id="Solenoid"></a>Solenoid</h5>
-					<p>A solenoid is of type <code>Solenoid</code> (capital S). In initialization, provide the output number from the <a href="../parts#Pneumatic_Control_Module">pneumatic control module</a>.</p>
+					<p>A solenoid is of type <code>Solenoid</code> (capital S). In initialization, provide the solenoid channel from the <a href="parts.html#Pneumatic_Control_Module">pneumatic control module</a>.</p>
+					<p>If the PCM that the solenoid is hooked up to is not assigned CAN ID 0, then provide the PCM's CAN ID before the solenoid channel.</p>
 					<pre lang="cpp">
 //Solenoid declaration
 Solenoid *m_sol;
 
-//Solenoid initialization on port 0
-m_sol = new Solenoid (0);					
+//Solenoid initialization on port 2, with PCM ID 0
+m_sol = new Solenoid (2);					
+
+//Solenoid initialization on port 0, with PCM ID 4
+m_sol = new Solenoid (4, 0);
 					</pre>
 		<h3 class="tutorial"><a id="Sensors"></a>Sensors</h3>
 			<p>Some common sensors use a generic class for their type. Below, if a generic class is given, the sensors that use that class are provided in a list.</p>
@@ -228,7 +238,7 @@ AnalogInput *m_analogDev;
 m_analogDev = new AnalogInput (0);
 				</pre>
 				<h5 class="tutorial"><a id="AnalogInput_Devices"></a><code>AnalogInput</code> Devices</h5>
-					<p>The most common device used in this category is a <a href="../parts#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
+					<p>The most common device used in this category is a <a href="parts.html#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
 			<h4 class="tutorial"><a id="DigitalInput"></a>DigitalInput</h4>
 				<p>The class <code>DigitalInput</code> (capital D, I; no space) manages generic digital sensors.</p>
 				<p>In the initialization, provide the digital input channel on the Digital Sidecar.</p>
@@ -240,12 +250,16 @@ DigitalInput *m_digitalDev;
 m_digitalDev = new DigitalInput (0);
 				</pre>
 				<h5 class="tutorial"><a id="DigitalInput_Devices"></a><code>DigitalInput</code> Devices</h5>
-					<p>The most common device used in this category is a <a href="../parts#Limit_Switch">limit switch</a>. If you have a general digital device, use this class (unless otherwise specified).</p>
+					<p>The most common device used in this category is a <a href="parts.html#Limit_Switch">limit switch</a>. Light sensors are also digital inputs.</p>
+					<p>If you have a general digital device, use this class (unless otherwise specified).</p>
 			<h4 class="tutorial"><a id="Encoder"></a>Encoder</h4>
 				<p>An encoder is of type <code>Encoder</code> (capital E). In the initialization, do the following:</p>
 				<ul>
 					<li>provide the device&#x27;s two digital channels</li>
 					<li>provide whether the device should measure in reverse (true/false)</li>
+					<ul>
+						<li>if the device is not measured in reverse, you may omit this parameter</li>
+					</ul>
 					<li>configure</li>
 					<ul>
 						<li>distance measured per pulse</li>
@@ -256,8 +270,8 @@ m_digitalDev = new DigitalInput (0);
 //Encoder declaration
 Encoder *m_lEncode;
 
-//Encoder initialization on digital inputs 1 and 2, not reversed, using a distance of 1 per pulse and a max period of 1
-m_lEncode = new Encoder (1,2,false);
+//Encoder initialization on digital inputs 1 and 2, reversed, using a distance of 1 per pulse and a max period of 1
+m_lEncode = new Encoder (1,2,true);
 m_lEncode-&gt;SetDistancePerPulse(1);
 m_lEncode-&gt;SetMaxPeriod(1.0);
 				</pre>
@@ -290,6 +304,7 @@ Gyro *m_gyro;
 m_gyro = new Gyro (1);
 m_gyro->SetSensitivity(2.00);
 				</pre>
+				<p>There are many different kinds of gyros that are available to teams, and they generally use their own APIs. Refer to the source that you have for a particular gyro for how to initialize it (look at its constructor).</p>
 			<h4 class="tutorial"><a id="Accelerometer"></a>Accelerometer</h4>
 				<p>An accelerometer is of type <code>Accelerometer</code> (capital A). In the initialization, do the following:</p>
 				<ul>
@@ -311,13 +326,13 @@ m_accel->SetZero(1.0);
 			<h4 class="tutorial"><a id="Game_Controller"></a>Game Controller</h4>
 				<p>Both a standard XBOX 360 controller and the Attack3-like joysticks are of type <code>Joystick</code> (capital J). In the initialization, provide the Joystick ID. Use the following rule:</p>
 				<ul>
-					<li>Joystick 1: Driver</li>
-					<li>Joystick 2: Operator</li>
+					<li>Joystick 0: Driver</li>
+					<li>Joystick 1: Operator</li>
 					<ul>
 						<li>The operator performs actions that manipulate various components of the robot (like an arm)</li>
 					</ul>
 				</ul>
-				<p>The actual ID of the joystick depends on when it was plugged in (first plugged in - 1, second - 2, and so on). There are a total of 4 available slots.
+				<p>The actual ID of the joystick depends on when it was plugged in (first plugged in - 0, second - 1, and so on). There are a total of 4 available slots.
 					Some teams use 3 or 4 if they use Attack3-like joysticks (multiple joysticks per driver), but we only ever use 2.</p>
 				<pre lang="cpp">
 //Game controller declaration
@@ -325,8 +340,8 @@ Joystick *m_driver;
 Joystick *m_operator;
 
 //Game controller initialization
-m_driver = new Joystick (1);
-m_operator = new Joystick (2);
+m_driver = new Joystick (0);
+m_operator = new Joystick (1);
 				</pre>
 			<h4 class="tutorial"><a id="Driver_Station"></a>Driver Station</h4>
 				<p>Believe it or not, the driver station (computer) has a few components that need to be declared. These are either useful debugging tools or methods to access information about the field.</p>
@@ -338,7 +353,7 @@ m_operator = new Joystick (2);
 						<li>The current operating mode (Autonomous, Teleop, Disabled)</li>
 						<li>The match duration</li>
 						<li>Which alliance you're on</li>
-						<li>Whether the Field Management System (FMS) is connected</li>
+						<li>Whether the Field Management System (FMS) is connected (in other words, whether you're on a competition field)</li>
 					</ul>
 					<p>To initialize it, just grab the pointer to the currently running <code>DriverStation</code> instance using the <code>GetInstance()</code> method.</p>
 					<pre lang="cpp">
@@ -428,9 +443,9 @@ m_timer = new Timer;
   		<table border="0" style="width: 100%;">
   			<tbody>
   				<tr>
-  					<td style="text-align: right; width: 40%;"><a href="../program-structure">&#8592; 1-2 Program Structure</a></td>
+  					<td style="text-align: right; width: 40%;"><a href="program-structure.html">&#8592; 1-2 Program Structure</a></td>
   					<td style="text-align: center; font-weight: bold; width: 20%;">1-2 Parts of the Robot: In Code</td>
-  					<td style="text-align: left; width: 40%;"><a href="../../ch2">Chapter 2: Driving and User Input &#8594;</a></td>
+  					<td style="text-align: left; width: 40%;"><a href="../ch2/index.html">Chapter 2: Driving and User Input &#8594;</a></td>
   				</tr>
   			</tbody>
   		</table>

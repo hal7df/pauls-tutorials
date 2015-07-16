@@ -2,7 +2,7 @@
 <html>
  <head>
   <title>2-3 Earning Your Driver's License: Driving (WPI)</title>
-  <link rel="stylesheet" type="text/css" href="../../style.css"/>
+  <link rel="stylesheet" type="text/css" href="../../files/styles/style.css"/>
  </head>
 <body>
  <!-- PAGE HEADER -->
@@ -10,8 +10,9 @@
 	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">2-3</span>&nbsp;Earning Your Driver's License: Driving</h1>
 	<hr />
 	<div>
-		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
-		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 3
+		<a href="../../index.html" title="Programming Home">Programming Home</a>
+		&gt;&nbsp;<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+		&gt;&nbsp;<a href="index.html" title="Chapter 2: Driving and User Input">Chapter 2</a>&nbsp;&gt;&nbsp;Lesson 3
 	</div>
 	<hr />
  
@@ -34,21 +35,21 @@
  
  <div id="tcontent">
 	<h2 class="tutorial"><a id="RobotDrive"></a><code>RobotDrive</code></h2>
-		<p>You may remember the <a href="../../ch1/parts-code#RobotDrive">RobotDrive</a> object from lesson 3. This object provides various functions to make managing the drive system simpler.
+		<p>You may remember the <a href="../ch1/parts-code.code#RobotDrive">RobotDrive</a> object from lesson 1-3. This object provides various functions to make managing the drive system simpler.
 			There are two functions that you will see most often: <code>ArcadeDrive()</code> and <code>TankDrive()</code>.</p>
 		<p>For all of the following examples, assume the following have all been declared:</p>
 		<pre lang="cpp">
 //Declarations
-Victor* m_lDrive;
-Victor* m_rDrive;
+Talon* m_lDrive;
+Talon* m_rDrive;
 
 RobotDrive* m_robotDrive;
 
 Timer* m_timer;
 
 //Initialization
-m_lDrive = new Victor (1);
-m_rDrive = new Victor (2);
+m_lDrive = new Talon (1);
+m_rDrive = new Talon (2);
  
 m_robotDrive = new RobotDrive (m_lDrive, m_rDrive);
 
@@ -118,12 +119,13 @@ else
   <!-- NAVIGATION -->
   <div style="clear: both;">
   	<hr />
+  	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="../motors">&#8592; 2-2 Motors</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="motors.html">&#8592; 2-2 Motors</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">2-3 Earning Your Driver's License: Driving</td>
-  				<td style="text-align: left; width: 40%;"><a href="../pneumatics">2-4 Pneumatics &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="pneumatics.html">2-4 Pneumatics &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>
