@@ -2,7 +2,8 @@
 <html>
  <head>
 	<title>3-3 PID Part 2: Implementing a PID (WPI)</title>
-	<link rel="stylesheet" type="text/css" href="../../style.css" />
+	<link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+	
  </head>
  <body>
  
@@ -11,8 +12,10 @@
 	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">3-3</span>&nbsp;PID Part 2: Implementing a PID</h1>
 	<hr />
 	<div>
-		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
-		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 2
+		<a href="../../index.html" title="Programming Home">Programming Home</a>
+		&gt;&nbsp;
+		<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+		&gt;&nbsp;<a href="../" title="Chapter 3: Control">Chapter 3</a>&nbsp;&gt;&nbsp;Lesson 2
 	</div>
 	<hr />
  
@@ -78,7 +81,7 @@ float PIDController::GetSetpoint()
  	<p>Writing a PID is one thing. Making it work is another thing.</p>
  	<p>Tuning a PID can be dangerous on any number of levels, as you have no idea of how the robot will respond. When you are tuning a PID, you should <span style="font-weight: bold;">ALWAYS</span> have your finger on the Enter key so that, when things go wrong, you can stop the robot before it does any serious damage.</p>
  	<h3 class="tutorial"><a id="PID_Setpoints"></a>PID Setpoints</h3>
- 		<p>You may remember <a href="../sensors#A_Special_Function" target="_blank">the <code>PIDGet()</code> function from lesson 3-1</a>. Funny how it begins with P-I-D, huh? That&#x27;s because this is the function that the <code>PIDController</code> reads from when it runs the calculations.
+ 		<p>You may remember <a href="sensors.html#A_Special_Function" target="_blank">the <code>PIDGet()</code> function from lesson 3-1</a>. Funny how it begins with P-I-D, huh? That&#x27;s because this is the function that the <code>PIDController</code> reads from when it runs the calculations.
 			This means that all of your setpoints need to match the value returned by <code>PIDGet()</code>.</p>
 		<p>To get these values, simply write the output of the <code>PIDGet()</code> function for whatever sensor you are using to the driver station, and then use those values for the setpoints.</p>
 	<h3 class="tutorial"><a id="Prerequisites"></a>Prerequisites</h3>
@@ -127,12 +130,13 @@ float PIDController::GetSetpoint()
  <!-- NAVIGATION -->
   <div style="clear: both;">
   	<hr />
+	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="../pid1">&#8592; 3-2 PID Part 1: PID Theory</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="pid1.html">&#8592; 3-2 PID Part 1: PID Theory</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">3-3 PID Part 2: Implementing a PID</td>
-  				<td style="text-align: left; width: 40%;"><a href="../pid3">3-4 PID Part 3: Advanced PID Programming &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="pid3.html">3-4 PID Part 3: Advanced PID Programming &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>

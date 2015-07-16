@@ -2,7 +2,7 @@
 <html>
  <head>
  <title>4-1 Initialization Routines (WPI)</title>
- <link rel="stylesheet" type="text/css" href="../../style.css" />
+ <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
  </head>
  <body>
  
@@ -11,14 +11,15 @@
 	style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">4-1</span>&nbsp;Initialization Routines</h1>
 	<hr />
 	<div>
-		<a href="../../../../" title="Programming Home">Programming Home</a>&nbsp;&gt;&nbsp;<a href="../../../" title="Paul's Tutorials">Paul's Tutorials</a>&nbsp;&gt;
-		<a href="../../" title="WPILib Tutorial">WPILib Tutorial</a>&nbsp;&gt;&nbsp;<a href="../" title="Chapter 4: Routines">Chapter 4</a>&nbsp;&gt;&nbsp;Lesson 1
+		<a href="../../index.html" title="Programming Home">Programming Home</a>
+		&gt;&nbsp;<a href="../index.html" title="WPILib Tutorial">WPILib Tutorial</a>
+		&gt;&nbsp;<a href="index.html" title="Chapter 4: Routines">Chapter 4</a>&nbsp;&gt;&nbsp;Lesson 1
 	</div>
 	<hr />
 	 
  <!-- PAGE CONTENT --> 
  <div id="intro">
-	<p>Your work on robot programming thus far has only taken place within the <code>TeleopPeriodic()</code> routine. If you remember from <a href="../../ch1/program-structure">lesson 1-2</a>, 
+	<p>Your work on robot programming thus far has only taken place within the <code>TeleopPeriodic()</code> routine. If you remember from <a href="../ch1/program-structure.html">lesson 1-2</a>, 
 		there were more routines than that -- namely Disabled and Autonomous. This chapter will teach you what these routines are for, and how you would program them. </p>
 	<p>Syntax-wise, programming in all of the new functions that will be presented throughout this chapter is the same as it would be in <code>TeleopPeriodic()</code>. However, 
 		there are restrictions on what can be done in the various routines, so you should be aware of what you are programming the robot to do and you are not telling it to break any of the restrictions. </p>
@@ -36,7 +37,7 @@
  </div>
 	
  <div id="tcontents">
-	<h2 class="tutorial"><a id="RobotInit()"></a><code>RobotInit()</code></h2>
+	<h2 class="tutorial"><a id="RobotInit"></a><code>RobotInit()</code></h2>
 		<p>This routine is the second function that is run on robot power-up (barring boot sequences, after the class constructor). This routine is used to perform any other initialization that needs to be performed before the robot moves into a periodic routine that was not performed within the class constructor. 
 			What goes here is generally specific to the robot being programmed. </p>
 	
@@ -53,12 +54,13 @@
  <!-- NAVIGATION -->
   <div style="clear: both;">
  	<hr />
+	<p align="center" style="font-size: 0.75em;">WPILIB TUTORIAL</p>
   	<table border="0" style="width: 100%;">
   		<tbody>
   			<tr>
-  				<td style="text-align: right; width: 40%;"><a href="../">&#8592; Chapter 4 Overview</a></td>
+  				<td style="text-align: right; width: 40%;"><a href="index.html">&#8592; Chapter 4 Overview</a></td>
   				<td style="text-align: center; font-weight: bold; width: 20%;">4-1 Initialization Routines</td>
-  				<td style="text-align: left; width: 40%;"><a href="../disabled">4-2 Disabled Routines &#8594;</a></td>
+  				<td style="text-align: left; width: 40%;"><a href="disabled.html">4-2 Disabled Routines &#8594;</a></td>
   			</tr>
   		</tbody>
   	</table>
