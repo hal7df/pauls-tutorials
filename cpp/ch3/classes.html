@@ -4,6 +4,13 @@
     <title>3-2 Classes (C++)</title>
     <meta content="">
     <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+    
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
   </head>
   <body>
   <h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
@@ -35,7 +42,7 @@
   	
   	<div id="video" style="width: 50%; float: right;">
 		<h2 class="tutorial">Companion Videos</h2>
-		<div id="vids" style="style="overflow: auto; overflow-y: hidden; white-space: nowrap;"">
+		<div id="vids" style="overflow: auto; overflow-y: hidden; white-space: nowrap;">
 			<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fMA3ARMutaA?rel=0" frameborder="0" allowfullscreen></iframe>
 		</div>
   	</div>
@@ -117,22 +124,19 @@
 						<p>Assume that each card has a value of what is given in the list (it is also fine to use numbers 0-12 instead of 1-13).</p>
 					<h5 class="tutorial"><a id="The_Card_Class"></a>The Card Class</h5>
 						<p>The class Card should have the <q>less than</q> operator defined that compares the ranks. For example, if <code>card1</code> is the Eight of Clubs and <code>card2</code> is the Queen of Hearts, then:</p>
-						<pre lang="cpp" escaped="true">
-card1 &lt; card2
-						</pre>
+						<pre class="brush: cpp">card1 &lt; card2</pre>
 						<p>is a true statement. The suit has no effect on how the cards are compared. Your operator should make use of the public function <code>rank2num()</code>, which you may want to define first.</p>
 						<p>The default constructor for the Card class should assign a random suit and rank to the card. This allows us to <q>draw</q> a new card every time we call the constructor.</p>
 						<p>In order to generate random numbers, use the <a href="../tips-tricks.html#Random_Numbers" target="_blank"><code>rand()</code></a> function. The <code>cstdlib</code> and <code>ctime</code> libraries have already been included for you in cards.h, so you don't have to.</p>
 						<p>For example, you could set the suit like this:</p>
-						<pre lang="cpp" escaped="true">
+						<pre class="brush: cpp">
 int rand_num = 1 + rand() % 4;  //Random # between 1 and 4.
 switch(rand_num) {
 	case 1: suit = &quot;Hearts&quot;; break;
 	case 2: suit = &quot;Diamonds&quot;; break;
 	case 3: suit = &quot;Clubs&quot;; break;
 	case 4: suit = &quot;Spades&quot;; break;
-}
-						</pre>
+}</pre>
 				<h4 class="tutorial"><a id="Extra_Practice"></a>Extra Practice</h4>
 				<p>Do any of the following:</p>
 				<ul>

@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
  <head>
- <title>4-3 Autonomous Routines (WPI)</title>
- <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+	 <title>4-3 Autonomous Routines (WPI)</title>
+	 <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+	 
+	 <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
+	 <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
+	 <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
+	 <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+	   
+	 <script type="text/javascript">SyntaxHighlighter.all();</script>
  </head>
  <body>
  
@@ -57,7 +64,7 @@
  	
  	<h2 class="tutorial"><a id="Structure"></a>Structure</h2>
  		<p>Generally, your Autonomous code should look something like this: </p>
- 		<pre lang="cpp">
+ 		<pre class="brush: cpp">
 void AutonomousPeriodic()
 {
   switch(m_strategy)
@@ -80,7 +87,7 @@ void AutonomousPeriodic()
 		
 		<h3 class="tutorial"><a id="Individual_Autonomous_Cases"></a>Individual Autonomous Cases</h3>
 			<p>Your individual cases will look syntactically similar, although the <code>switch/case</code> structure is used for a different purpose. </p>
-			<pre lang="cpp">
+			<pre class="brush: cpp">
 void MyAutonomousStrategy()
 {
   switch(m_autonSegment)

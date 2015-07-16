@@ -62,8 +62,7 @@
 class MySubsystemWrapper: public PIDOutput
 {
 //...
-};
-		</pre>
+};</pre>
 	<h3 class="tutorial"><a id="Constructor"></a>Constructor</h3>
 		<p>Because your subsystem wrapper is a separate object from your root object (the <code>IterativeRobot</code>-inheriting class), you will not be able to access all of your robot&#x27;s components like you normally would. Instead, you have your class require them as parameters in your constructor. </p>
 		<p>To do this, you need to declare all of the components that you need with the subsystem as <code>private</code> members of this class. Declare them like you would declare the components in the root class (as pointers -- this is important!!). </p>
