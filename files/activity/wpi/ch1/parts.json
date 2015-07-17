@@ -1,0 +1,14 @@
+[
+	{
+		"name":"roboRIO",
+		"img":"http://www.uwinfirst.com/wp-content/uploads/2013/08/roboRIO-Specification-Flyer-12.png",
+		"description":"The robot's onboard computer, it uses preprogrammed instructions to direct the various components of the robot on how to move.",
+		"category":false
+	},
+	{
+		"name":"Victor",
+		"img":"http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg"
+		"description":"Receives a PWM signal and translates it into a voltage for the motor to read.",
+		"category":"Motor controller"
+	}
+]
