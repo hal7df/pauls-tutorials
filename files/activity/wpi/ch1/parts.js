@@ -9,3 +9,7 @@ var answer;
 function activity_init()
 {
 }
+
+function run_next_action()
+{
+}

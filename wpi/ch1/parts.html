@@ -3,13 +3,15 @@
   <head>
     <title>1-1 Parts of the Robot (WPI)</title>
     <meta content="">
-    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" /> 
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
     <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
     <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
     <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
     <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
     
     <script type="text/javascript">SyntaxHighlighter.all();</script>
+	
+	<script type="text/javascript" src="../../files/activity/wpi/ch1/parts.js"></script>
   </head>
   <body>
 	<!-- ACTIVITY SCRIPTS -->
@@ -417,17 +419,24 @@
 			<p>When you are done, submit your answers. When you do, the first two parts will be checked automatically, and an example answer will be given for the last part.</p>
 			<p>When you are ready, click Start.</p>
 			
-			<button id="start" onclick="startActivity()">Start</button>
+			<button id="start" onclick="activity_init()">Start</button>
 			<br><a id="activityStart"></a>
 			<div>
 				<hr />
-				<p id="activityProgress"></p>
+				<p id="activityProgress" style="font-weight: bold; font-size: 1.5em; text-align: center;"></p>
 				<hr />
 				<img class="tutorial" id="questionImg" />
 				<form name="responses">
 					<label for="name">Name: </label>
-					<input type="text" name="name" />
+					<input type="text" name="name" /><br><br>
+					<div id="catContain">
+						<label for="category">Category: </label>
+						<input type="text" name="category" /><br><br>
+					</div>
+					<label for="desc">Description</label><br>
+					<textarea name="desc" rows="2" cols="50"></textarea>
 				</form>
+				<button onclick="run_next_action()">Submit</button>
 			</div>
 		</div>
 	</div>
