@@ -400,9 +400,8 @@
 	<div id="activity" style="clear: both;">
 		<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
 			<p style="font-weight: bold; text-align: center; color: #ff0000;"><noscript>This activity requires Javascript. Please turn it on or use a browser with Javascript.</noscript></p>
-			<p style="font-weight: bold; text-align: center;">WARNING: This activity is not fully working at the moment. The input boxes work, but it will not check your answers. Please check back later.</p>
 		<div id="instructions">
-			<p>The following activity will test your knowledge of the robot components. Try to complete it without referring to the lesson.</p>
+			<p>The following activity will test your knowledge of the robot components.</p>
 			<p>The activity consists of 10 pictures. Your task is to do the following for each picture:</p>
 			<ul>
 				<li>Identify the name of the component</li>
@@ -416,12 +415,12 @@
 				<li><span style="font-weight: bold;">Category: </span>Digital Sensor</li>
 				<li><span style="font-weight: bold;">Function: </span>Determines distances using ultrasonic waves</li>
 			</ul>
-			<p>When you are done, submit your answers. When you do, the first two parts will be checked automatically, and an example answer will be given for the last part.</p>
-			<p>When you are ready, click Start.</p>
+			<p>When you click <q>Start</q>, the information on the page will disappear. You will be presented with one image at a time.
+				When you are done, submit your answers. When you do, the first two parts will be checked automatically, and an example answer will be given for the last part.</p>
 			
 			<button id="start" onclick="activity_init()">Start</button>
-			<br><a id="activityStart"></a>
-			<div>
+			<br><a id="_activityStart"></a>
+			<div id="activityContent" style="display: none;">
 				<hr />
 				<p id="activityProgress" style="font-weight: bold; font-size: 1.5em; text-align: center;"></p>
 				<hr />
@@ -436,6 +435,15 @@
 					<label for="desc">Description</label><br>
 					<textarea name="desc" rows="2" cols="50"></textarea>
 				</form>
+				<button id="next" onclick="run_next_action()">Submit</button>
+				<ul id="answerDisplay" style="display: none;">
+					<li>Name</li>
+					<ul id="nameDisp"></ul>
+					<li>Category</li>
+					<ul id="catDisp"></ul>
+					<li>Description</li>
+					<ul id="descDisp"></ul>
+				</ul>
 				<button onclick="run_next_action()">Submit</button>
 			</div>
 		</div>
