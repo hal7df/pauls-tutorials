@@ -12,6 +12,11 @@ var correctAnswers;
 var questionNum;
 var displayingResult;
 
+/** ACTIVITY INITIALIZATION
+ *  -----------------------
+ *  Initializes all variables needed to run the activity
+ *  and shows the activity content. 
+ */
 function activity_init()
 {
 	var tcontent = document.getElementById("tcontent");
@@ -36,6 +41,12 @@ function activity_init()
 	window.location.replace("#_activityStart");
 }
 
+/** GET PARTS LIST
+ *  --------------
+ *  Gets the parts list from the remote server
+ *  and stores it into an object. When complete,
+ *  it generates the first question.
+ */
 function get_parts_list()
 {
 	var xrq = new XMLHttpRequest();
@@ -56,6 +67,13 @@ function get_parts_list()
 	xrq.send(null);
 }
 
+
+/** GENERATE QUESTION
+ *  -----------------
+ *  Generates a question using the parts
+ *  list. Ensures that the same part
+ *  is not asked twice.
+ */
 function generate_question()
 {
 	var imgDisp = document.getElementById("questionImg");
@@ -75,6 +93,13 @@ function generate_question()
 		document.getElementById("catContain").style.display = "block";
 }
 
+/** RUN NEXT ACTION
+ *  ---------------
+ *  Depending on the context, this function will:
+ *  
+ *  - Check your answers and display them
+ *  - Clear the form and display a new question
+ */
 function run_next_action()
 {
 	if (displayingResult)
@@ -117,6 +142,12 @@ function run_next_action()
 	}
 }
 
+/** CHECK ANSWER
+ *  ------------
+ *  Checks a given response.
+ *  
+ * @returns {CorrectObject}: An object representing each answer and whether or not it is correct.
+ */
 function check_answer()
 {
 	var correct = new Object();
@@ -168,6 +199,13 @@ function check_answer()
 	return correct;
 }
 
+/** SCORE ANSWER
+ *  ------------
+ *  Score an answer
+ *  
+ * @param correct: The CorrectObject for the response
+ */
+
 function score_answer(correct)
 {
 	if (partsList[answer].category)
@@ -185,6 +223,13 @@ function score_answer(correct)
 	percentCorrect = (correctAnswers / questionsAnswered) * 100;
 }
 
+/** REPORT ANSWER
+ *  -------------
+ *  Display the results of a response
+ *  on the screen.
+ * 
+ * @param correct: The CorrectObject for the response.
+ */
 function report_answer(correct)
 {
 	var report = new Object();
@@ -248,6 +293,11 @@ function report_answer(correct)
 	document.forms["responses"].style.display = "none";
 }
 
+/** WRITE PROGRESS
+ *  --------------
+ *  Write progress information about the activity
+ *  to the designated space on the page
+ */
 function write_progress()
 {
 	var progress; 
@@ -257,6 +307,12 @@ function write_progress()
 	document.getElementById("activityProgress").innerHTML = progress;
 }
 
+/** CALCULATE PERCENTAGE COLOR
+ *  --------------------------
+ *  Calculates a color for a given percentage correct.
+ * 
+ * @returns {String}: The color to use for the current percentage
+ */
 function calcColor() 
 {
 	var percent = percentCorrect * 0.01;
@@ -285,6 +341,13 @@ function calcColor()
 	return rgbToHex(out);
 }
 
+/** HEX TO RGB
+ *  ----------
+ *  Converts a hex color to an RgbObject
+ * 
+ * @param hex: A hex string representing the color
+ * @returns {RgbObject}
+ */
 function hexToRGB(hex) {		
 	var color = new Object;
 	
@@ -299,15 +362,36 @@ function hexToRGB(hex) {
 	return color;
 }
 
+/** RGB TO HEX
+ *  ----------
+ *  Converts an RgbObject to a hex string.
+ * 
+ * @param rgb: the RgbObject for this color
+ * @returns {String}: a hex string representing the color
+ */
 function rgbToHex(rgb) {
 	return "#" + componentToHex(rgb.r) + componentToHex(rgb.g) + componentToHex(rgb.b); 
 }
 
+/** COMPONENT TO HEX
+ *  ----------------
+ *  Converts a given color component to a hex string.
+ * 
+ * @param c: the numeric color component
+ * @returns {String}: a hex string for that component
+ */
 function componentToHex(c) {
 	var hex = c.toString(16);
 	return hex.length == 1 ? "0" + hex : hex;
 }
 
+/** GET RANDOM INTEGER
+ *  ------------------
+ * 
+ * @param lower: the lower bound
+ * @param upper: the upper bound
+ * @returns {int}: a random integer
+ */
 function getRandomInt (lower, upper)
 {
 	return (Math.floor(Math.random() * ((upper - lower) + 0.5)) + lower);
