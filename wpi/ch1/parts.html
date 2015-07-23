@@ -405,7 +405,7 @@
 			<p>The activity consists of 10 pictures. Your task is to do the following for each picture:</p>
 			<ul>
 				<li>Identify the name of the component</li>
-				<li>Identify the component's category and applicable sub-categories</li>
+				<li>If present, identify the component's category (be specific as possible!)</li>
 				<li>Explain its function</li>
 			</ul>
 			<p>For example, given the following image:</p>
@@ -435,7 +435,6 @@
 					<label for="desc">Description</label><br>
 					<textarea name="desc" rows="2" cols="50"></textarea>
 				</form>
-				<button id="next" onclick="run_next_action()">Submit</button>
 				<ul id="answerDisplay" style="display: none;">
 					<li>Name</li>
 					<ul id="nameDisp"></ul>
@@ -444,7 +443,7 @@
 					<li>Description</li>
 					<ul id="descDisp"></ul>
 				</ul>
-				<button onclick="run_next_action()">Submit</button>
+				<button id="next" onclick="run_next_action()">Submit</button>
 			</div>
 		</div>
 	</div>

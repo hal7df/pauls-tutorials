@@ -65,13 +65,13 @@ function generate_question()
 
 function run_next_action()
 {
-	if (displayingResults)
+	if (displayingResult)
 	{
 		if (questionNum < 10)
 		{
 			questionNum++;
 			write_progress();
-			displayingResults = false;
+			displayingResult = false;
 			
 			document.forms["responses"].reset();
 			document.forms["responses"].style.display = "block";
@@ -92,12 +92,23 @@ function run_next_action()
 		var correct;
 		correct = check_answer();
 		score_answer(correct);
+		report_answer(correct);
+		write_progress();
+		displayingResult = true;
+		
+		if (questionNum < 10)
+			document.getElementById("next").innerHTML = "Next &gt;";
+		else
+			document.getElementById("next").innerHTML = "Retry";
+		
+		window.location.replace("#_activityStart");
 	}
 }
 
 function check_answer()
 {
 	var correct = new Object();
+	var corrFlag;
 	
 	var name = document.forms["responses"]["name"].value;
 	var category = document.forms["responses"]["category"].value;
@@ -105,24 +116,44 @@ function check_answer()
 	name = name.toUpperCase();
 	category = category.toUpperCase();
 	
-	correct.name = (name == (partsList[answer].name.toUpperCase()));
+	if (partsList[answer].name.constructor === Array)
+	{
+		corrFlag = false;
+		for (var x = 0; x < partsList[answer].name.length; x++)
+		{
+			if (name == partsList[answer].name[x].toUpperCase())
+			{
+				corrFlag = true;
+				break;
+			}
+		}
+		
+		correct.name = corrFlag;
+	}
+	else
+		correct.name = (name == (partsList[answer].name.toUpperCase()));
 	
 	if (partsList[answer].category)
 	{
-		category = replace_category_alias(category);
-		
-		correct.category = (category == (partsList[answer].category.toUpperCase()));
+		if (partsList[answer].category.constructor === Array)
+		{
+			corrFlag = false;
+			for (var x = 0; x < partsList[answer].category.length; x++)
+			{
+				if (category == partsList[answer].category[x].toUpperCase())
+				{
+					corrFlag = true;
+					break;
+				}
+			}
+			
+			correct.category = corrFlag;
+		}
+		else
+			correct.category = (category == (partsList[answer].category.toUpperCase()));
 	}
 	
 	return correct;
-}
-
-function replace_category_alias(catStr)
-{
-	catStr = catStr.replace("INPUT", "SENSOR");
-	catStr = catStr.replace("DRIVE CONTROLLER", "MOTOR CONTROLLER");
-	
-	return catStr;
 }
 
 function score_answer(correct)
@@ -142,16 +173,63 @@ function report_answer(correct)
 {
 	var report = new Object();
 	var response = new Object();
+	var buf;
 	
 	report.name = document.getElementById("nameDisp");
 	report.cat = document.getElementById("catDisp");
 	report.desc = document.getElementById("descDisp");
 	
-	response.name = document.forms["responses"]["name"];
-	response.category = document.forms["responses"]["category"];
-	response.desc = document.forms["responses"]["desc"];
+	response.name = document.forms["responses"]["name"].value;
+	response.cat = document.forms["responses"]["category"].value;
+	response.desc = document.forms["responses"]["desc"].value;
 	
+	buf = "<li>Your response: " + response.name;
 	
+	if (correct.name)
+		buf += "<span style='color: #00cc00;'>&#10004;</span></li>";
+	else
+	{
+		buf += "<span style='color: #ff0000;'>&#10008;</span></li>";
+		buf += "<li>Correct answer: ";
+		
+		if (partsList[answer].name.constructor === Array)
+			buf += partsList[answer].name[0] + "</li>";
+		else
+			buf += partsList[answer].name + "</li>";
+	}
+	
+	report.name.innerHTML = buf;
+	
+	if (partsList[answer].category)
+	{
+		buf = "<li>Your response: " + response.cat;
+		
+		if (correct.category)
+			buf += "<span style='color: #00cc00;'>&#10004;</span></li>";
+		else
+		{
+			buf += "<span style='color: #ff0000;'>&#10008;</span></li>";
+			buf += "<li>Correct answer: ";
+			
+			if (parstList[answer].category.constructor === Array)
+				buf += partsList[answer].category[0] + "</li>";
+			else
+				buf += partsList[answer].category + "</li>";
+		}
+		report.cat.innerHTML = buf;
+	}
+	else
+	{
+		report.cat.innerHTML = "<li>Category not applicable</li>";
+	}
+	
+	buf = "<li>Your response: " + response.desc + "</li>";
+	buf += "<li>Example answer: " + partsList[answer].description + "</li>";
+	
+	report.desc.innerHTML = buf;
+	
+	document.getElementById("answerDisplay").style.display = "block";
+	document.forms["responses"].style.display = "none";
 }
 
 function write_progress()

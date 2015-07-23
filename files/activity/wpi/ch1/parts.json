@@ -18,31 +18,31 @@
 		"category":false
 	},
 	{
-		"name":"Power Distribution Panel",
+		"name":["Power Distribution Panel","Power Distribution Board"],
 		"img":"http://www.fightingpi.org/Resources/Controls/Beta/2015_Pictures/pdb.jpg",
 		"description":"Receives power from the battery and distributes it among the different robot components with differing voltages.",
 		"category":false
 	},
 	{
-		"name":"Pneumatic Control Module",
+		"name":["Pneumatic Control Module", "Pneumatics Control Module", "PCM"],
 		"img":"http://www.fightingpi.org/Resources/Controls/Beta/2015_Pictures/pcm.jpg",
 		"description":"Manages the pneumatics system",
 		"category":false
 	},
 	{
-		"name":"Signal light",
+		"name":["Signal light","Robot signal light"],
 		"img":"http://www.rockwellautomation.com/resources/images/productinfo/IDW_300x300/855BS/855BS-N10BL5_300x300.jpg",
 		"description":"Uses solid and pulsing light sequences to signal the status of the robot.",
 		"category":false
 	},
 	{
-		"name":"CIM",
+		"name":["CIM","CIM motor"],
 		"img":"http://www.firstcadlibrary.com/images/CIM%20Motor.gif",
 		"description":"Converts (electrical) potential energy into mechanical energy. This specific motor provides a very powerful output.",
 		"category":"Motor"
 	},
 	{
-		"name":"Servo",
+		"name":["Servo","Servo motor"],
 		"img":"http://myrobotlab.org/sites/default/files/users/user3images/servomotor.gif",
 		"description":"Reads directly from a PWM signal to turn to a specific angle.",
 		"category":"Motor"
@@ -57,76 +57,76 @@
 		"name":"Victor",
 		"img":"http://www.3dcontentcentral.com/showmodels/CONTENTCENTRAL%5CVictor%20883-short%20fan%5CVictor%20883-short%20fan.jpg",
 		"description":"Receives a PWM signal and translates it into a voltage for the attached motor to use.",
-		"category":"Motor controller"
+		"category":["Motor controller","Drive controller","Speed controller"]
 	},
 	{
 		"name":"Jaguar",
 		"img":"http://www.vexrobotics.com/media/catalog/product/cache/11/image/296x/5e06319eda06f020e43594a9c230972d/2/1/217-3367-jaguar-motor-controller.jpeg",
 		"description":"Receives a PWM or CAN signal and translates it into a voltage for the attached motor to use.",
-		"category":"Motor controller"
+		"category":["Motor controller","Drive controller","Speed controller"]
 	},
 	{
 		"name":"Talon",
 		"img":"http://crosstheroadelectronics.com/Talon%20SR.jpg",
 		"description":"Receives a PWM signal and translates it into a voltage for the attached motor to use.",
-		"category":"Motor controller"
+		"category":["Motor controller","Drive controller","Speed controller"]
 	},
 	{
 		"name":"Spike",
 		"img":"http://www.vexrobotics.com/media/catalog/product/cache/11/image/296x/5e06319eda06f020e43594a9c230972d/2/1/217-0220-spike-h-bridge-relay.jpg",
 		"description":"Acts as a light switch to turn power to a motor/light on, off, or reverse it.",
-		"category":"Motor controller"
+		"category":["Motor controller","Drive controller","Speed controller"]
 	},
 	{
 		"name":"Compressor",
 		"img":"http://team358.org/files/pneumatic/CompressorSideview.jpg",
 		"description":"Charges the pneumatic storage tanks for use by the pneumatics system.",
-		"category":"Pneumatics"
+		"category":["Pneumatics","Pneumatic"]
 	},
 	{
-		"name":"Solenoid",
+		"name":["Solenoid", "Solenoid valve", "Festo solenoid", "Festo solenoid valve", "Festo valve"],
 		"img":"http://www.festo.com/rep/en-us_us/assets/VUVG_13829u_240px.jpg",
 		"description":"Uses an electromagnet to drive a valve to actuate a pneumatic system.",
-		"category":"Pneumatics"
+		"category":["Pneumatics","Pneumatic"] 
 	},
 	{
 		"name":"Potentiometer",
 		"img":"http://img.ehowcdn.com/750x500/ehow/images/a05/3r/7k/potentiometer-works-800x800.jpg",
 		"description":"Translates rotation into a resistance, and, in turn, a voltage. Translated into a digital value by the roboRIO.",
-		"category":"Analog sensor"
+		"category":["Analog sensor","Analog input"]
 	},
 	{
 		"name":"Limit switch",
 		"img":"http://www.lightobject.info/eBay/Images/LimitSWC2.jpg",
 		"description":"A simple switch that senses on and off states.",
-		"category":"Digital sensor"
+		"category":["Digital sensor","Digital input"]
 	},
 	{
 		"name":"Gyro",
 		"img":"http://team358.org/files/programming/ControlSystem2015-2019/images/sm_Gyro.jpg",
 		"description":"Measures orientation along the X, Y, and Z axes",
-		"category":"Digital sensor"
+		"category":["Digital sensor","Digital input"]
 	},
 	{
 		"name":"Encoder",
 		"img":"http://www.automationdirect.com/images/overviews/encoder_trdn_300.jpg",
 		"description":"Records distance/rotation as digital pulses.",
-		"category":"Digital sensor"
+		"category":["Digital sensor","Digital input"]
 	},
 	{
 		"name":"Gear tooth sensor",
 		"img":"http://www.rls.si/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/g/t/gts_1_master.jpg",
 		"description":"Uses the hall effect to count the number of gear teeth that pass by in a given period of time.",
-		"category":"Digital Sensor"
+		"category":["Digital sensor","Digital input"]
 	},
 	{
 		"name":"Pressure switch",
 		"img":"http://www.davidsonsalesshop.com/catalog%5Cfiles%5CEcommerce%20Pictures%5CNason%5CSM-1A-014R_1.JPG",
 		"description":"Detects when the pressure is reaches a certain threshold (usually 115 psi)",
-		"category":"Digital sensor"
+		"category":["Digital sensor","Digital input","Pneumatics","Pneumatic"]
 	},
 	{
-		"name":"Game controller",
+		"name":["Game controller","Controller","Joystick","XBOX Controller","XBOX 360 Controller"],
 		"img":"http://upload.wikimedia.org/wikipedia/commons/4/4d/Xbox-360-Wireless-Controller-White.jpg",
 		"description":"Gathers user input to control the robot.",
 		"category":false
