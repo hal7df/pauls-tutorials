@@ -1,5 +1,7 @@
 var answer; //object to store information about the answer
 var percentCorrect; //percentage correct
+var questionsAnswered; //questions answered so far
+var correctAnswers; //the number of correct answers given so far
 var partsList; //object that stores information about robot parts
 var questionNum; //current question number
 var displayingResults; //true if displaying results, false otherwise; used to handle submit/next button and its action
@@ -14,7 +16,9 @@ function activity_init()
 {
 	answer = new Object();
 	questionNum = 1;
-	percentCorrect = 0;
+	percentCorrect = 100;
+	questionsAnswered = 0;
+	correctAnswers = 0;
 	displayingResults = false;
 	get_parts_list();
 	
@@ -389,28 +393,28 @@ function check_answer()
 	//** if they don't use the right component
 	correct.decl = (response.decl.indexOf(answer.decl) == 0);
 	
+	//** find the object's declared name
+	correct.objName = decl_get_obj_name(response.decl);
+	
+	//** validate the name
+	if (correct.objName[0] == '!')
+	{
+		correct.objName = correct.objName.substr(1);
+		correct.decl = false;
+		
+		if (correct.objName == "")
+			correct.objName = "m_foo";
+	}
+	else if (correct.objName == "")
+	{
+		correct.objName = "m_foo";
+		correct.decl = false;
+	}
+	
 	if (correct.decl)
 	{
 		//** check to make sure that there are just two keywords
 		correct.decl = decl_check_keywords(response.decl);
-		
-		//** find the object's declared name
-		correct.objName = decl_get_obj_name(response.decl);
-		
-		//** validate the name
-		if (correct.objName[0] == '!')
-		{
-			correct.objName = correct.objName.substr(1);
-			correct.decl = false;
-			
-			if (correct.objName == "")
-				correct.objName = "m_foo";
-		}
-		else if (correct.objName == "")
-		{
-			correct.objName = "m_foo";
-			correct.decl = false;
-		}
 		
 		if (correct.decl)
 		{			
@@ -866,22 +870,26 @@ function check_param (given, param)
  */
 function score_answer (correct)
 {
-	var initPoints;
-	
-	if (correct.decl)
-		percentCorrect += 10;
-	
+	var totalQuestions;
+
 	// ** if they did not provide the correct number of initialization steps, dock points
 	if (correct.initMismatch)
-		initPoints = (10 / (correct.init.length + 1));
+		totalQuestions = correct.init.length + 2;
 	else
-		initPoints = (10 / correct.init.length);
+		totalQuestions = correct.init.length + 1;
+	
+	if (correct.decl)
+		correctAnswers += 1;
 	
 	for (var x = 0; x < correct.init.length; x++)
 	{
 		if (correct.init[x])
-			percentCorrect += initPoints;
+			correctAnswers += 1;
 	}
+	
+	questionsAnswered += totalQuestions
+	
+	percentCorrect = (correctAnswers / questionsAnswered) * 100;
 }
 
 /** REPORT AN ANSWER
@@ -1061,7 +1069,84 @@ function report_answer(correct)
  */
 function write_progress()
 {
-	document.getElementById("progressIndicator").innerHTML = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + percentCorrect.toFixed(1) + '%';
+	var progress; 
+	
+	progress = questionNum + "/10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	progress += "<span style='color: " + calcColor() + ";'>" + percentCorrect.toFixed(1) + "%</span>";
+	document.getElementById("progressIndicator").innerHTML = progress;
+}
+
+/** CALCULATE COLOR FOR PERCENTAGE CORRECT
+ *  --------------------------------------
+ * @returns {String}: the color to use for the given percent
+ */
+function calcColor() 
+{
+	var percent = percentCorrect * 0.01;
+	
+	if (percent <= 0.5)
+	{		
+		var color1 = hexToRGB(0xff0000);
+		var color2 = hexToRGB(0xffff00);
+		
+		percent *= 2;
+	}
+	else
+	{
+		var color1 = hexToRGB(0xffff00);
+		var color2 = hexToRGB(0x00cc00);
+		
+		percent = (percent-0.5)*2;
+	}
+	
+	var out = new Object;
+	
+	out.r = Math.floor(((percent * color2.r) + ((1 - percent) * color1.r)) + 0.5);
+	out.g = Math.floor(((percent * color2.g) + ((1 - percent) * color1.g)) + 0.5);
+	out.b = Math.floor(((percent * color2.b) + ((1 - percent) * color1.b)) + 0.5);	
+	
+	return rgbToHex(out);
+}
+
+/** HEX COLOR TO RGB OBJECT
+ *  -----------------------
+ * @param hex: the hex string representing the color
+ * @returns {ColorObject}: the object with r, g, and b components
+ */
+
+function hexToRGB(hex) {		
+	var color = new Object;
+	
+	color.r = hex >> 16;
+	color.g = (hex >> 8) & 0xFF;
+	color.b = hex & 0xFF;
+	
+	color.r = Math.floor(color.r+0.5);
+	color.g = Math.floor(color.g+0.5);
+	color.b = Math.floor(color.b+0.5);
+	
+	return color;
+}
+
+/** RGB OBJECT TO HEX COLOR
+ * 
+ * @param rgb: the rgb object
+ * @returns {String}: the hex string representing the color
+ */
+
+function rgbToHex(rgb) {
+	return "#" + componentToHex(rgb.r) + componentToHex(rgb.g) + componentToHex(rgb.b); 
+}
+
+/** CONVERT COMPONENT VALUE TO A HEX STRING
+ * 
+ * @param c: the component
+ * @returns a hex halue representing the component
+ */
+
+function componentToHex(c) {
+	var hex = c.toString(16);
+	return hex.length == 1 ? "0" + hex : hex;
 }
 
 /** GET RANDOM PORT

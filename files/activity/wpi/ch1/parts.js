@@ -5,7 +5,10 @@
 
 var partsList;
 var answer;
+var alreadyUsed;
 var percentCorrect;
+var questionsAnswered;
+var correctAnswers;
 var questionNum;
 var displayingResult;
 
@@ -15,14 +18,20 @@ function activity_init()
 	var activityContent = document.getElementById("activityContent");
 	var startButton = document.getElementById("start");
 	
-	percentCorrect = 0;
+	percentCorrect = 100;
 	questionNum = 1;
 	displayingResult = false;
+	alreadyUsed = new Array();
 	get_parts_list();
+	
+	questionsAnswered = 0;
+	correctAnswers = 0;
 	
 	tcontent.style.display = "none";
 	activityContent.style.display = "block";
 	startButton.style.display = "none";
+	
+	write_progress();
 	
 	window.location.replace("#_activityStart");
 }
@@ -51,9 +60,12 @@ function generate_question()
 {
 	var imgDisp = document.getElementById("questionImg");
 	
-	answer = getRandomInt(0, (partsList.length - 1));
+	do
+	{
+		answer = getRandomInt(0, (partsList.length - 1));
+	}while(alreadyUsed.indexOf(answer) != -1);
 	
-	console.log("Chosen component:",partsList[answer].name);
+	alreadyUsed.push(answer);
 	
 	imgDisp.src = partsList[answer].img;
 	
@@ -161,12 +173,16 @@ function score_answer(correct)
 	if (partsList[answer].category)
 	{
 		if (correct.name)
-			percentCorrect += 5;
+			correctAnswers += 1;
 		if (correct.category)
-			percentCorrect += 5;
+			correctAnswers += 1;
 	}
 	else if (correct.name)
-		percentCorrect += 10;
+		correctAnswers += 2;
+	
+	questionsAnswered += 2;
+	
+	percentCorrect = (correctAnswers / questionsAnswered) * 100;
 }
 
 function report_answer(correct)
@@ -186,10 +202,10 @@ function report_answer(correct)
 	buf = "<li>Your response: " + response.name;
 	
 	if (correct.name)
-		buf += "<span style='color: #00cc00;'>&#10004;</span></li>";
+		buf += "<span style='color: #00cc00; font-size: 1.5em;'> &#10004;</span></li>";
 	else
 	{
-		buf += "<span style='color: #ff0000;'>&#10008;</span></li>";
+		buf += "<span style='color: #ff0000; font-size: 1.5em;'> &#10008;</span></li>";
 		buf += "<li>Correct answer: ";
 		
 		if (partsList[answer].name.constructor === Array)
@@ -205,10 +221,10 @@ function report_answer(correct)
 		buf = "<li>Your response: " + response.cat;
 		
 		if (correct.category)
-			buf += "<span style='color: #00cc00;'>&#10004;</span></li>";
+			buf += "<span style='color: #00cc00; font-size: 1.5em;'> &#10004;</span></li>";
 		else
 		{
-			buf += "<span style='color: #ff0000;'>&#10008;</span></li>";
+			buf += "<span style='color: #ff0000; font-size: 1.5em;'> &#10008;</span></li>";
 			buf += "<li>Correct answer: ";
 			
 			if (partsList[answer].category.constructor === Array)
@@ -234,7 +250,62 @@ function report_answer(correct)
 
 function write_progress()
 {
-	document.getElementById("activityProgress").innerHTML = questionNum + "/10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + percentCorrect.toFixed(1) + '%';
+	var progress; 
+	
+	progress = questionNum + "/10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	progress += "<span style='color: " + calcColor() + ";'>" + percentCorrect.toFixed(1) + "%</span>";
+	document.getElementById("activityProgress").innerHTML = progress;
+}
+
+function calcColor() 
+{
+	var percent = percentCorrect * 0.01;
+	
+	if (percent <= 0.5)
+	{		
+		var color1 = hexToRGB(0xff0000);
+		var color2 = hexToRGB(0xffff00);
+		
+		percent *= 2;
+	}
+	else
+	{
+		var color1 = hexToRGB(0xffff00);
+		var color2 = hexToRGB(0x00cc00);
+		
+		percent = (percent-0.5)*2;
+	}
+	
+	var out = new Object;
+	
+	out.r = Math.floor(((percent * color2.r) + ((1 - percent) * color1.r)) + 0.5);
+	out.g = Math.floor(((percent * color2.g) + ((1 - percent) * color1.g)) + 0.5);
+	out.b = Math.floor(((percent * color2.b) + ((1 - percent) * color1.b)) + 0.5);	
+	
+	return rgbToHex(out);
+}
+
+function hexToRGB(hex) {		
+	var color = new Object;
+	
+	color.r = hex >> 16;
+	color.g = (hex >> 8) & 0xFF;
+	color.b = hex & 0xFF;
+	
+	color.r = Math.floor(color.r+0.5);
+	color.g = Math.floor(color.g+0.5);
+	color.b = Math.floor(color.b+0.5);
+	
+	return color;
+}
+
+function rgbToHex(rgb) {
+	return "#" + componentToHex(rgb.r) + componentToHex(rgb.g) + componentToHex(rgb.b); 
+}
+
+function componentToHex(c) {
+	var hex = c.toString(16);
+	return hex.length == 1 ? "0" + hex : hex;
 }
 
 function getRandomInt (lower, upper)
