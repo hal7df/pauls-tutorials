@@ -211,7 +211,7 @@ function report_answer(correct)
 			buf += "<span style='color: #ff0000;'>&#10008;</span></li>";
 			buf += "<li>Correct answer: ";
 			
-			if (parstList[answer].category.constructor === Array)
+			if (partsList[answer].category.constructor === Array)
 				buf += partsList[answer].category[0] + "</li>";
 			else
 				buf += partsList[answer].category + "</li>";
