@@ -1,4 +1,4 @@
-/** Platform detection tools
+/** Page tools
  * 
  * Mobile browser detection from StackOverflow
  *

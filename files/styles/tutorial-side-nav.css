@@ -1,0 +1,83 @@
+/** Sidebar navigation CSS **/
+
+body {
+	background-color: #555555;
+	color: #ffffff;
+	font-family: 'Droid Sans', Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+ul.nav-root {
+	display: block;
+	padding: 5px;
+	background-color: #111;
+	text-align: center;
+}
+
+ul.nav-root > li:hover {
+	background: -webkit-linear-gradient(#ff6666,#ff4444);
+	background: -moz-linear-gradient(#ff6666,#ff4444);
+	background: linear-gradient(#ff6666,#ff4444);
+}
+
+ul.nav-root li {
+	list-style-type: none;
+	font-weight: bold;
+	display: block;
+	padding: 0.3em;
+}
+
+ul.nav-root a {
+	color: inherit;
+	text-decoration: none;
+	display: block;
+}
+
+ul.nav-root ul {
+	padding: 0;
+}
+
+ul.nav-root > li {
+	font-size: 2em;
+	padding: 5px;
+	background-color: #ff6666;
+	color: #000000;
+}
+
+ul.nav-sub-1 > li {
+	font-size: 1.5em;
+}
+
+ul.nav-sub-2 > li {
+	font-size: 1.25em;
+}
+
+ul.nav-sub-1 {
+	display: none;
+	padding: 1em;
+	background-color: #555555;
+}
+
+ul.nav-sub-1:hover {
+	display: block;
+}
+
+ul.nav-sub-2 {
+	display: none;
+	background-color: #111111;
+}
+
+ul.nav-sub-2:hover {
+	display: block;
+}
+
+ul.nav-root > li:hover + ul.nav-sub-1 {
+	display: block;
+}
+
+ul.nav-sub-1 > li:hover + ul.nav-sub-2 {
+	display: block;
+}
+
+ul.nav-sub-1 li:hover {
+	background-color: #777777;
+}
