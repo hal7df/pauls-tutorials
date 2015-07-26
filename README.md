@@ -38,3 +38,6 @@ If you want to see something better with the tutorials, such as an improved acti
 
 ### Contributing code
 If you want to do the coding yourself, cool! Just fork this repository and give us a pull request!
+
+## To-Do list
+[To-Do](https://github.com/hal7df/pauls-tutorials/wiki/To-Do-list)
