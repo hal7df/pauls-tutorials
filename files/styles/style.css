@@ -95,6 +95,18 @@ div.contain {
 	height: 1.25em;
 }
 
+div.containCh {
+	position: relative;
+	float: left;
+	display: inline-block;
+	width: 105px;
+	height: 1.25em;
+}
+
+div.containCh:hover {
+	width: 200px;
+}
+
 div.path {
 	float: left;
 	display: inline-block;
@@ -109,6 +121,7 @@ div.path span {
 	display: block;
 	height: 100%;
 	padding: 10px;
+	white-space: nowrap;
 }
 
 div.path a {
@@ -123,6 +136,7 @@ div.path a.main {
 	height: 100%;
 	width: 100%;
 	padding: 10px;
+	white-space: nowrap;
 }
 
 div.path:hover {
