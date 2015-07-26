@@ -1071,7 +1071,7 @@ function write_progress()
 {
 	var progress; 
 	
-	progress = questionNum + "/10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	progress = questionNum + "/5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	progress += "<span style='color: " + calcColor() + ";'>" + percentCorrect.toFixed(1) + "%</span>";
 	document.getElementById("progressIndicator").innerHTML = progress;
 }

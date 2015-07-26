@@ -1,7 +1,7 @@
 # pauls-tutorials
 Source for Paul's Tutorials.
 
-The current implementation is at [the HOT Team website](http://www.hotteam67.org/programming/pauls-tutorials), but this implementation is not as complete as what is in this repository. Once we get the pages working to our liking, we will post a new, complete implementation of the tutorials.
+We currently maintain a reference implementation of Paul's Tutorials [right here on GitHub](http://hal7df.github.io/pauls-tutorials). We will, however, move this to the official HOT Team website once it is ready.
 
 Paul's Tutorials are the programming tutorials for FRC Team #67, the 'HOT' Team. They teach new programmers C++ and WPILib with C++.
 
