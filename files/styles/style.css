@@ -87,23 +87,28 @@ textarea.code {
 
 /** NAVIGATION BAR **/
 
-div.contain {
+div.contain,
+div.containCh,
+div.containWpi {
 	position: relative;
 	float: left;
 	display: inline-block;
-	width: 200px;
 	height: 1.25em;
+}
+div.contain {
+	width: 200px;
 }
 
 div.containCh {
-	position: relative;
-	float: left;
-	display: inline-block;
 	width: 105px;
-	height: 1.25em;
 }
 
-div.containCh:hover {
+div.containWpi {
+	width: 160px;
+}
+
+div.containCh:hover,
+div.containWpi:hover {
 	width: 200px;
 }
 
