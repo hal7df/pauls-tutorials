@@ -61,7 +61,7 @@ code {
 	margin: 2px;
 }
 a code {
-	color: #e84747;
+	color: inherit;
 }
 pre {
 	background-color: #f5f5f5;
