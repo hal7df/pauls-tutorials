@@ -4,10 +4,10 @@
     <title>Tips and Tricks (C++)</title>
     <meta content="">
     <link rel="stylesheet" type="text/css" href="../files/styles/style.css" />
-      <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shCore.css" />
-    <link rel="stylesheet" type="text/css" href="../../files/syntax/css/shThemeRDark.css" />
-    <script type="text/javascript" src="../../files/syntax/script/shCore.js"></script>
-    <script type="text/javascript" src="../../files/syntax/script/shBrushCpp.js"></script>
+      <link rel="stylesheet" type="text/css" href="../files/syntax/css/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="../files/syntax/css/shThemeRDark.css" />
+    <script type="text/javascript" src="../files/syntax/script/shCore.js"></script>
+    <script type="text/javascript" src="../files/syntax/script/shBrushCpp.js"></script>
     
     <script type="text/javascript">SyntaxHighlighter.all();</script>
   </head>
@@ -65,7 +65,7 @@
   	 	<p>The <code>printf()</code> function is another method of output from C (the language C++ is based on).  It allows you to print variable values right in a text string.</p>
   	 	<p>This will be useful later when you start programming the robot.</p>
   	 	<p>When you use it, you need to include the library <code>cstdio</code>.</p>
-		<pre class= "brush: cpp">
+		<pre class="brush: cpp">
 #include &lt;cstdio&gt;
 
 using namespace std;
@@ -160,7 +160,7 @@ printf("I would like to say %s", mystring.c_str());</pre></td>
 						Also, <span style="font-weight: bold;">DO NOT TAKE THE RESULT OF THE ABOVE EQUATION AND WRITE <code>rand() % result</code>, AS THIS CHANGES THE RANGE OF NUMBERS TO BE GENERATED!</span>
 						(Order of Operations - modulo is grouped with multiplication/division)</p>
 					<p>For example:</p>
-					<pre calss= "brush: cpp">int my_int = rand() % 31 + 1983;</pre>
+					<pre class= "brush: cpp">int my_int = rand() % 31 + 1983;</pre>
 					<p>will generate years from 1983 to 2013.</p>
 					
 		<h2 class="tutorial"><a id="IO_Manipulation"></a>I/O Manipulation</h2>
@@ -181,9 +181,10 @@ cout &lt;&lt; OutputOperation1 &lt;&lt; OutputOperation2 &lt;&lt; OutputOperatio
 				<pre lang="cpp">
 iomanip::setw(int width)</pre>
 				<h4 class="tutorial"><a id="setw_parameters"></a><code>setw()</code> parameters</h4>
-				<ul>
-					<li><code>width</code>: The number of characters that the following output operation should contain. If there is an excess, the <a href="#setfill">fill character</a> is repeated and put adjacent to the characters output by the following operation.</li>
-				</ul>
+				<dl class="tutorial">
+					<dt>width</dt>
+					<dd>The number of characters that the following output operation should contain. If there is an excess, the <a href="#setfill">fill character</a> is repeated and put adjacent to the characters output by the following operation.</dd>
+				</dl>
 				<h4 class="tutorial"><a id="setw_use"></a><code>setw()</code> use</h4>
 					<p>Place this function <span style="font-weight: bold;">before</span> the desired output operation.</p>
 					<div style="float: left; overflow: auto; overflow-y: hidden; white-space: nowrap; width: 49%;">
