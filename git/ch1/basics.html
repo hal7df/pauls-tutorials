@@ -60,20 +60,21 @@
 			<ul>
 				<li><a href="#staging">The Staging Area</a></li>
 				<li><a href="#committing">Committing</a>
-					<ul>
-						<li><a href="#reset">Undoing your changes</a></li>
-					</ul>
+				<ul>
+					<li><a href="#reset">Undoing your changes</a></li>
+				</ul>
 				</li>
 				<li><a href="#pushing">Pushing</a>
-					<ul>
-						<li><a href="#push-fail">When pushing fails</a></li>
-					</ul>
+				<ul>
+					<li><a href="#push-fail">When pushing fails</a></li>
+				</ul>
 				</li>
 				<li><a href="#pulling">Pulling</a>
-					<ul>
-						<li><a href="#fetching">Fetching</a></li>
-						<li><a href="#merging">Merging</a></li>
-					</ul>
+				<ul>
+					<li><a href="#fetching">Fetching</a></li>
+					<li><a href="#merging">Merging</a></li>
+					<li><a href="#result">The Result</a>
+				</ul>
 				</li>
 				<li><a href="#ignoring">Ignoring files</a></li>
 			</ul>
@@ -188,6 +189,27 @@
 				</ul>
 				
 				<img class="tutorial large" alt="Overall diagram of a pull" title="Visual summary of a pull" src="../../files/img/git-repo-pull.png" />
+				
+		<h2 class="tutorial"><a id="ignoring"></a>Ignoring files</h2>
+			<p>Although git may watch the entire repository folder for changes, there may be files within the repository that you do not want git to track. Usually, these files are:</p>
+			
+			<ul>
+				<li>Built executables</li>
+				<li>Local configuration files (files that only affect the software on your computer, not anywhere else)
+				<ul>
+					<li>This should not include project and/or make files, if they are present</li>
+				</ul>
+				</li>
+				<li>Some auto-generated files (ones that are not code)
+				<ul>
+					<li>Especially if the files are auto-generated configuration, these files are usually constantly in flux, and will bloat your commits</li>
+				</ul>
+				</li>
+			</ul>
+			
+			<p>If this is the case, then you can actually tell git to ignore these files. This is done by the means of a <code>.gitignore</code> file, which lists file patterns to be ignored.
+				A <code>.gitignore</code> can specify folders or files, and all files that match a certain expression.</p>
+			<p>You will learn more about how to use a <code>.gitignore</code> file in <a href="../ch2/basic-operations.html">lesson 2-1</a>.</p>
 	</div>
   	
   	<!-- NAVIGATION -->
