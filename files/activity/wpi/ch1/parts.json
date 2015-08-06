@@ -67,7 +67,7 @@
 	},
 	{
 		"name":"Talon",
-		"img":"http://crosstheroadelectronics.com/Talon%20SR.jpg",
+		"img":"http://cdn3.volusion.com/vyfsn.knvgw/v/vspfiles/photos/am-Talon-discontinued-2.jpg",
 		"description":"Receives a PWM signal and translates it into a voltage for the attached motor to use.",
 		"category":["Motor controller","Drive controller","Speed controller"]
 	},
