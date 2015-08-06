@@ -166,15 +166,28 @@
 					<p>It is possible, however, for a merge to fail. This is usually due to one of two reasons.</p>
 					
 					<h5 class="tutorial"><a id="uncommitted-changes"></a>Merge failure due to uncommitted changes</h5>
-					<p>If you have changes in your repository that you have not yet committed, git will refuse to merge any commits to protect your work.
-						The solution to this is simple: commit your work, or reset the state of your repository if you don't want to keep it.</p>
+						<p>If you have changes in your repository that you have not yet committed, git will refuse to merge any commits to protect your work.
+							The solution to this is simple: commit your work, or reset the state of your repository if you don't want to keep it.</p>
 						
 					<h5 class="tutorial"><a id="code-conflict"></a>Merge failure due to conflicting code</h5>
-					<p>As has been hinted, it is also possible for the merge to fail because another commit conflicts with a commit that you haven't yet pushed.
-						This happens when a commit that was pushed after you last pulled changed the same line that you changed.
-						Since git doesn't know which commit should take precedence in this case, it will error out with a merge conflict, and ask that you resolve it manually.</p>
-					<p>To resolve the conflict, you can either open up the file directly in the text editor or use a special merge tool.</p>
-					<p>Resolving merge conflicts will be explained in greater detail in <a href="../ch2/merge-conflicts.html">lesson 2-4</a>.</p>
+						<p>As has been hinted, it is also possible for the merge to fail because another commit conflicts with a commit that you haven't yet pushed.
+							This happens when a commit that was pushed after you last pulled changed the same line that you changed.
+							Since git doesn't know which commit should take precedence in this case, it will error out with a merge conflict, and ask that you resolve it manually.</p>
+						<p>To resolve the conflict, you can either open up the file directly in the text editor or use a special merge tool.</p>
+						<p>Once you have resolved the merge conflicts, you need to commit the result of the merge to get the repository in line again.
+							However, git will automatically generate a commit message for you if you had to merge. All you have to do is sign off on the commit.</p>
+						<p>Resolving merge conflicts will be explained in greater detail in <a href="../ch2/merge-conflicts.html">lesson 2-4</a>.</p>
+						
+			<h3 class="tutorial"><a id="result"></a>The Result</h3>
+				<p>At the end of a pull, one of the follwing results will occur, based on what happened during the pull:</p>
+				
+				<ul>
+					<li>Up-to-date: There were no commits to fetch.</li>
+					<li>Fast-forward: Commits were fetched and there were no conflicts, the repository was automatically updated with the latest code.</li>
+					<li>Merged: Commits were fetched and conflicts occurred. If git couldn't resolve them automatically, they were solved manually, and the result was committed.</li>
+				</ul>
+				
+				<img class="tutorial large" alt="Overall diagram of a pull" title="Visual summary of a pull" src="../../files/img/git-repo-pull.png" />
 	</div>
   	
   	<!-- NAVIGATION -->
