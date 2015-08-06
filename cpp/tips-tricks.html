@@ -172,13 +172,13 @@ printf("I would like to say %s", mystring.c_str());</pre></td>
 			<h3 class="tutorial"><a id="Output_operation"></a>Output operation</h3>
 				<p>An <span style="font-weight: bold;">output operation</span> is one of the clauses you put between the <code>&lt;&lt;</code> operators in <code>cout</code> statements.</p>
 				<p style="font-weight: bold;">Example</p>
-				<pre calss= "brush: cpp">
+				<pre class="brush: cpp">
 cout &lt;&lt; OutputOperation1 &lt;&lt; OutputOperation2 &lt;&lt; OutputOperation3;</pre>
 				<p>Note that the following functions are not considered output operations.</p>
 				<p>When considering how to set it up, the following functions do affect following <code>cout</code> statements, if applicable.</p>
 			<h3 class="tutorial"><a id="setw"></a><code>setw()</code></h3>
 				<p>The <code>setw()</code> function allows you to <span style="font-weight: bold;">set the width</span> of a specific output operation.</p>
-				<pre lang="cpp">
+				<pre class="brush: cpp">
 iomanip::setw(int width)</pre>
 				<h4 class="tutorial"><a id="setw_parameters"></a><code>setw()</code> parameters</h4>
 				<dl class="tutorial">
@@ -198,16 +198,17 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 					<div style="float: right; overflow: auto; overflow-y: hidden; white-space: nowrap; width: 49%">
 						<p style="font-weight: bold; text-align: center;">Output</p>
 						<br/>
-						<pre lang="text">Not affected                      Affected Not affected</pre>
+						<blockquote class="tutorialexample">Not affected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Affected Not affected</blockquote>
 					</div>
 			<h3 class="tutorial" style="clear: both;"><a id="setfill"></a><code>setfill()</code></h3>
 				<p>The <code>setfill()</code> function allows you to set the fill character (normally a whitespace). The fill character is used if an output operation contains fewer characters than the <a href="#setw">field width</a>.</p>
 				<p><code>setfill()</code> affects <span style="font-weight: bold;">all</span> output operations following it.</p>
-				<pre lang="cpp">iomanip::setfill(char_type c)</pre>
+				<pre class="brush: cpp">iomanip::setfill(char_type c)</pre>
 				<h4 class="tutorial"><a id="setfill_parameters"></a><code>setfill()</code> parameters</h4>
-					<ul>
-						<li><code>c</code>: Character to use as the fill character in the following output operation. </li>
-					</ul>
+					<dl class="tutorial">
+						<dt>c</dt>
+						<dd>Character to use as the fill character in the following output operation.</dd>
+					</dl>
 				<h4 class="tutorial"><a id="setfill_use"></a><code>setfill()</code> use</h4>
 					<p>Place this function <span style="font-weight: bold;">before</span> the desired output operation.</p>
 					<table><tbody>
@@ -235,8 +236,8 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 								<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
 								<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
 							</tr><tr>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre class = "brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; left &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre>hi++++++++</pre></td>
+								<td style="border: 1px solid #ccc; padding: 5px;"><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; left &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
+								<td style="border: 1px solid #ccc; padding: 5px;"><blockquote class="tutorialexample">hi++++++++</blockquote></td>
 							</tr>
 						</tbody></table>
 				<h4 class="tutorial"><a id="right"></a><code>right</code></h4>
@@ -250,8 +251,8 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 								<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
 								<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
 							</tr><tr>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre class= "brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; right &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre>++++++++hi</pre></td>
+								<td style="border: 1px solid #ccc; padding: 5px;"><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; right &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
+								<td style="border: 1px solid #ccc; padding: 5px;"><blockquote class="tutorialexample">++++++++hi</blockquote></td>
 							</tr>
 						</tbody></table>
 				<h4 class="tutorial"><a id="internal"></a><code>internal</code></h4>
@@ -266,7 +267,7 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 								<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
 							</tr><tr>
 								<td style="border: 1px solid #ccc; padding: 5px;"><pre lang="cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; internal &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre>h++++++++i</pre></td>
+								<td style="border: 1px solid #ccc; padding: 5px;"><blockquote class="tutorialexample">h++++++++i</blockquote></td>
 							</tr>
 						</tbody></table>
 		<h2 class="tutorial"><a id="Clearing_the_Screen"></a>Clearing the Screen</h2>
