@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>1-1 Git Basics (Git)</title>
+    <meta content="">
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+  </head>
+  <body>  
+  	<!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-1</span>&nbsp;Git Basics</h1>
+  	<hr />
+  	<div class="path">
+		<a class="main" href="../../index.html">Programming Home</a>
+	</div>
+	<div class="separator"></div>
+	<div class="containWpi">
+		<div class="path subNav">
+			<a class="main" href="../index.html">Git Mini-tutorial</a>
+			
+			<ul>
+				<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
+				<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
+				<li><a href="../../about.html">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="containCh">
+		<div class="path subNav">
+			<a class="main" href="index.html">Chapter 1</a>
+			
+			<ul>
+				<li><a href="../ch2/index.html">Chapter 2: Use</a></li>
+				<li><a href="../operations-reference.html">Git Operations Reference</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="contain">
+		<div class="path subNav">
+			<span>Lesson 1</span>
+			
+			<ul>
+				<li><a href="history-branching.html">Lesson 2: History and Branching</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="reset"></div>	
+  	<hr />  	
+  	
+  	<!-- PAGE CONTENT -->
+	<div id="intro">
+		<p>One of the important things to understand about git is that it is a specific kind of VCS called a <span style="font-style: italic;">distributed version control system</span>,
+			meaning that it does not have a centralized location where all of the code history is stored, and the local copies all perform their version control functions from that repository.
+			Instead, every copy of a git <span style="font-style: italic;">repository</span>, or <span style="font-style: italic;">repo</span>, as they are called, is fully-blown, having a complete copy of the code history.
+			So, instead of relying on the web server for all of the functions of the VCS, git merely uses the web server as a means through which to keep all copies of the repository updated.</p>
+		<p>With that in mind, this lesson will teach you exactly how git approaches version control and how it communicates with the repository stored on the Internet.</p>
+		<div id="toc">
+			<ul>
+				<li><a href="#staging">The Staging Area</a></li>
+				<li><a href="#committing">Committing</a>
+					<ul>
+						<li><a href="#reset">Undoing your changes</a></li>
+					</ul>
+				</li>
+				<li><a href="#pushing">Pushing</a>
+					<ul>
+						<li><a href="#push-fail">When pushing fails</a></li>
+					</ul>
+				</li>
+				<li><a href="#pulling">Pulling</a>
+					<ul>
+						<li><a href="#fetching">Fetching</a></li>
+						<li><a href="#merging">Merging</a></li>
+					</ul>
+				</li>
+				<li><a href="#ignoring">Ignoring files</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="tcontent">
+		<h2 class="tutorial"><a id="staging"></a>The Staging Area</h2>
+			<p>Although git keeps a full copy of the version history in every local repository,
+				it is still important to distinguish a <span style="font-style: italic;">remote</span> repository from a <span style="font-weight: italic;">local</span>repository.
+				Local repositories do not (usually) directly move code between themselves. Communication with git is almost always done between the local repo and the remote repo, and other local repos grab the changes from the remote.</p>
+			<p>In version control, keeping remote repos updated with code from local repos and vice versa is not as simple as a copy-paste operation.
+				There are a number of steps involved from one end to the other to ensure that git does not destroy your code, but rather update it.</p>
+			<p>To accomplish this, git implements a <span style="font-style: italic;">staging area</span> in each repository.
+				The purpose of the staging area is to hold any changes that have been made to the local repo that have not been reflected on the remote repo, as well as any changes that have been made to the remote repo that haven't yet been reflected locally.
+				This way, git knows exactly what to either update the code with or to upload to the remote repository.</p>
+			<p>Diagrams such as this one are usually used to visualize the staging area:</p>
+			<img class="tutorial large" alt="Git repo diagram" title="Local-remote repository diagram" src="../../files/img/git-repo-base.png" />
+		
+		<h2 class="tutorial"><a id="committing"></a>Committing</h2>
+			<p>While you write your code, git watches all of the files in the repository for changes.
+				When you are satisfied with the changes that you have made, you need to tell git that you want it to <span style="font-style: italic;">commit</span> the changes that you have made to the version history.</p>
+			<p>In the first part of this process, git will tell you all of the files that have changed &#8212; including any new files, deleted files, renamed files, and even changes in any binary files that are in the repositories (such as images).
+				At this step, you have to tell git what files you want it to include in the commit. Most often, you tell git to include all of the changes in the commit, but occasionally you might have reason to tell git to skip certain files in a commit.</p>
+			<p>Then, git asks you to write a commit message. In this message, you should write a detailed, yet succinct description of the changes you made in that specific commit.</p>
+			<p>Commit messages have two parts: a title and a description. However, most tools only show one text box to write into. In this case, the commit title is the first line of the commit message. Any lines following that are considered the description.</p>
+			<p>Generally, you should write a short summary of the changes you made into the title. Then, in the description, make a bulleted list (using hyphens) to describe in more detail exactly what you changed.
+				If you have difficulty remembering exactly what you changed, git can show a delta file (known as a <span style="font-style: italic;">diff</span>) that shows you exactly what you changed against the previous commit.</p>
+			<p><a href="https://github.com/hal7df/pauls-tutorials/commit/9e7224888a12c8ff3c76bc79e38732975e3e2541">See an example of a good commit message</a>
+			<p>Once you write the commit message and save it, git completes the commit process. Instead of updating every whole file that was changed, git generates a diff file for the commit, which just describes the lines in each file that changed.
+				For example, if you changed only one line in a file that was a thousand lines long, instead of committing all one thousand lines, git simply commits that one line that changed, which makes the commit itself much smaller in size.</p>
+			<p>Each commit has only one diff file. Git uses its own syntax within the diff to describe how different files in the commit changed.</p>
+			<p>Once the diff has been generated, git then creates a <span style="font-style: italic;">checksum</span> of the whole commit.
+				This is a one-way, 40-character hexadecimal hash (specifically a SHA-1 hash) of the diff and the commit message, or, in other words, a numerical value that represents the entire contents of the commit.
+				From that point forward, that commit is referenced by that hash. A commit hash might look like this:</p>
+			<blockquote class="tutorialexample">
+9e7224888a12c8ff3c76bc79e38732975e3e2541
+			</blockquote>
+			<p>Although this hash may look scary, whenever you have to refer to past commits, you can just use the first 7 characters of the hash &#8212; git will fill in the rest (you will see more on how commit hashes can be used in chapter 2).</p>
+			<blockquote class="tutorialexample">
+9e72248
+			</blockquote>
+			<p>With the diff and commit hash, git then stores the commit in the repository's history.</p>
+			<p>Up to this point, everything that has happened has taken place completely within the local repository. Now, git copies this commit into the staging area, where it will keep it until the commit is uploaded to the remote repository.</p>
+			<img class="tutorial large" alt="Committing to the staging area" title="Commit being copied to the staging area" src="../../files/img/git-repo-commit.png" />
+			<p>At this point, as far as git is concerned, the commit process is complete. Although not recommended, you can keep working without doing anything further.
+				You can continue to make new commits without uploading them, git will still keep the old ones in staging.</p>
+				
+			<h3 class="tutorial"><a id="reset"></a>Undoing your changes</h3>
+				<p>There may be a time that you want to undo changes. While spamming Ctrl+Z might work, if you have multiple changes across multiple files that you want to undo, it is easier to tell git to undo them for you.
+					However, there is one important thing to note: it is difficult to undo part of a commit with git. The easier path is only between whole commits.</p>
+				<p>If you want to undo everything since the last recorded commit (this does not have to be your commit), then you simply tell git to <span style="font-style: italic;">reset</span> (specifically, hard reset) the working tree to the last commit.
+					This will delete all of your changes since that commit.</p>
+				<p>You can also undo a commit, if you realize that you don't want the changes contained in the commit, <span style="font-weight: bold;">as long as you haven't pushed the commit yet</span> (pushing will be explained in the next section).
+					In this case, you tell git to reset the working tree to the commit before last. You can even undo multiple commits at once, if you want, just by telling git to reset to an even older commit.
+		
+		<h2 class="tutorial"><a id="pushing"></a>Pushing</h2>
+			<p>Once you have made a commit, it is usually in your best interest to upload it to the remote repository. This process is known to git as a <span style="font-style: italic;">push</span>.</p>
+			<p>This process is fairly self-explanatory. Git takes any unpushed commits it finds in the staging area and sends them to the remote repository.
+				The copy of git that is running on the server that hosts the remote repository does all of the necessary work to insert the new commits into the history on the remote server.</p>
+			<img class="tutorial large" alt="Pushing to the remote repository" title="Commit being pushed" src="../../files/img/git-repo-push.png" />
+			
+			<h3 class="tutorial"><a id="push-fail"></a>When pushing fails</h3>
+				<p>Despite how simple this process is, to ensure that the code does not get corrupted, some operations between the local and remote repositories do have the chance of failing.
+					With git, assuming that you have a stable internet connection and the server hosting the remote repository is functioning properly,
+					this is almost always due to the fact that someone else has pushed a commit that conflicts with what you have, and you have not yet downloaded that commit into your repository.
+					If you are trying to push code that conflicts what is in the remote repo, git will block the push and ask that you pull first, which is explained in the next section.
+				
+		<h2 class="tutorial"><a id="pulling"></a>Pulling</h2>
+			<p>Retrieving new commits from the remote repo is a more complicated process than uploading them.
+				Once again, this is to ensure that the code does not become corrupted and continues to function as expected.</p>
+			<p>The process of grabbing new commits from the remote repository is called <span style="font-style: italic;">pulling</span>.
+				A pull consists of two steps: <span style="font-style: italic;">fetching</span> and <span style="font-style: italic;">merging</span>.</p>
+				
+			<h3 class="tutorial"><a id="fetching"></a>Fetching</h3>
+				<p>This is basically the reverse process of a push. Git queries the remote repo for any new commits that it does not have locally. It then downloads these commits and places them in the staging area.</p>
+				<p>Unlike pushing, however, a fetch will not fail due to a code conflict, since the commit is only being put in the staging area, and not affecting any files in your local copy.</p>
+				<img class="tutorial large" alt="Fetching commits from the remote repository" title="Commit being fetched" src="../../files/img/git-repo-fetch.png" />
+				<p>Although a pull is the operation that you are most likely to use when you want to get the latest commits from the remote repo, it is also possible to tell git only to perform the fetch.</p>
+				
+			<h3 class="tutorial"><a id="merging"></a>Merging</h3>
+				<p>Once the commits have been fetched, git must then incorporate these changes into the codebase in the local repo. This is done through a process called <span style="font-style: italic;">merging</span>.</p>
+				<p>To do this, git analyzes the diff each commit that it fetched. It then changes every file changed in the commit as specified by the diff.
+					So, if three lines were added and one line was deleted in a file, then git will add those three lines and delete the line that was deleted.
+					If there are no code conflicts, then git results with a <span style="font-style: italic;">fast-forward</span>, where the repository is automatically updated to the latest code from the remote.</p>
+				<img class="tutorial large" alt="Merging fetched commits" title="Fetched commit being merged into the local codebase" src="../../files/img/git-repo-merge.png" />
+				<p>As was the case with fetching, if you have already fetched commits from the remote, then it is possible to tell git separately to merge the fetched commits into the local codebase.
+					However, this is a little more complex than fetching. You will learn more about how merging works in git <a href="history-branching.html">in the next lesson</a>.</p>
+				
+				<h4 class="tutorial"><a id="merge-fail"></a>When merging fails</h4>
+					<p>It is possible, however, for a merge to fail. This is usually due to one of two reasons.</p>
+					
+					<h5 class="tutorial"><a id="uncommitted-changes"></a>Merge failure due to uncommitted changes</h5>
+					<p>If you have changes in your repository that you have not yet committed, git will refuse to merge any commits to protect your work.
+						The solution to this is simple: commit your work, or reset the state of your repository if you don't want to keep it.</p>
+						
+					<h5 class="tutorial"><a id="code-conflict"></a>Merge failure due to conflicting code</h5>
+					<p>As has been hinted, it is also possible for the merge to fail because another commit conflicts with a commit that you haven't yet pushed.
+						This happens when a commit that was pushed after you last pulled changed the same line that you changed.
+						Since git doesn't know which commit should take precedence in this case, it will error out with a merge conflict, and ask that you resolve it manually.</p>
+					<p>To resolve the conflict, you can either open up the file directly in the text editor or use a special merge tool.</p>
+					<p>Resolving merge conflicts will be explained in greater detail in <a href="../ch2/merge-conflicts.html">lesson 2-4</a>.</p>
+	</div>
+  	
+  	<!-- NAVIGATION -->
+  	<div style="clear: both;">
+  		<hr>
+	  	<p id="navTitle">GIT MINI-TUTORIAL</p>
+  		<table id="footNav">
+  			<tbody>
+  				<tr>
+  					<td id="prev"><a href="index.html">&#8592; Chapter 1 Overview</a></td>
+  					<td id="cur">1-1 Git Basics</td>
+  					<td id="next"><a href="history-branching.html">1-2 History and Branching &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+  </body>
+</html>

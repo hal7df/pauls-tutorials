@@ -52,6 +52,9 @@ img.tutorial {
 	margin-left: auto;
 	height: 200px;
 }
+img.large {
+	height: 400px;
+}
 
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
