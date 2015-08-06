@@ -83,50 +83,50 @@ int main()
 		<p style="font-style: italic;">This table is from the www.cplusplus.com reference page on <code>printf()</code></p>
 		<table><tbody>
 			<tr>
-				<th style="border: 1px solid #ccc; padding: 5px;">Specifier</th>
-				<th style="border: 1px solid #ccc; padding: 5px;">Type</th>
-				<th style="border: 1px solid #ccc; padding: 5px;">Example</th>
+				<th>Specifier</th>
+				<th>Type</th>
+				<th>Example</th>
 			</tr>
 			<tr>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>d</code> or <code>i</code></td>
-				<td style="border: 1px solid #ccc; padding: 5px;">Signed integer</td>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>-49</code></td>
+				<td><code>d</code> or <code>i</code></td>
+				<td>Signed integer</td>
+				<td><code>-49</code></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>u</code></td>
-				<td style="border: 1px solid #ccc; padding: 5px;">Unsigned integer</td>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>435</code></td>
+				<td><code>u</code></td>
+				<td>Unsigned integer</td>
+				<td><code>435</code></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>f</code></td>
-				<td style="border: 1px solid #ccc; padding: 5px;">Floating point number</td>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>58.9784</code></td>
+				<td><code>f</code></td>
+				<td>Floating point number</td>
+				<td><code>58.9784</code></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>c</code></td>
-				<td style="border: 1px solid #ccc; padding: 5px;">Character</td>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>g</code></td>
+				<td><code>c</code></td>
+				<td>Character</td>
+				<td><code>g</code></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>s</code></td>
-				<td style="border: 1px solid #ccc; padding: 5px;">C String</td>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>&quot;hello&quot;</code></td>
+				<td><code>s</code></td>
+				<td>C String</td>
+				<td><code>&quot;hello&quot;</code></td>
 			</tr>
 		</tbody></table>
 		<p>See <a href="http://www.cplusplus.com/reference/cstdio/printf/" target="_blank">here</a> for a complete table and more details on <code>printf</code>.</p>
 		<p>Please note that printf will not accept C++ strings (variable type <code>string</code>) If you need to output a <code>string</code> in this manner, use this method for now:</p>
-		<table><tbody>
+		<table class="codeOutput"><tbody>
 			<tr>
-				<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
-				<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
+				<th>Code</th>
+				<th>Output</th>
 			</tr>
 			<tr>
-				<td style="border: 1px solid #ccc; padding: 5px;">
+				<td>
 					<pre class= "brush: cpp">
 string mystring;
 mystring = "hello";
 printf("I would like to say %s", mystring.c_str());</pre></td>
-				<td style="border: 1px solid #ccc; padding: 5px;"><code>I would like to say hello</code></td>
+				<td>I would like to say hello</td>
 			</tr>
 		</tbody></table>
 		<p>Another way to do this would be to declare a <a href="ch2/arrays.html#C_Strings">C string</a>; however, you need to have learned the concepts in lesson 6 in order to do that.</p>
@@ -187,19 +187,21 @@ iomanip::setw(int width)</pre>
 				</dl>
 				<h4 class="tutorial"><a id="setw_use"></a><code>setw()</code> use</h4>
 					<p>Place this function <span style="font-weight: bold;">before</span> the desired output operation.</p>
-					<div style="float: left; overflow: auto; overflow-y: hidden; white-space: nowrap; width: 49%;">
-						<p style="font-weight: bold; text-align: center;">Code</p>
+					<table class="codeOutput" style="width: 82.5%;"><tbody>
+						<tr>
+							<th>Code</th>
+							<th>Output</th>
+						</tr>
+						<tr>
+							<td>
 						<pre class= "brush: cpp">
 cout &lt;&lt; "Not affected" &lt;&lt; setw(30);
 cout &lt;&lt; "Affected" &lt;&lt; " Not affected" &lt;&lt; endl;</pre>
 						<pre class= "brush: cpp">
 cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " Not affected" &lt;&lt; endl;</pre>
-					</div>
-					<div style="float: right; overflow: auto; overflow-y: hidden; white-space: nowrap; width: 49%">
-						<p style="font-weight: bold; text-align: center;">Output</p>
-						<br/>
-						<blockquote class="tutorialexample">Not affected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Affected Not affected</blockquote>
-					</div>
+							</td>
+							<td>Not affected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Affected Not affected</td>
+					</tbody></table>
 			<h3 class="tutorial" style="clear: both;"><a id="setfill"></a><code>setfill()</code></h3>
 				<p>The <code>setfill()</code> function allows you to set the fill character (normally a whitespace). The fill character is used if an output operation contains fewer characters than the <a href="#setw">field width</a>.</p>
 				<p><code>setfill()</code> affects <span style="font-weight: bold;">all</span> output operations following it.</p>
@@ -211,13 +213,13 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 					</dl>
 				<h4 class="tutorial"><a id="setfill_use"></a><code>setfill()</code> use</h4>
 					<p>Place this function <span style="font-weight: bold;">before</span> the desired output operation.</p>
-					<table><tbody>
+					<table class="codeOutput"><tbody>
 						<tr>
-							<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
-							<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
+							<th>Code</th>
+							<th>Output</th>
 						</tr><tr>
-							<td style="border: 1px solid #ccc; padding: 5px;"><pre class= "brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-							<td style="border: 1px solid #ccc; padding: 5px;"> <code>++++++++hi</code></td>
+							<td><pre class= "brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
+							<td> <code>++++++++hi</code></td>
 						</tr>
 					</tbody></table>
 			<h3 class="tutorial"><a id="Text_alignment"></a>Text alignment</h3>
@@ -231,13 +233,13 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 						<p>The parameter for <code>left</code> is the following output operation, therefore, parentheses are unnecessary.</p>
 					<h5 class="tutorial"><a id="left_use"></a><code>left</code> use</h5>
 						<p>Use <code>left</code> before the output operations to be left-aligned.</p>
-						<table><tbody>
+						<table class="codeOutput"><tbody>
 							<tr>
-								<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
-								<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
+								<th>Code</th>
+								<th>Output</th>
 							</tr><tr>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; left &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-								<td style="border: 1px solid #ccc; padding: 5px;"><blockquote class="tutorialexample">hi++++++++</blockquote></td>
+								<td><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; left &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
+								<td>hi++++++++</td>
 							</tr>
 						</tbody></table>
 				<h4 class="tutorial"><a id="right"></a><code>right</code></h4>
@@ -246,13 +248,13 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 						<p>The parameter for <code>right</code> is the following output operation, therefore, parentheses are unnecessary.</p>
 					<h5 class="tutorial"><a id="right_use"></a><code>right</code> use</h5>
 						<p>Use <code>right</code> before the output operations to be right-aligned.</p>
-						<table><tbody>
+						<table class="codeOutput"><tbody>
 							<tr>
-								<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
-								<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
+								<th>Code</th>
+								<th>Output</th>
 							</tr><tr>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; right &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-								<td style="border: 1px solid #ccc; padding: 5px;"><blockquote class="tutorialexample">++++++++hi</blockquote></td>
+								<td><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; right &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
+								<td>++++++++hi</td>
 							</tr>
 						</tbody></table>
 				<h4 class="tutorial"><a id="internal"></a><code>internal</code></h4>
@@ -261,13 +263,13 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 						<p>The parameter for <code>internal</code> is the following output operation, therefore, parentheses are unnecessary.</p>
 					<h5 class="tutorial"><a id="internal_use"></a>internal use<a href="#internal_use" class="section_anchor"></a></h5>
 						<p>Use <code>internal</code> before the output operations to fill internally.</p>
-						<table><tbody>
+						<table class="codeOutput"><tbody>
 							<tr>
-								<th style="border: 1px solid #ccc; padding: 5px;">Code</th>
-								<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
+								<th>Code</th>
+								<th>Output</th>
 							</tr><tr>
-								<td style="border: 1px solid #ccc; padding: 5px;"><pre lang="cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; internal &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
-								<td style="border: 1px solid #ccc; padding: 5px;"><blockquote class="tutorialexample">h++++++++i</blockquote></td>
+								<td><pre class="brush: cpp">cout &lt;&lt; setfill('+') &lt;&lt; setw(10) &lt;&lt; internal &lt;&lt; "hi" &lt;&lt; endl;</pre></td>
+								<td>h++++++++i</td>
 							</tr>
 						</tbody></table>
 		<h2 class="tutorial"><a id="Clearing_the_Screen"></a>Clearing the Screen</h2>
@@ -341,22 +343,22 @@ int main () {
 	return 0;
 }</pre>
 			<p>The above code would run like this:</p>
-			<table><tbody>
+			<table class="inputOutput"><tbody>
 				<tr>
-					<th style="border: 1px solid #ccc; padding: 5px;">Input</th>
-					<th style="border: 1px solid #ccc; padding: 5px;">Output</th>
+					<th>Input</th>
+					<th>Output</th>
 				</tr><tr>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>2</code></td>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>You input a positive 2.</code></td>
+					<td>2</td>
+					<td>You input a positive 2.</td>
 				</tr><tr>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>abc</code></td>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>Please input a positive integer.</code></td>
+					<td>abc</td>
+					<td>Please input a positive integer.</td>
 				</tr><tr>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>-9</code></td>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>Please input a positive integer.</code></td>
+					<td>-9</td>
+					<td>Please input a positive integer.</td>
 				</tr><tr>
-					<td style="border: 1px solid #ccc; padding: 5px;"> <code>0.25</code></td>
-					<td style="border: 1px solid #ccc; padding: 5px;"><code>Please input a positive integer.</code></td>
+					<td>0.25</td>
+					<td>Please input a positive integer.</td>
 				</tr>
 			</tbody></table>
 			<p style="font-style: italic;">Note that you may need to double the <code>cin.ignore()</code> statement</p>
