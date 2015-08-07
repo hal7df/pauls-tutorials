@@ -63,18 +63,18 @@
   	<p>By this point, you have gone over 1) what parts of the robot are available, and 2) the structure of the program. Now, we will look at how we the parts of the robot are declared in the code.</p>
   	<p>Note that, if you are using RobotBuilder, all of this is done automatically.</p>
  	<ul>
- 		<li><a href="#Naming_and_Declarative_Style">Naming and Declarative Style</a></li>
+ 		<li><a href="#Naming_and_Declarative_Style">Naming and Declarative Style</a>
  		<ul>
  			<li><a href="#Naming">Naming</a></li>
  			<li><a href="#Declaring_Members">Declaring Members</a></li>
- 		</ul>
- 		<li><a href="#Robot_Parts">Robot Parts</a></li>
+ 		</ul></li>
+ 		<li><a href="#Robot_Parts">Robot Parts</a>
  		<ul>
  			<li><a href="#Motor_Controllers">Motor Controllers</a></li>
  			<li><a href="#Sensors">Sensors</a></li>
  			<li><a href="#Driver_Station_Components">Driver Station Components</a></li>
  			<li><a href="#Miscellaneous">Miscellaneous</a></li>
- 		</ul>
+ 		</ul></li>
  		<li><a href="#Activity">Activity</a></li>
  	</ul>
  	<h2 class="tutorial"><a id="Naming_and_Declarative_Style"></a>Naming and Declarative Style</h2>
@@ -214,7 +214,7 @@ m_servo1 = new Servo (3);</pre>
 Relay *m_relay1;
 
 //Spike initialization on relay 0
-m_relay1 = new Relay (0);</pre>
+m_relay1 = new Riley (0);</pre>
 			<h4 class="tutorial"><a id="Digital_Outputs"></a>Digital Outputs</h4>
 				<p>In some cases, you have a controller/motor that is digital yet does not fall into this category. As long as it uses the <a href="parts.html#roboRIO">digital output</a> on the roboRIO, use this class.</p>
 				<p>A digital output is of type <code>DigitalOutput</code> (with a capital D and O, no space). In the initialization, provide the digital output channel on the Digital Sidecar.</p>
@@ -279,15 +279,15 @@ m_digitalDev = new DigitalInput (0);</pre>
 				<p>An encoder is of type <code>Encoder</code> (capital E). In the initialization, do the following:</p>
 				<ul>
 					<li>provide the device&#x27;s two digital channels</li>
-					<li>provide whether the device should measure in reverse (true/false)</li>
+					<li>provide whether the device should measure in reverse (true/false)
 					<ul>
 						<li>if the device is not measured in reverse, you may omit this parameter</li>
-					</ul>
-					<li>configure</li>
+					</ul></li>
+					<li>configure
 					<ul>
 						<li>distance measured per pulse</li>
 						<li>max period</li>
-					</ul>
+					</ul></li>
 				</ul>
 				<pre class= "brush: cpp">
 //Encoder declaration
@@ -345,10 +345,10 @@ m_accel->SetZero(1.0);</pre>
 				<p>Both a standard XBOX 360 controller and the Attack3-like joysticks are of type <code>Joystick</code> (capital J). In the initialization, provide the Joystick ID. Use the following rule:</p>
 				<ul>
 					<li>Joystick 0: Driver</li>
-					<li>Joystick 1: Operator</li>
+					<li>Joystick 1: Operator
 					<ul>
 						<li>The operator performs actions that manipulate various components of the robot (like an arm)</li>
-					</ul>
+					</ul></li>
 				</ul>
 				<p>The actual ID of the joystick depends on when it was plugged in (first plugged in - 0, second - 1, and so on). There are a total of 4 available slots.
 					Some teams use 3 or 4 if they use Attack3-like joysticks (multiple joysticks per driver), but we only ever use 2.</p>
@@ -438,12 +438,12 @@ m_timer = new Timer;
   	  		
   	  		<div id="answers" style="display: none;">
   	  		<ul>
-	  	  		<li>Declaration</li>
+	  	  		<li>Declaration
 	  	  		<ul id="decl_answer">
-	  	  		</ul>
-	  	  		<li>Initialization</li>
+	  	  		</ul></li>
+	  	  		<li>Initialization
 	  	  		<ul id="init_answer">
-	  	  		</ul>
+	  	  		</ul></li>
   	  		</ul>
   	  		</div>
   	  		
@@ -451,7 +451,7 @@ m_timer = new Timer;
   	  	</div>
 
 <!-- NAVIGATION -->
-  	<div style="clear: both;">
+  	<div class="reset">
   		<hr>
 	  	<p id="navTitle">WPILIB TUTORIAL</p>
   		<table id="footNav">

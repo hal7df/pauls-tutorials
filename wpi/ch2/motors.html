@@ -84,17 +84,17 @@
   
 	<div id="toc">	
 		<ul>
-			<li><a href="#The_Motor">The Motor</a></li>
+			<li><a href="#The_Motor">The Motor</a>
 			<ul>
 				<li><a href="#Moving">Moving</a></li>
 				<li><a href="#How_Fast?">How Fast?</a></li>
 				<li><a href="#Physical_Capabilities_of_the_Robot">Physical Capabilities of the Robot</a></li>
-			</ul>
-			<li><a href="#The_Relay">The Relay</a></li>
+			</ul></li>
+			<li><a href="#The_Relay">The Relay</a>
 			<ul>
 				<li><a href="#Relay_Set">Relay <code>Set()</code></a></li>
 				<li><a href="#What_State?">What State?</a></li>
-			</ul>	
+			</ul></li>	
 			<li><a href="#Activity">Activity</a></li>
 		</ul>
 	</div>
@@ -202,39 +202,39 @@ else
 			<p style="font-weight: bold; text-align: center;">You will want to talk to someone who is familiar with the setup of your available robots to write something to run on a robot.</p>
 			<p>Program an available robot so that:</p>
 			<ul>
-				<li>One of the non-driving motors responds to input on the left Y axis</li>
+				<li>One of the non-driving motors responds to input on the left Y axis
 				<ul>
 					<li>Do not use one of the drivetrain motors -- there is a special method for controlling these that you will learn next lesson.</li>
-				</ul>
+				</ul></li>
 				<li>A relay gets set to forward when one button is held, reverse when another button is held, and off if no button is held</li>
 				<li>If you have access to a robot with lights on a relay, turn them on when another button (not yet used) is held.</li>
 			</ul>
 			<p>The sample below describes a program for the 2013 HOTBOT.</p>
 			<button onclick="toggleDesc()" id="showDesc">Show sample</button>
 			<ul id="sampleDesc" style="display: none;">
-				<li>Move the plate up and down using the left Y axis. </li>
+				<li>Move the plate up and down using the left Y axis. 
 				<ul>
 					<li>PWMs: 8 and 10 </li><li>Do not invert the controller reading </li>
-				</ul>
-				<li>Bring the launcher up to full speed with the A button, and turn it off with the B button. </li>
+				</ul></li>
+				<li>Bring the launcher up to full speed with the A button, and turn it off with the B button. 
 				<ul>
 					<li>PWMs: 4-6 </li>
 					<li>Slow spin up! In order to do this, you can start a <a href="../tips-tricks.html#Timers">timer</a> and set the victors to half the timer&#x27;s value until the timer reaches 2 seconds.</li>
 					<ul>
     					<li>Only for spin up. Setting the motors to 0 from full is fine.</li>
   					</ul>
-				</ul>
-				<li>Turn the climb indicator light on and off with the X button. </li>
+				</ul></li>
+				<li>Turn the climb indicator light on and off with the X button. 
 				<ul>
 					<li>Relay: 2 </li>
 					<li><a href="../tips-tricks.html#Timeouts">Button timeout</a>!</li>
-  				</ul>
+  				</ul></li>
   			</ul>
   			<p>Don&#x27;t forget the controller deadband (0.2), as the controllers do not zero properly. To regain fine control, add the deadband (if the controller reading is negative) / subtract the deadband (if the controller reading is positive) and then multiply that value by 1.25.</p>
   		</div>
   			
 	<!-- NAVIGATION -->
-  	<div style="clear: both;">
+  	<div class="reset">
   		<hr>
 	  	<p id="navTitle">WPILIB TUTORIAL</p>
   		<table id="footNav">
