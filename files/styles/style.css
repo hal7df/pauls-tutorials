@@ -58,8 +58,8 @@ img.large {
 
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
-	background-color: #f5f5f5;
-	color: #000000;
+	background-color: #002b36;
+	color: #b2b2b2;
 	padding: 2px;
 	margin: 2px;
 }
@@ -67,25 +67,97 @@ a code {
 	color: inherit;
 }
 pre {
-	background-color: #f5f5f5;
-	color: #000000;
+	background-color: #002b36;
+	color: #b2b2b2;
 	padding: 5px;
 }
 blockquote {
 	background-color: #002b36;
 	padding: 5px;
-	color: #839496;
+	color: #b2b2b2;
 }
 blockquote.tutorialexample {
+	font-family: monospace;
+}
+dl.tutorial > dt {
 	font-family: "monospace";
+	background-color: #002b36;
+	color: #b2b2b2;
+	padding: 5px;
+	margin-left: 10px;
+	display: inline-block;
+}
+dl.tutorial dd {
+	margin-top: 5px;
+}
+
+/** TABLES **/
+table {
+	border-collapse: collapse;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+table td, table th {
+	border: 1px solid;
+	padding: 5px;
+	text-align: center;
+}
+
+table.codeOutput {
+	width: 75%;
+}
+
+table.codeOutput td, table.codeOutput th {
+	width: 37.5%;
+}
+
+table.codeOutput th {
+	background-color: #555555;
+}
+
+table.codeOutput tr:nth-child(2) > td:first-child {
+	background-color: #1b2426;
+}
+
+table.codeOutput tr:nth-child(2) > td:nth-child(2) {
+	background-color: #002b36;
+	color: #b2b2b2;
+	font-family: monospace;
+	font-size: 1.25em;
+}
+
+table.inputOutput {
+	width: 50%;
+}
+
+table.inputOutput td, table.codeOuput th {
+	width: 25%;
+}
+
+table.inputOutput th {
+	background-color: #555555;
+}
+
+table.inputOutput tr > td:first-child {
+	background-color: #1b2426;
+	font-family: monospace;
+	font-size: 1.25em;
+}
+
+table.inputOutput tr > td:nth-child(2) {
+	background-color: #002b36;
+	color: #b2b2b2;
+	font-family: monospace;
+	font-size: 1.25em;
 }
 
 /** FORMS **/
 input.code {
-	font-family: "monospace";
+	font-family: monospace;
 }
 textarea.code {
-	font-family: "monospace";
+	font-family: monospace;
 }
 
 /** NAVIGATION BAR **/
@@ -229,13 +301,18 @@ p#navTitle {
 table#footNav {
 	width: 100%;
 	border: none;
+	border-collapse: separate;
+}
+
+table#footNav td {
+	border: none;
 }
 
 td#prev, td#next {
 	width: 40%;
 }
 
-td#cur {
+table#footNav td#cur {
 	width: 20%;
 	font-weight: bold;
 	text-align: center;
@@ -261,4 +338,8 @@ td#prev a:hover, td#next a:hover {
 
 td#prev {
 	text-align: right;
+}
+
+td#next {
+	text-align: left;
 }
