@@ -49,7 +49,7 @@
 	},
 	{
 		"name":"Window motor",
-		"img":"http://www.powerwindowmotor.net/wp-content/gallery/power-window-motor-specification/Power_Window_Motor_HT420_1_170.jpg",
+		"img":"http://www.carid.com/images/dorman/electrical-parts/742-253.jpg",
 		"description":"Relatively weak motor that normally runs the power windows in a car. It is usually used for low-load applications.",
 		"category":"Motor"
 	},
@@ -67,7 +67,7 @@
 	},
 	{
 		"name":"Talon",
-		"img":"http://crosstheroadelectronics.com/Talon%20SR.jpg",
+		"img":"http://cdn3.volusion.com/vyfsn.knvgw/v/vspfiles/photos/am-Talon-discontinued-2.jpg",
 		"description":"Receives a PWM signal and translates it into a voltage for the attached motor to use.",
 		"category":["Motor controller","Drive controller","Speed controller"]
 	},
