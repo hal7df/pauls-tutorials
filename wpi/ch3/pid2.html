@@ -67,17 +67,17 @@
  <div id="toc">
  <ul>
  	<li><a href="#Safety_Note">Safety Note</a></li>
- 	<li><a href="#PIDController">PIDController</a></li>
+ 	<li><a href="#PIDController">PIDController</a>
  	<ul>
  		<li><a href="#Initialization">Initialization</a></li>
  		<li><a href="#Use">Use</a></li>
- 	</ul>
- 	<li><a href="#Tuning_a_PID">Tuning a PID</a></li>
+ 	</ul></li>
+ 	<li><a href="#Tuning_a_PID">Tuning a PID</a>
  	<ul>
  		<li><a href="#PID_Setpoints">PID Setpoints</a></li>
  		<li><a href="#Prerequisites">Prerequisites</a></li>
  		<li><a href="#Finding_the_right_values">Finding the right values</a></li>
- 	</ul>
+ 	</ul></li>
  	<li><a href="#Activity">Activity</a></li>
  </ul>
  </div>
@@ -131,16 +131,16 @@
 	<h3 class="tutorial"><a id="Finding_the_right_values"></a>Finding the right values</h3>
 		<p>When you are tuning the PID, you need to ask yourself the following questions. Below each question is a potential solution for a problem that you might see.</p>
 		<ul>
-			<li>Is it moving in the right direction?</li>
+			<li>Is it moving in the right direction?
 			<ul>
 				<li>No: Make the P constant the opposite of what it is now (negative if it is positive, vice versa).</li>
-			</ul>
-			<li>Is it being too aggressive/shy in its movements?</li>
+			</ul></li>
+			<li>Is it being too aggressive/shy in its movements?
 			<ul>
 				<li>Aggressive: Lower the P constant.</li>
 				<li>Shy: Raise the P constant.</li>
-			</ul>
-			<li>Is it overshooting and not correcting itself?</li>
+			</ul></li>
+			<li>Is it overshooting and not correcting itself?
 			<ul>
 				<li>Solution 1: Try lowering the P constant.</li>
 				<li>Solution 2</li>
@@ -148,7 +148,7 @@
 					<li>Overshooting (try first): Adjust the D constant. Be careful if you are going to do this, and adjust D by values of 0.1 or even 0.01.</li>
 					<li>Steady-state error: Adjust the I constant. Take similar cautions with I that you would with D.</li>
 				</ul>
-			</ul>
+			</ul></li>
 		</ul>
 		<p>Knowing how much to change a P, I, or D value is a learned skill and does not really follow a definite algorithm. As such it cannot be taught through a tutorial. If you need help, ask someone who has tuned a PID before.</p>
 
@@ -158,7 +158,7 @@
  </div>
  
  <!-- NAVIGATION -->
-  <div style="clear: both;">
+  <div class="reset">
   	<hr />
 	<p id="navTitle">WPILIB TUTORIAL</p>
   	<table id="footNav">

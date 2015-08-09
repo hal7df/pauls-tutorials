@@ -74,7 +74,7 @@
 		<div id="toc">
 			<ul>
 				<li><a href="#Basic_Components">Basic Components</a></li>
-				<li><a href="#Programmed_Components">Programmed Components</a></li>
+				<li><a href="#Programmed_Components">Programmed Components</a>
 				<ul>
 					<li><a href="#Motor_Controllers">Motor Controllers</a></li>
 					<li><a href="#Motors">Motors</a></li>
@@ -82,6 +82,7 @@
 					<li><a href="#Sensors">Sensors</a></li>
 					<li><a href="#Controls">Controls</a></li>
 				</ul>
+				</li>
 				<li><a href="#Miscellaneous">Miscellaneous</a></li>
 				<li><a href="#Activity">Activity</a></li>
 			</ul>
@@ -113,42 +114,42 @@
 					When you replace it, you need to reboot this (either using the main breaker or the <q>Reboot roboRIO...</q> button on the driver station) in order for your changes to take effect.</p>
 				<p>Unlike previous years, all of the inputs and outputs are located directly on the roboRIO. The following is a list of all of the ports that you might end up dealing with.</p>
 				<ul>
-					<li>Pulse Width Modulation (PWM) outputs (x10), for drive controllers</li>
+					<li>Pulse Width Modulation (PWM) outputs (x10), for drive controllers
 					<ul>
 						<li>These are located along the right side of the device, labeled <q>PWM</q></li>
-					</ul>
-					<li>Digital I/O (input/output) (x10), for digital sensors</li>
+					</ul></li>
+					<li>Digital I/O (input/output) (x10), for digital sensors
 					<ul>
 						<li>These are along the left side of the device, labeled <q>DIO</q></li>
-					</ul>
-					<li>Relays (x4), which provide commands for controllers (like a <a href="#Spikes%2FRelays">Spike</a>) for devices that have an on-or-off state (e.g. lights).</li>
+					</ul></li>
+					<li>Relays (x4), which provide commands for controllers (like a <a href="#Spikes%2FRelays">Spike</a>) for devices that have an on-or-off state (e.g. lights).
 					<ul>
 						<li>These are located along the bottom of the device, to the left of the analog inputs, labeled <q>RELAY</q></li>
-					</ul>
-					<li>Analog Input (x4), for analog sensors</li>
+					</ul></li>
+					<li>Analog Input (x4), for analog sensors
 					<ul>
 						<li>Located along the bottom of the device, to the right of the relays, labeld <q>ANALOG IN</q></li>
-					</ul>
-					<li>Custom electronics port, provides the ability to add more ports to the device</li>
+					</ul></li>
+					<li>Custom electronics port, provides the ability to add more ports to the device
 					<ul>
 						<li>Located at the bottom middle of the device</li>
-					</ul>
-					<li>Local Area Network (LAN, a.k.a Ethernet)</li>
+					</ul></li>
+					<li>Local Area Network (LAN, a.k.a Ethernet)
 					<ul>
 						<li>Located at the top, to the right of the USB ports</li>
-					</ul>
-					<li>Universal Serial Bus (USB)</li>
+					</ul></li>
+					<li>Universal Serial Bus (USB)
 					<ul>
 						<li>USB type A (x2, located directly to the left of the LAN port)</li>
 						<li>USB type B (x1, located directly to the left of the USB-A ports)</li>
-					</ul>
-					<li>Other I/O ports</li>
+					</ul></li>
+					<li>Other I/O ports
 					<ul>
 						<li>Controller Area Network (CAN) bus, at the top left, labeled <q>CAN</q></li>
 						<li>Serial Peripheral Interface (SPI) bus, at the top right, labeled <q>SPI</q></li>
 						<li>Inter-Integrated Circuit (I<sup>2</sup>C) bus, at the top left, beneath the CAN port, labeled <q>I<sup>2</sup>C</q></li>
 						<li>RS-232 (serial), at the top left, beneath the I<sup>2</sup>C port, labeled <q>RS-232</q></li>
-					</ul>
+					</ul></li>
 				</ul>
 				<p>This year, the roboRIO comes with a built-in accelerometer.</p>
 			<h3 class="tutorial"><a id="Pneumatic_Control_Module"></a>Pneumatic Control Module</h3>
@@ -280,7 +281,7 @@
 		<h2 class="tutorial"><a id="Miscellaneous"></a>Miscellaneous</h2>
 			<p>Of course, the amount of components is not limited to this. There are even entirely different control systems (like an Arduino or a CAN bus). This is just a list of simple components that run on a simple control system (which we use).</p>
 	</div>
-	<div id="activity" style="clear: both;">
+	<div id="activity" class="reset">
 		<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
 			<p style="font-weight: bold; text-align: center; color: #ff0000;"><noscript>This activity requires Javascript. Please turn it on or use a browser with Javascript.</noscript></p>
 		<div id="instructions">
@@ -319,12 +320,12 @@
 					<textarea name="desc" rows="2" cols="50"></textarea>
 				</form>
 				<ul id="answerDisplay" style="display: none;">
-					<li>Name</li>
-					<ul id="nameDisp"></ul>
-					<li>Category</li>
-					<ul id="catDisp"></ul>
-					<li>Description</li>
-					<ul id="descDisp"></ul>
+					<li>Name
+					<ul id="nameDisp"></ul></li>
+					<li>Category
+					<ul id="catDisp"></ul></li>
+					<li>Description
+					<ul id="descDisp"></ul></li>
 				</ul>
 				<button id="next" onclick="run_next_action()">Submit</button>
 			</div>
@@ -332,7 +333,7 @@
 	</div>
   	
   	<!-- NAVIGATION -->
-  	<div style="clear: both;">
+  	<div class="reset">
   		<hr>
 	  	<p id="navTitle">WPILIB TUTORIAL</p>
   		<table id="footNav">
