@@ -51,19 +51,39 @@
   	
   	<!-- PAGE CONTENT -->
 	<div id="intro">
-		<p></p>
+		<p>One of the key aspects to version control is that you are, well, able to control the version of your software.
+			For example, if you make a commit that you later discover breaks the code, it is important that you be able to go back into your project's history and undo that change.
+			Git provides a number of tools that you can use to this effect (one of which, <code>git reset</code>, you have already been exposed to).</p>
+		<p>In addition to that, git provides another feature for which it is well-known: <span style="font-style: italic;">branching</span>.
+			In addition to history management, this lesson will teach you what branching is all about, how it is related to history, and how to effectively use branches in your project.</p>
 		<div id="toc">
 			<ul>
-				
+				<li><a href="#history">History</a>
+				<ul>
+					<li><a href="#reset">Resetting</a></li>
+					<li><a href="#revert">Reverting</a></li>
+				</ul></li>
+				<li><a href="#branching">Branching</a>
+				<ul>
+					<li><a href="#switching">Switching branches</a></li>
+					<li><a href="#merging">Merging branches</a></li>
+				</ul></li>
 			</ul>
 		</div>
 	</div>
 	<div id="tcontent">
-		
+		<h2 class="tutorial"><a id="history"></a>History</h2>
+			<p>As you make commits to your repository, git adds each commit to the repository's history.
+				You have full access to the repository's history, and you can use it to your advantage when something goes wrong.</p>
+			<p>To visualize how git handles history, we use branch diagrams, which are arguably the most commonly used (and most helpful) diagrams associated with git.</p>
+			<p>A branch diagram may look something like this:</p>
+			<img class="tutorial large" alt="Example branch diagram" title="Example branch diagram" src="../../files/img/git-branch-diagram-example.png" />
+			<p>In this diagram, each dot represents a commit. Every horizontal arrow represents a new commit being made. Every diagonal arrow represents a merge.</p>
+			<p>However, for now, we're just going to look at how history works, so we're going to ignore merge commits for the moment.</p>
 	</div>
   	
   	<!-- NAVIGATION -->
-  	<div style="clear: both;">
+  	<div class="reset">
   		<hr>
 	  	<p id="navTitle">GIT MINI-TUTORIAL</p>
   		<table id="footNav">
