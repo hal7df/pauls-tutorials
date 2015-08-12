@@ -80,6 +80,12 @@
 			<img class="tutorial large" alt="Example branch diagram" title="Example branch diagram" src="../../files/img/git-branch-diagram-example.png" />
 			<p>In this diagram, each dot represents a commit. Every horizontal arrow represents a new commit being made. Every diagonal arrow represents a merge.</p>
 			<p>However, for now, we're just going to look at how history works, so we're going to ignore merge commits for the moment.</p>
+			<p>Every git repository (more specifically, every branch) has a pointer
+				(yes, even now you won't escape from <a href="../../cpp/ch3/pointers.html">pointers</a>, although this time you only need to understand how it works)
+				called <code>HEAD</code>. It basically is just how git refers to the latest commit.</p>
+			<p>Each commit is <span style="font-style: italic">parented</span> by the commit that immediately precedes it.
+				When you make a commit, the <code>HEAD</code> pointer moves from the new commit's parent to the new commit.</p> 
+			<img class="tutorial large" alt="Parent and child commit with HEAD" title="Advancement of the HEAD pointer from parent to child" src="../../files/img/git-history-head-parent-child.png" />
 	</div>
   	
   	<!-- NAVIGATION -->
