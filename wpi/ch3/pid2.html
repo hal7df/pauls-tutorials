@@ -90,14 +90,13 @@
  	<h3 class="tutorial"><a id="Initialization"></a>Initialization</h3>
  		<p>The <code>PIDController</code> constructor has 5 basic parameters for initialization.</p>
  		<pre class="brush: cpp">PIDController::PIDController(float p, float i, float d, PIDSource* source, PIDOutput* output)</pre>
-		<ul>
-			<li><code>float p</code>: The value of P, or the proportional constant.</li>
-			<li><code>float i</code>: The value of I, or the integral constant.</li>
-			<li><code>float d</code>: The value of D, or the derivative constant.</li>
-			<li><code>PIDSource* source</code>: The sensor input to be used with the PID controller. All sensors inherit the <code>PIDSource</code> class.</li>
-			<li><code>PIDOutput* output</code>: The motor controller output to be used with the PID controller. All motor controllers inherit the <code>PIDOutput</code> class.</li>
-		</ul>
-	<h3 class="tutorial"><a id="Use"></a>Use</h3>
+		<dl class="tutorial">
+			<dt>float p</dt><dd>the value of P, or the proportional constant</dd>
+			<dt>float i</dt><dd>the value of I, or the integral constant</dd>
+			<dt>float d</dt><dd>the value of D, or the derivative constant</dd>
+			<dt>PIDSource* source</dt><dd>the sensor input to be used with the PID controller. All sensors inherit the <code>PIDSource</code> class</dd>
+			<dt>PIDOutput* output</dt><dd>The motor controller output to be used with the PID controller. All motor controllers inherit the <code>PIDOutput</code> class</dd>
+		<h3 class="tutorial"><a id="Use"></a>Use</h3>
 		<p>Firstly, the <code>PIDController</code> has an on/off switch, which is off to start. In order to use it, it must first be enabled.</p>
 		<pre class="brush: cpp">void PIDController::Enable()</pre>
 		<p>Similarly, it can be disabled:</p>
