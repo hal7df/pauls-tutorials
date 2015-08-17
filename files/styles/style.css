@@ -53,6 +53,25 @@ img.tutorial {
 	height: 200px;
 }
 
+/** C++ GUIDED TUTORIAL PAGE FORMATTING **/
+div#reading {
+	float: left;
+	width: 50%;
+}
+div#video {
+	float: right;
+	width: 50%;
+}
+div#vids {
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+div#practice {
+	clear: both;
+	width: 100%;
+}
+
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
 	background-color: #002b36;
