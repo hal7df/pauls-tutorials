@@ -59,7 +59,7 @@
   	
   	<!-- PAGE CONTENT -->
   	
-  	<div id="reading" style="width: 50%; float: left;">
+  	<div id="reading">
   		<h2 class="tutorial">Reading</h2>
   		<p>Go here: <br><a href="http://www.cplusplus.com/doc/tutorial/arrays" target="_blank">Arrays</a><br />
   			and read through the whole page.</p>
@@ -69,14 +69,14 @@
   			<li><a href="http://www.cprogramming.com/tutorial/lesson8.html" target="_blank">CProgramming page</a></li>
   		</ul>
   	</div>
-  	<div id="video" style="width: 50%; float: right;">
+  	<div id="video">
 		<h2 class="tutorial">Companion Video</h2>  	
 			<iframe width="560" height="315" src="http://www.youtube.com/embed/gNRQHCGHROM?rel=0" frameborder="0" allowfullscreen></iframe>
   	</div>
 
-	<div style="clear: both;"></div>  	
+	<div class="reset"></div>  	
 	
-	<div id="notes" style="width: 100%;">
+	<div id="notes">
 		<h2 class="tutorial"><a id="C_Strings"></a>C Strings</h2>
 			<p>You are likely aware of this, but C++ is actually derived from another language called C. In C, there is no 
 				<code>string</code> data type. Instead, C programmers use an array of <code>chars</code>.</p>
@@ -84,14 +84,14 @@
 				they still rely on C strings. If you need to use a string in a C function, you can do one of two things:</p>
 			<ul>
 				<li>Declare an array of <code>char</code>s</li>
-				<li>Use the <code>c_str()</code> function of <code>string</code> that converts a C++ <code>string</code> to a C string temporarily</li>
+				<li>Use the <code>c_str()</code> function of <code>string</code> that converts a C++ <code>string</code> to a C string temporarily
 				<ul>
 					<li>i.e. <code>mystring.c_str();</code></li>
-				</ul>
+				</ul></li>
 			</ul>
 	</div>
   	
-  	<div id="practice" style="width: 100%;">
+  	<div id="practice">
   		<h2 class="tutorial">Practice</h2>
   			<p>Once you feel comfortable with the above content, complete Pancake Glutton. As an added challenge, you may also complete Dungeon Crawl or 2048 if you have time.
   				However, the last two activities are rather time consuming, and many have found it useful to move on and return to these later.</p>
@@ -139,10 +139,10 @@
 						<p>Do any of the following:</p>
 						<ul>
 							<li>Create multiple difficulty levels</li>
-							<li>Create a dynamic map (the map changes between runs)</li>
+							<li>Create a dynamic map (the map changes between runs)
 							<ul>
 								<li>HINT: <a href="../tips-tricks.html#Random_Numbers" target="_blank"><code>rand()</code></a></li>
-							</ul>
+							</ul></li>
 						</ul>
 						
 			<!-- 2048 -->
