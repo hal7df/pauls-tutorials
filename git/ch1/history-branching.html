@@ -86,6 +86,83 @@
 			<p>Each commit is <span style="font-style: italic">parented</span> by the commit that immediately precedes it.
 				When you make a commit, the <code>HEAD</code> pointer moves from the new commit's parent to the new commit.</p> 
 			<img class="tutorial large" alt="Parent and child commit with HEAD" title="Advancement of the HEAD pointer from parent to child" src="../../files/img/git-history-head-parent-child.png" />
+			<p>Assuming that you continue to develop on this branch without any merge issues (i.e. development on your own), you will create a string of commits,
+				each parented by the last, with <code>HEAD</code>pointing at the last commit you made.</p>
+			<img class="tutorial large" alt="String of multiple commits" title="String of multiple commits with HEAD pointing at the last commit" src="../../files/img/git-history-head-multiple-commits.png" />
+			<p>At some point, you may realize that one or more of the changes you made in a commit in your history is incorrect, so you will want to go back in the history of your project to either fix or undo that change.
+				This is done through either a <code>git reset</code> or a <code>git revert</code>, depending on the situation.</p>
+			
+			<h3 class="tutorial"><a id="reset"></a>Resetting</h3>
+				<p>You were acquainted with this operation in the last lesson. Basically, what it does is reset the state of the repository to the state at a specified commit.</p>
+				<p><code>git reset</code> is useful when you have recently made a commit which you wish to undo, and you haven't pushed the commit yet.</p>
+				<p>When referring to a repository's history, a <code>git reset</code> will move the <code>HEAD</code> pointer back to the specified commit, effectively deleting all of the commits that follow.</p>
+				<img class="tutorial large" alt="Example of a git reset in a branch diagram" title="A reset as visualized in a branch diagram" src="../../files/img/git-history-reset.png" />
+				<p>Because of this, it is important to note that it is not possible to do a reset to only undo a change in a commit that has already been buried in the repository's history.
+					All reset operations will undo <span style="font-style: italic;">all</span> changes from the previous location of <code>HEAD</code> until the commit given to <code>git reset</code>.</p>
+			
+			<h3 class="tutorial"><a id="revert"></a>Reverting</h3>
+				<p>However, you may find yourself in a situation where you want to undo a commit that has already been pushed to the remote repository, or you want to undo changes only from one commit, and that commit has since parented newer commits.</p>
+				<p>In this case, the tool you want to use is <code>git revert</code>. Unlike <code>git reset</code>, <code>git revert</code> does not move the <code>HEAD</code> pointer back.
+					Instead, it analyzes the commit that you want to undo and then makes <span style="font-style: italic;">another</span> commit that is effectively the reverse of the commit you specified.</p>
+				<p>Because of how the <code>revert</code> function works, you can actually only undo one commit at once. It is possible to tell git to revert a series of commits, but you have to review the commit log for each individual revert.</p>
+				<p>One of the important things to know about a revert is that you can run into issues when you try to revert a commit that has more than one parent (i.e. a merge commit).
+					Exactly how this happens will be discussed in greater detail in the Branching section, but it is important to note at this point that, in this situation, you need to tell git which parent to revert to.</p>
+				<img class="tutorial large" alt="Reverting a commit buried in history" title="Reverting a commit already buried in history, in this case 2 commits behind HEAD before the revert." src="../../files/img/git-history-revert.png" />
+				<p>Unlike <code>reset</code>, <code>revert</code> allows you to undo only the changes done in one commit, leaving the changes done by following commits intact.
+					However, it is important to note that when you revert only one commit already buried in history, you can be breaking code that was pushed in later commits, as that commit may have provided a function in later commits.
+					In this case, the idea would be to do a <span style="font-style: italic;">partial revert</span>, where you tell git only to revert certain lines in the commit diff.</p>
+					
+		<h2 class="tutorial"><a id="branching"></a>Branching</h2>
+			<p>One of git's most well-known features is its ability to create <span style="font-style: italic;">branches</span>. Effectively, branches allow you to create another copy of the code directly in the repository, which you can work on independently of the main development effort.
+				Each branch has its own development history, and remains completely separate from the other branches until you are ready to move your work back into mainstream development (via &#8212; you guessed it &#8212; a merge).</p>
+			<p>If you have even looked at a git repository, you have likely already seen evidence of branches &#8212; even if the repository itself does not make extensive use of them.
+				Every git repository has a base branch that represents the mainstream course of development, which is almost always named <code>master</code>. Under most circumstances, most branches branch off from the <code>master</code> branch, or branch from another branch that itself was branched from <code>master</code>.</p>
+			<p>Under normal circumstances, a branch operation will create a new branch using the code presently under <code>HEAD</code>. You can name a new branch anything that has not already been taken, although it is advised to make the branch's name descriptive of its purpose.</p>
+			<p>Each branch has its own <code>HEAD</code> pointer that points at its latest commit.</p>
+			<img class="tutorial large" alt="Starting a new branch" title="Creating a new branch myBranch" src="../../files/img/git-branch-new.png" />
+			<p>Once the new branch has been made, development on both branches can continue completely independently of each other.</p>
+			<img class="tutorial large" alt="Independent branch development" title="Independent development on branches master and myBranch. The commits on each branch are not related to each other." src="../../files/img/git-branch-independent-development.png" />
+			
+			<h3 class="tutorial"><a id="switching"></a>Switching branches</h3>
+				<p>The great thing about branching is that it allows a whole bunch of people to work on their own part of the code without interfering with each other at all &#8212; all within the same repository.
+					This sounds great, but how do you keep all of your work on your branch?</p>
+				<p>In a way, git takes care of this for you. However, you have to tell git which branch you want to commit to.</p>
+				<p>In your local copy's working directory, git will keep one (and only one) branch <span style="font-style: italic;">checked out</span>. This will make your working directory effectively at the <code>HEAD</code> of the branch that is checked out.</p>
+				<p>So, if you want to switch to and start working on another branch, you must <span style="font-style: italic;">checkout</span> that branch first.</p>
+				<p>A checkout is a fairly simple operation &#8212; git modifies all of the tracked files in the working directory to match the <code>HEAD</code> state of the desired branch.</p>
+				<p>As simple as on operation this may seem, it is actually possible for it to fail if you are not paying enough attention.
+					If you have uncommitted changes on a branch, then git will refuse to checkout another branch, as proceeding with the checkout would cause you to lose all of your changes.</p>
+				<p>To fix this, you have three options:</p>
+				<ol>
+					<li>hard reset the branch to its <code>HEAD</code>, effectively undoing all of the changes that you have made since the last commit</li>
+					<li>commit your changes</li>
+					<li>stash your changes</li>
+				</ol>
+				
+				<h4 class="tutorial"><a id="stashing"></a>The Stash</h4>
+					<p>Now what is stashing, you ask?</p>
+					<p>Let's back up for a moment: you want to switch branches, but you have made work that you don't want to lose, but don't feel ready to commit yet.
+						In this case, you would use the <span style="font-style: italic;">stash</span>.</p>
+					<p>The stash stores quasi-commits that you want to apply to the working tree at a later time. Each stash operation stores a diff on the stash,
+						but unlike normal commits, stash commits do not require that you leave a message (they are usually used to remind you what is contained in the stash).</p>
+					<p>Once on the stash, a particular set of changes is <q>in limbo</q>. It is not a part of any developmental history on any branch, and is not associated with any branch to begin with.
+						Git stores the changes internally, and waits for you to re-apply them to the working tree.</p>
+					<p>When you are ready to unstash changes, you perform a <span style="font-style: italic;">stash pop</span>. This removes the desired set of changes from the tree and applies them to the working directory.
+						These changes then become unstaged changes on the current branch.</p>
+					<p>You do need to be careful when you perform a <code>git stash pop</code>, however. Performing a stash pop is effectively like a merge &#8212; you can still end up with merge conflicts.</p>
+					<p>One of the other useful things the stash can be used for is to move unstaged changes between branches. If you start working on the code and realize that you're on the wrong branch when it comes time to commit, all is not lost.
+						Instead, simply stash your changes, switch branches, and then pop your changes off the stash onto the new branch, and voil&#224; &#8212; you are ready to commit your changes to the correct branch.</p>
+			
+			<h3 class="tutorial"><a id="merging"></a>Merging branches</h3>
+				<p>If you remember from the last lesson, a merge was used when the local commit history differed from that on the remote server.
+					Since a branch intentionally causes the development history to divert, in order to bring the changes from a branch into another branch (such as <code>master</code>), you need to merge that branch into the branch you wish to bring the changes into.</p>
+				<p>Because of how <code>git merge</code> works, you need to be on the branch you wish to merge into to start the operation. Then, when you set up the merge, you tell git which branch you want to merge from. Then you tell it to merge.</p>
+				<p>At this point, git will attempt to automatically merge the branches. It will analyze the <code>HEAD</code> of both branches to determine what is different between the two, and build a diff that effectively incorporates both sets of changes.
+					However, unless the development on the branch you are merging into has been stale since the branch you are merging from was updated, you are highly likely to run into merge conflicts
+					No problem, just open up the tool you use to resolve merge conflicts, mark them as resolved. Make sure to commit the result.</p>
+				<p>Unlike most commits, however, a merge commit results from the analysis of two commits that immediately precede it, and as such, that commit has two parent commits &#8212; the <code>HEAD</code> commits on the branches that were merged together.</p>
+				<p>It is important to note that, once a branch has been merged into another branch, that branch still remains. Every branch you create will remain in the repository until you (or someone else) explicitly deletes it.</p>
+				<img class="tutorial large" alt="Merging branches" title="Merging myBranch into master, creating a merge commit in the process." src="../../files/img/git-branch-merge.png" />  
 	</div>
   	
   	<!-- NAVIGATION -->
