@@ -100,10 +100,10 @@ m_timer = new Timer;</pre>
 			<p>This is the drive method that we most commonly use.</p>
 			<pre class="brush: cpp">void RobotDrive::ArcadeDrive(float velocity, float rotation)</pre>
 			<h4 class="tutorial"><a id="ArcadeDrive-parameters"></a><code>ArcadeDrive()</code> parameters</h4>
-			<ul>
-				<li><code>float velocity</code>: The desired relative velocity of the robot (forwards/backwards)</li>
-				<li><code>float rotation</code>: the relative velocity at which the robot rotates (left/right) </li>
-			</ul>
+			<dl class="tutorial">
+			<dt>float velocity</dt><dd>the desired relative velocity of the robot (forwards/backwards)</dd>
+			<dt>float rotation</dt><dd>the relative velocity at which the robot rotates (left/right)</dd>
+			</dl>
 			<h4 class="tutorial"><a id="ArcadeDrive-use"></a><code>ArcadeDrive()</code> use</h4>
 				<p>How you use <code>ArcadeDrive()</code> depends on which routine you are programming.
 					If you are programming in Teleop, you give it the opposite of the left Y axis and the right X axis (so that the robot doesn&#x27;t drift sideways if the left Y is being used), like so:</p>
@@ -119,10 +119,10 @@ else
 			<p>The other driving function can achieve essentially the same effect as the <code>ArcadeDrive()</code>, but the mechanism it uses is different.</p>
 			<pre class="brush: cpp">void RobotDrive::TankDrive(float left_power, float right_power)</pre>
 			<h4 class="tutorial"><a id="TankDrive-parameters"></a><code>TankDrive()</code> parameters</h4>
-				<ul>
-					<li><code>float left_power</code>: The relative power (-1.0 to 1.0) going to the left drive.</li>
-					<li><code>float right_power</code>: The relative power going to the right drive.</li>
-				</ul>
+				<dl class="tutorial">
+			<dt>float left_power</dt><dd>the relative power (-1.0 to 1.0) going to the left drive</dd>
+			<dt>float right_power</dt><dd>the relative power going to the right drive</dd>
+			</dl>
 			<h4 class="tutorial"><a id="TankDrive-use"></a><code>TankDrive()</code> use</h4>
 				<p>How you use <code>TankDrive()</code> is determined in the same way as <code>ArcadeDrive()</code>. However, the game controllers do not lend themselves to this driving method.
 					Instead, <code>TankDrive()</code> is actually the preferred method for driving in autonomous (since it is generally easier to control the heading of the robot that way).</p>

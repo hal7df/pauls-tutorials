@@ -126,10 +126,10 @@ Jaguar::Set(double speed)
 Talon::Set(double speed)</pre>
 
 				<h4 class="tutorial"><a id="Set_parameters"></a><code>Set()</code> parameters</h4>
-					<ul>
-						<li><code>double speed</code>: Relative speed of the motor, where 1.0 is full speed forward, and -1.0 is full speed reverse. Note that this depends on the orientation of the <span style="font-weight: bold;">motor</span>, and not necessarily that of the robot. Due to that, you will need to run the motor with your code to check that you have coded the proper value.</li>
-					</ul>
-				<h4 class="tutorial"><a id="Set_use"></a><code>Set()</code> use</h4>
+					<dl class="tutorial">
+					<dt>double speed</dt><dd>Relative speed of the motor, where 1.0 is full speed forward, and -1.0 is full speed reverse. Note that this depends on the orientation of the <span style="font-weight: bold;">motor</span>, and not necessarily that of the robot. Due to that, you will need to run the motor with your code to check that you have coded the proper value.</dd>
+					</dl>
+					<h4 class="tutorial"><a id="Set_use"></a><code>Set()</code> use</h4>
 					<p>You can use <code>Set()</code> in a variety of ways. If you need fine control over the speed of the motor, you would use <code>Set()</code> in conjunction with a <code>GetRawAxis()</code> call from one of your controllers (almost always controller 1 -- the joysticks on controller 0 are always reserved for driving), like so:</p>
 					<pre class= "brush: cpp">m_arm->Set(-m_gamepad->GetRawAxis(2)); //remember that the Y axis is backwards!!!</pre>
   					<p>The above code, along with the declaration and initialization at the beginning of the lesson, sets up controller 1, a <code>Talon</code> for controlling an arm on PWM 0, and then uses the left Y axis to move the arm up and down.</p>
@@ -165,14 +165,14 @@ m_light = new Relay (1);</pre>
 				<p>Like the other controllers, relays use the <code>Set()</code> function. However, it is used differently than the other functions.</p>
 				<pre class= "brush: cpp">Relay::Set(enum relay_state)</pre>
 				<h4 class="tutorial"><a id="Relay_Set_parameters"></a>Relay <code>Set()</code> parameters</h4>
-					<ul>
-						<li><code>enum relay_state</code>: The desired state of the relay, which is one of the following: </li>
+					<dl class="tutorial">
+					<dt>enum relay_state</dt><dd>the desired state of the relay, which is the following:</dd>
 						<ul>
 							<li><code>Relay::kOff</code>: Off </li>
 							<li><code>Relay::kForward</code>: Forward, on (for lights) </li>
 							<li><code>Relay::kReverse</code>: Reverse </li>
 						</ul>
-					</ul>
+					</dl>
 					<p>Again, you need to be careful, as the <code>kForward</code> and <code>kReverse</code> states are determined from the wiring and the orientation of the motor.</p>
 				<h4 class="tutorial"><a id="Relay_Set_use"></a>Relay <code>Set()</code> use</h4>
 					<p>You would use <code>Set()</code> like you might expect, calling it to enable (forward or reverse) or disable the relay.</p>

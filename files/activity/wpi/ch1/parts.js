@@ -158,6 +158,8 @@ function check_answer()
 	
 	name = name.toUpperCase();
 	category = category.toUpperCase();
+	name = name.trim();
+	category = category.trim();
 	
 	if (partsList[answer].name.constructor === Array)
 	{
