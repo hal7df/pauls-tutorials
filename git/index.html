@@ -55,6 +55,60 @@
     	<li><a href="https://git-scm.com/book" target="_blank">Pro Git book &#8212; free online edition</a></li>
     	<li><a href="http://stackoverflow.com/questions/tagged/git" target="_blank">Stack Overflow &#8212; git tag</a></li>
     </ul>
+    
+    <h2 class="tutorial"><a id="software"></a>Software</h2>
+    	<p>Yet, of course, you need some software for your computer.</p>
+    	
+    	<h3 class="tutorial"><a id="windows"></a>Windows</h3>
+    		<p>Depending on your situation, you will want to get different software.</p>
+    		<p>However, regardless of your situation, it is still a good idea to get the <a href="https://msysgit.github.io/">core git package for Windows</a>.</p>
+    		
+    		<h4 class="tutorial"><a id="eclipse"></a>Eclipse</h4>
+    			<p>If you are using Eclipse (and, if you're here for robotics, you probably are), then the best thing for you is the EGit Eclipse plugin,
+					which embeds git functions right in Eclipse.</p>
+				<p>HOT Team programming students: You will be using this to handle git operations.</p> 
+				<p>Here's how to get it:</p>
+				<ol>
+					<li>If you're using a team computer, it's possible that EGit is already installed. Open Eclipse, go to Help &#8594; Installation Details.
+						If <q>Eclipse Git Team Provider</q> is listed, then you're all set! If not, continue with the steps below.</li>
+					<li>In Eclipse, go to Help &#8594; Install New Software.</li>
+					<li>In the <q>Work with:</q> box, select <q>Luna</q>, or <q>Mars</q>, or whatever your Eclipse release is (the URL should be http://download.eclipse.org/releases/&lt;release&gt;).</li>
+					<li>Eclipse will load all software availabe through your release. This will take some time.</li>
+					<li>Once the list has loaded, expand the <q>Collaboration</q> folder.</li>
+					<li>Scroll down until you see <q>Eclipse Git Team Provider</q>, and check it.</li>
+					<li>Select <q>Next</q>. You may be presented with a license agreement. Accept it (it's an open-source license).</li>
+					<li>Select <q>Install</q>.</li>
+					<li>Once the installation has finished, restart Eclipse.</li>
+					<li>Once restarted, the EGit plugin will be installed.
+						Any open projects that are a git repository will have an indicator to the right of the project name in the project explorer with the current branch and current sync state with the remote repository.</li>
+					<li>To access git's functions, right-click on the repository in the project explorer, and open the <q>Team</q> menu.</li>
+				</ol>
+			
+			<h4 class="tutorial"><a id="tortoisegit"></a>TortoiseGit</h4>
+				<p>TortoiseGit is a Windows Explorer plug-in that provides GUI access to all of Git's features via the right-click menu in Windows Explorer.</p>
+				<p>This option is recommended if you are not using Eclipse to manage your git repositories.</p>
+				<p>In order for TortoiseGit to work, you need to download the <a href="https://msysgit.github.io/">core git package</a> if you haven't already.</p>
+				<p><a href="https://tortoisegit.org/download/">Download</a>
+				
+			<h4 class="tutorial"><a id="github-windows"></a>GitHub for Windows</h4>
+				<p>GitHub for Windows is a workflow-based git client. It is a little easier for new git users to use, although it hides a few of git's more advanced features for the sake of simplicity.</p>
+				<p><a href="https://desktop.github.com">Download</a></p>
+				
+		<h3 class="tutorial">Mac</h3>
+			<p>Again, there are different software packages that you can get for Mac.</p>
+			<p>If you are using Eclipse, you can install EGit <a href="#eclipse">as described above</a>.</p>
+			
+			<h4 class="tutorial"><a id="github-mac"></a>GitHub for Mac</h4>
+				<p>GitHub also develops a program very similar to GitHub for Windows for OS X. It is also workflow-focused, and, like GitHub for Windows, hides some of git's advanced features for the sake of simplicity.</p>
+				<p><a href="https://desktop.github.com">Download</a></p>
+		
+		<h3 class="tutorial"><a id="linux"></a>Linux</h3>
+			<p>Most distributions should have the commandline git packaged in their repositories. Search on <q>git</q> or <q>git-core</q>.</p>
+			<p>Since Eclipse is also available for Linux, you can install the git plugin using <a href="#eclipse">the steps above</a>, if you are using Eclipse.</p>
+			<p>On Linux, the general expectation is that git users will be using the command line git (which is honestly the most straightforward approach).
+				There are not many graphical tools to manipulate git repositories in Linux, and the ones that do exist are really just history viewers.
+				I would recommend, however, that you install a graphical merge tool (kdiff3 for KDE and meld for GNOME).</p> 
+			
         
     <h2 class="tutorial">Chapter Index</h2>
     	<ul>
