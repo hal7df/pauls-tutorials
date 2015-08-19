@@ -2,8 +2,6 @@
 *~
 .project
 
-*.odg
-*~lock*
 _vti_pvt/
 _vti_cnf/
 /*/_vti_cnf/
