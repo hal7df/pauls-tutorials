@@ -56,13 +56,6 @@ img.large {
 	height: 400px;
 }
 
-/** C++ GUIDED TUTORIAL MULTIPLE VIDEOS **/
-div#vids {
-	overflow-x: auto;
-	overflow-y: hidden;
-	white-space: nowrap;
-}
-
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
 	background-color: #002b36;
@@ -366,6 +359,18 @@ td#next {
 		clear: both;
 		width: 100%;
 	}
+	div#vids {
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+	}
+	div#video > iframe {
+		width: 100%;
+	}
+	div#vids > iframe {
+		width: 560px;
+	}
+}
 }
 @media only screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2)
 {
@@ -374,7 +379,10 @@ td#next {
 		float: none;
 		width: 100%;
 	}
-	div#video > iframe {
+	div#vids {
+		width: 100%;
+	}
+	div#video iframe {
 		width: 100%;
 	}
 }

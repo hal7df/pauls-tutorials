@@ -41,42 +41,83 @@ ul.select a {
 }
 
 @media only screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2)
-	{
-		p#tdesc {
-			display: none;
-		}
-		ul.select {
-			list-style-type: none;
-			vertical-align: middle;
-			font-family: Andale Mono, monospace;
-			padding: 0px 1em;
-		}
-		ul.select > li {
-			display: list-item;
-			list-style-type: none;
-			font-size: 2em;
-			vertical-align: middle;
-			line-height: 2.5em;
-			height: 2.5em;
-			background-color: #333333;
-			border-style: solid;
-			border-color: #ffffff;
-			border-width: 1px;
-			padding-left: 5px;
-		}
-		ul.select a {
-			display: block;
-			vertical-align: middle;
-		}
-		ul.select img {
-			position: relative;
-			top: 10px;
-			width: 40px;
-			display: inline;
-		}
-		span.mobile-select {
-			font-family: 'Droid Sans', Tahoma, Verdana, Arial, Helvetica, sans-serif;
-			font-size: 0.6em;
-			margin-left: 20px;
-		}
+{
+	p#tdesc {
+		display: none;
 	}
+	ul.select {
+		list-style-type: none;
+		vertical-align: middle;
+		font-family: Andale Mono, monospace;
+		padding: 0px 1em;
+	}
+	ul.select > li {
+		display: list-item;
+		list-style-type: none;
+		font-size: 2em;
+		vertical-align: middle;
+		line-height: 2.5em;
+		height: 2.5em;
+		background-color: #333333;
+		border-style: solid;
+		border-color: #ffffff;
+		border-width: 1px;
+		padding-left: 5px;
+	}
+	ul.select a {
+		display: block;
+		vertical-align: middle;
+	}
+	ul.select img {
+		position: relative;
+		top: 10px;
+		width: 40px;
+		display: inline;
+	}
+	span.mobile-select {
+		font-family: 'Droid Sans', Tahoma, Verdana, Arial, Helvetica, sans-serif;
+		font-size: 0.6em;
+		margin-left: 20px;
+	}
+}
+	
+@media only screen and (max-width: 736px) and (-webkit-max-device-pixel-ratio: 1.9)
+{
+	p#tdesc {
+		display: none;
+	}
+	ul.select {
+		list-style-type: none;
+		vertical-align: middle;
+		font-family: Andale Mono, monospace;
+		margin-right: 1em;
+	}
+	ul.select > li {
+		display: list-item;
+		list-style-type: none;
+		font-size: 1.5em;
+		vertical-align: middle;
+		line-height: 2.5em;
+		height: 2.5em;
+		background-color: #333333;
+		border-style: solid;
+		border-color: #ffffff;
+		border-width: 1px;
+		padding-left: 5px;
+	}
+	ul.select a {
+		display: block;
+		vertical-align: middle;
+	}
+	ul.select img {
+		position: relative;
+		top: 10px;
+		width: 40px;
+		display: inline;
+	}
+	span.mobile-select {
+		font-family: 'Droid Sans', Tahoma, Verdana, Arial, Helvetica, sans-serif;
+		font-size: 0.6em;
+		margin-left: 20px;
+	}
+}
