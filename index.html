@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Programming</title>
-    <meta content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="files/styles/style.css"/>
     <link rel="stylesheet" type="text/css" href="files/styles/selector.css"/>
     
@@ -11,14 +11,14 @@
   </head>
   <body>	
   		<!-- PAGE BODY -->
-  		<div style="background: url(files/img/PaulsTutorials-background.png) no-repeat center center">
+  		<div id="pt-main">
   		<h2 class="tutorial" id="tname">Paul's Tutorials</h2>
   		
   		<ul class="select">
-  			<li onmouseover="cppSelected()" onmouseout="resetAll()"><a href="cpp/index.html">C++</a></li>
-  			<li onmouseover="wpiSelected()" onmouseout="resetAll()"><a href="wpi/index.html">WPI</a></li>
-  			<li onmouseover="gitSelected()" onmouseout="resetAll()"><a href="git/index.html">GIT</a></li>
-  			<li onmouseover="aboutSelected()" onmouseout="resetAll()"><a href="about.html">&nbsp;?&nbsp;</a></li>
+  			<li onmouseover="cppSelected()" onmouseout="resetAll()"><a href="cpp/index.html">C++<span class="mobile-select">C++ Guided Tutorial</span></a></li>
+  			<li onmouseover="wpiSelected()" onmouseout="resetAll()"><a href="wpi/index.html">WPI<span class="mobile-select">WPILib Tutorial</span></a></li>
+  			<li onmouseover="gitSelected()" onmouseout="resetAll()"><a href="git/index.html">GIT<span class="mobile-select">Git Mini-tutorial</span></a></li>
+  			<li onmouseover="aboutSelected()" onmouseout="resetAll()"><a href="about.html">&nbsp;?&nbsp;<span class="mobile-select">About</span></a></li>
   		</ul>
   		
   		<p id="tdesc" style="text-align: center;">Select an option.</p>
@@ -29,9 +29,9 @@
   		<hr />
   		<h2 class="tutorial" id="extname">External Resources</h2>
   		<ul class="select">
-  			<li onmouseover="scrSelected()" onmouseout="resetAll()"><a href="https://wpilib.screenstepslive.com/s/4485" target="_blank"><img alt="SCR" src="files/img/screensteps.png"/></a></li>
-  			<li onmouseover="doxSelected()" onmouseout="resetAll()"><a href="http://first.wpi.edu/FRC/roborio/release/docs/cpp/" target="_blank"><img alt="DOX" src="files/img/doxygen.png"/></a></li>
-  			<li onmouseover="ghSelected()" onmouseout="resetAll()"><a href="https://github.com/hot67" target="_blank"><img alt="GIT" src="files/img/github.png"/></a></li>
+  			<li onmouseover="scrSelected()" onmouseout="resetAll()"><a href="https://wpilib.screenstepslive.com/s/4485" target="_blank"><img alt="SCR" src="files/img/screensteps.png"/><span class="mobile-select">WPI ScreenSteps</span></a></li>
+  			<li onmouseover="doxSelected()" onmouseout="resetAll()"><a href="http://first.wpi.edu/FRC/roborio/release/docs/cpp/" target="_blank"><img alt="DOX" src="files/img/doxygen.png"/><span class="mobile-select">WPI/C++ Doxygen</span></a></li>
+  			<li onmouseover="ghSelected()" onmouseout="resetAll()"><a href="https://github.com/hot67" target="_blank"><img alt="GIT" src="files/img/github.png"/><span class="mobile-select">GitHub</span></a></li>
   		</ul>
   		<p id="extdesc" style="text-align: center;">&nbsp;</p>
   </body>
