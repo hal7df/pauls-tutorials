@@ -49,7 +49,7 @@ ul.select a {
 			list-style-type: none;
 			vertical-align: middle;
 			font-family: Andale Mono, monospace;
-			margin-right: 1em;
+			padding: 0px 1em;
 		}
 		ul.select > li {
 			display: list-item;
