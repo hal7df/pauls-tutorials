@@ -160,7 +160,67 @@ textarea.code {
 	font-family: monospace;
 }
 
-/** NAVIGATION BAR **/
+/** GENERIC **/
+
+div.reset {
+	clear: both;
+}
+
+/** FOOTER NAVIGATION **/
+p#navTitle {
+	text-align: center;
+	font-size: 0.8em;
+}
+
+table#footNav {
+	width: 100%;
+	border: none;
+	border-collapse: separate;
+}
+
+table#footNav td {
+	border: none;
+}
+
+td#prev, td#next {
+	width: 40%;
+}
+
+table#footNav td#cur {
+	width: 20%;
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.5em;
+	padding: 5px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #555555;
+	background-color: #333333;
+}
+
+td#prev a, td#next a {
+	color: inherit;
+	display: inline-block;
+	font-size: 1.25em;
+	text-decoration: none;
+	padding: 10px;
+}
+
+td#prev a:hover, td#next a:hover {
+	background-color: #555555;
+}
+
+td#prev {
+	text-align: right;
+}
+
+td#next {
+	text-align: left;
+}
+
+@media all and (min-width: 737px)
+{
+	/** NAVIGATION BAR **/
 
 div.contain,
 div.containCh,
@@ -287,65 +347,7 @@ div.separator:after {
 	-o-transform: skew(0deg, -30deg);
 	transform: skew(0deg, -30deg);
 }
-
-div.reset {
-	clear: both;
-}
-
-/** FOOTER NAVIGATION **/
-p#navTitle {
-	text-align: center;
-	font-size: 0.8em;
-}
-
-table#footNav {
-	width: 100%;
-	border: none;
-	border-collapse: separate;
-}
-
-table#footNav td {
-	border: none;
-}
-
-td#prev, td#next {
-	width: 40%;
-}
-
-table#footNav td#cur {
-	width: 20%;
-	font-weight: bold;
-	text-align: center;
-	font-size: 1.5em;
-	padding: 5px;
-	border-style: solid;
-	border-width: 2px;
-	border-color: #555555;
-	background-color: #333333;
-}
-
-td#prev a, td#next a {
-	color: inherit;
-	display: inline-block;
-	font-size: 1.25em;
-	text-decoration: none;
-	padding: 10px;
-}
-
-td#prev a:hover, td#next a:hover {
-	background-color: #555555;
-}
-
-td#prev {
-	text-align: right;
-}
-
-td#next {
-	text-align: left;
-}
-
-@media all and (min-width: 737px)
-{
+	
 	/** C++ GUIDED TUTORIAL PAGE FORMATTING **/
 	div#reading {
 		float: left;
@@ -371,9 +373,28 @@ td#next {
 		width: 560px;
 	}
 }
-}
-@media only screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2)
+@media only screen and (max-width: 736px)
 {
+	h1.tutorial > img {
+		display: none;
+	}
+	/** NAVIGATION BAR **/
+	div#navbar > div {
+		display: none;
+	}
+	div#navbar > div:nth-last-child(3) {
+		display: block;
+	}
+	div.path {
+		font-size: 1.5em;
+		text-align: center;
+		margin: 10px 0px;
+	}
+	div.path ul {
+		display: none;
+	}
+	
+	/** C++ GUIDED TUTORIAL PAGE FORMATTING **/
 	div#reading,
 	div#video {
 		float: none;
