@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>1-1 Git Basics (Git)</title>
+    <meta content="">
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+  </head>
+  <body>  
+  	<!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
+  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-1</span>&nbsp;Git Basics</h1>
+  	<hr />
+  	<div class="path">
+		<a class="main" href="../../index.html">Programming Home</a>
+	</div>
+	<div class="separator"></div>
+	<div class="containWpi">
+		<div class="path subNav">
+			<a class="main" href="../index.html">Git Mini-tutorial</a>
+			
+			<ul>
+				<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
+				<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
+				<li><a href="../../about.html">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="containCh">
+		<div class="path subNav">
+			<a class="main" href="index.html">Chapter 2</a>
+			
+			<ul>
+				<li><a href="../ch1/index.html">Chapter 1: Concepts</a></li>
+				<li><a href="../operations-reference.html">Git Operations Reference</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="contain">
+		<div class="path subNav">
+			<span>Lesson 1</span>
+			
+			<ul>
+				<li><a href="revising-history.html">Lesson 2: Revising History</a></li>
+				<li><a href="branching.html">Lesson 3: Branching</a></li>
+				<li><a href="merge-conflicts.html">Lesson 4: Resolving Merge Conflicts</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="reset"></div>	
+  	<hr />  	
+  	
+  	<!-- PAGE CONTENT -->
+	<div id="intro">
+		<p>Now that you know how exactly git works, this lesson will teach you how to perform the basic tasks in git: committing, pushing, pulling, fetching, merging, and ignoring.</p>
+		<p>If you use a GUI to interact with git, then most of these operations should be relatively simple and straightforward.
+			However, a few of these operations, namely merging and ignoring, still require a few pieces of information, even when done through a GUI.</p>
+		<div id="toc">
+			<ul>
+				<li><a href="#committing">Committing</a>
+				<ul>
+					<li><a href="#adding">Adding to the Staging Area</a></li>
+					<li><a href="#writing-commit">Writing the Commit</a></li>
+				</ul>
+				<li><a href="#pulling">Pulling</a>
+				<ul>
+					<li><a href="#fetching">Fetching</a></li>
+					<li><a href="#merging">Merging</a></li>
+				</ul>
+				<li><a href="#pushing">Pushing</a></li>
+				<li><a href="#ignoring">Ignoring</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="tcontent">
+		<h2 class="tutorial"><a href="committing"></a>Committing</h2>
+			<p>After you have made any significant modifications to your code, it is always a good idea to commit your changes.</p>
+			
+			<h3 class="tutorial"><a href="adding"></a>Adding to the Staging Area</h3>
+				<p>If you are using a GUI, selecting the <q>Commit</q> option will usually include this step.
+					However, if you are using command-line git, there is one step you need to do before you can run the commit command.</p>
+				<p>In order to see whether or not you have any outstanding changes in your repository, type <code>git status</code>. This will show a message like this:</p>
+				<blockquote class="tutorialexample">
+					On branch git-tutorial<br>
+					Your branch is up-to-date with 'origin/git-tutorial'.<br><br>
+					Changes not staged for commit:<br>
+					&nbsp;&nbsp;(use "git add &lt;file&gt;..." to update what will be committed)<br>
+					&nbsp;&nbsp;(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)<br><br>
+					<span style="color: #ff0000;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modified:&nbsp;&nbsp;&nbsp;git/ch1/index.html<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modified:&nbsp;&nbsp;&nbsp;git/ch2/basic-operations.html<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modified:&nbsp;&nbsp;&nbsp;git/ch2/index.html</span><br><br>                                                                                                                                                 
+					no changes added to commit (use "git add" and/or "git commit -a")
+				</blockquote>
+	</div>
+  	
+  	<!-- NAVIGATION -->
+  	<div class="reset">
+  		<hr>
+	  	<p id="navTitle">GIT MINI-TUTORIAL</p>
+  		<table id="footNav">
+  			<tbody>
+  				<tr>
+  					<td id="prev"><a href="index.html">&#8592; Chapter 2 Overview</a></td>
+  					<td id="cur">2-1 Basic Operations</td>
+  					<td id="next"><a href="revising-history.html">2-2 Revising History &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+  </body>
+</html>
