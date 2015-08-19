@@ -56,23 +56,11 @@ img.large {
 	height: 400px;
 }
 
-/** C++ GUIDED TUTORIAL PAGE FORMATTING **/
-div#reading {
-	float: left;
-	width: 50%;
-}
-div#video {
-	float: right;
-	width: 50%;
-}
+/** C++ GUIDED TUTORIAL MULTIPLE VIDEOS **/
 div#vids {
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space: nowrap;
-}
-div#practice {
-	clear: both;
-	width: 100%;
 }
 
 /** CODE AND EXAMPLE PRESENTATION **/
@@ -363,7 +351,30 @@ td#next {
 	text-align: left;
 }
 
-@media only screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2)
-	{
-		
+@media all and (min-width: 737px)
+{
+	/** C++ GUIDED TUTORIAL PAGE FORMATTING **/
+	div#reading {
+		float: left;
+		width: 50%;
 	}
+	div#video {
+		float: right;
+		width: 50%;
+	}
+	div#practice {
+		clear: both;
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2)
+{
+	div#reading,
+	div#video {
+		float: none;
+		width: 100%;
+	}
+	div#video > iframe {
+		width: 100%;
+	}
+}
