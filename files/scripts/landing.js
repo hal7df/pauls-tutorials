@@ -20,6 +20,16 @@ function wpiSelected()
 	}
 }
 
+function gitSelected()
+{
+	if (!is_mobile())
+	{
+		document.getElementById("tname").innerHTML = "Git Mini-tutorial";
+		document.getElementById("tdesc").innerHTML = "This tutorial will briefly introduce programmers to the distributed version control system git and how it works.";
+	}
+}
+
+
 function aboutSelected()
 {
 	if (!is_mobile())
@@ -47,7 +57,7 @@ function doxSelected()
 	}
 }
 
-function gitSelected()
+function ghSelected()
 {
 	if (!is_mobile())
 	{
