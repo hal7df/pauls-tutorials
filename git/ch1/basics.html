@@ -86,19 +86,20 @@
 				it is still important to distinguish a <span style="font-style: italic;">remote</span> repository from a <span style="font-weight: italic;">local</span>repository.
 				Local repositories do not (usually) directly move code between themselves. Communication with git is almost always done between the local repo and the remote repo, and other local repos grab the changes from the remote.</p>
 			<p>In version control, keeping remote repos updated with code from local repos and vice versa is not as simple as a copy-paste operation.
-				There are a number of steps involved from one end to the other to ensure that git does not destroy your code, but rather update it.</p>
-			<p>To accomplish this, git implements a <span style="font-style: italic;">staging area</span> in each repository.
-				The purpose of the staging area is to hold any changes that have been made to the local repo that have not been reflected on the remote repo, as well as any changes that have been made to the remote repo that haven't yet been reflected locally.
-				This way, git knows exactly what to either update the code with or to upload to the remote repository.</p>
-			<p>Diagrams such as this one are usually used to visualize the staging area:</p>
-			<img class="tutorial large" alt="Git repo diagram" title="Local-remote repository diagram" src="../../files/img/git-repo-base.png" />
+				There are a number of steps involved from one end to the other to ensure that git does not destroy your code, but rather update it.
+				The first step in this process is the <span style="font-style: italic;">staging area</span>.</p>
+			<p>During normal operation, git watches the working directory for any changes to your code. If it finds any, it marks it internally and waits for you to look at the changes to the repository.
+				Because of the way git is set up, it doesn't know whether or not you want to commit the changes you have made to the repository or save them for a later time.</p>
+			<p>In order to tell git that you do want to commit the changes to the repository, you add the changes to git's staging area. They will remain in the staging area until you commit or unstage them.</p>
+			<p>A staging area might be visualized like this:</p>
+			<img class="tutorial large" alt="Git repo diagram" title="Local-remote repository diagram" src="../../files/img/git-repo-add.png" />
 		
 		<h2 class="tutorial"><a id="committing"></a>Committing</h2>
-			<p>While you write your code, git watches all of the files in the repository for changes.
-				When you are satisfied with the changes that you have made, you need to tell git that you want it to <span style="font-style: italic;">commit</span> the changes that you have made to the version history.</p>
-			<p>In the first part of this process, git will tell you all of the files that have changed &#8212; including any new files, deleted files, renamed files, and even changes in any binary files that are in the repositories (such as images).
-				At this step, you have to tell git what files you want it to include in the commit. Most often, you tell git to include all of the changes in the commit, but occasionally you might have reason to tell git to skip certain files in a commit.</p>
-			<p>Then, git asks you to write a commit message. In this message, you should write a detailed, yet succinct description of the changes you made in that specific commit.</p>
+			<p>Now that you have added your changes to the staging area, you need to commit them to the local repository.</p>
+			<p>The local repository is actually kept in a hidden folder in your working directory (this folder is always named <code>.git</code>).
+				When you tell git to commit, it will write your changes to this folder, where they will wait to be uploaded to the remote.</p>
+			<p>When you tell git to commit, you need to give git a commit message. Git will refuse to commit your changes unless you leave a message.
+				In this message, you should write a detailed, yet succinct description of the changes you made in that specific commit.</p>
 			<p>Commit messages have two parts: a title and a description. However, most tools only show one text box to write into. In this case, the commit title is the first line of the commit message. Any lines following that are considered the description.</p>
 			<p>Generally, you should write a short summary of the changes you made into the title. Then, in the description, make a bulleted list (using hyphens) to describe in more detail exactly what you changed.
 				If you have difficulty remembering exactly what you changed, git can show a delta file (known as a <span style="font-style: italic;">diff</span>) that shows you exactly what you changed against the previous commit.</p>
@@ -117,8 +118,7 @@
 9e72248
 			</blockquote>
 			<p>With the diff and commit hash, git then stores the commit in the repository's history.</p>
-			<p>Up to this point, everything that has happened has taken place completely within the local repository. Now, git copies this commit into the staging area, where it will keep it until the commit is uploaded to the remote repository.</p>
-			<img class="tutorial large" alt="Committing to the staging area" title="Commit being copied to the staging area" src="../../files/img/git-repo-commit.png" />
+			<img class="tutorial large" alt="Committing" title="Commit being written to the repository" src="../../files/img/git-repo-commit.png" />
 			<p>At this point, as far as git is concerned, the commit process is complete. Although not recommended, you can keep working without doing anything further.
 				You can continue to make new commits without uploading them, git will still keep the old ones in staging.</p>
 				
@@ -132,9 +132,9 @@
 		
 		<h2 class="tutorial"><a id="pushing"></a>Pushing</h2>
 			<p>Once you have made a commit, it is usually in your best interest to upload it to the remote repository. This process is known to git as a <span style="font-style: italic;">push</span>.</p>
-			<p>This process is fairly self-explanatory. Git takes any unpushed commits it finds in the staging area and sends them to the remote repository.
+			<p>This process is fairly self-explanatory. Git takes any unpushed commits it finds in the local repository and sends them to the remote repository.
 				The copy of git that is running on the server that hosts the remote repository does all of the necessary work to insert the new commits into the history on the remote server.</p>
-			<img class="tutorial large" alt="Pushing to the remote repository" title="Commit being pushed" src="../../files/img/git-repo-push.png" />
+			<img class="tutorial large" alt="Pushing to the remote repository" title="Commits being pushed" src="../../files/img/git-repo-push.png" />
 			
 			<h3 class="tutorial"><a id="push-fail"></a>When pushing fails</h3>
 				<p>Despite how simple this process is, to ensure that the code does not get corrupted, some operations between the local and remote repositories do have the chance of failing.
@@ -149,16 +149,17 @@
 				A pull consists of two steps: <span style="font-style: italic;">fetching</span> and <span style="font-style: italic;">merging</span>.</p>
 				
 			<h3 class="tutorial"><a id="fetching"></a>Fetching</h3>
-				<p>This is basically the reverse process of a push. Git queries the remote repo for any new commits that it does not have locally. It then downloads these commits and places them in the staging area.</p>
-				<p>Unlike pushing, however, a fetch will not fail due to a code conflict, since the commit is only being put in the staging area, and not affecting any files in your local copy.</p>
-				<img class="tutorial large" alt="Fetching commits from the remote repository" title="Commit being fetched" src="../../files/img/git-repo-fetch.png" />
+				<p>This is basically the reverse process of a push. Git queries the remote repo for any new commits that it does not have locally. It then downloads these commits to the local repo.</p>
+				<p>Unlike pushing, however, a fetch will not fail due to a code conflict, since the commit is only being put in the local repo, and not affecting any files in your working tree.</p>
+				<img class="tutorial large" alt="Fetching commits from the remote repository" title="Commits being fetched" src="../../files/img/git-repo-fetch.png" />
 				<p>Although a pull is the operation that you are most likely to use when you want to get the latest commits from the remote repo, it is also possible to tell git only to perform the fetch.</p>
 				
 			<h3 class="tutorial"><a id="merging"></a>Merging</h3>
-				<p>Once the commits have been fetched, git must then incorporate these changes into the codebase in the local repo. This is done through a process called <span style="font-style: italic;">merging</span>.</p>
+				<p>Once the commits have been fetched, git must then incorporate these changes into the working on the local side. This is done through a process called <span style="font-style: italic;">merging</span>.</p>
 				<p>To do this, git analyzes the diff each commit that it fetched. It then changes every file changed in the commit as specified by the diff.
 					So, if three lines were added and one line was deleted in a file, then git will add those three lines and delete the line that was deleted.
-					If there are no code conflicts, then git results with a <span style="font-style: italic;">fast-forward</span>, where the repository is automatically updated to the latest code from the remote.</p>
+					If there are no code conflicts, then git results with a <span style="font-style: italic;">fast-forward</span>, where the repository is simply updated with the latest commits on the remote.</p>
+				<p>Sometimes, your latest commit and the latest commit(s) from the remote might modify the same file. As long as they do not modify the same lines, git will automatically merge the changes in the same file.</p>
 				<img class="tutorial large" alt="Merging fetched commits" title="Fetched commit being merged into the local codebase" src="../../files/img/git-repo-merge.png" />
 				<p>As was the case with fetching, if you have already fetched commits from the remote, then it is possible to tell git separately to merge the fetched commits into the local codebase.
 					However, this is a little more complex than fetching. You will learn more about how merging works in git <a href="history-branching.html">in the next lesson</a>.</p>
