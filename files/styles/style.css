@@ -45,17 +45,6 @@ h5.tutorial {
 	font-size: 1.125em;
 }
 
-/** IMAGE DISPLAY **/
-img.tutorial {
-	display: block;
-	margin-right: auto;
-	margin-left: auto;
-	height: 200px;
-}
-img.large {
-	height: 400px;
-}
-
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
 	background-color: #002b36;
@@ -240,6 +229,17 @@ td#next {
 		margin-left: 10px;
 	}
 	
+	/** IMAGE DISPLAY **/
+	img.tutorial {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		height: 200px;
+	}
+	img.large {
+		height: 400px;
+	}
+	
 	/** NAVIGATION BAR **/
 
 	div.contain,
@@ -395,6 +395,7 @@ td#next {
 }
 @media only screen and (max-width: 736px)
 {
+	/** HEADER FORMATTING **/
 	h1.tutorial {
 		display: block;
 		background: url(../img/PaulsTutorials-background.png) no-repeat center center;
@@ -414,6 +415,14 @@ td#next {
 	h1.tutorial > span#ptitle {
 		display: block;
 		text-align: center;
+	}
+	
+	/** IMAGE DISPLAY **/
+	img.tutorial {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		width: 90%;
 	}
 	
 	/** NAVIGATION BAR **/
