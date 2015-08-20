@@ -220,133 +220,153 @@ td#next {
 
 @media all and (min-width: 737px)
 {
+	/** HEADER FORMATTING **/
+	
+	h1.tutorial > img {
+		float: left;
+		vertical-align: middle;
+		height: 60px;
+		width: 63px;
+	}
+	
+	h1.tutorial > span#pnum {
+		margin-left: 25px;
+		font-size: 0.5em;
+	}
+	h1.tutorial > span#ptitle {
+		margin-left: 25px;
+	}
+	span#pnum + span#ptitle {
+		margin-left: 10px;
+	}
+	
 	/** NAVIGATION BAR **/
 
-div.contain,
-div.containCh,
-div.containWpi {
-	position: relative;
-	float: left;
-	display: inline-block;
-	height: 1.25em;
-}
-div.contain {
-	width: 200px;
-}
-
-div.containCh {
-	width: 105px;
-}
-
-div.containWpi {
-	width: 160px;
-}
-
-div.containCh:hover,
-div.containWpi:hover {
-	width: 200px;
-}
-
-div.path {
-	float: left;
-	display: inline-block;
-}
-
-div.subNav {
-	position: absolute;
-}
-
-div.path span {
-	font-size: 1.25em;
-	display: block;
-	height: 100%;
-	padding: 10px;
-	white-space: nowrap;
-}
-
-div.path a {
-	color: inherit;
-	text-decoration: none;
-	font-size: 1.15em;
-	display: block;
-	padding: 5px;
-}
-
-div.path a.main {
-	font-size: 1.25em;
-	height: 100%;
-	width: 100%;
-	padding: 10px;
-	white-space: nowrap;
-}
-
-div.path:hover {
-	background-color: #555555;
-}
-
-div.path ul {
-	display: none;
-	padding: 0px 10px 10px 10px;
-}
-
-div.path ul > li {
-	list-style-type: none;
-}
-
-div.path ul > li:hover {
-	background-color: #777777;
-}
-
-div.path:hover ul {
-	display: block;
-}
-
-div.separator {
-	position: relative;
-	top: 10px;
-	text-align: center;
-	padding: 12px;
-	margin-boottom: 6px;
-	margin-left: 10px;
-	float:left;
-	height: 1px;
-	width: 0.5em;
-	-webkit-transform: rotate(270deg);
-	-moz-transform: rotate(270deg);
-	-ms-transform: rotate(270deg);
-	-o-transform: rotate(270deg);
-	transform: rotate(270deg);
-}
-
-div.separator:before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 50%;
-	width: 51%;
-	background: #777777;
-	-webkit-transform: skew(0deg, 30deg);
-	-moz-transform: skew(0deg, 30deg);
-	-ms-transform: skew(0deg, 30deg);
-	-o-transform: skew(0deg, 30deg);
-	transform: skew(0deg, 30deg);
-}
-
-div.separator:after {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 51%;
-	width: 51%;
-	background: #777777;
-	-webkit-transform: skew(0deg, -30deg);
-	-moz-transform: skew(0deg, -30deg);
-	-ms-transform: skew(0deg, -30deg);
-	-o-transform: skew(0deg, -30deg);
-	transform: skew(0deg, -30deg);
-}
+	div.contain,
+	div.containCh,
+	div.containWpi {
+		position: relative;
+		float: left;
+		display: inline-block;
+		height: 1.25em;
+	}
+	div.contain {
+		width: 200px;
+	}
+	
+	div.containCh {
+		width: 105px;
+	}
+	
+	div.containWpi {
+		width: 160px;
+	}
+	
+	div.containCh:hover,
+	div.containWpi:hover {
+		width: 200px;
+	}
+	
+	div.path {
+		float: left;
+		display: inline-block;
+	}
+	
+	div.subNav {
+		position: absolute;
+	}
+	
+	div.path span {
+		font-size: 1.25em;
+		display: block;
+		height: 100%;
+		padding: 10px;
+		white-space: nowrap;
+	}
+	
+	div.path a {
+		color: inherit;
+		text-decoration: none;
+		font-size: 1.15em;
+		display: block;
+		padding: 5px;
+	}
+	
+	div.path a.main {
+		font-size: 1.25em;
+		height: 100%;
+		width: 100%;
+		padding: 10px;
+		white-space: nowrap;
+	}
+	
+	div.path:hover {
+		background-color: #555555;
+	}
+	
+	div.path ul {
+		display: none;
+		padding: 0px 10px 10px 10px;
+	}
+	
+	div.path ul > li {
+		list-style-type: none;
+	}
+	
+	div.path ul > li:hover {
+		background-color: #777777;
+	}
+	
+	div.path:hover ul {
+		display: block;
+	}
+	
+	div.separator {
+		position: relative;
+		top: 10px;
+		text-align: center;
+		padding: 12px;
+		margin-boottom: 6px;
+		margin-left: 10px;
+		float:left;
+		height: 1px;
+		width: 0.5em;
+		-webkit-transform: rotate(270deg);
+		-moz-transform: rotate(270deg);
+		-ms-transform: rotate(270deg);
+		-o-transform: rotate(270deg);
+		transform: rotate(270deg);
+	}
+	
+	div.separator:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 50%;
+		width: 51%;
+		background: #777777;
+		-webkit-transform: skew(0deg, 30deg);
+		-moz-transform: skew(0deg, 30deg);
+		-ms-transform: skew(0deg, 30deg);
+		-o-transform: skew(0deg, 30deg);
+		transform: skew(0deg, 30deg);
+	}
+	
+	div.separator:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 51%;
+		width: 51%;
+		background: #777777;
+		-webkit-transform: skew(0deg, -30deg);
+		-moz-transform: skew(0deg, -30deg);
+		-ms-transform: skew(0deg, -30deg);
+		-o-transform: skew(0deg, -30deg);
+		transform: skew(0deg, -30deg);
+	}
 	
 	/** C++ GUIDED TUTORIAL PAGE FORMATTING **/
 	div#reading {
@@ -375,9 +395,27 @@ div.separator:after {
 }
 @media only screen and (max-width: 736px)
 {
+	h1.tutorial {
+		display: block;
+		background: url(../img/PaulsTutorials-background.png) no-repeat center center;
+		margin: 0px 0px;
+	}
 	h1.tutorial > img {
 		display: none;
 	}
+	h1.tutorial > span#pnum {
+		display: block;
+		font-size: 0.5em;
+		text-align: center;
+		line-height: 0.6em;
+		padding-top: 20px;
+		margin-bottom: 10px;
+	}
+	h1.tutorial > span#ptitle {
+		display: block;
+		text-align: center;
+	}
+	
 	/** NAVIGATION BAR **/
 	div#navbar > div {
 		display: none;
@@ -405,5 +443,15 @@ div.separator:after {
 	}
 	div#video iframe {
 		width: 100%;
+	}
+	
+	/** FOOTER NAVIGATION **/
+	table#footNav td#cur {
+		display: none;
+	}
+	
+	table#footNav td#prev,
+	table#footNav td#next {
+		width: 50%;
 	}
 }
