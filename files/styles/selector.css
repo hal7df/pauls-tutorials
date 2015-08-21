@@ -3,7 +3,7 @@ ul.select a {
 	text-decoration: none;
 }
 
-@media all and (min-width: 737px)
+@media all and (min-width: 821px)
 {
 	div#pt-main {
 		background: url(../img/PaulsTutorials-background.png) no-repeat center center;
@@ -40,7 +40,7 @@ ul.select a {
 	}
 }
 
-@media only screen and (max-width: 736px) and (-webkit-min-device-pixel-ratio: 2)
+@media only screen and (max-width: 820px) and (min-width: 315px)
 {
 	p#tdesc {
 		display: none;
@@ -81,7 +81,7 @@ ul.select a {
 	}
 }
 	
-@media only screen and (max-width: 736px) and (-webkit-max-device-pixel-ratio: 1.9)
+@media only screen and (max-width: 314px)
 {
 	p#tdesc {
 		display: none;
