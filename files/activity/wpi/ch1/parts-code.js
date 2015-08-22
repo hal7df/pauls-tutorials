@@ -386,7 +386,7 @@ function check_answer()
 	for (var x = 0; x < response.init.length; x++)
 	{
 		response.init[x] = response.init[x].trim();
-		if (response.init[x] === "" || response.init[x].search("^[ \\t]+$"))
+		if (response.init[x] === "" || response.init[x].search("^ +$"))
 			response.init.splice(x,1);
 	}
 	
@@ -925,7 +925,7 @@ function report_answer(correct)
 	
 	for (var x = 0; x < response.init.length; x++)
 	{
-		if (response.init[x] === "" || response.init[x].search("^[ \\t]+$"))
+		if (response.init[x] === "" || response.init[x].search("^ +$"))
 			response.init.splice(x,1);
 	}
 	
