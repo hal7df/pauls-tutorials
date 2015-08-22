@@ -384,7 +384,11 @@ function check_answer()
 	response.decl = response.decl.trim();
 	
 	for (var x = 0; x < response.init.length; x++)
+	{
 		response.init[x] = response.init[x].trim();
+		if (response.init[x] === "" || response.init[x].search("^[ \\t]+$"))
+			response.init.splice(x,1);
+	}
 	
 	//** begin correcting the declaration ** ------------------------
 	

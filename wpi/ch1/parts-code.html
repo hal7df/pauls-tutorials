@@ -229,7 +229,8 @@ m_do = new DigitalOutput (0);</pre>
 			<h4 class="tutorial"><a id="Pneumatics"></a>Pneumatics</h4>
 				<h5 class="tutorial"><a id="Compressor"></a>Compressor</h5>
 					<p>A compressor is of type <code>Compressor</code> (capital C). In initialization, provide the CAN ID of the pneumatic control module.</p>
-					<p>If the pneumatic control module's CAN ID is 0, then you may omit the CAN ID.</p>
+					<p>If the pneumatic control module's CAN ID is 0, then you may omit the CAN ID.
+						Note that, in this case, there are no parameters to pass to the <code>Compressor</code> object, so you would just leave out the parentheses entirely.</p>
 					<pre class= "brush: cpp">
 //Compressor declaration
 Compressor *m_compressor;
@@ -256,6 +257,7 @@ m_sol = new Solenoid (4, 0);</pre>
 			<p>Some common sensors use a generic class for their type. Below, if a generic class is given, the sensors that use that class are provided in a list.</p>
 			<h4 class="tutorial"><a id="AnalogInput"></a><code>AnalogInput</code></h4>
 				<p>The class <code>AnalogInput</code> (capital A,I; no space) manages generic analog devices. These devices manipulate voltage as output.</p>
+				<p>The most common device used in this category is a <a href="parts.html#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
 				<p>In the initialization, provide the analog channel of the device.</p>
 				<pre class= "brush: cpp">
 //AnalogInput declaration
@@ -263,20 +265,16 @@ AnalogInput *m_analogDev;
 
 //AnalogInput initialization on analog channel 0
 m_analogDev = new AnalogInput (0);</pre>
-				<h5 class="tutorial"><a id="AnalogInput_Devices"></a><code>AnalogInput</code> Devices</h5>
-					<p>The most common device used in this category is a <a href="parts.html#Potentiometer">potentiometer</a>. If you have a general analog device, use this class (unless otherwise specified).</p>
 			<h4 class="tutorial"><a id="DigitalInput"></a>DigitalInput</h4>
 				<p>The class <code>DigitalInput</code> (capital D, I; no space) manages generic digital sensors.</p>
-				<p>In the initialization, provide the digital input channel on the Digital Sidecar.</p>
+				<p>The most common device used in this category is a <a href="parts.html#Limit_Switch">limit switch</a>. Light sensors are also digital inputs. If you have a general digital device, use this class (unless otherwise specified).</p>
+				<p>In the initialization, provide the digital input channel on the roboRIO.</p>
 				<pre class= "brush: cpp">
 //DigitalInput declaration
 DigitalInput *m_digitalDev;
 
 //DigitalInput initialization on digital input 0
 m_digitalDev = new DigitalInput (0);</pre>
-				<h5 class="tutorial"><a id="DigitalInput_Devices"></a><code>DigitalInput</code> Devices</h5>
-					<p>The most common device used in this category is a <a href="parts.html#Limit_Switch">limit switch</a>. Light sensors are also digital inputs.</p>
-					<p>If you have a general digital device, use this class (unless otherwise specified).</p>
 			<h4 class="tutorial"><a id="Encoder"></a>Encoder</h4>
 				<p>An encoder is of type <code>Encoder</code> (capital E). In the initialization, do the following:</p>
 				<ul>
@@ -326,21 +324,14 @@ Gyro *m_gyro;
 m_gyro = new Gyro (1);
 m_gyro->SetSensitivity(2.00);</pre>
 				<p>There are many different kinds of gyros that are available to teams, and they generally use their own APIs. Refer to the source that you have for a particular gyro for how to initialize it (look at its constructor).</p>
-			<h4 class="tutorial"><a id="Accelerometer"></a>Accelerometer</h4>
-				<p>An accelerometer is of type <code>Accelerometer</code> (capital A). In the initialization, do the following:</p>
-				<ul>
-					<li>Provide the analog channel of the device</li>
-					<li>Set the voltage change per 1G (Earth gravity) change</li>
-					<li>Set the voltage output at 0G (no gravity)</li>
-				</ul>
+			<h4 class="tutorial"><a id="BuiltInAccelerometer"></a>Built-In Accelerometer</h4>
+				<p>The roboRIO's built-in accelerometer is of type <code>BuiltInAccelerometer</code> (capital A). It has no special initialization.</p>
 				<pre class= "brush: cpp">
-//Accelerometer declaration
-Accelerometer *m_accel;
+//BuiltInAccelerometer declaration
+BuiltInAccelerometer *m_accel;
 
-//Accelerometer initialization on analog channel 2, voltage change of 2, and zero-G voltage of 1
-m_accel = new Accelerometer (2);
-m_accel->SetSensitivity(2.0);
-m_accel->SetZero(1.0);</pre>
+//BuiltInAccelerometer initialization
+m_accel = new BuiltInAccelerometer;</pre>
 		<h3 class="tutorial"><a id="Driver_Station_Components"></a>Driver Station Components</h3>
 			<p>There are a few components on the driver&#x27;s side that you need to declare.</p>
 			<h4 class="tutorial"><a id="Game_Controller"></a>Game Controller</h4>
