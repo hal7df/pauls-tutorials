@@ -923,6 +923,12 @@ function report_answer(correct)
 	//** get the individual lines of the initialization
 	response.init = response.init.split("\n");
 	
+	for (var x = 0; x < response.init.length; x++)
+	{
+		if (response.init[x] === "" || response.init[x].search("^[ \\t]+$"))
+			response.init.splice(x,1);
+	}
+	
 	// ** report the declaration answer
 	
 	buf = "<li>Your answer: <code>" + response.decl + "</code> ";
