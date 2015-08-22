@@ -386,8 +386,10 @@ function check_answer()
 	for (var x = 0; x < response.init.length; x++)
 	{
 		response.init[x] = response.init[x].trim();
-		if (response.init[x] === "" || response.init[x].search("^ +$"))
+		if (response.init[x] === "")
+		{
 			response.init.splice(x,1);
+		}
 	}
 	
 	//** begin correcting the declaration ** ------------------------
@@ -925,8 +927,11 @@ function report_answer(correct)
 	
 	for (var x = 0; x < response.init.length; x++)
 	{
-		if (response.init[x] === "" || response.init[x].search("^ +$"))
+		response.init[x] = response.init[x].trim();
+		if (response.init[x] === "")
+		{\
 			response.init.splice(x,1);
+		}
 	}
 	
 	// ** report the declaration answer
