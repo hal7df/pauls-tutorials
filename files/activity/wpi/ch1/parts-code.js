@@ -384,7 +384,13 @@ function check_answer()
 	response.decl = response.decl.trim();
 	
 	for (var x = 0; x < response.init.length; x++)
+	{
 		response.init[x] = response.init[x].trim();
+		if (response.init[x] === "")
+		{
+			response.init.splice(x,1);
+		}
+	}
 	
 	//** begin correcting the declaration ** ------------------------
 	
@@ -918,6 +924,15 @@ function report_answer(correct)
 
 	//** get the individual lines of the initialization
 	response.init = response.init.split("\n");
+	
+	for (var x = 0; x < response.init.length; x++)
+	{
+		response.init[x] = response.init[x].trim();
+		if (response.init[x] === "")
+		{\
+			response.init.splice(x,1);
+		}
+	}
 	
 	// ** report the declaration answer
 	

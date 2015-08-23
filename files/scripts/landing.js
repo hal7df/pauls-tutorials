@@ -15,7 +15,7 @@ function wpiSelected()
 {
 	if (!is_mobile())
 	{
-		document.getElementById("tname").innerHTML = "WPILib";
+		document.getElementById("tname").innerHTML = "WPILib Tutorial";
 		document.getElementById("tdesc").innerHTML = "This tutorial will teach programmers with C++ knowledge how to use the WPI C++ library to program FRC robots."
 	}
 }
