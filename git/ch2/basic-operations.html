@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>1-1 Git Basics (Git)</title>
-    <meta content="">
+    <title>2-1 Basic Operations (Git)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
   </head>
   <body>  
   	<!-- PAGE HEADER -->
-	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">1-1</span>&nbsp;Git Basics</h1>
+	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" /><span id="pnum">1-1</span><span id="ptitle">Basic Operations</span></h1>
   	<hr />
-  	<div class="path">
-		<a class="main" href="../../index.html">Programming Home</a>
-	</div>
-	<div class="separator"></div>
-	<div class="containWpi">
-		<div class="path subNav">
-			<a class="main" href="../index.html">Git Mini-tutorial</a>
-			
-			<ul>
-				<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
-				<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
-				<li><a href="../../about.html">About</a></li>
-			</ul>
+  	<div id="navbar">
+	  	<div class="path">
+			<a class="main" href="../../index.html">Programming Home</a>
 		</div>
-	</div>
-	<div class="separator"></div>
-	<div class="containCh">
-		<div class="path subNav">
-			<a class="main" href="index.html">Chapter 2</a>
-			
-			<ul>
-				<li><a href="../ch1/index.html">Chapter 1: Concepts</a></li>
-				<li><a href="../operations-reference.html">Git Operations Reference</a></li>
-			</ul>
+		<div class="separator"></div>
+		<div class="containWpi">
+			<div class="path subNav">
+				<a class="main" href="../index.html">Git Mini-tutorial</a>
+				
+				<ul>
+					<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
+					<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
+					<li><a href="../../about.html">About</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<div class="separator"></div>
-	<div class="contain">
-		<div class="path subNav">
-			<span>Lesson 1</span>
-			
-			<ul>
-				<li><a href="revising-history.html">Lesson 2: Revising History</a></li>
-				<li><a href="branching.html">Lesson 3: Branching</a></li>
-				<li><a href="merge-conflicts.html">Lesson 4: Resolving Merge Conflicts</a></li>
-			</ul>
+		<div class="separator"></div>
+		<div class="containCh">
+			<div class="path subNav">
+				<a class="main" href="index.html">Chapter 2</a>
+				
+				<ul>
+					<li><a href="../ch1/index.html">Chapter 1: Concepts</a></li>
+					<li><a href="../operations-reference.html">Git Operations Reference</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="contain">
+			<div class="path subNav">
+				<span>Lesson 1</span>
+				
+				<ul>
+					<li><a href="revising-history.html">Lesson 2: Revising History</a></li>
+					<li><a href="branching.html">Lesson 3: Branching</a></li>
+					<li><a href="merge-conflicts.html">Lesson 4: Resolving Merge Conflicts</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<div class="reset"></div>	
@@ -56,26 +57,82 @@
 		<p>Now that you know how exactly git works, this lesson will teach you how to perform the basic tasks in git: committing, pushing, pulling, fetching, merging, and ignoring.</p>
 		<p>If you use a GUI to interact with git, then most of these operations should be relatively simple and straightforward.
 			However, a few of these operations, namely merging and ignoring, still require a few pieces of information, even when done through a GUI.</p>
+		<p>Note that, throughout this chapter, a number of operations will be referenced by their command.
+			If you are confused about a command or don't know how it translates into your GUI, please see the <a href="../operations-reference">git operations reference</a>.</p>
 		<div id="toc">
 			<ul>
+				<li><a href="#new-repo">Creating a New Repository</a>
+				<ul>
+					<li><a href="#github">Creating a New Repository on GitHub</a></li>
+					<li><a href="#local">Creating a New Local Repository</a></li>
+				</ul></li>
 				<li><a href="#committing">Committing</a>
 				<ul>
 					<li><a href="#adding">Adding to the Staging Area</a></li>
 					<li><a href="#writing-commit">Writing the Commit</a></li>
-				</ul>
+				</ul></li>
 				<li><a href="#pulling">Pulling</a>
 				<ul>
 					<li><a href="#fetching">Fetching</a></li>
 					<li><a href="#merging">Merging</a></li>
-				</ul>
+				</ul></li>
 				<li><a href="#pushing">Pushing</a></li>
-				<li><a href="#ignoring">Ignoring</a></li>
+				<li><a href="#ignoring">Ignoring</a>
+				<ul>
+					<li><a href="#ignoring-versioned-files">Ignoring versioned files</a></li>
+				</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
 	
 	<div id="tcontent">
-		<h2 class="tutorial"><a href="committing"></a>Committing</h2>
+		<h2 class="tutorial"><a id="new-repo"></a>Creating a New Repository</h2>
+			<p>Of course, before you can even start using git, you need to create a repository to store your code. You can do this either locally or on the website that hosts your repositories.</p>
+			<p>There are a number of websites that will host git projects for you, but we will explore how to use <a href="https://github.com" target="_blank">GitHub</a> here.</p>
+			
+			<h3 class="tutorial"><a id="github"></a>Creating a New Repository on GitHub</h3>
+				<p>Regardless of where you actually first initialize your repo, you need to create a remote repository in order to be able to push and pull to/from the remote.</p>
+				<p>GitHub has a number of locations on their website where you can create a new repository. There are two places on the front page where you can create a new repository.</p>
+				<img class="tutorial large" alt="GitHub new repository buttons" title="Location of the New Repository action on the GitHub home page." src="../../files/img/github-new-repo.png" />
+				<p>When you select this option, you will get the following screen:</p>
+				<img class="tutorial large" alt="GitHub new repository dialog" title="The New Repository dialog." src="../../files/img/github-new-repo-dialog.png" />
+				<p>The first thing you should do here is give your repository a name. Make sure that you give the repository a good name (as GitHub suggests you do).
+					You don't have to use GitHub's suggestion, but it should be either descriptive of the software contained in the repository or a good, memorable name.</p>
+				<p>The Description will appear on the repository's link on your GitHub page, and at the top of the repository's page. This is a good, short way to tell other people all about the code in your repository.</p>
+				<p>If you have a paid GitHub account, then you can create a private repository. Otherwise, your only option here is a public repository.</p>
+				<p>This last step here is the key. This allows you to automatically generate files and place them in your repository, so that you don't have to initialize it locally.
+					If you already have a repository locally that you want to push to GitHub, then it would be a good idea to leave this option unchecked.
+					However, if you want to get GitHub's template <code>.gitignore</code> for your repo, a LICENSE, or a template README, it is still possible to import your local repository, you'll just have to pull on your local repo before you push.</p>
+				<p>Grabbing the <code>.gitignore</code> is generally a good idea. As was discussed in <a href="../ch1/basics.html#ignoring" target="_blank">lesson 1-1</a>, there are a number of files that may exist in your repository that you do not want to commit.
+					<a href="https://github.com/github/gitignore" target="_blank">GitHub keeps a good list</a> of these files for a number of these languages, so it would be a good idea to open that drop-down menu and look for the language that you expect to be using for your project.</p>
+				<p>The license basically lets other developers know what restrictions you have about distributing and modifying your source.
+					Open-source licenses generally tend to allow other developers to distribute and modify your code, but they still have to credit you as the original developer.
+					If you want more information about the different types of licenses available to you, see <a href="http://choosealicense.com/" target="_blank">here</a>.</p>
+				<p>Once you have completed the dialog to your liking, click <q>Create repository</q>. This will create the repository under the selected account and redirect you to the repository's home page.
+					If you created a README, a gitignore, or a license file, you will see these files in the repository viewer, otherwise the respository will be empty and GitHub will have some instructions on how to import a local repository.</p>
+				<p>If you don't yet have a repository locally, and you have files in the GitHub repository, then you need to clone it (the same goes for already-existing repositories).
+					If you use a GUI, look around for it's <q>Clone URL</q> or <q>Clone URI</q> option, and then give it the clone URL, which is on the side of the page.
+					If you use the command line, then <code>cd</code> into the directory you want the repository to be in, and then type <code>git clone https://github.com/user/repo.git</code>,
+					replacing <code>user</code> and <code>repo</code> with your username and the repository's name, respectively (leave the <code>.git</code> extension, you will need that).</p>
+				<p>This will copy the GitHub repository exactly in its current state into a folder that has the same name as the repository. At this point, you're good!
+					The local repository was automatically set up to be associated with the remote when you cloned, so you can get to work right away!</p> 
+
+			<h3 class="tutorial"><a id="local"></a>Creating a New Local Repository</h3>
+				<p>If you already have code that you wish to upload to GitHub (or some other server), then this option is probably the better option. You will, at some point, want to create a repository on the server so you can push your code.</p>
+				<p>The first step is fairly simple. If you use a GUI, look for an option like <q>Initialize a repository here</q>
+					(EGit users will find this option by right-clicking on the project, selecting <q>Team</q> and then <q>Share project</q>). It may present some configuration options, but the defaults shouuld be fine.
+					If it asks for a remote URL, you can give it the clone URL of the remote repository if you have made it, otherwise just skip it for now (you'll do that next).
+					If you use the command line, initializing the repository is quite simple: just <code>cd</code> into the root of your directory and type <code>git init</code>.</p>
+				<p>Regardless of how you do it, this operation will initialize a git repository in the directory where your code is.</p>
+				<p>At this point, git will begin to track changes to your code. However, without a <a href="#ignoring"><code>.gitignore</code></a>, it will assume that every file it finds should be tracked, which may not be what you want.
+					It would be a good idea to avoid committing until you are all set up.</p>
+				<p>The next step is to associate your local repository with the remote repository. If you haven't set up a repository on the remote server yet, you should do that now.</p>
+				<p>Once you have the repository URL, go back to your git tool. If you use a GUI, look through the repository's settings for <q>remotes</q>.
+					You will want to add a new remote called <q>origin</q> that points at the clone URL. If you use the command line, simply type <code>git remote add origin https://github.com/user/repo.git</code>, again, with your specific clone URL as the last argument.</p>
+				<p>At this point, if you already initialized the remote repository, do a <a href="#pulling">pull</a> to get the files that were initialized with the remote repository.
+					Other than that, you are ready to go!</p> 
+		<h2 class="tutorial"><a id="committing"></a>Committing</h2>
 			<p>After you have made any significant modifications to your code, it is always a good idea to commit your changes.</p>
 			
 			<h3 class="tutorial"><a href="adding"></a>Adding to the Staging Area</h3>
@@ -93,6 +150,139 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modified:&nbsp;&nbsp;&nbsp;git/ch2/index.html</span><br><br>                                                                                                                                                 
 					no changes added to commit (use "git add" and/or "git commit -a")
 				</blockquote>
+				<p>This message tells you all of the changes that have been made to the repository since the last commit. Review this message and decide which files you want to commit, and then type <code>git add path/to/file</code>.
+					So, for example, if you wanted to add the <code>git/ch2/index.html</code> file above, you would type:
+				<blockquote class="tutorialexample">
+					git add git/ch2/index.html
+				</blockquote>
+				<p>Or, if you want to add all of the tracked files listed by <code>git status</code>, you can type:</p>
+				<blockquote class="tutorialexample">
+					git add -u
+				</blockquote>
+				<p>Also, you can add all changes (tracked or untracked) by using:</p>
+				<blockquote class="tutorialexample">
+					git add -A
+				</blockquote>
+				
+			<h3 class="tutorial"><a id="writing-commit"></a>Writing the commit</h3>
+				<p>Now that you have added files to the staging area, you need to actually make the commit. To do this, type <code>git commit</code>.</p>
+				<blockquote>
+					<p><span style="font-style: italic;">Tip</span>: You can combine the addition step with the commit step by typing:</p>
+					<blockquote class="tutorialexample">
+						git commit -a
+					</blockquote>
+					<p>which is equivalent to doing:</p>
+					<blockquote class="tutorialexample">
+						git add -u<br>
+						git commit
+					</blockquote>
+				</blockquote>
+				<p>Running the <code>commit</code> command will launch your terminal's text editor.
+					There will be an empty line, and then a comment with all of the changes presently in the staging area. (The comment won't be a part of the commit message).
+					When you make your commit message, be sure to follow the <a href="../ch1/basics.html#committing" target="_blank">commit message guidelines</a> laid out in the previous chapter.
+					In order to sign off on the commit, save the file. In the <code>vi</code> text editor, to do this you need to leave insert mode, type <code>:w</code>, and hit Enter.
+					In the <code>nano</code> text editor, strike Ctrl+O, and then Enter.</p>
+				<p>If you have a GUI, you can go straight to the <q>Commit</q> option. Most GUIs present the <code>git add</code> step right in the commit dialog, usually underneath the commit messsage.
+					Check/uncheck any files that you do/do not want to be included in the commit, type your commit message, and then click <q>Commit</q> (some GUIs may even have a <q>Commit and push</q> option, if you're lucky).</p>
+		
+		<h2 class="tutorial"><a id="pulling"></a>Pulling</h2>
+			<p>If you know that changes have been made to the remote repository, you will want to pull the changes before you push your own.</p>
+			<p>The overall operation is easy to perform, if you don't have any need to perform the two steps separately (and in most cases, you won't). In the GUI, just look for the <q>Pull</q> option.
+				The syntax is as follows:</p>
+			<blockquote class="tutorialexample">
+				git pull &lt;remote-name&gt; &lt;branch&gt; 
+			</blockquote>
+			<p>In most cases, your <code>remote-name</code> will be <code>origin</code>, unless you have other remotes configured (for example, your repository is a fork).
+				So, if you want to pull the <code>master</code> branch from <code>origin</code>, you would type:</p>
+			<blockquote class="tutorialexample">
+				git pull origin master
+			</blockquote>
+			
+			<h3 class="tutorial"><a id="fetching"></a>Fetching</h3>
+				<p>However, there may be cases where you want to run each step individually.</p>
+				<p>Fetching is just as easy as pulling, if not easier. In a GUI, just find the <q>Fetch</q> option. On the command line, simply type:</p>
+				<blockquote class="tutorialexample">
+					git fetch
+				</blockquote>
+				<p>This will update your local repository's <span style="font-style: italic;">remote-tracking branches</span>, which basically just keep track of the status of the remote.</p>
+				
+			<h3 class="tutorial"><a id="merging"></a>Merging</h3>
+				<p>In order to merge manually fetched changes into your repository, you need to tell git which remote-tracking branch you want to merge into the working tree.
+					This should <span style="font-style:italic;">always</span> be the same remote branch as your current branch (unless you are doing branch merges, which will be discussed in more detail in <a href="branching.html">lesson 2-3</a>).</p>
+				<p>However, just typing <code>master</code> will not accomplish this, since <code>master</code> alone refers to the local <code>master</code>, and not the remote-tracking <code>master</code>.
+					To differentiate the two, you need to add <code>&lt;remote-name&lt;/</code> to the beginning of the branch name. So, to merge the changes from <code>master</code> on the <code>origin</code> remote, you would type:</p>
+				<blockquote class="tutorialexample">
+					git merge origin/master
+				</blockquote>
+				<p>In a GUI, the merge dialog will present all of the branches available to it &#8212; both local and remote-tracking branches.
+					Remote-tracking branches may be presented as shown above (such as <q>origin/master</q>), or you may also see them as they appear in the git repository directory (<q>refs/remotes/origin/master</q>).
+					Select the proper remote-tracking branch from the dialog's <q>Merge from</q> setting, and then click <q>Merge</q>.</p>
+				<p>If there are no merge conflicts, you will have manually completed the pull process. If there are conflicts, <a href="merge-conflicts.html" target="_blank">resolve those first</a>.</p>
+			
+		<h2 class="tutorial"><a id="pushing"></a>Pushing</h2>
+			<p>Pushing is very simple. In your GUI, look for the <q>Push</q> option, and make sure to select the branch you want to push.</p>
+			<p>On the command line, the <code>git push</code> syntax is identical to that of <code>git pull</code>:
+			<blockquote class="tutorialexample">
+				git push &lt;remote-name&gt; &lt;branch&gt;
+			</blockquote>
+			<p>So, pushing the <code>master</code> branch to the <code>origin</code> remote would look like:</p>
+			<blockquote class="tutorialexample">
+				git push origin master
+			</blockquote>
+			
+		<h2 class="tutorial"><a id="ignoring"></a>Ignoring</h2>
+			<p><a href="../ch1/basics.html#ignoring" target="_blank">As was mentioned in lesson 1-1</a>, you don't want to be committing every file in your working directory.
+				<a href="https://github.com/github/gitignore/" target="_blank">The GitHub templates</a> are good starts, but they don't always include everything that you may want to ignore.
+				So, following the guidelines listed in lesson 1-1, look around for files in your directory that you do not want to be pushing to the repository,
+				and then edit (or create) the <code>.gitignore</code> in the root of the working directory.</p>
+			<p>In this file, you can specify file patterns for git to ignore. They can be specific filenames, or search expressions using the wildcard character, <code>*</code>.
+				For example, if you wanted to ignore any file with the <code>.exe</code> file extension, you would add:</p>
+			<blockquote class="tutorialexample">
+				*.exe
+			</blockquote>
+			<p>You can also tell git to ignore entire directories (in the case of <code>bin</code> directories and the like) by adding a trailing <code>/</code>.</p>
+			<blockquote class="tutorialexample">
+				bin/
+			</blockquote>
+			<p>However, with this syntax, git will only ignore folders on the root of the working directory of the name <code>bin</code>.
+				If you wanted to ignore every folder that has the name <code>bin</code>, you need to include a wildcard:</p>
+			<blockquote class="tutorialexample">
+				/*/bin/
+			</blockquote>
+			<p>You can also put comments in the <code>.gitignore</code> file if you want to leave a reason why you are ignoring a specific file by using shell-style comments (<code>#</code>):</p>
+			<blockquote class="tutorialexample">
+				# This is a comment<br>
+				# This is another comment<br><br>			
+				# There are no multiline comments. If you want to wrap your comment to a new line,<br>
+				# you need to put the '#' character at the beginning of the new line.<br><br>
+				# This is to ignore any built binaries.<br>
+				/*/bin/<br><br>
+				# This will ignore any directory named 'bin', including any bin directories on the root of the directory,<br>
+				# since nothing will still be matched by '*' (//bin/ evaluates to /bin/).
+			</blockquote>
+			<p>When git finds any new files that match the file patterns listed in the <code>.gitignore</code>, it will omit the files from the <code>git status</code> message,
+				and it will not add them to the staging area unless you force it to.</p>
+			
+			<h3 class="tutorial"><a id="ignoring-versioned-files"></a>Ignoring versioned files</h3>
+				<p>Although git will ignore unversioned (uncommitted) files that match the patterns in the <code>.gitignore</code>, if those files have already been committed, then git will not start ignoring them.</p>
+				<p>In order to make git stop versioning the files, you need to actually delete the file from the repository.
+					To do this, open the git command line (most GUIs will come with a command line tool), and <code>cd</code> into the folder where the file you want to unversion is located, and then type the following:</p>
+				<blockquote class="tutorialexample">
+					git rm --cached filename
+				</blockquote>
+				<p>where <code>filename</code> is the name of the file you want to un-version.</p>
+				<blockquote>
+					<p><span style="font-style: italic;">Tip</span>: You can auto-fill filenames in the terminal by hitting the <code>Tab</code> key after you have typed the first few letters of the filename.
+						If there are multiple files in the directory that match those characters, the terminal will complete as many characters as it can,
+						after which you can type the characters that differentiate it from the other files in the directory, and keep using the <code>Tab</code> key to auto-fill.</p>
+				</blockquote>
+				<p>If you want to un-version a whole directory, you need to indicate recursive mode by using the <code>-r</code> flag:</p>
+				<blockquote class="tutorialexample">
+					git rm -r --cached directory
+				</blockquote>
+				<p>This command will remove the specified file/directory from git's index, which makes it appear to git that the file has been deleted, although it remains in your working directory.
+					However, it is important to note that this <span style="font-style: italic;">will</span> delete the file from other computers when your collaborators pull the commit down, so if they need that file,
+					make sure they know to keep a backup of the file.</p>
 	</div>
   	
   	<!-- NAVIGATION -->
