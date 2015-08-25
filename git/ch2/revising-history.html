@@ -57,16 +57,40 @@
 		<p>Of course, one of the important reasons for having version control is being able to go back to an earlier version if need be.</p>
 		<div id="toc">
 			<ul>
-				<li><a href="#resetting">Resetting</a></li>
+				<li><a href="#referencing-head">Referencing from <code>HEAD</code></a>
+				<li><a href="#resetting">Resetting</a>
+				<ul>
+					<li><a href="#reset-examples">Examples</a></li>
+				</ul></li>
 				<li><a href="#reverting">Reverting</a></li>
+				<li><a href="#detached-head">Detached <code>HEAD</code></a></li>
 			</ul>
 		</div>
 	</div>
 	
 	<div id="tcontent">
+		<h2 class="tutorial"><a id="referencing-head"></a>Referencing from <code>HEAD</code></h2>
+			<p>If you remember from <a href="../ch1/basics.html">lesson 1-1</a>, it is possible to reference a commit using the first 7 or more characters of a commit hash.
+				However, even the first 7 characters of a commit hash can be difficult to remember quickly, and usually involves copying and pasting, which can be difficult to do in the terminal under certain circumstances.
+				But, if you can remember how many commits away the commit you want is from the local <code>HEAD</code> (as in the last commit you have locally, including unpushed commits),
+				then there is another way to reference it.</p>
+			<p>If you want to refer to the parent of the <code>HEAD</code> commit, then you would use the parent symbol, <code>^</code>:</p>
+			<blockquote class="tutorialexample">
+				HEAD^
+			</blockquote>
+			<p>If you want to refer to commits beyond the parent, then you have to pass a number with the tilde <code>~</code>:</p>
+			<blockquote class="tutorialexample">
+				HEAD~3
+			</blockquote>
 		<h2 class="tutorial"><a id="resetting"></a>Resetting</h2>
-			<p>As was mentioned in <a href="../ch1/history-branching.html">lesson 1-2</a>, a reset is useful if you want to undo unpushed changes,
+			<p>As was mentioned in <a href="../ch1/history-branching.html" target="_blank">lesson 1-2</a>, a reset is useful if you want to undo unpushed changes,
 				or briefly go back to a point in your repository's history such that your repository is exactly the way it was at that commit.</p>
+			<p>For command-line git users, the syntax is pretty simple. You just tell it what commit you want to reset to:</p>
+			<blockquote class="tutorialexample">
+				git reset &lt;commit&gt;
+			</blockquote>
+			<p>where <code>commit</code> can either be the first 7 (or more) characters of the commit hash, or a reference from <code>HEAD</code>.</p>
+			<p>If you use a GUI, its <q>Reset</q> option should provide you with a list of commits (or a text box to enter the commit in) and a list of the different reset modes.</p> 
 			<p>The tricky thing about <code>git reset</code> is that there are actually multiple different reset modes. The three main ones that you will use are:</p>
 			<dl>
 				<dt>soft</dt>
@@ -79,7 +103,80 @@
 				<dd>This resets the index and makes the working tree mirror the state of the repository at the specified commit. This will affect the files in the working directory.
 					If you want to put your working directly exactly in the state it was when you made the commit, then this is the mode you want to use.</dd> 
 			</dl>
-			<p>To see a full list of the possible modes and their explanations, see <code><a href="http://git-scm.com/docs/git-reset">man git-reset</a></code>.</p>
+			<p>To see a full list of the possible modes and their explanations, see <code><a href="http://git-scm.com/docs/git-reset" target="_blank">man git-reset</a></code>.</p>
+			<p>Basically, what mode you use comes down to a few rules:</p>
+			<ul>
+				<li>If you just want to clear the staging area (say you added a file you didn't want to), use mixed.</li>
+				<li>If you actually want to undo changes to files (either since the last commit or since a certain commit), use hard.</li>
+			</ul>
+			<p>After you have done a hard reset, if you have pushed changes after the commit your <code>HEAD</code> points at, you can get them back simply by doing a pull.</p>
+			
+			<h3 class="tutorial"><a id="reset-examples"></a>Examples</h3>
+				<p>To clear the staging area:</p>
+				<blockquote class="tutorialexample">
+					git reset HEAD
+				</blockquote>
+				<p>To undo all changes since the last commit:</p>
+				<blockquote class="tutorialexample">
+					git reset --hard HEAD
+				</blockquote>
+				<p>To reset the working tree to 7 commits back in history:</p>
+				<blockquote class="tutorialexample">
+					git reset --hard HEAD~7
+				</blockquote>
+				<p>To reset the working tree to commit <code>845da8b</code>:</p>
+				<blockquote class="tutorialexample">
+					git reset --hard 845da8b
+				</blockquote>
+			
+		<h2 class="tutorial"><a id="reverting"></a>Reverting</h2>
+			<p>A revert is more useful if you want to more permanently undo the changes done in a commit,
+				if a commit you want to undo is buried in history, or it has already been pushed to the remote repository.</p>
+			<p>Unlike reset, you can only revert one commit in a time. If you want to revert across multiple commits, you will have to revert each commit individually.</p>
+			<p>To undo just one commit, the syntax is similar to <code>git reset</code>:</p>
+			<blockquote class="tutorialexample">
+				git revert &lt;commit&gt;
+			</blockquote>
+			<p>where, again, <code>commit</code> can be either the shortened hash or a reference from <code>HEAD</code>.</p>
+			<p>However, if you want to revert several commits, the syntax is different:</p>
+			<blockquote class="tutorialexample">
+				git revert &lt;first-commit&gt;..&lt;last-commit&gt;
+			</blockquote>
+			<p>where <code>first-commit</code> is the first (oldest) commit you want to undo, and <code>last-commit</code> is the last (newest) commit you want to undo.</p>
+			<p>When you execute the revert command, git will generate reverse diffs for each commit and then give you a commit message to sign off on.
+				If you revert multiple commits, git will ask you to approve the commit message for each individual revert in order
+				(however, it will iterate through every commit automatically).</p>
+			
+		<h2 class="tutorial"><a id="detached-head"></a>Detached <code>HEAD</code></h2>
+			<p>Sometimes, you may find yourself in a situation where you want to get something from a previous commit,
+				but you don't want to go through the hassle of pulling the changes back down after a hard reset.
+				Or perhaps you have unpushed commits that you don't want to lose, but aren't ready to push yet.</p>
+			<p>There is another way to access your repository at a certain point in history, and this is called having a <span style="font-style: italic;">detached <code>HEAD</code></span>.
+				However, this method is really only usable on the command line.</p>
+			<p>This method takes advantage of the <code>git checkout</code> command (which, as you will learn in the next lesson, is used to switch branches)
+				to put the repository in the state it was when the commit was made, essentially by treating the commit as if it were its own branch.</p>
+			<p>You can do this by passing the commit reference to <code>git checkout</code>:</p>
+			<blockquote class="tutorialexample">
+				git checkout &lt;commit&gt;
+			</blockquote>
+			<p>Git will let you know you are entering the detached <code>HEAD</code> state when you do this:</p>
+			<blockquote class="tutorialexample">
+				# git checkout HEAD^<br>
+				Note: checking out 'HEAD^'.<br><br>
+				You are in 'detached HEAD' state. You can look around, make experimental<br>
+				changes and commit them, and you can discard any commits you make in this<br>
+				state without impacting any branches by performing another checkout.<br><br>				
+				If you want to create a new branch to retain commits you create, you may<br>
+				do so (now or later) by using -b with the checkout command again. Example:<br><br>
+				&nbsp;&nbsp;git checkout -b new_branch_name<br><br>
+				HEAD is now at 845da8b... &lt;commit message title&gt;
+			</blockquote>
+			<p>Basically, what this does is make git behave like the commit is its own branch. While you can make commits and use git normally,
+				you should note that anything you do won't end up on a branch unless, like the message says, you create a new branch to keep your changes.</p>
+			<p>You can go back to where your repository was before detaching <code>HEAD</code> by checking out the branch you were on before:</p>
+			<blockquote class="tutorialexample">
+				git checkout master
+			</blockquote>
 	</div>
   	
   	<!-- NAVIGATION -->
