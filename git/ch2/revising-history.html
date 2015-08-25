@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2-2 Revising History (Git)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+  </head>
+  <body>  
+  	<!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" /><span id="pnum">2-2</span><span id="ptitle">Revising History</span></h1>
+  	<hr />
+  	<div id="navbar">
+	  	<div class="path">
+			<a class="main" href="../../index.html">Programming Home</a>
+		</div>
+		<div class="separator"></div>
+		<div class="containWpi">
+			<div class="path subNav">
+				<a class="main" href="../index.html">Git Mini-tutorial</a>
+				
+				<ul>
+					<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
+					<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
+					<li><a href="../../about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="containCh">
+			<div class="path subNav">
+				<a class="main" href="index.html">Chapter 2</a>
+				
+				<ul>
+					<li><a href="../ch1/index.html">Chapter 1: Concepts</a></li>
+					<li><a href="../operations-reference.html">Git Operations Reference</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="contain">
+			<div class="path subNav">
+				<span>Lesson 2</span>
+				
+				<ul>
+					<li><a href="basic-operations.html">Lesson 1: Basic Operations</a></li>
+					<li><a href="branching.html">Lesson 3: Branching</a></li>
+					<li><a href="merge-conflicts.html">Lesson 4: Resolving Merge Conflicts</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="reset"></div>	
+  	<hr />  	
+  	
+  	<!-- PAGE CONTENT -->
+	<div id="intro">
+		<p>Of course, one of the important reasons for having version control is being able to go back to an earlier version if need be.</p>
+		<div id="toc">
+			<ul>
+				<li><a href="#resetting">Resetting</a></li>
+				<li><a href="#reverting">Reverting</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="tcontent">
+		<h2 class="tutorial"><a id="resetting"></a>Resetting</h2>
+			<p>As was mentioned in <a href="../ch1/history-branching.html">lesson 1-2</a>, a reset is useful if you want to undo unpushed changes,
+				or briefly go back to a point in your repository's history such that your repository is exactly the way it was at that commit.</p>
+			<p>The tricky thing about <code>git reset</code> is that there are actually multiple different reset modes. The three main ones that you will use are:</p>
+			<dl>
+				<dt>soft</dt>
+				<dd>All this does is move the <code>HEAD</code> pointer back to the specified commit. It does not change git's index or affect the files in the working tree.
+					In other words, <code>HEAD</code> will point at the commit you specified, but nothing else will change &#8212;
+					the files in the working tree will remain the way they were before the reset.</dd>
+				<dt>mixed</dt>
+				<dd>This resets the index but not the working tree. By resetting the index, this clears the staging area. This is the default <code>git reset</code> mode.</dd>
+				<dt>hard</dt>
+				<dd>This resets the index and makes the working tree mirror the state of the repository at the specified commit. This will affect the files in the working directory.
+					If you want to put your working directly exactly in the state it was when you made the commit, then this is the mode you want to use.</dd> 
+			</dl>
+			<p>To see a full list of the possible modes and their explanations, see <code><a href="http://git-scm.com/docs/git-reset">man git-reset</a></code>.</p>
+	</div>
+  	
+  	<!-- NAVIGATION -->
+  	<div class="reset">
+  		<hr>
+	  	<p id="navTitle">GIT MINI-TUTORIAL</p>
+  		<table id="footNav">
+  			<tbody>
+  				<tr>
+  					<td id="prev"><a href="basic-operations.html">&#8592; 2-1 Basic Operations</a></td>
+  					<td id="cur">2-2 Revising History</td>
+  					<td id="next"><a href="branching.html">2-3 Branching &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+  </body>
+</html>
