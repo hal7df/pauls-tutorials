@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2-3 Branching (Git)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+  </head>
+  <body>  
+  	<!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" /><span id="pnum">2-3</span><span id="ptitle">Branching</span></h1>
+  	<hr />
+  	<div id="navbar">
+	  	<div class="path">
+			<a class="main" href="../../index.html">Programming Home</a>
+		</div>
+		<div class="separator"></div>
+		<div class="containWpi">
+			<div class="path subNav">
+				<a class="main" href="../index.html">Git Mini-tutorial</a>
+				
+				<ul>
+					<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
+					<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
+					<li><a href="../../about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="containCh">
+			<div class="path subNav">
+				<a class="main" href="index.html">Chapter 2</a>
+				
+				<ul>
+					<li><a href="../ch1/index.html">Chapter 1: Concepts</a></li>
+					<li><a href="../operations-reference.html">Git Operations Reference</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="contain">
+			<div class="path subNav">
+				<span>Lesson 3</span>
+				
+				<ul>
+					<li><a href="basic-operations.html">Lesson 1: Basic Operations</a></li>
+					<li><a href="revising-history.html">Lesson 2: Revising History</a></li>
+					<li><a href="merge-conflicts.html">Lesson 4: Resolving Merge Conflicts</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="reset"></div>	
+  	<hr />  	
+  	
+  	<!-- PAGE CONTENT -->
+	<div id="intro">
+		<p>Being one of git's core features, being able to handle branches is an incredibly important skill to have.
+			If done properly, it can greatly enhance a group's efficiency when working on a new project.</p>
+		<div id="toc">
+			<ul>
+				<li><a href="#creating">Creating a New Branch</a>
+				<ul>
+					<li><a href="#local">Creating a New Local Branch</a></li>
+					<li><a href="#github">Creating a New Branch on GitHub</a></li>
+				</ul></li>
+				<li><a href="#checking">Checking the Current Branch</a></li>
+				<li><a href="#switching">Switching Branches</a></li>
+				<li><a href="#pushing">Pushing a New Branch</a></li>
+				<li><a href="#merging">Merging Branches</a></li>
+				<li><a href="#deleting">Deleting Branches</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="tcontent">
+		<h2 class="tutorial"><a id="creating"></a>Creating a New Branch</h2>
+			<p>Creating a new branch is quite easy, and there are a number of ways to do it.
+				However, there are a few important things to understand about branching first.</p>
+			<p>When you create a new branch, you are deliberately causing the repository's history to diverge.
+				This is great if you want to work on a new feature for your code, you are working on some sort of side project,
+				or you don't want to interfere with the main stream of development. However, if you are just working on a simple fix,
+				creating a whole new branch can be a little too much. If you let the main stream of development diverge too much from
+				your branch, you will end up with merge conflicts when you ultimately do decide to merge your branch back.</p>
+			<p>When you make a new branch, keep the name short and simple. Make sure that it accurately describes the purpose of the branch,
+				so that it really isn't necessary to inspect the code on the branch to figure out what you're doing.</p>
+			
+			<h3 class="tutorial"><a id="local"></a>Creating a New Local Branch</h3>
+				<p>Of the two options that you have, this one is the simplest of the two.</p>
+				<p>When you create a new branch locally, by default,
+					the <code>HEAD</code> pointer of the new branch will point to the <code>HEAD</code> commit of the branch you were on when you gave git the branch command.
+					If you want to branch from a specific commit, then you have to tell git the commit you wish to branch from.</p>
+				
+				<h4 class="tutorial"><a id="new-local-gui"></a>Using the GUI</h4>
+					<p>If you have a GUI, this function is probably embedded in its branch switching feature.
+						Open the <q>Switch branch</q> or <q>Checkout</q> dialog and look for a <q>New branch</q> option.
+						At some point, it will ask you what you want the branch to be named, and it will likely ask you where you want to push it on the remote repository.
+						In the latter event, you will want to tell git to set up a new branch on the remote of the same name, so there is no confusion later.
+						At any rate, when you finish with the dialog, your tool will usually switch to the new branch for you, and you can start working on the new branch.</p>
+					<p>If you want to create the new branch from another commit or branch, you will have to tell git the source in the dialog
+						(the option will probably be labeled <q>Source</q> or <q>Branch from</q>).
+						If that option only lists branches, you can try typing in a commit hash, if there is a field there for you to type in.</p>
+				
+				<h4 class="tutorial"><a id="new-local-commandline"></a>Using the commandline</h4>
+					<p>With the commandline, you have a few options to create a new branch.</p>
+					<p>The first is simply to create the new branch. This will create the new branch, but you will remain on the branch that you were on before you entered the branch command.</p>
+					<p>This can be done with <code>git branch</code>:</p>
+					<blockquote class="tutorialexample">
+						git branch myBranch
+					</blockquote>
+					<p>Furthermore, the <code>branch</code> command can be used to branch from a specific branch or commit:</p>
+					<blockquote class="tutorialexample">
+						# Branch from commit<br/>
+						git branch myBranch 845da8b<br/><br/>
+						# Branch from existing branch 'myBranch' to 'myOtherBranch' while on a different branch<br/>
+						git branch myOtherBranch myBranch
+					</blockquote>
+					<p>The second option is to create a branch and then immediately switch to the new branch.
+						This is done with the <code>-b</code> switch of the <code>git checkout</code> command.</p>
+					<p>With the <code>-b</code> switch, <code>git checkout</code>'s syntax is practically identical to that of <code>git branch</code>:</p>
+					<blockquote class="tutorialexample">
+						# Branch from the current HEAD and switch to the new branch<br/>
+						git checkout -b myBranch<br/><br/>
+						# Branch from commit 845da8b and switch to the new branch<br/>
+						git checkout -b myBranch 845da8b<br/><br/>
+						# Branch from branch 'myBranch' to 'myOtherBranch' and switch to it<br />
+						git checkout -b myOtherBranch myBranch
+					</blockquote>
+					<p>With any of these commands, git will create the new branch and then immediately switch to it.</p>
+					
+				<h4 class="tutorial"><a id="pushing-new-local"></a>Pushing a new local branch</h4>
+					<p>When you create a new branch locally, you still need to push it to the remote repository. However, this is an incredibly simple operation to perform.</p>
+					<p>If you have a GUI, just push like you normally would (no commit necessary). There may be some configuration steps involved, but the defaults should be fine. That's it.</p>
+					<p>If you are using the commandline, you also just push like you normally would, just adding the <code>-u</code> switch to have git set up the tracking information:</p>
+					<blockquote class="tutorialexample">
+						git push -u origin myBranch
+					</blockquote>
+			
+			<h3 class="tutorial"><a id="github"></a>Creating a New Branch on GitHub</h3>
+				<p>It is also possible to use the GitHub web interface to create a new branch. However, it does involve some extra steps to get the branch on your local copy.</p>
+				
+				<h4 class="tutorial"><a id="github-setup"></a>Creating the branch</h4>
+					<p>Creating a branch on GitHub is quite similar to the process for a local GUI. Just open the branch selector, and type the name of the branch you want to create. and hit enter.</p>
+					<img class="tutorial large" alt="GitHub branch popup" title="Creating a new branch on GitHub" src="../../files/img/github-new-branch.png" />
+					<p>If you want to branch from a specific branch or commit, you need to be browsing the repository under that branch or commit.
+						To browse the repository at a specific commit, click on the <q>Commits</q> link in the info box, find the commit you want to branch from and click on it,
+						and then click <q>Browse files</q> in the upper right-hand corner of the commit digest. This will bring you back to the root of the repository. The branch selector should now
+						read <q>Tree: xxxxxxxxx</q>, where <code>xxxxxxxxx</code> is the first 9 characters of the commit hash.</p>
+						
+				<h4 class="tutorial"><a id="pulling-new-branch"></a>Pulling the new branch</h4>
+					<p>Once you have created the new branch, you need to pull it down.</p>
+					<p>If you are OK with pulling (i.e. there is nothing on the server that you don't want yet &#8212; this stands for any branch), then you can just do a pull.
+						For commandline users, you need to do a generic pull by leaving off the remote and ref name:</p>
+					<blockquote class="tutorialexample">
+						git pull
+					</blockquote>
+					<p>However, if only want to grab the new branch, then the process is a little different.</p>
+					<p>First, <a href="basic-operations.html#fetching" target="_blank">perform a fetch</a>. This will update git's remote-tracking branches (and thus fetch the new branch).</p>
+					<p>Secondly, you need to create a new branch from the proper remote-tracking branch.
+						In the GUI, you will want to select the proper branch under the <q>Source</q> or <q>Branch from</q> option.
+						In the commandline, just use <a href="#new-local-commandline">the process described above</a>, and just use your source as the right remote-tracking branch.</p>
+					<blockquote class="tutorialexample">
+						# Create a branch without checking it out<br/>
+						git branch myBranch origin/myBranch<br/><br/>
+						# Create a branch and check it out<br/>
+						git checkout -b myBranch origin/myBranch
+					</blockquote>
+					
+		<h2 class="tutorial"><a id="checking"></a>Checking the Current Branch</h2>
+			<p>It is useful to know what branch you are on, so you know you are developing in the right place.</p>
+			<p>Most GUIs will show this information to you quite readily, however, this depends on the implementation.
+				Most IDE git plugins (such as EGit or the Qt Creator git plugin) will display the branch right next to the project root in the project explorer.
+				TortoiseGit displays this information alongside the Commit option (it says <q>Git Commit &#8594; 'branch'</q>).</p>
+			<p>If you remember back to the <code>git status</code> message from <a href="basic-operations.html#adding">lesson 2-1</a>, the very first line shows you the current branch:</p>
+			<blockquote class="tutorialexample">
+				On branch git-tutorial
+			</blockquote>
+	</div>
+  	
+  	<!-- NAVIGATION -->
+  	<div class="reset">
+  		<hr>
+	  	<p id="navTitle">GIT MINI-TUTORIAL</p>
+  		<table id="footNav">
+  			<tbody>
+  				<tr>
+  					<td id="prev"><a href="revising-history.html">&#8592; 2-3 Revising History</a></td>
+  					<td id="cur">2-2 Revising History</td>
+  					<td id="next"><a href="merge-conflicts.html">2-4 Resolving Merge Conflicts &#8594;</a></td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+  </body>
+</html>
