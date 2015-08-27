@@ -58,6 +58,7 @@
 			If done properly, it can greatly enhance a group's efficiency when working on a new project.</p>
 		<div id="toc">
 			<ul>
+				<li><a href="#note">How Git Tracks Branches</a></li>
 				<li><a href="#creating">Creating a New Branch</a>
 				<ul>
 					<li><a href="#local">Creating a New Local Branch</a></li>
@@ -65,14 +66,28 @@
 				</ul></li>
 				<li><a href="#checking">Checking the Current Branch</a></li>
 				<li><a href="#switching">Switching Branches</a></li>
-				<li><a href="#pushing">Pushing a New Branch</a></li>
 				<li><a href="#merging">Merging Branches</a></li>
-				<li><a href="#deleting">Deleting Branches</a></li>
+				<li><a href="#modifying">Modifying Branches</a>
+				<ul>
+					<li><a href="#renaming">Renaming Branches</a>
+					<li><a href="#deleting">Deleting Branches</a></li>
+				</ul></li>
 			</ul>
 		</div>
 	</div>
 	
 	<div id="tcontent">
+		<h2 class="tutorial"><a id="note"></a>How Git Tracks Branches</h2>
+			<p>Although not explicitly necessary to understand in order to use branching, it is still fairly important to discuss exactly how git handles branching.</p>
+			<p>When you make a commit on a branch, you are actually not commiting directly on the branch &#8212;
+				your commit goes first into a large <q>pool</q> where it swims around with all of the other commits that were ever made to the repository (including commits on other branches).
+				Then, git takes the commit and updates the <code>HEAD</code> pointer on the branch to point at that particular commit by adding the commit to the branch's history.</p>
+			<p>So, effectively, a branch is really just a list defining its history.
+				If a branch is deleted, the commits that were a part of its history will remain in the repository &#8212; even if that branch was the only branch that they belonged to
+				(they may only be accessed by their commit hash after this point, however).</p>
+			<p>When branches are merged together, on top of splicing the source code together, git splices the history lists together,
+				so that the commits that were made on the source branch will appear on the destination branch as if they had been made alongside the rest of the development,
+				and not in a large block at the top of the branch's history.</p> 
 		<h2 class="tutorial"><a id="creating"></a>Creating a New Branch</h2>
 			<p>Creating a new branch is quite easy, and there are a number of ways to do it.
 				However, there are a few important things to understand about branching first.</p>
@@ -127,7 +142,7 @@
 					</blockquote>
 					<p>With any of these commands, git will create the new branch and then immediately switch to it.</p>
 					
-				<h4 class="tutorial"><a id="pushing-new-local"></a>Pushing a new local branch</h4>
+				<h4 class="tutorial"><a id="pushing"></a>Pushing a new local branch</h4>
 					<p>When you create a new branch locally, you still need to push it to the remote repository. However, this is an incredibly simple operation to perform.</p>
 					<p>If you have a GUI, just push like you normally would (no commit necessary). There may be some configuration steps involved, but the defaults should be fine. That's it.</p>
 					<p>If you are using the commandline, you also just push like you normally would, just adding the <code>-u</code> switch to have git set up the tracking information:</p>
@@ -159,21 +174,97 @@
 						In the GUI, you will want to select the proper branch under the <q>Source</q> or <q>Branch from</q> option.
 						In the commandline, just use <a href="#new-local-commandline">the process described above</a>, and just use your source as the right remote-tracking branch.</p>
 					<blockquote class="tutorialexample">
-						# Create a branch without checking it out<br/>
+						# Set up new branch without checking it out<br/>
 						git branch myBranch origin/myBranch<br/><br/>
-						# Create a branch and check it out<br/>
+						# Set up new branch and check it out<br/>
 						git checkout -b myBranch origin/myBranch
 					</blockquote>
 					
 		<h2 class="tutorial"><a id="checking"></a>Checking the Current Branch</h2>
-			<p>It is useful to know what branch you are on, so you know you are developing in the right place.</p>
+			<p>It is useful to know what branch you are on, so you know that you are developing in the right place.</p>
 			<p>Most GUIs will show this information to you quite readily, however, this depends on the implementation.
 				Most IDE git plugins (such as EGit or the Qt Creator git plugin) will display the branch right next to the project root in the project explorer.
 				TortoiseGit displays this information alongside the Commit option (it says <q>Git Commit &#8594; 'branch'</q>).</p>
 			<p>If you remember back to the <code>git status</code> message from <a href="basic-operations.html#adding">lesson 2-1</a>, the very first line shows you the current branch:</p>
 			<blockquote class="tutorialexample">
-				On branch git-tutorial
+				On branch myBranch
 			</blockquote>
+			
+		<h2 class="tutorial"><a id="switching"></a>Switching Branches</h2>
+			<p>Although you will be working on one feature on one branch for a while, you may decide to start working on another feature, or a bug has come up that needs attention.
+				In either of these scenarios (among others), you will want to switch your branch to work on something else so you don't mix your work together prematurely.</p>
+			<p>This is a very simple operation. In the GUI, you will have an option called <q>Switch branch</q> or <q>Checkout</q>,
+				or the function may simply be presented to you as the name of the current branch on top of a drop-down menu.
+				Regardless of how it is presented, selecting this option will present you with at least all of the local branches.
+				There will usually be some way to access the remote-tracking branches as well.</p>
+			<p>On the command line, this function is available through, you guessed it, the <code>git checkout</code> command.
+				This function is probably the <code>checkout</code> command's most simple use case; you just pass it the name of the branch you want to switch to.</p>
+			<blockquote class="tutorialexample">
+				git checkout myBranch
+			</blockquote>
+			<p>When you switch branches, it is important to remember that <a href="../ch1/history-branching.html#switching" target="_blank">you cannot have uncommitted changes in your working directory</a>.</p>
+			
+		<h2 class="tutorial"><a id="merging"></a>Merging Branches</h2>
+			<p>Once you're done working on your branch, you need to merge it back into the main stream of development.
+				However, it is important to note that this will not always be the <code>master</code> branch.
+				Which branch you merge into depends on your project, and if you don't know, you should ask one of your teammates as to which branch to merge into.</p>
+			<p>The important thing to remember when you merge that a merge always happens <span style="font-style: italic;">onto</span> the current branch <span style="font-style: italic;">from</span> another branch.
+				So, when you want to merge, make sure you are on the target branch, not the branch you want to merge from.</p>
+			<p>Before you merge, make sure that both branches are completely up-to-date &#8212; especially the target branch. Merging onto outdated code will just cause more problems during the merge process.</p>
+			<p>Secondly, it is usually good advice to merge from the branch you want to ultimately merge onto into your branch first, so that you work out any conflicts and problems without disrupting the main stream of development.
+				Once you have worked those out, then you would merge into the target branch, which should simply give you a fast-forward.</p>
+			<p>Once you are on the new branch, then you want to start the merge operation. In the GUI, selecting the <q>Merge</q> option will basically always bring a list of branches up (either as a list view or a combobox).
+				Here, you select the branch you wish to merge from. If the GUI shows you the summary of the latest commit, ensure that it matches the last commit on the branch you are trying to merge from.</p>
+			<p>Once you have selected your branch, select <q>Merge</q>. Git will attempt to merge automatically, but if lines conflict,
+				then it will error out and ask you to resolve the conflict manually (which you will learn more about in the next lesson).
+				If there are no conflicts but the result was an automatic merge (i.e. it was not a fast-forward)), the tool may commit the result for you, but it is usually a good idea to try and commit the result anyway in case it does not.</p>
+			<p>On the commandline, you would do basically the same thing as you would if you were merging fetched changes,
+				except you would leave the remote tracking prefix off (unless the remote tracking branch has the code you wish to merge) and use the name of the branch you wish to merge from instead:</p>
+			<blockquote class="tutorialexample">
+				git merge myBranch
+			</blockquote>
+			
+		<h2 class="tutorial"><a id="modifying"></a>Modifying Branches</h2>
+			<p>Although most everything about the branch should be pretty much done when you set it up, there may be times when you need to modify the branch itself (not just the code on it).</p>
+			<p>It is important to note that GUIs do not usually have a unified way of presenting these functions, so only the command line will be shown here.</p>
+			
+			<h3 class="tutorial"><a id="renaming"></a>Renaming Branches</h3>
+				<p>You might find that your branch's name is not quite fitting to its purpose. Or maybe you're just having one of those bad days when you can't type (don't worry, it happens to us all).</p>
+				<p>The best way to rename a branch is to use the command line and use the <code>-m</code> switch of the <code>git branch</code> command:</p>
+				<blockquote class="tutorialexample">
+					git branch -m old_name new_name
+				</blockquote>
+				<p>This will rename the branch <code>old_name</code> to <code>new_name</code>. You can also use a shorthand if you want to rename the current branch:</p>
+				<blockquote class="tutorialexample">
+					git branch -m new_name
+				</blockquote>
+				<p>If this branch has already been pushed to the remote repository, then you will have to <a href="#deleting-remote">delete the remote branch</a> and push the renamed branch as a new branch instead.
+					However, you should be very cautious when doing this, because this can cause git to error out on your teammates' computers because it doesn't know what happened to the branch you deleted.
+					Be sure that everyone knows that you are going to change the branch name before you go and do it.</p>
+					
+			<h3 class="tutorial"><a id="deleting"></a>Deleting Branches</h3>
+				<p>When you merge, the branch you are merging from is not deleted. It remains in the repository.</p>
+				<p>Under almost all circumstances, this is fine. You are usually not actually done with development on that branch when you do a merge
+					(merging usually happens when the branch reaches a particular milestone), so it is a good idea to keep them around in case you need them.</p>
+				<p>However, there may be some cases where you want to delete the branch. This is usually if you created a branch and ended up not needing it in the first place.</p>
+				<p>And, a word of advice &#8212; don't delete <code>master</code>.</p>
+				
+				<h4 class="tutorial"><a id="deleting-local"></a>Deleting a local branch</h4>
+					<p>You may also have cause to delete a branch locally if you personally have no need to keep the branch, and would rather just keep it on the server.</p>
+					<p>Deleting a branch is done using the <code>-d</code> switch of the <code>git branch</code> command.</p>
+					<blockquote class="tutorialexample">
+						git branch -d myBranch
+					</blockquote>
+					<p>Note that git will <span style="font-weight: bold;">NOT</span> allow you to delete the branch you currently have checked out.
+						Make sure that you have another branch (such as <code>master</code>) checked out first.</p>
+					
+				<h4 class="tutorial"><a id="deleting-remote"></a>Deleting a remote branch</h4>
+					<p style="font-style: italic;">Please talk to your codevelopers before deleting a branch from the remote repository!</p> 
+					<p>If you delete a branch locally, you can no longer push that branch, so attempting to perform a push the way you would normally would not delete the remote branch.</p>
+					<p>However, the way this is done is still using the <code>git push</code> command. As a matter of fact, the syntax is almost exactly the same, except you add a colon (<code>:</code>) before the branch name, like so:</p>
+					<blockquote class="tutorialexample">
+						git push origin :myBranch
+					</blockquote>
 	</div>
   	
   	<!-- NAVIGATION -->
@@ -183,8 +274,8 @@
   		<table id="footNav">
   			<tbody>
   				<tr>
-  					<td id="prev"><a href="revising-history.html">&#8592; 2-3 Revising History</a></td>
-  					<td id="cur">2-2 Revising History</td>
+  					<td id="prev"><a href="revising-history.html">&#8592; 2-2 Revising History</a></td>
+  					<td id="cur">2-3 Branching</td>
   					<td id="next"><a href="merge-conflicts.html">2-4 Resolving Merge Conflicts &#8594;</a></td>
   				</tr>
   			</tbody>
