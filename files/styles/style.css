@@ -60,6 +60,29 @@ pre {
 	color: #b2b2b2;
 	padding: 5px;
 }
+blockquote.compare-left,
+blockquote.compare-right {
+	font-family: monospace;
+	width: 48%;
+	padding: 5px;
+	margin: 5px;
+	margin-bottom: 15px;
+}
+blockquote.compare-left {
+	float: left;
+}
+blockquote.compare-right {
+	float: right;
+}
+blockquote.compare-right + * {
+	clear: both;
+}
+p.compare {
+	text-align: center;
+	text-decoration: underline;
+	font-size: 1.1em;
+	font-weight: bold;
+}
 blockquote {
 	background-color: #002b36;
 	padding: 5px;
@@ -69,7 +92,7 @@ blockquote.tutorialexample {
 	font-family: monospace;
 }
 dl.tutorial > dt {
-	font-family: "monospace";
+	font-family: monospace;
 	background-color: #002b36;
 	color: #b2b2b2;
 	padding: 5px;

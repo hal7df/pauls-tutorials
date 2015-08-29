@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2-4 Resolving Merge Conflicts (Git)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../files/styles/style.css" />
+  </head>
+  <body>  
+  	<!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="../../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" /><span id="pnum">2-4</span><span id="ptitle">Resolving Merge Conflicts</span></h1>
+  	<hr />
+  	<div id="navbar">
+	  	<div class="path">
+			<a class="main" href="../../index.html">Programming Home</a>
+		</div>
+		<div class="separator"></div>
+		<div class="containWpi">
+			<div class="path subNav">
+				<a class="main" href="../index.html">Git Mini-tutorial</a>
+				
+				<ul>
+					<li><a href="../../cpp/index.html">C++ Guided Tutorial</a></li>
+					<li><a href="../../wpi/index.html">WPILib Tutorial</a></li>
+					<li><a href="../../about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="containCh">
+			<div class="path subNav">
+				<a class="main" href="index.html">Chapter 2</a>
+				
+				<ul>
+					<li><a href="../ch1/index.html">Chapter 1: Concepts</a></li>
+					<li><a href="../operations-reference.html">Git Operations Reference</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="separator"></div>
+		<div class="contain">
+			<div class="path subNav">
+				<span>Lesson 3</span>
+				
+				<ul>
+					<li><a href="basic-operations.html">Lesson 1: Basic Operations</a></li>
+					<li><a href="revising-history.html">Lesson 2: Revising History</a></li>
+					<li><a href="branching.html">Lesson 3: Branching</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="reset"></div>	
+  	<hr />  	
+  	
+  	<!-- PAGE CONTENT -->
+	<div id="intro">
+		<p>When you start managing a large git project with multiple branches, you will start encountering merge conflicts.
+			As such, it is a very important skill to have.</p>
+		<div id="toc">
+			<ul>
+				<li><a href="#key-ideas">Key Ideas Behind Conflict Resolution</a>
+				<ul>
+					<li><a href="#conflict-minimization">Conflict Minimization</a></li>
+					<li><a href="#resolution-tactics">Resolution Tactics</a>
+				</ul></li>
+				<li><a href="#methods">Methods of Conflict Resolution</a>
+				<ul>
+					<li><a href="#merge-tool">Using a Merge Tool</a>
+					<li><a href="#pure-text">Pure Text</a></li>
+				</ul>
+			</ul>
+		</div>
+	</div>
+	
+	<div id="tcontent">
+		<h2 class="tutorial"><a id="key-ideas"></a>Key Ideas Behind Conflict Resolution</h2>
+			<p>Firstly, if you encounter a merge conflict, don't panic. Really, when dealing with large git repositories, this result should be more or less expected.</p>
+			<p>When dealing with merge conflicts, the number one piece of advice is to <span style="font-weight: bold;">know the code</span>.
+				Even if you didn't write it, you should know what every line in every file is intended to accomplish.
+				If you know this, then resolving merge conflicts should come more or less naturally.</p>
+			<p>When you are dealing with a multi-branch repository, there are two things you need to keep in mind:
+				how to minimize the number of merge conflicts, and how to approach resolving them when they arise.</p>
+				
+			<h3 class="tutorial"><a id="conflict-minimization"></a>Conflict Minimization</h3>
+				<p>The first step in dealing with merge conflicts is trying to prevent them in the first place.
+					There is really only one piece of advice that you need to take into account here:
+					merge from master (or whatever branch you will ultimately be merging back into) into your branch often.
+					Whenever you think that the source branch has advanced a decent amount, just quickly merge from it.
+					You may encounter some small conflicts as part of this process,
+					but resolving them now keeps you from having to resolve them later alongside all of the other conflicts that will arise later.
+					Additionally, this process allows you to develop effectively with the main stream of development, rather than beside it.</p>
+					<p>Essentially, <span style="font-weight: bold;">merging into your branch often will minimize the number of conflicts you have to deal with at one time and even prevent some from arising in the first place.</span>
+						Really, in any case, it is this forward thinking that keeps the whole project moving forward smoothly.</p>
+						
+			<h3 class="tutorial"><a id="resolution-tactics"></a>Resolution Tactics</h3>
+				<p>However, there are some conflicts that simply can't be avoided. So, when you encounter these, you need to know how to address them.
+					There are effectively two different cases you will encounter when resolving conflicts: addition and replacement.</p>
+				<p>For all of these examples, we shall assume that the last common commit contains a file with the following text content:</p>
+				<blockquote class="tutorialexample">
+					About the HOT Team<br/>
+					------------------<br/><br/>
+					About FIRST<br/>
+					-----------
+				</blockquote>
+				
+				<h4 class="tutorial"><a id="adding"></a>Resolution by Addition</h4>
+					<p>The first case is addition. This happens when you want to keep all of the conflicting code.</p>
+					<p>To see exactly how this happens, let's look at an example. When you view merge conflicts visually, you look at both versions of the file side-by-side.
+						Git will refer to your current version as <q>mine</q>, and the conflicting version as <q>theirs</q>.</p>
+					<blockquote class="compare-left">
+						<p class="compare">MINE</p>
+						About the HOT Team<br/>
+						------------------<br/>
+						<span style="color: #ff0000;">The HOT Team is a member team in the FIRST Robotics Competition, FRC.</span><br/><br/>
+						About FIRST<br/>
+						-----------
+					</blockquote>
+					<blockquote class="compare-right">
+						<p class="compare">THEIRS</p>
+						About the HOT Team<br/>
+						------------------<br/>
+						<span style="color: #ff0000;">Every year, the HOT Team designs, builds, and programs a robot designed to accomplish FRC's design challenge.</span><br/><br/>
+						About FIRST<br/>
+						----------
+					</blockquote>
+					<p>As you can see, git doesn't really know what to do with the paragraphs in red text because they're completely different.
+						From git's perspective, it has no way of telling which paragraph you want to keep, if you want to keep neither, or if you want to keep both.
+						So, in this case, git will error out of the merge with a merge conflict.</p>
+					<p>In this particular case, both paragraphs are correct, so we want to keep them.
+						The paragraph on the left is a better opener paragraph, so we want to use the paragraph from <q>mine</q> before <q>theirs</q>.</p>
+					<blockquote class="tutorialexample">
+						About the HOT Team<br/>
+						------------------<br/>
+						The HOT Team is a member team in the FIRST Robotics Competition, FRC.<br/>
+						<span style="color: #007826;">Every year, the HOT Team designs, builds, and programs a robot designed to accomplish FRC's design challenge.</span><br/><br/>
+						About FIRST<br/>
+						-----------
+					</blockquote>
+					
+				<h4 class="tutorial"><a id="replacement"></a>Resolution by Replacement</h4>
+					<p>The next case is replacement. This happens when all of the code that you want to keep is on only one of the conflicting versions.</p>
+					<blockquote class="compare-left">
+						<p class="compare">MINE</p>
+						About the HOT Team<br/>
+						------------------<br/>
+						<span style="color: #ff0000;">The HOT Team is a member team in the FIRST Robotics Competition, FRC.</span><br/><br/>
+						About FIRST<br/>
+						-----------
+					</blockquote>
+					<blockquote class="compare-right">
+						<p class="compare">THEIRS</p>
+						About the HOT Team<br/>
+						------------------<br/>
+						<span style="color: #ff0000;">The HOT Team is a golf team that uses flaming golf balls.</span><br/><br/>
+						About FIRST<br/>
+						-----------
+					</blockquote>
+					<p>Here, git errors out of the merge due to the same reason as before: there are two paragraphs, and it doesn't know which one you want to keep.
+						In this case, as cool as it sounds, <q>their</q> copy is very clearly erroneous. So, what you want to do is to use your copy in place of their copy.</p>
+					<blockquote class="tutorialexample">
+						About the HOT Team<br/>
+						------------------<br/>
+						The HOT Team is a member team in the FIRST Robotics Competition, FRC.<br/><br/>
+						About FIRST<br/>
+						-----------
+					</blockquote>
+					
+		<h2 class="tutorial"><a id="methods"></a>Methods of Conflict Resolution</h2>
+			<p>When git fails a merge due to a conflict, it leaves the conflicting files in your working tree in a semi-merged state, detailing the conflict.</p>
+			<p>In order to resolve the conflict, you need to be able to go into these files and remove each of these conflict blocks.
+				This can be done one of two ways: using a graphical merge tool or using a text editor.</p>
+			<p style="font-style: italic;">Note: because git leaves text in the source files themselves, your code will not compile until you resolve the conflict!</p>
+			
+			<h3 class="tutorial"><a id="merge-tool"></a>Using a Merge Tool</h3>
+				<p>This is probably the most intuitive way to resolve merge conflicts. However, different tools function differently, and it can be difficult to go from using one tool to another.</p>
+				<p>Here, we will explore two different merge tools: TortoiseGitMerge and the EGit mergetool.</p>
+				
+				<h4 class="tutorial"><a id="tortoise-git-merge"></a>TortoiseGitMerge</h4>
+					<p>TortoiseGit comes with a very powerful and intuitive merge tool.
+						When your repository is left in a conflicting state, navigate to it in Windows Explorer, then right-click, open the TortoiseGit menu, and select <q>Resolve</q>.</p>
+					<p>This will open up a dialog listing all of the conflicting files in the repository. To open the merge tool, double-click on a file.</p>
+					<p>When you open the merge tool, you will see something like this:</p>
+					<img class="tutorial large" alt="TortoiseGitMerge" title="TortoiseGitMerge window" src="../../files/img/tortoisegitmerge.png">
+					<p>The two text editors side-by-side are the two conflicting versions of the file, and the editor at the bottom shows you the result.
+						Orange-colored lines indicate lines that git automatically determined to delete.
+						Yellow lines indicate lines that git automatically determined to add to the resulting file.</p>
+					<p>Any red highlighting indicates a conflict. You can jump between conflicts by using the red arrows at the top.</p>
+					<p>If you notice, anywhere there is a conflict, TortoiseGitMerge fills the corresponding lines with <code>?</code>s in the result.
+						To fix this, right-click on the red text block (the black lines should enclose the entire text block, not just one line).
+						This will present you with four options:</p>
+					<ul>
+						<li>Use text block from mine</li>
+						<li>Use text block from theirs</li>
+						<li>Use text block from mine before theirs</li>
+						<li>Use text block from theirs before mine</li>
+					</ul>
+					<p>Depending on the situation, you will want to select one of these four options. For example, in the addition example above, you would select <q>Use text block from mine before theirs</q>.
+						In the replacement example, you would select <q>Use text block from mine</q>.</p>
+					<p>Continue this process until all of the conflicts have been resolved in the file (the conflict arrows will grey out and there will be no more red text blocks in the bottom editor).
+						When you save the file, tell TortoiseGit to mark the file as resolved when it asks.</p>
+					<p>If there are any more conflicting files, double-click on them in the <q>Resolve</q> dialog (which should still be open). Repeat this process for each file.</p>
+					<p>When you are done resolving all of the conflicts, close the <q>Resolve</q> dialog, and commit the result. Git should automatically fill in a commit message for you.</p>
+					
+				<h4 class="tutorial"><a id="egit-merge"></a>EGit Merge Tool</h4>
+					<p>If you're using Eclipse, the EGit plugin came with a merge tool that you can use to resolve conflicts. However, it functions quite differently from TortoiseGitMerge.</p>
+					<p>When you merge, the last dialog in the process will tell you that your repository is left in a <q>Conflicting</q> state.
+						This will further be shown next to the project root in the project explorer.</p>
+					<p>To find conflicting files, look for the red arrow icon. This will appear on not only conflicting files but also any folders that contain conflicting files (and folders that contain folders with conflicting files, and so on).
+						When you find the conflicting file, right-click on the file, go to <q>Team</q> and select <q>Merge tool</q>.</p>
+					<p>This will open up the merge tool in another tab. You will be presented with two text editors.
+						The one on the left represents <q>mine</q>, and the one on the right represents <q>theirs</q>.</p>
+					<p>Here, as opposed to merging two files to achieve a result, you need to think that you're merging conflicting changes from <q>theirs</q> into <q>mine</q>.</p> 
+	</div>
+  	
+  	<!-- NAVIGATION -->
+  	<div class="reset">
+  		<hr>
+	  	<p id="navTitle">GIT MINI-TUTORIAL</p>
+  		<table id="footNav">
+  			<tbody>
+  				<tr>
+  					<td id="prev"><a href="branching.html">&#8592; 2-3 Branching</a></td>
+  					<td id="cur">2-4 Resolving Merge Conflicts</td>
+  					<td id="next">&nbsp;</td>
+  				</tr>
+  			</tbody>
+  		</table>
+  	</div>
+  </body>
+</html>
