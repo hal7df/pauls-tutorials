@@ -208,8 +208,48 @@
 					<p>To find conflicting files, look for the red arrow icon. This will appear on not only conflicting files but also any folders that contain conflicting files (and folders that contain folders with conflicting files, and so on).
 						When you find the conflicting file, right-click on the file, go to <q>Team</q> and select <q>Merge tool</q>.</p>
 					<p>This will open up the merge tool in another tab. You will be presented with two text editors.
-						The one on the left represents <q>mine</q>, and the one on the right represents <q>theirs</q>.</p>
-					<p>Here, as opposed to merging two files to achieve a result, you need to think that you're merging conflicting changes from <q>theirs</q> into <q>mine</q>.</p> 
+						The one on the left represents <q>mine</q>, and the one on the right represents <q>theirs</q>.
+						The red boxes along the side of the scrollbar on the right side allow you to jump between conflicts.</p>
+					<p>Here, as opposed to merging two files to achieve a result, you need to think that you're merging conflicting changes from <q>theirs</q> into <q>mine</q>.</p>
+					<p>Eclipse will connect all of changes between the two versions with a line. On changes that require your attention, you will see a little dot in the middle of the line.
+						When you hover your mouse over this dot, it will turn into a small button with an arrow pointing at the local copy. If you click this button, it will copy the change from <q>theirs</q> into <q>mine</q>.
+						This operation will overwrite any changes in <q>mine</q> that are indicated by the corresponding box on the left side.
+						If you don't want to delete changes on your side but want to bring in changes from the left, just copy the whole conflicting text block manually (using Ctrl-C) and paste it where you want it.</p>
+					<p>If you want to completely ignore a conflict from <q>theirs</q>, then you actually will have to add an edit to the code block on the left, and then undo it (so Eclipse presents the <q>save</q> option to you).</p>
+					<p>Once you are satisfied with the file on the left, save the file (Ctrl+S). This will remove the conflict annotations from the file. However, the files are still left in a conflicting state.
+						To fix this, go back to the file in the project explorer, open the Team menu, and select <q>Add to index</q>. This will change the icon on the file to an asterisk.</p>
+					<p>Repeat this process for all of the conflicting files. When you are done, the repostiory status message should read <q>Merged</q> instead of <q>Conflicting</q>.
+						Commit the result. As with any merge, git will automatically fill in a merge message for you.</p>
+						
+				<h4 class="tutorial"><a id="other-merge"></a>Other merge tools</h4>
+					<p>Of course, these aren't the only merge tools available. Most merge tools function similarly to TortoiseGitMerge.</p>
+					<p>If you have any other merge tools, sometimes the git commandline program will recognize this and register the tool.
+						If this is the case, you can run <code>git mergetool</code> on the commandline, and git will automatically fire up the merge tool
+						for each conflicting file. If the file is binary, then git will ask you which file you want to keep.</p>
+					<p>It is also possible to tell git to resolve all merge conflicts using either <q>theirs</q> or <q>mine</q>. You can do this from the command line (and some GUI tools, this will be presented to you in the merge dialog),
+						using the <code>--mine</code> and <code>--theirs</code> switches:</p>
+					<blockquote class="tutorialexample">
+						git merge --mine myBranch<br/>
+						git merge --theirs myBranch
+					</blockquote>
+					<p>It is important to note that, when you use this option, <span style="font-weight: bold;">all</span> conflicts will be resolved with the version you indicated, including ones that you may not have been anticipating.
+						Use this option with caution.</p>
+				
+			<h3 class="tutorial"><a id="pure-text"></a>Pure Text</h3>
+				<p>Of course, these tools just provide a more visual way of approaching conflict resolution. It is also possible to resolve merge conflicts by editing the files directly.</p>
+				<p>However, this method does have its drawbacks: it is not as easy to tell which files are conflicting. To see which files need editing, run a <code>git status</code>.</p>
+				<p>If you want to resolve merge conflicts manually, just open up the file in any text editor. Scroll through the file until you see conflict annotations, which will look like this:</p>
+				<blockquote class="tutorialexample">
+					&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br/>
+					This is MINE<br/>
+					=======<br/>
+					This is THEIRS<br/>
+					&gt;&gt;&gt;&gt;&gt;&gt;&gt; merge-source
+				</blockquote>
+				<p>As you can see, your changes appear above the line of equals signs, while <q>theirs</q> appear below. The source of the merge is listed after the <code>&gt;</code> signs at the end of the conflict.</p>
+				<p>To resolve here, simply edit the file to your liking. Cut/copy and paste code where it belongs, add code where necessary, and then delete the conflict annotations when you're done. Make sure to save the file.</p>
+				<p>When you're all done, make sure to <code>git add</code> the files. If you're using a GUI, see if there is an <q>add</q> option for the file (such as the <q>Add to index</q> option in EGit).
+					Then, commit the result. Again, git will have auto-generated a commit message for you.</p>
 	</div>
   	
   	<!-- NAVIGATION -->
