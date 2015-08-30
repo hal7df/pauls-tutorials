@@ -283,7 +283,7 @@
 					</dl></dd>
 				<dt><a id="git-checkout"></a>checkout</dt>
 				<dd><span class="bold">Change working directory to match the specified <code>HEAD</code></span> &#8212; When used with a branch or a tag, this makes the working directory reflect the <code>HEAD</code> of the specified branch or tag.
-					Any commits made when checked out as a branch will be made to the checked-out branch.<br/>
+					Any commits made when checked out as a branch will be made to the checked-out branch.
 					When used with a commit, this <a href="ch2/revising-history.html#detached-head" target="_blank">detaches <code>HEAD</code></a> and makes the working tree reflect the specified commit.
 					Any commits made while in this state will be thrown out upon checkout of another reference unless a new branch is made from the detached <code>HEAD</code>.
 					<dl class="tutorial">
@@ -314,6 +314,10 @@
 					</ul>
 					<span class="italic">Note</span> &#8212; With newer versions of TortoiseGit, using <code>git mergetool</code> will NOT launch the merge tool due to a program rename.
 						Use the <a href="ch2/merge-conflicts.html#tortoise-git-merge">graphical method</a> instead.</dd>
+				<dt><a id="git-tag"></a>tag</dt>
+				<dd><span class="bold">Create and manage tags</span> &#8212; Creates, modifies, and deletes tags.
+					Requires at least an argument to name the tag, but can be used like <code>git branch</code> to create the tag from a reference other than <code>HEAD</code>.
+					When creating a tag, you should always use the <code>-a</code> option and leave a tag message (much like a commit message).</dd>
 				<dt><a id="git-diff"></a>diff</dt>
 				<dd><span class="bold">Show a diff</span> &#8212; With no arguments, this command shows a diff of the working tree against <code>HEAD</code> in <a href="#less"><code>less</code></a>.
 					Alternatively, you can view a diff between arbitrary commits by passing the commit hashes (or a <a href="ch2/revising-history.html#referencing-head" target="_blank"><code>HEAD</code> reference</a>) as arguments.<br/>
