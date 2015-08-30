@@ -9,18 +9,18 @@
   </head>
   <body>
   <!-- PAGE HEADER -->
-	<h1 class="tutorial"><img src="../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" 
-  		style="float: left; vertical-align: middle;" height="60" width="63">&nbsp;&nbsp;<span style="font-size: 0.5em;">C++</span>&nbsp;Tips and Tricks</h1>
+	<h1 class="tutorial"><img src="../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" /><span id="ptitle">Git Operations Reference</span></h1>
   	<hr />
   	<div class="path">
 		<a class="main" href="../index.html">Programming Home</a>
 	</div>
 	<div class="separator"></div>
-	<div class="contain">
+	<div class="containWpi">
 		<div class="path subNav">
-			<a class="main" href="index.html">C++ Guided Tutorial</a>
+			<a class="main" href="index.html">Git Mini-tutorial</a>
 			
 			<ul>
+				<li><a href="../cpp/index.html">C++ Guided Tutorial</a></li>
 				<li><a href="../wpi/index.html">WPILib Tutorial</a></li>
 				<li><a href="../about.html">About</a></li>
 			</ul>
@@ -29,12 +29,11 @@
 	<div class="separator"></div>
 	<div class="contain">
 		<div class="path subNav">
-			<span>Tips and Tricks</span>
+			<span>Git Operations Reference</span>
 			
 			<ul>
-				<li><a href="ch1/index.html">Chapter 1: Basics</a></li>
-				<li><a href="ch2/index.html">Chapter 2: Organization</a></li>
-				<li><a href="ch3/index.html">Chapter 3: Advanced C++</a></li>
+				<li><a href="ch1/index.html">Chapter 1: Concepts</a></li>
+				<li><a href="ch2/index.html">Chapter 2: Use</a></li>
 			</ul>
 		</div>
 	</div>
@@ -43,5 +42,302 @@
   	
   	<!-- PAGE CONTENT -->
   	
+  	<div id="intro">
+  		<p>One of the issues with the number of different GUIs and interfaces for git is that it can be difficult to communicate particular functions.
+  			Git is, at its core, a commandline program. Most everywhere online, you will see solutions and instructions for git in commandline form,
+  			because that is the one standardized interface across all platforms.</p>
+  		<p>As such, it is important to know what all of the commands do, even if you do not plan on using the commandline interface extensively.</p>
+  		<p>This is not a definitive list of git commands, and neither does it explain all of the functions of every command.
+			If you have questions about a command or some of its functions, use the <code>man</code> command with the name of the command you want to look up as an argument
+			(for example, <code>man git-commit</code>).
+			If it's a git command, prefix <code>git-</code> to the command name.
+			Or, if you don't want to use the commandline, you can just Google with the <code>man</code> command as your search query instead.</p>
+		
+		<div id="toc">
+			<ul>
+				<li><a href="#bash-notes">bash notes</a>
+				<ul>
+					<li><a href="#filepaths">File paths</a></li>
+					<li><a href="#escaping">Character escaping</a></li>
+					<li><a href="#autocomplete">Shell autocompletion</a></li>
+					<li><a href="#shell-expressions">Shell expressions</a></li>
+					<li><a href="#piping-output">Piping output</a>
+				</ul>
+				</li>
+				<li><a href="#bash">Standard bash Commands</a></li>
+				<li><a href="#git">Git Commands</a></li>
+			</ul>
+		</div>
+  	</div>
+		
+  	<div id="tcontent">
+		<h2 class="tutorial"><a id="bash-notes"></a>bash notes</h2>
+			<p>When you're using bash (<span class="italic">Note</span>: this is NOT cmd.exe!), there are a couple of things you need to keep in mind.</p>
+			
+			<h3 class="tutorial"><a id="filepaths"></a>File paths</h3>
+				<p>File paths in bash separate directories with forward slashes (<code>/</code>). Appending a slash to an argument will tell bash that you're referring specifically for a directory.</p>
+				<p>Referring to files and folders in the present working directory is done just by typing the filename (no prefixes).
+					If you want to use an absolute path (from the root of the system), lead with a slash <code>/</code>. On Windows, the first folder under <code>/</code> is the drive letter, e.g. <code>/c/</code> for C:.</p>
+				<p>You can move through multiple directories at once by separating each folder with a slash, for example:</p>
+				<blockquote class="tutorialexample">
+				/home/pt/Documents
+				</blockquote>
+				
+			<h3 class="tutorial"><a id="escaping"></a>Character escaping</h3>
+				<p>There are a number of characters that the shell uses to denote various functions that take precedence over literals such as filenames.
+					For the most part, filenames don't include these characters, but there is one that you will encounter often: the space.</p>
+				<p>Spaces are used in bash to delimit arguments. So, if you enter a filename that has a space in it the way you normally would, bash will separate
+					everything before the space and everything after the space into two different arguments &#8212; preventing your command from functioning properly.
+					So, if you want to pass a filename that has a space or other reserved character, you need to escape it with a backslash:</p>
+				<blockquote class="tutorialexample">
+					My\ File.txt
+				</blockquote> 
+				<p>There are a number of other characters that are also reserved, such as parentheses, or even the backslash itself (if you have a backslash in a filename, you double it up: <code>\\</code>).
+					All of these need to be escaped with a backslash. See <a href="http://mywiki.wooledge.org/BashGuide/SpecialCharacters" target="_blank">here</a> for a more complete list.</p>
+				<p>Optionally, if it's just spaces you're worried about, you can enclose the filename or literal in double quotes. Then you don't have to escape the spaces.</p>
+				<blockquote class="tutorialexample">
+					"My File.txt"
+				</blockquote>
+			
+			<h3 class="tutorial"><a id="autocomplete"></a>Shell autocompletion</h3>
+				<p>If you're typing something like a long filename (or some git references like branches),
+					you can actually have the shell complete the text for you, provided that you've given the shell enough information to do autocompletion.</p>
+				<p>Start typing the first few characters of the file/folder/branch name, and then hit Tab. If you've given it enough information, it will complete the rest.
+					However, if there are multiple references that have a similar name, bash will only autocomplete as much that is similar between the files.
+					You will have to type the characters to differentiate it from the rest.</p>
+					
+			<h3 class="tutorial"><a id="shell-expressions"></a>Shell expressions</h3>
+				<p>It is possible to make the shell do a search through the contents of the current directory, or, if used with <a href="#grep"><code>grep</code></a>, the contents of a file or standard input.
+					This is usually done with a wildcard, <code>*</code>:</p>
+				<blockquote class="tutorialexample">
+					pauls-*
+				</blockquote>
+				<p>This will match any string that begins with the text <code>pauls-</code>, such as <code>pauls-tutorials</code>.</p>
+				
+			<h3 class="tutorial"><a id="piping-output"></a>Piping output</h3>
+				<p>It is possible to take the output of a command and use it as the input for another. This is known as <code class="italic">piping</code>, and is accomplished with the pipe <code>|</code>.</p>
+				<blockquote class="tutorialexample">
+					ls | less
+				</blockquote>
+				<p>This redirects the output of the <a href="#ls"><code>ls</code></a> command and writes it to <a href="#less">less</a>'s standard input.
+					For those who know <a href="../cpp/index.html" target="_blank">C++</a>, this is like taking the <code>cout</code> of one program and giving it as <code>cin</code> for another.</p>
+
+  		<h2 class="tutorial"><a id="bash"></a>Standard bash Commands</h2>
+  			<p>When you're using the commandline, you will also want to know some of the basic features of the shell you're using.</p>
+  			<p>These commands only work in bash! Do not try to use them in cmd!</p>
+  			<p>For these commands, if you want to look them up, omit the <code>git-</code> prefix, since they're not actually git commands.</p>
+  			
+  			<dl class="tutorial command-list">
+  				<dt><a id="cd"></a>cd</dt>
+  				<dd><span class="bold">Change directory</span> &#8212; This changes the current working directory, which is essentially equivalent to opening a folder in a file manager.
+  					When you want to change to a directory that's in your current working directory, then just pass the name of the directory as the first argument and hit Enter.
+  					You can also jump through several directories at once by separating each directory with a <code>/</code>.
+					You can also change directories using absolute paths (from the root of the drive), by prefixing a <code>/</code> to the beginning of the file path.
+					Under most Windows implementations, the root of the C: drive is <code>/c/</code> (and <code>/d/</code> for D:, <code>/e/</code> for E:, etc.).<br/>
+					<span class="italic">Note</span> &#8212; <code>cd</code> does not have man page. Its only function is to switch directories as described here.</dd>
+				<dt><a id="pwd"></a>pwd</dt>
+				<dd><span class="bold">Print working directory</span> &#8212; Prints a path to the present working directory.</dd>
+				<dt><a id="ls"></a>ls</dt>
+				<dd><span class="bold">List directory contents</span> &#8212; If no argument is passed, it lists the contents of the current working directory.
+					Or, if a path to a directory is passed, then list the contents of that directory. Some useful switches:
+					<dl class="tutorial">
+						<dt>-l</dt>
+						<dd>Show file details. Output is in the following format (with vertical lines denoting fields &#8212; <code>ls</code> will put spaces here):
+							<blockquote class="tutorialexample">
+							permissions | number of items (always 1 if it's a file) | user | group | size | last modified (3 fields) | filename
+							</blockquote>
+						</dd>
+						<dt>-h</dt>
+						<dd>Show file sizes in a human-readable format (e.g. <code>1k</code> instead of <code>1024</code>). To be used with <code>-l</code></dd>
+						<dt>-t</dt>
+						<dd>Order by file modification time.</dd>
+						<dt>-a</dt>
+						<dd>Show all files, including hidden files.</dd>
+					</dl></dd>
+				<dt><a id="grep"></a>grep</dt>
+				<dd><span class="bold">Filter input</span> &#8212; <code>grep</code> searches through standard input for a given expression and writes the result to standard output.
+					Or, if a second argument is passed, search through the file passed as the second argument for the search query given in the first.<br/>
+					This is useful for searching through large/multiple files or logs for something specific. Usually used with a pipe <code>|</code>:
+					<blockquote class="tutorialexample">
+						$ ls -l | grep myfile<br/>
+						-rw-r--r-- 1 pt users 0 Aug 30 13:20 <span style="color: #ff0000;">myfile</span>.txt 
+					</blockquote> 
+				<dt><a id="mv"></a>mv</dt>
+				<dd><span class="bold">Move or rename files/folders</span> &#8212; Move files or folders specified by the first through second-to-last arguments to the path specified as the last argument.
+					If the last argument does not exist, or is a filename, <code>mv</code> will instead rename the file or folder as the second argument.</dd>
+				<dt><a id="cp"></a>cp</dt>
+				<dd><span class="bold">Copy files/folders</span> &#8212; Copy the files or folders specified as the first through second-to-last arguments to the path specified in the last argument.
+					If you need to copy directories, make sure to include the <code>-r</code> switch before the rest of your arguments!</dd>
+				<dt><a id="rm"></a>rm</dt>
+				<dd><span class="bold">Delete file or directory</span> &#8212; This deletes any files or folders passed as arguments.
+					If you want to delete directories, make sure you pass the <code>-r</code> switch before your arguments!<br/>
+					<span class="italic">Note</span> &#8212; <code>rm</code> is a <span class="bold">permanent deletion</span>. It does not send files to the recycle bin.</dd>
+				<dt><a id="mkdir"></a>mkdir</dt>
+				<dd><span class="bold">Create directory</span> &#8212; This command creates one or more directories named according to its arguments.
+					Make sure you escape or enclose the arguments in quotes if it contains spaces.</dd>
+				<dt><a id="touch"></a>touch</dt>
+				<dd><span class="bold">Create file or update modification time</span> &#8212; If the file does not exist, create it as a blank file.
+					Or, if the file does exist, update the file metadata so that it appears to have been modified at the time the command was run.</dd>
+				<dt><a id="cat"></a>cat</dt>
+				<dd><span class="bold">Read contents of file to standard output</span> &#8212; This prints all of the contents of a file directly to the terminal.
+					This will require that you scroll through the terminal history if the file is large. If you don't want to print directly to the terminal, use <code>less</code>.</dd>
+				<dt><a id="less"></a>less</dt>
+				<dd><span class="bold">Show contents of file</span> &#8212; This displays the contents of the file passed as an argument in a full-window display mode, with arrow-key controls.
+					Or, if no file is passed, then <code>less</code> reads from standard input.<br/>
+					You can search for a string by striking <code>/</code>, typing your search key, and hitting Enter. Use <code>n</code> to jump to the next result.<br/>
+					Strike <code>q</code> to quit.<br/>
+					<span class="italic">Note</span> &#8212; You cannot edit the file with <code>less</code>. Use <code>vi</code> instead.</dd>
+				<dt><a id="vi"></a>vi</dt>
+				<dd><span class="bold">Unix commandline text editor</span> &#8212; This will open the file in a full-window text editor. Git will usually open <code>vi</code> for commit messages.
+					Some useful <code>vi</code> commands (these must be run from outside of edit mode):<br/>
+					<a href="http://www.lagmonster.org/docs/vi.html" target="_blank"><code>vi</code> cheat sheet</a>
+					<dl class="tutorial">
+						<dt>i</dt>
+						<dd>Enter insert mode and edit the file. To leave insert mode, strike Esc.</dd>
+						<dt>:w</dt>
+						<dd>Save the file.</dd>
+						<dt>:x</dt>
+						<dd>Save the file and quit.</dd>
+						<dt>:q</dt>
+						<dd>Quit.</dd>
+						<dt>:q!</dt>
+						<dd>Quit, discarding changes</dd>
+					</dl>
+					<span class="italic">Note</span> &#8212; <code>vi</code> is usually provided in Windows <code>bash</code> implementations.</dd>
+				<dt><a id="man"></a>man</dt>
+				<dd><span class="bold">Display manual page</span> &#8212; This command opens up the manual of the command passed as an argument in <code>less</code>.</dd> 
+  			</dl>
+  			
+  		<h2 class="tutorial"><a id="git"></a>Git Commands</h2>
+  			<p>These are many of git's own commands, which follow the root <code>git</code> command. If you want to look up a particular command's manual, you need to add the <code>git-</code> prefix to the command.</p>
+  			<p>To see an exhaustive list of git commands, see <code>man git</code>.</p>
+  			
+  			<dl class="tutorial command-list">
+  				<dt><a id="git-init"></a>init</dt>
+  				<dd><span class="bold">Initialize git repostiory</span> &#8212; Initializes a blank repository in the current working directory.</dd>
+  				<dt><a id="git-clone"></a>clone</dt>
+  				<dd><span class="bold">Clone git repository</span> &#8212; Clones a git repository specified by the URI passed as an argument into a folder named with the repository's name in the current working directory.
+  					A git repository is initialized in this directory with a remote <code>origin</code> set up to refer to the cloned URI.</dd>
+  				<dt><a id="git-status"></a>status</dt>
+  				<dd><span class="bold">Check repository status</span> &#8212; Displays a status message for the repository.</dd>
+  				<dt><a id="git-add"></a>add</dt>
+  				<dd><span class="bold">Add files to the staging area</span> &#8212; Adds the specified files to the staging area.
+	  				<dl class="tutorial">
+	  					<dt>-u</dt>
+	  					<dd>Add all tracked files with changes to the staging area.</dd>
+	  					<dt>-A</dt>
+	  					<dd>Add all files to the staging area, even if they are not tracked.</dd>
+	  					<dt>-f</dt>
+	  					<dd>Force git to add a normally ignored file to the staging area.</dd>
+	  				</dl></dd>
+	  			<dt><a id="git-rm"></a>rm</dt>
+	  			<dd><span class="bold">Delete files from repository</span> &#8212; Like <a href="#rm"><code>rm</code></a>, <code>git rm</code> will delete a file, but also removes them from the index.
+	  				Normally, using normal <code>rm</code> will also make git see the change and remove it from the index anyway, but <code>git rm</code> adds some new features for dealing specifically with the git repository:
+	  				<dl class="tutorial">
+	  					<dt>--cached</dt>
+	  					<dd>Only delete the file from the index. Leave the file in the working directory.</dd>
+	  				</dl>
+	  				The same consideration is in place for deleting directories &#8212; use the <code>-r</code> switch.</dd>
+  				<dt><a id="git-commit"></a>commit</dt>
+  				<dd><span class="bold">Make a commit</span> &#8212; Opens a text editor (usually <a href="#vi"><code>vi</code></a>) to write a commit message, then commits everything in the staging area with the commit message.
+  					Aborts committing if no commit message is present.
+	  				<dl class="tutorial">
+	  					<dt>-a</dt>
+	  					<dd>Same as <code>git add -u</code> followed by a <code>git commit</code>.</dd>
+	  					<dt>-m &lt;message&gt;</dt>
+	  					<dd>Make a commit with message <code>message</code>. Make sure that <code>message</code> is enclosed in quotes.</dd>
+	  				</dl></dd>
+	  			<dt><a id="git-log"></a>log</dt>
+	  			<dd><span class="bold">Show commit log for the currently checked-out branch</span> &#8212; Opens up the commit log for the currently checked out branch in <a href="#less"><code>less</code></a>.</dd>
+	  			<dt><a id="git-push"></a>push</dt>
+	  			<dd><span class="bold">Push commits</span> &#8212; Without any arguments, this pushes everything that has changed (branches, new commits, tags, etc.) to the default remote repository.<br/>
+	  				Standard arguments are:
+	  				<blockquote class="tutorialexample">
+	  					git push &lt;remote&gt; &lt;refspec&gt;
+	  				</blockquote>
+	  				where <code>remote</code> is the name of the remote repository and <code>refspec</code> is, under most circumstances, the name of the branch you wish to push to.</dd>
+	  			<dt><a id="git-pull"></a>pull</dt>
+	  			<dd><span class="bold">Pull commits</span> &#8212; Without any arguments, this fetches all changes from the default remote repository and merges them into the working tree.<br/>
+	  				Standard arguments are:
+	  				<blockquote class="tutorialexample">
+	  					git pull &lt;remote&gt; &lt;refspec&gt;
+	  				</blockquote>
+	  				where <code>remote</code> is the name of the remote repository and <code>refspec</code> is, under most circumstances, the name of the branch you wish to pull from.</dd>
+	  			<dt><a id="git-fetch"></a>fetch</dt>
+	  			<dd><span class="bold">Fetch remote changes and update remote-tracking branches</span> &#8212; This grabs any changes on the remote repository and reflects them in remote-tracking branches.<br/>
+	  				Standard arguments are:
+	  				<blockquote class="tutorialexample">
+	  					git fetch &lt;remote&gt; &lt;refspec&gt;
+	  				</blockquote>
+	  				where <code>remote</code> is the name of the remote repository and <code>refspec</code> is, under most circumstances, the name of the branch you wish to fetch.</dd>
+	  			<dt><a id="git-branch"></a>branch</dt>
+	  			<dd><span class="bold">Manage branches</span> &#8212; Without any arguments, this displays all of the local branches and the branch that you're currently on.
+	  				With one argument, it creates a new branch named according to the argument from the current <code>HEAD</code>.
+					With two arguments, it creates a new branch named according to the first argument from the reference (branch, commit, or tag) given as the second argument.
+					When creating a branch, this does not automatically switch to the new branch.
+					<dl class="tutorial">
+						<dt>-d &lt;branch&gt;</dt>
+						<dd>Delete <code>branch</code>.</dd>
+						<dt>-m [branch] &lt;new-name&gt;</dt>
+						<dd>If present, rename <code>branch</code> to <code>new-name</code>. If a branch name is not present (only one argument), then rename the current branch to <code>new-name</code></dd>
+					</dl></dd>
+				<dt><a id="git-checkout"></a>checkout</dt>
+				<dd><span class="bold">Change working directory to match the specified <code>HEAD</code></span> &#8212; When used with a branch or a tag, this makes the working directory reflect the <code>HEAD</code> of the specified branch or tag.
+					Any commits made when checked out as a branch will be made to the checked-out branch.<br/>
+					When used with a commit, this <a href="ch2/revising-history.html#detached-head" target="_blank">detaches <code>HEAD</code></a> and makes the working tree reflect the specified commit.
+					Any commits made while in this state will be thrown out upon checkout of another reference unless a new branch is made from the detached <code>HEAD</code>.
+					<dl class="tutorial">
+						<dt>-b &lt;new-branch&gt; [source]</dt>
+						<dd>Create a branch <code>new-branch</code> and check it out. If <code>source</code> is present, then create the branch from there instead of the current <code>HEAD</code>.</dd>
+					</dl></dd>
+				<dt><a id="git-merge"></a>merge</dt>
+				<dd><span class="bold">Merge changes from specified reference into the working tree</span> &#8212; Usually used when merging branches, but implicit in a pull.
+					This takes all of the changes from the branch specified as an argument that aren't present in the currently checked-out branch and merges them into the working tree.
+					May result in a <a href="ch2/merge-conflicts.html" target="_blank">merge conflict</a>. Be sure to commit the result if not a fast-forward.
+					<dl class="tutorial">
+						<dt>--theirs</dt>
+						<dd>If merge conflicts occur, resolve them using <q>their</q> copy.</dd>
+						<dt>--mine</dt>
+						<dd>If merge conflicts occur, resolve them using <q>my</q> copy.</dd>
+					</dl></dd>
+				<dt><a id="git-mergetool"></a>mergetool</dt>
+				<dd><span class="bold">Launch a merge tool to resolve conflicts</span> &#8212; Git will launch the set merge tool to resolve conflicts in text files.
+					If the files are binary, or the conflict is due to a deletion, <code>mergetool</code> will ask which version you wish to use.<br/>
+					Merge tools include:
+					<ul>
+						<li>emerge</li>
+						<li>gvimdiff</li>
+						<li>kdiff3</li>
+						<li>meld</li>
+						<li>vimdiff</li>
+						<li>tortoisemerge</li>
+					</ul>
+					<span class="italic">Note</span> &#8212; With newer versions of TortoiseGit, using <code>git mergetool</code> will NOT launch the merge tool due to a program rename.
+						Use the <a href="ch2/merge-conflicts.html#tortoise-git-merge">graphical method</a> instead.</dd>
+				<dt><a id="git-diff"></a>diff</dt>
+				<dd><span class="bold">Show a diff</span> &#8212; With no arguments, this command shows a diff of the working tree against <code>HEAD</code> in <a href="#less"><code>less</code></a>.
+					Alternatively, you can view a diff between arbitrary commits by passing the commit hashes (or a <a href="ch2/revising-history.html#referencing-head" target="_blank"><code>HEAD</code> reference</a>) as arguments.<br/>
+					You can make a patch file for a diff to apply on another repository by writing the diff to a file:
+					<blockquote class="tutorialexample">
+						git diff > diff.patch
+					</blockquote></dd>
+				<dt><a id="git-apply"></a>apply</dt>
+				<dd><span class="bold">Apply a patch</span> &#8212; Applies the patch passed as an argument to the working tree.
+					You may need to pass some switches to get git to apply the patch correctly (git will tell you which one you need to use if this is the case). See <code>man git-apply</code> for more details.</dd>
+				<dt><a id="git-config"></a>config</dt>
+				<dd><span class="bold">Configure git</span> &#8212; Configure various git settings. The setting is usually denoted with <code>feature.setting</code> as the first argument, and the setting's contents as the second argument. Some useful settings:
+					<dl class="tutorial">
+						<dt>user.name</dt>
+						<dd>Your name, which will appear on commits. When setting this, make sure your name is enclosed in quotes. This must be configured to make a commit.</dd>
+						<dt>user.email</dt>
+						<dd>Your email, which will appear on commits. When setting this, make sure your email is enclosed in quotes. This must be configured to make a commit.</dd>
+						<dt>credential.helper</dt>
+						<dd>If set to <code>cache</code>, this will make git store your password for 15 minutes after you enter it, in case you are going to be making mutiple pushes in a short time.
+							This only works for command-line git.</dd>
+					</dl>
+					Using the <code>--global</code> switch while creating or editing a setting will set the setting as default for all repositories.</dd>
+					</dl>
+  			</dl>
+  	</div>
   </body>
 </html>

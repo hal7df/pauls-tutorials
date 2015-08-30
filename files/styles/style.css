@@ -45,6 +45,24 @@ h5.tutorial {
 	font-size: 1.125em;
 }
 
+/** TEXT FORMATTING **/
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.subtitle {
+	text-align: center;
+	font-weight: bold;
+}
+
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
 	background-color: #002b36;
@@ -101,6 +119,11 @@ dl.tutorial > dt {
 }
 dl.tutorial dd {
 	margin-top: 5px;
+}
+dl.command-list > dt {
+	margin-top: 2em;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 /** TABLES **/
