@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tips and Tricks (Git)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../files/styles/style.css" />
+    
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+  </head>
+  <body>
+  <!-- PAGE HEADER -->
+	<h1 class="tutorial"><img src="../files/img/PaulsTutorials.png" alt="Paul's Tutorials - logo" /><span id="ptitle">Git Operations Reference</span></h1>
+  	<hr />
+  	<div class="path">
+		<a class="main" href="../index.html">Programming Home</a>
+	</div>
+	<div class="separator"></div>
+	<div class="containWpi">
+		<div class="path subNav">
+			<a class="main" href="index.html">Git Mini-tutorial</a>
+			
+			<ul>
+				<li><a href="../cpp/index.html">C++ Guided Tutorial</a></li>
+				<li><a href="../wpi/index.html">WPILib Tutorial</a></li>
+				<li><a href="../about.html">About</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="separator"></div>
+	<div class="contain">
+		<div class="path subNav">
+			<span>Tips and Tricks</span>
+			
+			<ul>
+				<li><a href="ch1/index.html">Chapter 1: Concepts</a></li>
+				<li><a href="ch2/index.html">Chapter 2: Use</a></li>
+				<li><a href="operations-reference.html">Git Operations Reference</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="reset"></div>
+  	<hr />
+  	
+  	<!-- PAGE CONTENT -->
+  	
+  	<div id="intro">
+  		<p>This page is intended to provide extra information about some of git's features, as well as expose and document others.
+			While they are not explicitly necessary to know when using git, they can be helpful when using git or trying to accomplish effective version control.</p>
+		<p>Unlike the Tips and Tricks pages from the other tutorials, this page only requires that you have read and understood the concepts in <a href="ch1/index.html" target="_blank">chapter 1</a>.</p>
+		
+		<div id="toc">
+			<ul>
+				<li><a href="#tagging">Tagging</a></li>
+				<li><a href="#patching">Manually Patching the Tree</a></li>
+			</ul>
+		</div>
+  	</div>
+		
+  	<div id="tcontent">
+		<h2 class="tutorial"><a id="tagging"></a>Tagging</h2>
+			<p>There may come a time during the life of your repository that you find that you have reached a specific milestone, such as a version release, a specific deadline, or perhaps a stable feature set.
+				At this point, you may want to leave some sort of marker on the history so you can come back to it if need be.
+				Granted, you could just revert back to the commit hash at this point, but wouldn't it be difficult to have to remember even just the first 7 characters of the commit hash forever?</p>
+			<p>Luckily, git has a feature for just this situation, called a <span class="italic">tag</span>.
+				When you make a tag, you can effectively label a specific commit with an arbitrary name, such as <code>v1.0</code>, or <code>v0.2.3-alpha</code>.
+				This allows you to quickly grab the code from that point in history wiithout having to remember the commit hash.</p>
+			<p>In a sense, tagging is a little like branching. You create another <span class="italic">reference</span> in the repository, which points to a specific commit, however, tags do not have history.
+				You cannot develop on a tag the way you can on a branch.</p>
+				
+			<h3 class="tutorial"><a id="new-tag"></a>Creating a New Tag</h3>
+				<p>To create a new tag from the current <code>HEAD</code> on the commandline, you can just do the following:</p>
+				<blockquote class="tutorialexample">
+					git tag -a &lt;tag-name&gt;
+				</blockquote>
+				<p>where <code>tag-name</code> is what you wish to name the tag. Or, if you want to make a tag from a specific branch or commit, you can do this like you would when you make a branch:</p>
+				<blockquote class="tutorialexample">
+					git tag -a &lt;tag-name&gt; &lt;source&gt;
+				</blockquote>
+				<p>With regards to naming, a tag's name should be a version number (with an optional <code>v</code> prefix), and follow a <a href="http://semver.org" target="_blank">sensible versioning system</a>.</p>
+				<p>When you execute this command, it will bring up a text editor for you to leave a message. This is a good place to leave some release notes about your software at this particular point in development.</p>
+				<p>Unlike commit messages, tag messages don't have a title &#8212; only a body.</p>
+				<p>When you're done, save the file. This will save the tag message, and git will add the tag to its list of references.</p>
+				<p>In a GUI, where this function is found can vary. In EGit, it is located under <q>Advanced</q> in the <q>Team</q> menu.
+					In TortoiseGit, this function is called <q>Create Tag</q> and is located in the primary TortoiseGit menu.</p>
+					
+			<h3 class="tutorial"><a id="deleting-tags"></a>Deleting Tags</h3>
+				<p>Although you really shouldn't find yourself in a situation where you need to delete a tag, this is possible as well, using the <code>-d</code> switch of the <code>git tag</code> command:</p>
+				<blockquote class="tutorialexample">
+					git tag -d &lt;tag-name&gt;
+				</blockquote>
+				
+			<h3 class="tutorial"><a id="pushing-tags"></a>Pushing Tags</h3>
+				<p>If you want to push a tag to the remote repository, the <code>git push</code> command looks a little different.</p>
+				<blockquote class="tutorialexample">
+					git push --tags origin
+				</blockquote>
+				<p>This command will push all of the tags to <code>origin</code>. Because tags generally don't change, this really just pushes new tags to the remote.</p>
+				<p>If you use a GUI, the normal push process should work.</p>
+				
+			<h3 class="tutorial"><a id="branching-tags"></a>What if I want to develop from the codebase on a tag?</h3>
+				<p>No problem. Just use the tag as a source for a new branch.</p>
+				<blockquote class="tutorialexample">
+					git branch myCode v1.0<br/>
+					git checkout -b myCode v1.0<br/>
+				</blockquote>
+				<p>Alternatively, if you need to reset a branch to the state of the tag, and the tag's commit is in that branch's history, then you can use the tag with your <code>reset</code> command:</p>
+				<blockquote class="tutorialexample">
+					git reset --hard v1.0
+				</blockquote>
+				
+		<h2 class="tutorial"><a id="patching"></a>Manually Patching the Tree</h2>
+			<p>Even though merging is a wonderful thing, it will always merge everything from the two branches' most recent common ancestor to their present <code>HEAD</code>s.
+				This is sufficient in most cases, but sometimes you may find yourself needing to merge just a few specific commits from one branch into another.</p>
+			<p>Because of the nature of merging, this is not really possible by doing a really complex merge. You have to do some of the heavy lifting yourself.</p>
+			<p>The process for this, however, is simple. The first step is to get a diff across all of the commits you want and save it to a file:</p>
+			<blockquote class="tutorialexample">
+				git diff &lt;first-commit&gt; &lt;last-commit&gt; > mydiff.patch
+			</blockquote>
+			<p>This command will generate an overarching commit for every commit made from <code>first-commit</code> to <code>last-commit</code> and store it in a text file called <code>mydiff.patch</code>.</p>
+			<p>The next step from here is to take the patch and apply it to the proper branch (while being sure to keep track of <code>mydiff.patch</code>).
+				So, switch to the branch you want to apply the patch to, and then use the <code>git apply</code> command to apply the diff to the working tree.</p>
+			<blockquote class="tutorialexample">
+				git apply mydiff.patch
+			</blockquote>
+			
+			<h3 class="tutorial"><a id="apply-notes"></a>Important Notes about <code>git apply</code></h3>
+				<p>Firstly, git apply works without looking at your repository's history. All it does is look at the patch file you give it and apply the changes that the patch file specifies.
+					Because of this, <span class="bold">code conflicts will not occur</span>.
+					This may seem like a blessing at first, but it actually means that running <code>git apply</code> is like running <code>git merge</code> with the <code>--theirs</code> switch.
+					Any changes listed in the patch will <span style="italic">always</span> take precedence over changes that you have made in your local directory.</p>
+				<p>Secondly, <code>git apply</code> is limited because it doesn't access the commit history
+					&#8212; if a file has changed enough so that git can't really tell what lines are supposed to go where, you may end up with some interesting results.</p>
+				<p>Finally, and partly as a function of the last point, newlines and whitespaces can screw up the patch application process often.
+					If this is the case, git will ask you to run the <code>apply</code> command with the <code>--ignore-whitespace</code> or <code>--whitespace=nowarn</code> options.</p>
+  	</div>
+  </body>
+</html>
