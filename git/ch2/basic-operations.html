@@ -166,7 +166,7 @@
 			<h3 class="tutorial"><a id="writing-commit"></a>Writing the commit</h3>
 				<p>Now that you have added files to the staging area, you need to actually make the commit. To do this, type <code>git commit</code>.</p>
 				<blockquote>
-					<p><span style="font-style: italic;">Tip</span>: You can combine the addition step with the commit step by typing:</p>
+					<p><span class="italic">Tip</span>: You can combine the addition step with the commit step by typing:</p>
 					<blockquote class="tutorialexample">
 						git commit -a
 					</blockquote>
@@ -203,7 +203,7 @@
 				<blockquote class="tutorialexample">
 					git fetch
 				</blockquote>
-				<p>This will update your local repository's <span style="font-style: italic;">remote-tracking branches</span>, which basically just keep track of the status of the remote.</p>
+				<p>This will update your local repository's <span class="italic">remote-tracking branches</span>, which basically just keep track of the status of the remote.</p>
 				
 			<h3 class="tutorial"><a id="merging"></a>Merging</h3>
 				<p>In order to merge manually fetched changes into your repository, you need to tell git which remote-tracking branch you want to merge into the working tree.
@@ -271,7 +271,7 @@
 				</blockquote>
 				<p>where <code>filename</code> is the name of the file you want to un-version.</p>
 				<blockquote>
-					<p><span style="font-style: italic;">Tip</span>: You can auto-fill filenames in the terminal by hitting the <code>Tab</code> key after you have typed the first few letters of the filename.
+					<p><span class="italic">Tip</span>: You can auto-fill filenames in the terminal by hitting the <code>Tab</code> key after you have typed the first few letters of the filename.
 						If there are multiple files in the directory that match those characters, the terminal will complete as many characters as it can,
 						after which you can type the characters that differentiate it from the other files in the directory, and keep using the <code>Tab</code> key to auto-fill.</p>
 				</blockquote>
@@ -280,7 +280,7 @@
 					git rm -r --cached directory
 				</blockquote>
 				<p>This command will remove the specified file/directory from git's index, which makes it appear to git that the file has been deleted, although it remains in your working directory.
-					However, it is important to note that this <span style="font-style: italic;">will</span> delete the file from other computers when your collaborators pull the commit down, so if they need that file,
+					However, it is important to note that this <span class="italic">will</span> delete the file from other computers when your collaborators pull the commit down, so if they need that file,
 					make sure they know to keep a backup of the file.</p>
 	</div>
   	

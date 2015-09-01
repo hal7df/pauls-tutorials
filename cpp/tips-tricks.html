@@ -50,7 +50,7 @@
   	<!-- PAGE CONTENT -->
   	 <p>This page details a few tips and tricks you can employ to accomplish varying tasks and would not normally be explained in this tutorial. Some of them require a certain level of understanding.
   	 	That level will be written under each heading.</p>
-  	 <p>Note that the levels listed here are the <span style="font-weight: bold;">absolute minimum</span> levels of knowledge you will need to implement them. 
+  	 <p>Note that the levels listed here are the <span class="bold">absolute minimum</span> levels of knowledge you will need to implement them. 
   	 	It may be easier for you to learn them at a later time.</p>
   	 <p id="toc">
   	 <ul>
@@ -159,7 +159,7 @@ printf("I would like to say %s", mystring.c_str());</pre></td>
 					<p>This will generate a number from 0 to 19. If you want to generate numbers in a specific range, use the following formula:</p>
 					<pre class= "brush: cpp">rand() % ((max-min)+1) + min;</pre>
 					<p style="font-style: italic;">Remember that addition and subtraction ignore the index number (the number you start from). This is why you need to add 1 after the range calculation. 
-						Also, <span style="font-weight: bold;">DO NOT TAKE THE RESULT OF THE ABOVE EQUATION AND WRITE <code>rand() % result</code>, AS THIS CHANGES THE RANGE OF NUMBERS TO BE GENERATED!</span>
+						Also, <span class="bold">DO NOT TAKE THE RESULT OF THE ABOVE EQUATION AND WRITE <code>rand() % result</code>, AS THIS CHANGES THE RANGE OF NUMBERS TO BE GENERATED!</span>
 						(Order of Operations - modulo is grouped with multiplication/division)</p>
 					<p>For example:</p>
 					<pre class= "brush: cpp">int my_int = rand() % 31 + 1983;</pre>
@@ -172,14 +172,14 @@ printf("I would like to say %s", mystring.c_str());</pre></td>
 			<p>Note that the functions below only work on <code>cout</code>. For a full list of functions provided by this library, see <a href="http://www.cplusplus.com/reference/iomanip/" target="_blank">iomanip</a>. 
 				Some listed there will also work on <code>cin</code>.</p>
 			<h3 class="tutorial"><a id="Output_operation"></a>Output operation</h3>
-				<p>An <span style="font-weight: bold;">output operation</span> is one of the clauses you put between the <code>&lt;&lt;</code> operators in <code>cout</code> statements.</p>
+				<p>An <span class="bold">output operation</span> is one of the clauses you put between the <code>&lt;&lt;</code> operators in <code>cout</code> statements.</p>
 				<p style="font-weight: bold;">Example</p>
 				<pre class="brush: cpp">
 cout &lt;&lt; OutputOperation1 &lt;&lt; OutputOperation2 &lt;&lt; OutputOperation3;</pre>
 				<p>Note that the following functions are not considered output operations.</p>
 				<p>When considering how to set it up, the following functions do affect following <code>cout</code> statements, if applicable.</p>
 			<h3 class="tutorial"><a id="setw"></a><code>setw()</code></h3>
-				<p>The <code>setw()</code> function allows you to <span style="font-weight: bold;">set the width</span> of a specific output operation.</p>
+				<p>The <code>setw()</code> function allows you to <span class="bold">set the width</span> of a specific output operation.</p>
 				<pre class="brush: cpp">
 iomanip::setw(int width)</pre>
 				<h4 class="tutorial"><a id="setw_parameters"></a><code>setw()</code> parameters</h4>
@@ -188,7 +188,7 @@ iomanip::setw(int width)</pre>
 					<dd>The number of characters that the following output operation should contain. If there is an excess, the <a href="#setfill">fill character</a> is repeated and put adjacent to the characters output by the following operation.</dd>
 				</dl>
 				<h4 class="tutorial"><a id="setw_use"></a><code>setw()</code> use</h4>
-					<p>Place this function <span style="font-weight: bold;">before</span> the desired output operation.</p>
+					<p>Place this function <span class="bold">before</span> the desired output operation.</p>
 					<table class="codeOutput" style="width: 82.5%;"><tbody>
 						<tr>
 							<th>Code</th>
@@ -206,7 +206,7 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 					</tbody></table>
 			<h3 class="tutorial" style="clear: both;"><a id="setfill"></a><code>setfill()</code></h3>
 				<p>The <code>setfill()</code> function allows you to set the fill character (normally a whitespace). The fill character is used if an output operation contains fewer characters than the <a href="#setw">field width</a>.</p>
-				<p><code>setfill()</code> affects <span style="font-weight: bold;">all</span> output operations following it.</p>
+				<p><code>setfill()</code> affects <span class="bold">all</span> output operations following it.</p>
 				<pre class="brush: cpp">iomanip::setfill(char_type c)</pre>
 				<h4 class="tutorial"><a id="setfill_parameters"></a><code>setfill()</code> parameters</h4>
 					<dl class="tutorial">
@@ -214,7 +214,7 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 						<dd>Character to use as the fill character in the following output operation.</dd>
 					</dl>
 				<h4 class="tutorial"><a id="setfill_use"></a><code>setfill()</code> use</h4>
-					<p>Place this function <span style="font-weight: bold;">before</span> the desired output operation.</p>
+					<p>Place this function <span class="bold">before</span> the desired output operation.</p>
 					<table class="codeOutput"><tbody>
 						<tr>
 							<th>Code</th>

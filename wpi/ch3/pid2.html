@@ -87,7 +87,7 @@
  <div id="tcontent">
  <h2 class="tutorial"><a id="Safety_Note"></a>Safety Note</h2>
  	<p>The most important thing with robotics in general is safety, as you well know by now. One important thing to remember is that the more automated the machine becomes, the more dangerous it can be.
-		As a PID automates the robot to a certain degree, you should always be <span style="font-weight: bold;">VERY CAREFUL</span> when you are testing one for the first time (although you should always be very careful anyway).</p>
+		As a PID automates the robot to a certain degree, you should always be <span class="bold">VERY CAREFUL</span> when you are testing one for the first time (although you should always be very careful anyway).</p>
  <h2 class="tutorial"><a id="PIDController"></a><code>PIDController</code></h2>
  	<p>WPILib comes with a builtin PID controller class, named, quite creatively, <code>PIDController</code>. Declare it like you would any other robot component (as a pointer).</p>
  	<h3 class="tutorial"><a id="Initialization"></a>Initialization</h3>
@@ -111,19 +111,19 @@
  
  <h2 class="tutorial"><a id="Tuning_a_PID"></a>Tuning a PID</h2>
  	<p>Writing a PID is one thing. Making it work is another thing.</p>
- 	<p>Tuning a PID can be dangerous on any number of levels, as you have no idea of how the robot will respond. When you are tuning a PID, you should <span style="font-weight: bold;">ALWAYS</span> have your finger on the Enter key so that, when things go wrong, you can stop the robot before it does any serious damage.</p>
+ 	<p>Tuning a PID can be dangerous on any number of levels, as you have no idea of how the robot will respond. When you are tuning a PID, you should <span class="bold">ALWAYS</span> have your finger on the Enter key so that, when things go wrong, you can stop the robot before it does any serious damage.</p>
  	<h3 class="tutorial"><a id="PID_Setpoints"></a>PID Setpoints</h3>
  		<p>You may remember <a href="sensors.html#A_Special_Function" target="_blank">the <code>PIDGet()</code> function from lesson 3-1</a>. Funny how it begins with P-I-D, huh? That&#x27;s because this is the function that the <code>PIDController</code> reads from when it runs the calculations.
 			This means that all of your setpoints need to match the value returned by <code>PIDGet()</code>.</p>
 		<p>To get these values, simply write the output of the <code>PIDGet()</code> function for whatever sensor you are using to the driver station, and then use those values for the setpoints.</p>
 	<h3 class="tutorial"><a id="Prerequisites"></a>Prerequisites</h3>
-		<p><span style="font-style: italic;">Before</span> you start tuning a PID, make sure your code does the following:</p>
+		<p><span class="italic">Before</span> you start tuning a PID, make sure your code does the following:</p>
 		<ul>
 			<li>Outputs the <code>PIDGet()</code> value of the sensor you are using to the dashboard.</li>
 			<li>Reads from the right input and writes to the right output, and that those objects are mapped correctly.</li>
-			<li>Sets the setpoint <span style="font-style: italic;">only</span> after a button press.</li>
+			<li>Sets the setpoint <span class="italic">only</span> after a button press.</li>
 		</ul>
-		<p>Setting the setpoint and enabling the PID controller should be run when a button on the controller is pressed. This means that when the operator lets go of the button, the <code>PIDController</code> should be <span style="font-weight: bold;">disabled</span>.</p>
+		<p>Setting the setpoint and enabling the PID controller should be run when a button on the controller is pressed. This means that when the operator lets go of the button, the <code>PIDController</code> should be <span class="bold">disabled</span>.</p>
 		<p>You should start with the following PID constants:</p>
 		<ul>
 			<li>P: 1</li>

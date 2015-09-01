@@ -127,7 +127,7 @@
 		<pre class= "brush: cpp">
 class Robot: public IterativeRobot</pre>
 		<p>This creates a new class called <code>Robot</code> that you will program. It inherits the <code>IterativeRobot</code> class, the class the roboRIO treats the robot as.
-		Your class <span style="font-weight: bold;">MUST</span> inherit <code>IterativeRobot</code>, otherwise it will not work.</p>
+		Your class <span class="bold">MUST</span> inherit <code>IterativeRobot</code>, otherwise it will not work.</p>
 		<p>Now, we will look at the structure of the robot class.</p>
 	<h2 class="tutorial"><a id="Class_Members"></a>Class Members</h2>
 		<pre class= "brush: cpp">
@@ -202,7 +202,7 @@ void TestInit()
 			<p>In TestInit, you would set your robot up for diagnostics, if any are needed.</p>
 	<h2 class="tutorial"><a id="Periodic_Routines"></a>Periodic Routines</h2>
 		<p>These are all routines that are run once the roboRIO has finished the initialization stage for that specific mode (e.g. teleop). These continue to run, once per loop until the robot is disabled (in matches, the robot is disabled for a short period of time after autonomous to switch to teleop).
-			Because they loop automatically, you should <span style="font-weight: bold;">never</span> write a loop into these routines.</p>
+			Because they loop automatically, you should <span class="bold">never</span> write a loop into these routines.</p>
 		<h3 class="tutorial"><a id="DisabledPeriodic"></a><code>DisabledPeriodic()</code></h3>
 			<pre class= "brush: cpp">
 void DisabledPeriodic()
@@ -248,7 +248,7 @@ void TeleopDashboardUpdate()
 {
 	//Update the driver station here
 }</pre>
-			<p><span style="font-weight: bold;">Note:</span> This will become even more apparent as the tutorial progresses, but <span style="font-weight: bold;">PLEASE</span> name your functions and variables with relevant names.
+			<p><span class="bold">Note:</span> This will become even more apparent as the tutorial progresses, but <span class="bold">PLEASE</span> name your functions and variables with relevant names.
 				Not doing so will cause a lot of ripped-out hair and shouting voices.</p>
 		<h3 class="tutorial"><a id="TestPeriodic"></a><code>TestPeriodic()</code></h3>
 			<pre class= "brush: cpp">

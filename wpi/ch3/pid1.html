@@ -63,7 +63,7 @@
 	The next three lessons will teach you one of the most important aspects of WPILib and robot programming in general -- the PID.</p>
  <p>The PID is split up into three parts here because of its complexity. It is EXTREMELY important (enough that it will distinguish you as an accomplished robot programmer) that you know how to create a PID in your program - so pay close attention.</p>
  <p>Robot programming is not the only thing that uses the PID -- it is used heavily in the automotive industry (think cruise control).</p>
- <p><span style="font-style: italic;">Fun fact:</span> PID theory was developed by watching helmsmen steer a ship.</p>
+ <p><span class="italic">Fun fact:</span> PID theory was developed by watching helmsmen steer a ship.</p>
  
  </div>
  
@@ -88,16 +88,16 @@
 	
 	<h3 class="tutorial"><a id="setpoint"></a>Setpoints</h3>
 	
-		<p>The idea behind the PID is that you want a given system to be in a specific position, usually fairly quickly. This is accomplished by setting the PID controller&#x27;s <span style="font-style: italic;">setpoint</span>.</p>
+		<p>The idea behind the PID is that you want a given system to be in a specific position, usually fairly quickly. This is accomplished by setting the PID controller&#x27;s <span class="italic">setpoint</span>.</p>
 		<p>The setpoint is what your sensor reads when the system is at the position you want it to be at.
 			However, you must obtain this value manually &#8212; usually by controlling the system manually &#8212; and then feed it to the PID controller in the code (more on that later).</p>
 		<p>For example, the cruise control in a car is given a specific speed to run the car at (the setpoint), and it reads from the car&#x27;s speedometer and controls the output of the engine so that the speed of the car is as close to the set speed as possible.</p>
 	
     <h3 class="tutorial"><a id="error"></a>Error</h3>
     
-    	<p>In the following sections, you will see the term <span style="font-style: italic;">error</span> pop up a lot.
-			In the context of the PID, <span style="font-style: italic;">error</span> refers to the difference between the given sensor reading and the setpoint.</p>
-		<p>You will see this lesson refer to two different types of error: <span style="font-style: italic;">instantaneous error</span> and <span style="font-style: italic;">accumulated error</span>.
+    	<p>In the following sections, you will see the term <span class="italic">error</span> pop up a lot.
+			In the context of the PID, <span class="italic">error</span> refers to the difference between the given sensor reading and the setpoint.</p>
+		<p>You will see this lesson refer to two different types of error: <span class="italic">instantaneous error</span> and <span class="italic">accumulated error</span>.
 			Instantaneous error refers to the difference between the setpoint and the sensor reading at any given instant.
 			Accumulated error is the sum of the errors at every instant from time 0 (when the PID controller is turned on) to the present moment.</p>
 		<p>All of the mathematical operations in a basic PID controller involve the error in some way.</p>
@@ -107,9 +107,9 @@
 		<p>The name <q>PID</q> comes from constants that are given to the PID controller that dictate the manner in which it adjusts its output:</p>
  	
 	 	<ul>
- 			<li><span style="font-weight: bold;">P</span>roportional</li>
- 			<li><span style="font-weight: bold;">I</span>ntegral</li>
- 			<li><span style="font-weight: bold;">D</span>erivative</li>
+ 			<li><span class="bold">P</span>roportional</li>
+ 			<li><span class="bold">I</span>ntegral</li>
+ 			<li><span class="bold">D</span>erivative</li>
  		</ul>
  	
 	 	<p>In the descriptions of the constants below, the graphs effectively show a reading from a sensor over time, with the red line being the setpoint. The other lines are examples showing the sensor reading over time given different constant values.</p>
@@ -122,7 +122,7 @@
 			<p>Changing the value of K<sub>p</sub> will effectively change the power of the PID controller.</p>
 			<p>Pure proportional control has a few problems. Firstly, if the error is significant, it tends to overshoot the setpoint, then moving back towards it.
 				Secondly, if the proportional term is large enough, the system will not be able to respond as quickly to the changes in the desired output, and as such will lose stability.
-				Finally, proportional control usually does not settle at the setpoint, but rather near it -- this is known as <span style="font-style: italic;">steady-state error</span>.
+				Finally, proportional control usually does not settle at the setpoint, but rather near it -- this is known as <span class="italic">steady-state error</span>.
 				This occurs because the signal from the proportional control becomes negligible when the instantaneous error is very small, and so internal friction in the system is usually strong enough to resist any change.</p>
 				
 			<img class="tutorial" src="http://newton.ex.ac.uk/teaching/cdhw/Feedback/Figs/ProportionalGraph.gif" title="Example of proportional control, showing increasing gain"></img>
@@ -139,7 +139,7 @@
 		<h4 class="tutorial"><a id="I"></a>Integral</h4>
 		
 			<p>While derivative control eliminates overshoot and instability in the proportional control, it still does not eliminate the steady-state error, as the error does not change once it reaches its steady state, which satisfies derivative control. To fix this, integral control is used.</p>
-			<p>Integral control looks at the <span style="font-style: italic;">accumulated error</span> of the system as opposed to the instantaneous error. Integral control finds the accumulated error by integrating the error over the time period for which the controller has been running.
+			<p>Integral control looks at the <span class="italic">accumulated error</span> of the system as opposed to the instantaneous error. Integral control finds the accumulated error by integrating the error over the time period for which the controller has been running.
 				It then multiplies this by the integral constant K<sub>i</sub>. In effect, the longer the system is allowed to maintain steady-state error, the stronger the output from the integral term becomes, driving the system closer to its setpoint.</p>
 			<p>The effect of increasing K<sub>i</sub> will increase the system's response to accumulated error, reducing the steady-state error. If the K<sub>i</sub> constant is too large, the stability of the system will decrease (see below).</p>
 			
@@ -153,18 +153,18 @@
 	<p>Effectively, what you should remember about each of these terms is:</p>
 	
 	<ul>
-		<li><span style="font-weight: bold;">P</span>: Adjusts the output of the system proportionally to the instantaneous error.
+		<li><span class="bold">P</span>: Adjusts the output of the system proportionally to the instantaneous error.
 		<ul>
-			<li>Effect of increasing K<sub>p</sub>: Increases <span style="font-weight: bold;">P</span>ower</li>
+			<li>Effect of increasing K<sub>p</sub>: Increases <span class="bold">P</span>ower</li>
 		</ul></li>
-		<li><span style="font-weight: bold;">I</span>: Adjusts the output of the system based on the accumulated error.
+		<li><span class="bold">I</span>: Adjusts the output of the system based on the accumulated error.
 		<ul>
 			<li>Effect of increasing K<sub>i</sub>: Increases sensitivity to accumulated error, decreasing steady-state error</li>
 			<li>If K<sub>i</sub> is too large, then the stability of the system will decrease</li>
 		</ul></li>
-		<li><span style="font-weight: bold;">D</span>: Adjusts the output of the system based on the rate of change of the instantaneous error.
+		<li><span class="bold">D</span>: Adjusts the output of the system based on the rate of change of the instantaneous error.
 		<ul>
-			<li>Effect of increasing K<sub>d</sub>: Increases <span style="font-weight: bold;">D</span>amping</li>
+			<li>Effect of increasing K<sub>d</sub>: Increases <span class="bold">D</span>amping</li>
 		</ul></li>
 	</ul>
 	

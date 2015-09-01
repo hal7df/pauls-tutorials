@@ -130,7 +130,7 @@ Talon::Set(double speed)</pre>
 
 				<h4 class="tutorial"><a id="Set_parameters"></a><code>Set()</code> parameters</h4>
 					<dl class="tutorial">
-					<dt>double speed</dt><dd>Relative speed of the motor, where 1.0 is full speed forward, and -1.0 is full speed reverse. Note that this depends on the orientation of the <span style="font-weight: bold;">motor</span>, and not necessarily that of the robot. Due to that, you will need to run the motor with your code to check that you have coded the proper value.</dd>
+					<dt>double speed</dt><dd>Relative speed of the motor, where 1.0 is full speed forward, and -1.0 is full speed reverse. Note that this depends on the orientation of the <span class="bold">motor</span>, and not necessarily that of the robot. Due to that, you will need to run the motor with your code to check that you have coded the proper value.</dd>
 					</dl>
 					<h4 class="tutorial"><a id="Set_use"></a><code>Set()</code> use</h4>
 					<p>You can use <code>Set()</code> in a variety of ways. If you need fine control over the speed of the motor, you would use <code>Set()</code> in conjunction with a <code>GetRawAxis()</code> call from one of your controllers (almost always controller 1 -- the joysticks on controller 0 are always reserved for driving), like so:</p>
@@ -154,7 +154,7 @@ float Victor::Get()
 float Jaguar::Get()
 float Talon::Get()</pre>
 			<h3 class="tutorial"><a id="Physical_Capabilities_of_the_Robot"></a>Physical Capabilities of the Robot</h3>
-				<p>Now that you are programming things to move, you should, first of all, be aware that <span style="font-weight: bold;">things are moving</span>, so you should be even more certain that you and everyone around you know that the equipment you are working with can move and potentially cause serious injury.
+				<p>Now that you are programming things to move, you should, first of all, be aware that <span class="bold">things are moving</span>, so you should be even more certain that you and everyone around you know that the equipment you are working with can move and potentially cause serious injury.
 					Secondly, you should be aware of the robot&#x27;s physical capabilities while you are programming. For example, the 2013 bot&#x27;s launcher system uses motors driving wheels via belts. If the motors spin up the belts too quickly, the belt pulleys will spin inside the belt, which in turn shreds the belt. In this case, the robot was programmed to spin up more slowly. At any rate, you should be aware of potential problems such as this and be able to work around them programmatically.</p>
 		<h2 class="tutorial"><a id="The_Relay"></a>The Relay</h2>
 			<p>One of the other controllers that was mentioned in lesson 1 was the <a href="../ch1/parts.html#Spikes%2FRelays">Spike</a>, which ran off of a relay. Since these devices are basically like light switches (with the added bonus of being able to go in reverse as well), they are programmed differently.</p>

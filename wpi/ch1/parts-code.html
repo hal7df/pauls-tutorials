@@ -81,7 +81,7 @@
  	</ul>
  	<h2 class="tutorial"><a id="Naming_and_Declarative_Style"></a>Naming and Declarative Style</h2>
 	 	<p>One of the most important things that you will need to learn is how to write code &#8212; not in the terms of syntax, but rather of style. How you write your code really shows your skill as a programmer.
- 			If your coding style is atrocious, then no one (in some cases, not even you) will be able to understand your code. In terms of improvement, this is <span style="font-weight: bold;">bad</span>.
+ 			If your coding style is atrocious, then no one (in some cases, not even you) will be able to understand your code. In terms of improvement, this is <span class="bold">bad</span>.
 	 		If no one can help you fix bugs, etc., then you are essentially stuck.</p>
  		<p>One of the most important things that a programmer has is his/her peers. Quite often, beating out a bug can take multiple people, as the original programmer might not be able to see the bug.
  			This is why it is so important that your code be legible.</p>
@@ -94,7 +94,7 @@
 TypeIdentifier m_DescriptiveLabel;</pre>
 			<p>The <code>m_</code> prefix stands for <q>member</q>. It is a coding practice that has been in place for a long time (before FIRST came into existence), and while it isn&#x27;t quite necessary, it is usually still included for clarity purposes.
 				Additionally, a <code>f_</code> prefix can also be used for boolean flags.</p>
-			<p>The <code>DescriptiveLabel</code> part should be a <span style="font-weight: bold;">descriptive label</span>. You should be able to tell what the variable does without having to look at the code that it is used in. Do not use any irrelevant or confusing labels. For example:</p>
+			<p>The <code>DescriptiveLabel</code> part should be a <span class="bold">descriptive label</span>. You should be able to tell what the variable does without having to look at the code that it is used in. Do not use any irrelevant or confusing labels. For example:</p>
 			<p style="font-weight: bold; color: #009900;">GOOD</p>
 			<pre class= "brush: cpp">
 int m_TeleopLoopCounter;</pre>
@@ -103,7 +103,7 @@ int m_TeleopLoopCounter;</pre>
 			<pre class= "brush: cpp">
 int m_turtles;</pre>
 			<p>The only conclusion I can draw from this declaration is that you are counting turtles. Such a feature would be useless on a competitive robot.</p>
-			<p style="font-style: italic;">RobotBuilder Note: <span style="font-weight: bold;">ONLY</span> if you are using RobotBuilder, take off the <code>m_</code> prefix. RobotBuilder tends to run into issues when the names get too complex.</p>
+			<p style="font-style: italic;">RobotBuilder Note: <span class="bold">ONLY</span> if you are using RobotBuilder, take off the <code>m_</code> prefix. RobotBuilder tends to run into issues when the names get too complex.</p>
 		<h3 class="tutorial"><a id="Declaring_Members"></a>Declaring Members</h3>
 			<p>How you declare your class members depends on what type the member is.</p>
 			<h4 class="tutorial"><a id="Generic_Variables"></a>Generic Variables</h4>
@@ -132,7 +132,7 @@ class Robot: public IterativeRobot
 		<p>Note that you do not need to declare all of the parts on the robot for your code to work. Of course, you will only be able to control what is declared. Also note that the roboRIO cannot possibly detect the correct address (e.g. PWM or relay channel) of various components, so make sure that your assignment is correct.</p>
 		<p>Most parts are fairly straightforward. The tricky parts come in with the address assignment. Your electrical team should be able to tell you what is mounted where, but you should keep a wiring table and know how to find the relevant port, if necessary (see <a href="parts.html#roboRIO">roboRIO</a>).</p>
 		<p>Note that the location of each statement is not shown in the declaration example. The actual declaration belongs in the class list, and the initialization belongs in the class constructor.</p>
-		<p>NOTE: If you declare standard variables, such as <code>int</code>s or <code>bool</code>s, <span style="font-weight: bold;">you need to set a default value in the constructor</span>, like so:</p>
+		<p>NOTE: If you declare standard variables, such as <code>int</code>s or <code>bool</code>s, <span class="bold">you need to set a default value in the constructor</span>, like so:</p>
 		<pre class= "brush: cpp">
 //..
 	Robot()
@@ -149,7 +149,7 @@ class Robot: public IterativeRobot
 					It is possible to split the PWM output coming out of the roboRIO into two cables to double the signal, if two drive controllers should always be driven at the same speed and direction.
 					You will often find that this is done with the drivetrain controllers, since they are the most abundant. If your robot is wired like this, treat it like a 2-controller drivetrain.</p>
 				<p>In the initialization, provide all of the drive controllers that are part of the drivetrain. Provide the left controller(s) first, then the right controller(s). Ensure that you initialize the <code>RobotDrive</code>
-					<span style="font-weight: bold;">AFTER</span> you have initialized the individual drivetrain controllers.</p>
+					<span class="bold">AFTER</span> you have initialized the individual drivetrain controllers.</p>
 				<p>For the four-motor configuration, the process is much the same, however there is an additional front-to-back differentiation. You still initialize left and then right, but for both sides you initialize the front first, and then the rear motor.</p>
 				<p>You should disable the safety (watchdog) unless you know how to use it. The watchdog is run by the drivetrain in order to detect errors. The watchdog is quite needy, as it needs to be fed data or it will disable the drive.
 					If you are confident about what you're doing, you may keep the watchdog on, but for now, just disable it.</p>
@@ -373,7 +373,7 @@ DriverStation *m_ds;
 //DriverStation initialization
 m_ds = DriverStation::GetInstance();</pre>
 				<h5 class="tutorial"><a id="Live_Window"></a>Live Window</h5>
-					<p>Smart Dashboard provides an option to manipulate robot components in real time. This feature is known as <span style="font-style: italic;">Live Window mode</span>, and is used in the <code>Test</code> routines in your program.
+					<p>Smart Dashboard provides an option to manipulate robot components in real time. This feature is known as <span class="italic">Live Window mode</span>, and is used in the <code>Test</code> routines in your program.
 						You manage Live Window with the <code>LiveWindow</code> object.</p>
 					<pre class= "brush: cpp">
 //Live Window declaration

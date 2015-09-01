@@ -124,7 +124,7 @@
 						<li>Left Stick = 9</li>
 						<li>Right Stick = 10</li>
 					</ul>
-					<p><span style="font-weight: bold;">WARNING</span>: The left and right stick buttons are pressed when the actual joystick on the controller is pressed down. Because they are tied in with the controller, a driver can hit either button inadvertantly. Use these with extreme caution, if at all.</p>
+					<p><span class="bold">WARNING</span>: The left and right stick buttons are pressed when the actual joystick on the controller is pressed down. Because they are tied in with the controller, a driver can hit either button inadvertantly. Use these with extreme caution, if at all.</p>
 					<p>This function returns true if the requested button is currently being held down.</p>
 					<p>Note that the triggers are not here. They are treated as controller joysticks (you will see why in a moment).</p>
 				<h4 class="tutorial"><a id="Controller_Joysticks"></a>Controller Joysticks</h4>
@@ -200,7 +200,7 @@
 			<h3 class="tutorial"><a id="Quick_Note:_Periodic_Routines"></a>Quick Note: Periodic Routines</h3>
 				<p>If you remember from <a href="../ch1/program-structure.html#Periodic_Routines">lesson 1-2</a>, <code>TeleopPeriodic()</code> will loop until the robot shuts down or another mode is entered. So, you must remember that, for the cases of this program, what you write is constantly running in a loop.
 					Because it is already looping, you should write the <code>TeleopPeriodic()</code> function as if the whole thing were a loop. So, if you write something to the SmartDashboard in <code>TeleopPeriodic()</code>, it will write to SmartDashboard every time the CPU performs another loop.
-					<span style="font-style: italic;">Future note: that is actually good, because then you can write real-time values to SmartDashboard.</span></p>
+					<span class="italic">Future note: that is actually good, because then you can write real-time values to SmartDashboard.</span></p>
 			<h3 class="tutorial"><a id="Button"></a>Button</h3>
 				<p>For example, let&#x27;s look at a program that prints <q>Hello World!</q> to the driver station when, and only when, the A button is pressed.</p>
 				<p>What we need:</p>
@@ -395,14 +395,14 @@ public:
 			<ul>
 				<li>Has a counter (use a <code>float</code> for this)
 				<ul>
-					<li>Counts <span style="font-weight: bold;">UP</span> on press of the A button</li>
-					<li>Counts <span style="font-weight: bold;">DOWN</span> on press of the B button</li>
+					<li>Counts <span class="bold">UP</span> on press of the A button</li>
+					<li>Counts <span class="bold">DOWN</span> on press of the B button</li>
 					<li>Note: you will need to use a <a href="../tips-tricks.html#Timers">timeout</a>.</li>
 				</ul></li>
 				<li>Controls a <code>float</code> with the left joystick and triggers as follows:
 				<ul>
-					<li>When the left joystick is pressed <span style="font-weight: bold;">FORWARD</span>, it counts <span style="font-weight: bold;">UP</span> at a speed determined by how far the stick is pressed forward.</li>
-					<li>When the left joystick is pulled <span style="font-weight: bold;">BACKWARD</span>, it counts <span style="font-weight: bold;">DOWN</span> at a speed determined by how far the stick is pulled back.</li>
+					<li>When the left joystick is pressed <span class="bold">FORWARD</span>, it counts <span class="bold">UP</span> at a speed determined by how far the stick is pressed forward.</li>
+					<li>When the left joystick is pulled <span class="bold">BACKWARD</span>, it counts <span class="bold">DOWN</span> at a speed determined by how far the stick is pulled back.</li>
 					<li>When the left trigger is pressed in, the float becomes negative</li>
 					<li>When the right trigger is pressed in, the float becomes positive</li>
 					<li>Note: many of the controllers do not zero perfectly. Use a deadband of 0.2.</li>

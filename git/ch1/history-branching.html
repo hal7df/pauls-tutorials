@@ -56,7 +56,7 @@
 		<p>One of the key aspects to version control is that you are, well, able to control the version of your software.
 			For example, if you make a commit that you later discover breaks the code, it is important that you be able to go back into your project's history and undo that change.
 			Git provides a number of tools that you can use to this effect (one of which, <code>git reset</code>, you have already been exposed to).</p>
-		<p>In addition to that, git provides another feature for which it is well-known: <span style="font-style: italic;">branching</span>.
+		<p>In addition to that, git provides another feature for which it is well-known: <span class="italic">branching</span>.
 			In addition to history management, this lesson will teach you what branching is all about, how it is related to history, and how to effectively use branches in your project.</p>
 		<div id="toc">
 			<ul>
@@ -100,22 +100,22 @@
 				<p>When referring to a repository's history, a <code>git reset</code> will move the <code>HEAD</code> pointer back to the specified commit, effectively deleting all of the commits that follow.</p>
 				<img class="tutorial large" alt="Example of a git reset in a branch diagram" title="A reset as visualized in a branch diagram" src="../../files/img/git-history-reset.png" />
 				<p>Because of this, it is important to note that it is not possible to do a reset to only undo a change in a commit that has already been buried in the repository's history.
-					All reset operations will undo <span style="font-style: italic;">all</span> changes from the previous location of <code>HEAD</code> until the commit given to <code>git reset</code>.</p>
+					All reset operations will undo <span class="italic">all</span> changes from the previous location of <code>HEAD</code> until the commit given to <code>git reset</code>.</p>
 			
 			<h3 class="tutorial"><a id="revert"></a>Reverting</h3>
 				<p>However, you may find yourself in a situation where you want to undo a commit that has already been pushed to the remote repository, or you want to undo changes only from one commit, and that commit has since parented newer commits.</p>
 				<p>In this case, the tool you want to use is <code>git revert</code>. Unlike <code>git reset</code>, <code>git revert</code> does not move the <code>HEAD</code> pointer back.
-					Instead, it analyzes the commit that you want to undo and then makes <span style="font-style: italic;">another</span> commit that is effectively the reverse of the commit you specified.</p>
+					Instead, it analyzes the commit that you want to undo and then makes <span class="italic">another</span> commit that is effectively the reverse of the commit you specified.</p>
 				<p>Because of how the <code>revert</code> function works, you can actually only undo one commit at once. It is possible to tell git to revert a series of commits, but you have to review the commit log for each individual revert.</p>
 				<p>One of the important things to know about a revert is that you can run into issues when you try to revert a commit that has more than one parent (i.e. a merge commit).
 					Exactly how this happens will be discussed in greater detail in the Branching section, but it is important to note at this point that, in this situation, you need to tell git which parent to revert to.</p>
 				<img class="tutorial large" alt="Reverting a commit buried in history" title="Reverting a commit already buried in history, in this case 2 commits behind HEAD before the revert." src="../../files/img/git-history-revert.png" />
 				<p>Unlike <code>reset</code>, <code>revert</code> allows you to undo only the changes done in one commit, leaving the changes done by following commits intact.
 					However, it is important to note that when you revert only one commit already buried in history, you can be breaking code that was pushed in later commits, as that commit may have provided a function in later commits.
-					In this case, the idea would be to do a <span style="font-style: italic;">partial revert</span>, where you tell git only to revert certain lines in the commit diff.</p>
+					In this case, the idea would be to do a <span class="italic">partial revert</span>, where you tell git only to revert certain lines in the commit diff.</p>
 					
 		<h2 class="tutorial"><a id="branching"></a>Branching</h2>
-			<p>One of git's most well-known features is its ability to create <span style="font-style: italic;">branches</span>. Effectively, branches allow you to create another copy of the code directly in the repository, which you can work on independently of the main development effort.
+			<p>One of git's most well-known features is its ability to create <span class="italic">branches</span>. Effectively, branches allow you to create another copy of the code directly in the repository, which you can work on independently of the main development effort.
 				Each branch has its own development history, and remains completely separate from the other branches until you are ready to move your work back into mainstream development (via &#8212; you guessed it &#8212; a merge).</p>
 			<p>If you have even looked at a git repository, you have likely already seen evidence of branches &#8212; even if the repository itself does not make extensive use of them.
 				Every git repository has a base branch that represents the mainstream course of development, which is almost always named <code>master</code>. Under most circumstances, most branches branch off from the <code>master</code> branch, or branch from another branch that itself was branched from <code>master</code>.</p>
@@ -129,8 +129,8 @@
 				<p>The great thing about branching is that it allows a whole bunch of people to work on their own part of the code without interfering with each other at all &#8212; all within the same repository.
 					This sounds great, but how do you keep all of your work on your branch?</p>
 				<p>In a way, git takes care of this for you. However, you have to tell git which branch you want to commit to.</p>
-				<p>In your local copy's working directory, git will keep one (and only one) branch <span style="font-style: italic;">checked out</span>. This will make your working directory effectively at the <code>HEAD</code> of the branch that is checked out.</p>
-				<p>So, if you want to switch to and start working on another branch, you must <span style="font-style: italic;">checkout</span> that branch first.</p>
+				<p>In your local copy's working directory, git will keep one (and only one) branch <span class="italic">checked out</span>. This will make your working directory effectively at the <code>HEAD</code> of the branch that is checked out.</p>
+				<p>So, if you want to switch to and start working on another branch, you must <span class="italic">checkout</span> that branch first.</p>
 				<p>A checkout is a fairly simple operation &#8212; git modifies all of the tracked files in the working directory to match the <code>HEAD</code> state of the desired branch.</p>
 				<p>As simple as on operation this may seem, it is actually possible for it to fail if you are not paying enough attention.
 					If you have uncommitted changes on a branch, then git will refuse to checkout another branch, as proceeding with the checkout would cause you to lose all of your changes.</p>
@@ -144,12 +144,12 @@
 				<h4 class="tutorial"><a id="stashing"></a>The Stash</h4>
 					<p>Now what is stashing, you ask?</p>
 					<p>Let's back up for a moment: you want to switch branches, but you have made work that you don't want to lose, but don't feel ready to commit yet.
-						In this case, you would use the <span style="font-style: italic;">stash</span>.</p>
+						In this case, you would use the <span class="italic">stash</span>.</p>
 					<p>The stash stores quasi-commits that you want to apply to the working tree at a later time. Each stash operation stores a diff on the stash,
 						but unlike normal commits, stash commits do not require that you leave a message (they are usually used to remind you what is contained in the stash).</p>
 					<p>Once on the stash, a particular set of changes is <q>in limbo</q>. It is not a part of any developmental history on any branch, and is not associated with any branch to begin with.
 						Git stores the changes internally, and waits for you to re-apply them to the working tree.</p>
-					<p>When you are ready to unstash changes, you perform a <span style="font-style: italic;">stash pop</span>. This removes the desired set of changes from the tree and applies them to the working directory.
+					<p>When you are ready to unstash changes, you perform a <span class="italic">stash pop</span>. This removes the desired set of changes from the tree and applies them to the working directory.
 						These changes then become unstaged changes on the current branch.</p>
 					<p>You do need to be careful when you perform a <code>git stash pop</code>, however. Performing a stash pop is effectively like a merge &#8212; you can still end up with merge conflicts.</p>
 					<p>One of the other useful things the stash can be used for is to move unstaged changes between branches. If you start working on the code and realize that you're on the wrong branch when it comes time to commit, all is not lost.
