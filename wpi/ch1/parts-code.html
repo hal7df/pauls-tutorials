@@ -95,11 +95,11 @@ TypeIdentifier m_DescriptiveLabel;</pre>
 			<p>The <code>m_</code> prefix stands for <q>member</q>. It is a coding practice that has been in place for a long time (before FIRST came into existence), and while it isn&#x27;t quite necessary, it is usually still included for clarity purposes.
 				Additionally, a <code>f_</code> prefix can also be used for boolean flags.</p>
 			<p>The <code>DescriptiveLabel</code> part should be a <span class="bold">descriptive label</span>. You should be able to tell what the variable does without having to look at the code that it is used in. Do not use any irrelevant or confusing labels. For example:</p>
-			<p style="font-weight: bold; color: #009900;">GOOD</p>
+			<p class="bold" style="color: #009900;">GOOD</p>
 			<pre class= "brush: cpp">
 int m_TeleopLoopCounter;</pre>
 			<p>From this declaration, I can already tell that you plan to use this variable to count CPU loops in the TeleopPeriodic routine.</p>
-			<p style="font-weight: bold; color: #ff0000;">BAD</p>
+			<p class="bold" style="color: #ff0000;">BAD</p>
 			<pre class= "brush: cpp">
 int m_turtles;</pre>
 			<p>The only conclusion I can draw from this declaration is that you are counting turtles. Such a feature would be useless on a competitive robot.</p>
@@ -399,7 +399,7 @@ m_timer = new Timer;
   	<h2 class="tutorial"><a id="Activity"></a>Activity</h2>
   	  	<p>In this activity, you will be given either the name of a component or a picture of a component. You will be given all of the necessary information to initialize the component. Using this information, write both a component declaration and initialization line.</p>
   	  	<p>There are 5 questions.</p>
-  	  	<p style="font-weight: bold; text-align: center; color: #ff0000;"><noscript>JavaScript is required for this activity. Please turn it on or switch to a browser with JavaScript.</noscript></p>
+  	  	<p class="bold" style="text-align: center; color: #ff0000;"><noscript>JavaScript is required for this activity. Please turn it on or switch to a browser with JavaScript.</noscript></p>
   	  	<h3 class="tutorial">Example</h3>
   	  	<img class="tutorial" style="width: 250px; height: 220px;" src="http://team358.org/files/programming/ControlSystem2009-/Talon.jpg" alt="Talon" />
   	  	<ul>

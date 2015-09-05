@@ -99,10 +99,10 @@
 }
 .syntaxhighlighter table td.gutter .line {
   text-align: right !important;
-  padding: 0 0.5em 0 1em !important;
+  padding: 1px 0.5em 1px 1em !important;
 }
 .syntaxhighlighter table td.code .line {
-  padding: 0 1em !important;
+  padding: 1px 1em !important;
 }
 .syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
   padding-left: 0em !important;

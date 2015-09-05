@@ -63,6 +63,10 @@ h5.tutorial {
 	font-weight: bold;
 }
 
+span.tooltip {
+	border-bottom: dotted 1px white;
+}
+
 /** CODE AND EXAMPLE PRESENTATION **/
 code {
 	background-color: #002b36;
@@ -151,11 +155,11 @@ table.codeOutput th {
 	background-color: #555555;
 }
 
-table.codeOutput tr:nth-child(2) > td:first-child {
+table.codeOutput td:first-child {
 	background-color: #1b2426;
 }
 
-table.codeOutput tr:nth-child(2) > td:nth-child(2) {
+table.codeOutput td:nth-child(2) {
 	background-color: #002b36;
 	color: #b2b2b2;
 	font-family: monospace;

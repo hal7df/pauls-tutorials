@@ -82,7 +82,7 @@
  	</div>
  	<div id="tcontent">
  		<h2 class="tutorial"><a id="Defined_Constants"></a>Defined Constants</h2>
- 			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+ 			<p class="bold" style="text-align: center;">Required Level: Lesson 1-1</p>
  			<p>You can read more about constants <a href="http://www.cplusplus.com/doc/tutorial/constants/" target="_blank">here</a>.</p>
 			<h3 class="tutorial"><a id="The_Header_Definition"></a>The Header Definition</h3>
 				<p>Aside from providing functions and other utilities for use in a source file, header files can also define specific values that can be accessed using a custom name. Usually, this name is written in <code>ALL_CAPS_WITH_NO_SPACES</code>, utilizing underscores if necessary. A sample header definition is given below.</p>
@@ -96,7 +96,7 @@
 			<h3 class="tutorial"><a id="Why?"></a>Why?</h3>
 				<p>The use of a header definition depends on the application of the header file itself. In our case, we are using it to turn seemingly arbitrary numbers into a more easily understood format. If you were writing a library, you might use a header definition to avoid the difference of values that occurs between platforms.</p>
 		<h2 class="tutorial"><a id="Timers"></a>Timers</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-3</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 1-3</p>
 			<p>If you remember from Lesson 1-3, there was a <code>Timer</code> object that could be used to time events. This section will teach you how to use it.</p>
 			<h3 class="tutorial"><a id="Managing_the_timer"></a>Managing the timer</h3>
 				<p>The <code>Timer</code> object comes with the following functions to manage the timer:</p>
@@ -116,12 +116,12 @@ bool Timer::HasPeriodPassed(double period)</pre>
 				<p>The <code>Get()</code> function simply accesses the time (in seconds) that the timer has counted.</p>
 				<p>The <code>HasPeriodPassed()</code> function is like checking to see if the timer has gone off, so to speak. Its only parameter is the length, in seconds, of the timed period. Note that <code>HasPeriodPassed()</code> will continue to return <code>true</code> once the defined period has passed. In order to make it return false again, you need to reset the timer.</p>
 		<h2 class="tutorial"><a id="Timeouts"></a>Timeouts</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 2-1</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 2-1</p>
 			<p>One of the downsides of the <code>GetRawButton()</code> function is that it returns <code>true</code> if there is a button pressed, regardless of how long that it has been pressed for. Because the roboRIO is running the <code>TeleopPeriodic()</code> routine in a loop, one button press in the driver's perspective may register anywhere from 5 to 20 times in the roboRIO. Due to that, manipulating variables by set amounts (incrementing/decrementing) is trickier than it sounds. This section discusses how to create a button timeout.</p>
 			<p>It is recommended that you create a <a href="#Wrappers">wrapper class</a> to handle the timeout, as it makes keeping track of the button press a lot cleaner.</p>			
 			<p>There are two methods to do this.</p>
 			<h3 class="tutorial"><a id="Timer"></a>Timer</h3>
-				<p style="font-weight: bold; text-align: center;">Requires knowledge of how to use a <a href="#Timers">timer</a>.</p>
+				<p class="bold" style="text-align: center;">Requires knowledge of how to use a <a href="#Timers">timer</a>.</p>
 				<p>This method is the easier method to implement, since it only requires checking the timer. However, this method is also less robust than the other, due to the generally high maintenance level of the <code>Timer()</code> object.</p>
 				<h4 class="tutorial"><a id="Required_Objects"></a>Required Objects</h4>
 					<ul>
@@ -172,8 +172,8 @@ if (!m_joystick->GetRawButton(1) && m_pressed)
 }</pre>
 					<p>In this case, once the driver releases the button, the second step will pass, which will enable the first step to register a button press again.</p>
 		<h2 class="tutorial"><a id="Wrappers"></a>Wrappers</h2>
-			<p style="font-weight: bold; text-align: center;">Recommended Level: Lesson 2-2</p>
-			<p style="font-style: italic; text-align: center;">Note: This concept is similar to <a href="ch3/pid3.html#Subsystem_Wrappers">subsystem wrappers</a> utilized with PID controllers, but not identical.</p>
+			<p class="bold" style="text-align: center;">Recommended Level: Lesson 2-2</p>
+			<p class="italic" style="text-align: center;">Note: This concept is similar to <a href="ch3/pid3.html#Subsystem_Wrappers">subsystem wrappers</a> utilized with PID controllers, but not identical.</p>
 			<p>Sometimes, the classes provided by WPILib don't provide enough functionality to get a certain task done efficiently and in an organized manner. In order to fix this problem, you can create a class that wraps around (hence the term) a core WPILib class and add the functionality you want.</p>
 			<p>The way wrapper classes are written depends on the class that is being wrapped around. However, there are some basic concepts that can be discussed about wrappers.</p>
 			<h3 class="tutorial"><a id="What_a_Wrapper_Does"></a>What a Wrapper Does</h3>

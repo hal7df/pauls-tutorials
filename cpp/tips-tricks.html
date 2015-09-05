@@ -60,10 +60,12 @@
   	 	<li><a href="#Clearing_the_Screen">Clearing the Screen</a></li>
   	 	<li><a href="#unbuffered_input">Reading from Unbuffered Input</a></li>
   	 	<li><a href="#Input_Validation">Input Validation</a></li>
+  	 	<li><a href="#bubble-sort">The Bubble Sort</a></li>
+  	 	<li><a href="#vectors">Vector: The Resizable Array</a></li>
   	 </ul>
   	 
   	 <h2 class="tutorial"><a id="printf"></a><code>printf()</code></h2>
-  	 	<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+  	 	<p class="bold" style="text-align: center;">Required Level: Lesson 1-1</p>
   	 	<p>The <code>printf()</code> function is another method of output from C (the language C++ is based on).  It allows you to print variable values right in a text string.</p>
   	 	<p>This will be useful later when you start programming the robot.</p>
   	 	<p>When you use it, you need to include the library <code>cstdio</code>.</p>
@@ -134,7 +136,7 @@ printf("I would like to say %s", mystring.c_str());</pre></td>
 		<p>Another way to do this would be to declare a <a href="ch2/arrays.html#C_Strings">C string</a>; however, you need to have learned the concepts in lesson 6 in order to do that.</p>
 		
 		<h2 class="tutorial"><a id="Random_Numbers"></a>Random Numbers</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 1-1</p>
 			<p>First off, the numbers you will obtain through this method are not quite random, as they are created through a predictable algorithm. However, for most purposes, this process is acceptable.</p>
 			<p>In order to use it, you must include the following libraries:</p>
 			<blockquote class="tutorialexample">
@@ -166,14 +168,14 @@ printf("I would like to say %s", mystring.c_str());</pre></td>
 					<p>will generate years from 1983 to 2013.</p>
 					
 		<h2 class="tutorial"><a id="IO_Manipulation"></a>I/O Manipulation</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 1-1</p>
 			<p>If you are a stickler about presentation, there is a whole library for that.</p>
 			<pre class= "brush: cpp">#include &lt;iomanip&gt;</pre>
 			<p>Note that the functions below only work on <code>cout</code>. For a full list of functions provided by this library, see <a href="http://www.cplusplus.com/reference/iomanip/" target="_blank">iomanip</a>. 
 				Some listed there will also work on <code>cin</code>.</p>
 			<h3 class="tutorial"><a id="Output_operation"></a>Output operation</h3>
 				<p>An <span class="bold">output operation</span> is one of the clauses you put between the <code>&lt;&lt;</code> operators in <code>cout</code> statements.</p>
-				<p style="font-weight: bold;">Example</p>
+				<p class="bold" style="">Example</p>
 				<pre class="brush: cpp">
 cout &lt;&lt; OutputOperation1 &lt;&lt; OutputOperation2 &lt;&lt; OutputOperation3;</pre>
 				<p>Note that the following functions are not considered output operations.</p>
@@ -275,7 +277,7 @@ cout &lt;&lt; "Not affected"  &lt;&lt; setw(30) &lt;&lt; "Affected" &lt;&lt;  " 
 							</tr>
 						</tbody></table>
 		<h2 class="tutorial"><a id="Clearing_the_Screen"></a>Clearing the Screen</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 1-1</p>
 			<p>Clearing the screen actually depends on which platform you are using, because how the terminal is implemented between different platforms changes.</p>
 			<h3 class="tutorial"><a id="clear_windows"></a>Clearing the Screen on Windows</h3>
 				<p>Use <a href="http://www.cplusplus.com/articles/4z18T05o/#Windows" target="_blank">this function</a>.</p>
@@ -303,7 +305,7 @@ void clearScreen()
 				<p>The last line (the <code>putp(tigetstr(&quot;clear&quot;))</code>) basically asks the terminal for the control sequence to clear the screen, and then prints it.</p>
 				<p>If you use this, you will need to link the right library (older systems use <code>-lterminfo</code>, newer Ubuntu systems use <code>-ltinfo</code>, other POSIX-compliant systems might use <code>-lcurses</code> or so on).</p>
 		<h2 class="tutorial"><a id="unbuffered_input"></a>Reading from Unbuffered Input</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-1</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 1-1</p>
 			<p>Unbuffered input is basically input that has not been ended by a strike of the enter key. This is useful for writing programs that respond immediately to a key stroke.</p>
 			<p>Again, unbuffered input depends on the implementation of the terminal you are using, so this is platform-dependent.</p>
 			<h3 class="tutorial"><a id="unbuffered_windows"></a>Unbuffered Input on Windows</h3>
@@ -321,7 +323,7 @@ c = getch();</pre>
 					However, the former is a little tricky, and curses is not compatible with <code>stdin</code> and <code>stdout</code> (i.e. <code>cin</code> and <code>cout</code>), so you would have to learn all of <code>curses</code> to use it. 
 					I would suggest looking at <a href="http://stackoverflow.com/a/912796" target="_blank">this</a>.</p>
 		<h2 class="tutorial"><a id="Input_Validation"></a>Input Validation</h2>
-			<p style="font-weight: bold; text-align: center;">Required Level: Lesson 1-3</p>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 1-3</p>
 			<p>When the user inputs data into your program, he/she may not know what data type you are looking for. If that is a concern, you can use the following method to keep your program running properly, should that happen.</p>
 			<pre class="brush: cpp">
 #include &lt;iostream&gt;
@@ -340,7 +342,7 @@ int main () {
  		cin.ignore(numeric_limits&lt;streamsize&gt;::max(),'\n');
 	}
 
-	cout<<"You input a positive "&lt;&lt;myUInt&lt;&lt;'.'&lt;&lt;endl;
+	cout&lt;&lt;"You input a positive "&lt;&lt;myUInt&lt;&lt;'.'&lt;&lt;endl;
 
 	return 0;
 }</pre>
@@ -368,8 +370,250 @@ int main () {
 				<p>Despite the fact that the <code>cin</code> statement is inside the parentheses for the <code>while</code> loop, the program still looks for input at that point.
 					If the user inputs the wrong data type, <code>cin</code> throws a couple of flags (<code>fail</code> and/or <code>bad</code>, to be exact).
 					The computer interprets this to be a <code>false</code> value, so it runs the loop.</p>
-	
+					
+		<h2 class="tutorial"><a id="bubble-sort"></a>The Bubble Sort</h2>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 2-2</p>
+			<p>When dealing with a set of numeric data, you may find it useful to have that data sorted in either ascending or descending order.
+				In computer science, there are many different algorithms that you can implement to sort data stored in arrays. 
+				Despite the many different algorithms available to us, here we will go into depth about the simplest algorithm: the bubble sort.
+				The idea behind the bubble sort is that the smallest (or the largest, depending on how you're sorting) elements of the array rise to the top of the array like bubbles.</p>
+			<p>Let's say we have the following array of <code>int</code>s which we wish to sort in ascending (smallest first) order:</p>
+			<pre class="brush: cpp">int myNums[5] = {2, 9, 5, 11, 7};</pre>
+			<p>Using a bubble sort, you need to check the value of each element against the following element, swapping them if they are out of order.
+				You would do that inside a <code>for</code> loop, checking each element and performing the swap using a holding varible if they need to be swapped:</p>
+			<pre class="brush: cpp">
+int myNums[5] = {7, 11, 5, 9, 2};
+int tmp;
+
+for (int i = 0; i &lt; 4; ++i)
+{
+	/* We can't have i equal 4, 
+	 * because the last element in myNums has index 4,
+	 * and this algorithm requires that we access the 
+	 * element i+1, which would cause the program to crash.
+	 */
+	 
+	if (myNums[i] &gt; myNums[i++])
+	{
+		/* remember: a ++ following a numeric variable only increments
+		 * the variable if it is used alone. Used here, it just returns the incremented
+		 * value to the [] operator.
+		 */
+		 
+		 tmp = myNums[i];
+		 myNums[i] = myNums[i++];
+		 myNums[i++] = tmp;
+	}
+}</pre>
+			<p>After this block finished executing, the array would look like this:</p>
+			<blockquote class="tutorialexample">
+				7 5 9 2 11
+			</blockquote>
+			<p>If you notice, this array still isn't sorted in ascending order &#8212; the 2 should be first, and 7 is bigger than 5.
+				So, the trick here is to put the <code>for</code> loop inside a <code>do-while</code> loop that runs until the array is sorted.
+				The condition that we need to check for the <code>do-while</code> loop is whether or not a swap was made &#8212; if a swap was made, then we can safely assume that we're not done sorting.
+				When the array is sorted, no swaps will be made, and the <code>do-while</code> loop will exit.</p>
+			<pre class="brush: cpp">
+int myNums[5] = {7, 11, 5, 9, 2};
+int tmp;
+bool swap;
+
+do
+{
+	swap = false;
+	/* we need to assume that the array is sorted at the beginning.
+	 * If we find anything out of order, then we simply change swap to true
+	 */
+	 
+	for (int i = 0; i &lt; 4; ++i)
+	{
+		if (myNums[i] &lt; myNums[i++])
+		{
+			tmp = myNums[i];
+			myNums[i] = myNums[i++];
+			myNums[i++] = tmp;
+			swap = true;
+		}
+	}
+} while (swap);</pre> 
+			<p>Now, when we run the code, the sort will be complete:</p>
+			<table class="codeOutput">
+				<tbody>
+					<tr>
+						<th>Pass</th>
+						<th>Array</th>
+					</tr>
+					<tr>
+						<td>0 (before sort)</td>
+						<td>7 11 5 9 2
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>7 5 9 2 11</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>5 7 2 9 11</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>5 2 7 9 11</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>2 5 7 9 11</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>As you can see, after pass 4, the array has been sorted.
+				The <code>do-while</code> loop will repeat one more time and check all of the array elements,
+				but since the array has been sorted by this point, no elements will be switched,
+				the <code>swap</code> flag will not be thrown, and the loop will exit, resulting with a sorted array.</p>
+			<p>The bubble sort works in both directions.
+				The only change that you would need to make to sort the array in descending order (largest first)
+				would be to change the comparison between the two array elements from a <code>&gt;</code> to a <code>&lt;</code>.</p>
+			<p>As was mentioned before, there are more algorithms that you can use to sort arrays. This is the simplest, but it is also the least efficient.
+				If you would like to explore more sort algorithms, see <a href="http://www.cprogramming.com/tutorial/computersciencetheory/sortcomp.html" target="_blank">here</a>.</p>
+				
+		<h2 class="tutorial"><a id="vectors"></a>Vector: The Resizable Array</h2>
+			<p class="bold" style="text-align: center;">Required Level: Lesson 3-2</p>
+			<p>Arrays are quite useful: they allow you to store related information in sequence.
+				The problem is, a standard array set up using the <code>[]</code> operator has a fixed size.
+				Once created, you cannot add or remove array elements, you can only change them.</p>
+			<p>But what if you don't know how many array elements you need?
+				Do you just create an incredibly large array and hope that the user doesn't need more than the amount you have defined?</p>
+			<p>There are immediately three problems with this approach:</p>
+			<ol>
+				<li>Every element in this array has a value (even if it is <code>NULL</code>), so you cannot tell how many values you actually have.</li>
+				<li>Every element in this array is held in memory, including the ones that are not in use, and take up the amount of space according to the array's data type.
+					So, if you have an array of 10 billion <code>char</code>s, and a single <code>char</code> requires a single byte, the entire array will be 9.3
+					<span class="tooltip" title="Gibibyte (GiB) = 1024 MiB (Mebibyte). This is what most people refer to when they say 'gigabyte'.">GiB</span> large.
+					Note that this array is being held in the computer's RAM, so this array is likely to crash most common computers (with 4 or 8 GiB of RAM).</li>
+				<li>You should <span class="italic">never</span> write a program and simply hope that its limitations suit your end users.
+					You should make your program shape itself based on the needs of your users.</li>
+			</ol>
+			<p>If only there were a resizable array that where you could add and remove elements...</p>
+			<p>C++ provides something referred to as the <a href="http://www.cplusplus.com/reference/stl/" target="_blank"><span class="italic">standard template library</span></a>, or STL.
+				It contains a number of <span class="italic">template classes</span>, or classes that can be cast to any data type.
+				Of these class templates, there is one named <code>vector</code>. This is, effectively, a resizable array to/from which you can add/remove elements.</p>
+				
+			<h3 class="tutorial"><a id="creating-vector"></a>Creating a Vector</h3>
+				<p>Because a vector is a class template, you need to create it differently than you would a normal array.
+					Firstly, you need to include the <code>vector</code> header file.
+					Then, you can create a variable of type <code>vector</code> with the data type you wish to store in the vector as the template argument:</p>
+				<pre class="brush: cpp">
+#include &lt;vector&gt;
+
+//...
+
+std::vector&lt;int&gt; myInts;
+// vector is a part of the std namespace!</pre>
+				<p>This will create an <span class="bold">empty</span> vector of <code>int</code>s. You can, furthermore, use some of the 
+					<a href="http://www.cplusplus.com/reference/vector/vector/vector/" target="_blank"><code>vector</code> class constructors</a>:</p>
+				<pre class="brush: cpp">
+				std::vector&lt;int&gt; myInts (10, 5); //creates a vector containing 10 ints, all with the value 5
+				std::vector&lt;int&gt; myIntsTwo (myInts); //copies myInts</pre>
+				
+			<h3 class="tutorial"><a id="accessing-vector"></a>Accessing Vector Elements</h3>
+				<p>There are five ways to access vector elements. The first you are already familiar with:</p>
+				<pre class="brush: cpp">
+//remember that indices start with 0!
+myInts[0]</pre>
+				<p>You can access elements of a vector just like you would an array by using the <code>[]</code> operator along with the index of the element you want.</p>
+				<p>You can also access vector elements by using the <code>at()</code> function, if your compiler supports C++11 (most recent versions of g++, the compiler in Eclipse and Code::Blocks, do).
+					This function works effectively in the same manner as the <code>[]</code> operator, except the <code>at()</code> function has better error handling.</p>
+				<pre class="brush: cpp">myInts.at(0)</pre>
+				<p>You can access the first and last elements of a <code>vector</code> with the <code>front()</code> and <code>back()</code> functions, respectively:</p>
+				<pre class="brush: cpp">
+myInts.front()
+myInts.back()</pre>
+				
+				<h4 class="tutorial"><a id="vector-iterator"></a>Iterators</h4>
+					<p>The <code>vector</code> class provides a subclass called <code>iterator</code> which you can also use to access the vector's elements.
+						This class is especially helpful if you are trying to run through the vector in a <code>for</code> loop.</p>
+					<p>In order to use an iterator, you need to declare an <code>iterator</code> variable.
+						The tricky thing here is that because <code>iterator</code> is a subclass of <code>vector</code>,
+						you still need to provide the proper template type to vector, so that it matches the vector you wish to apply the iterator to:</p>
+					<pre class="brush: cpp">vector&lt;int&gt;::iterator it;</pre>
+					<p>Once you have an iterator variable, get the iterator reference from the vector:</p>
+					<pre class="brush: cpp">it = myInts.begin();</pre>
+					<p>This will get an iterator that references the first element in the vector. If you want to get a specific element in the vector, you can add its index to the iterator, like so:</p>
+					<pre class="brush: cpp">
+//get an iterator to the 6th element (index 5)
+it = (myInts.begin() + 5);</pre>
+					<p>You can also use the <code>end()</code> function to work from the end of the vector, as well.
+						Note that <code>end()</code> returns an iterator to the space <span class="bold">after</span> the last element of the array (there is no element stored in this location).</p> 
+					<pre class="brush: cpp">
+//get an iterator to the 2nd to last element
+it = (myInts.end() - 2)</pre>
+					<p>Once you have the iterator reference, you can then access the element to which the iterator reference.
+						In this case, the iterator works a lot like a pointer, you can just dereference it to get the element:</p>
+					<pre class="brush: cpp">*it</pre>
+					<p>If you want to use an <code>iterator</code> with a <code>for</code> loop, you need to keep in mind that the method for doing so is slightly different:</p>
+					<pre class="brush: cpp">
+vector&lt;int&gt; myInts (10,5);
+vector&lt;int&gt;::iterator it;
+
+for (it = myInts.begin(); it != myInts.end(); ++it)
+{
+	//do some stuff with the elements of myInts
+	*it = 100 - (*it);
+}</pre>
+					<p class="italic">This is the recommended method for using a <code>for</code> loop with an array.</p>
+			<h3 class="tutorial"><a id="checking-size"></a>How Big?</h3>
+				<p>Since a <code>vector</code> is resizable at runtime, you cannot really tell how many elements that it contains at any given moment.
+					However, the <code>vector</code> keeps track of this number itself:</p>
+				<pre class="brush: cpp">myInts.size()</pre>
+				<p>This will return the current <span class="bold">number of elements</span> in the vector.
+					Note that this is not equal to the last index; the last index will always be equal to this number minus one.</p>
+					
+			<h3 class="tutorial"><a id="adding-vector"></a>Adding Elements</h3>
+				<p>There are a few ways that you can add elements to a vector.</p>
+				
+				<h4 class="tutorial"><a id="appending-vector"></a>Appending elements</h4>
+					<p>If the order doesn't matter to you that much, or if you are building the vector, then this choice is probably for you.</p>
+					<p>Appending elements is accomplished with the <code>push_back()</code> function:</p>
+					<pre class="brush: cpp">myInts.push_back(7);</pre>
+					<p>This will place a new <code>int</code> at the end of the array with a value of <code>7</code>.</p>
+					
+				<h4 class="tutorial"><a id="inserting-vector"></a>Inserting elements</h4>
+					<p>If the order of the vector is important, and you want to place the new element in the middle or beginning of the array, then use this method.</p>
+					<p>Insertion of elements into a <code>vector</code> is accomplished through the <code>insert()</code> function:</p>
+					<pre class="brush: cpp">myInts.insert(it, 7);</pre>
+					<p>This will insert a new element with a value of 7 to the position referenced by the <a href="#vector-iterator">iterator</a> <code>it</code>,
+						pushing the element that formerly held the position at <code>it</code> and all of the elements following it one index further.</p>
+						
+			<h3 class="tutorial"><a id="deleting-vector"></a>Removing Elements</h3>
+				<p>There are also multiple methods by which you can remove elements. The ones listed here correspond to the methods shown above for creating elements.</p>
+				
+				<h4 class="tutorial"><a id="popping-vector"></a>Popping an element</h4>
+					<p>You can use this method if you wish to delete the last element of the vector. The function to do this is <code>pop_back()</code>.</p>
+					<pre class="brush: cpp">myInts.pop_back();</pre>
+					
+				<h4 class="tutorial"><a id="erasing-vector"></a>Erasing an element</h4>
+					<p>The <code>erase()</code> function allows you to erase specific elements from a <code>vector</code>, using an <code>iterator</code>.</p>
+					<pre class="brush: cpp">myInts.erase(it);</pre>
+					<p>Or, you can erase a range of elements, using iterators to define the beginning and end of the range (including the beginning but not the end):</p>
+					<pre class="brush: cpp">
+vector&lt;int&gt;::iterator first_it;
+vector&lt;int&gt;::iterator last_it;
+
+first_it = myInts.begin()+2;
+last_it = myInts.end()-2;
+
+//erases everything except for the first two elements and the last two elements
+myInts.erase(first_it, last_it);</pre>
+
+				<h4 class="tutorial"><a id="clearing-vector"></a>Clearing all elements</h4>
+					<p>You can also delete every element in the vector quite easily:</p>
+					<pre class="brush: cpp">myInts.clear()</pre>
 	<hr>				
-	<p style="font-style: italic;">This resource was compiled with reference to <a href="http://www.cplusplus.com" target="_blank">http://www.cplusplus.com</a> and <a href="http://www.stackoverflow.com/">Stack Overflow</a>.</p>
+	<p style="font-style: italic;">This resource was compiled with reference to the following resources:</p>
+	<ul>
+		<li><a href="http://www.cplusplus.com" target="_blank">cplusplus.com</a></li>
+		<li><a href="http://www.stackoverflow.com/" target="_blank">Stack Overflow</a></li>
+		<li><a href="http://www.cprogramming.com" target="_blank">Cprogramming</a></li>
+		<li><a href="http://mathbits.com/MathBits/CompSci/Arrays/Bubble.htm" target="_blank">MathBits</a></li>
+	</ul>
   </body>
 </html>
