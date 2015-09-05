@@ -191,7 +191,7 @@ iomanip::setw(int width)</pre>
 				</dl>
 				<h4 class="tutorial"><a id="setw_use"></a><code>setw()</code> use</h4>
 					<p>Place this function <span class="bold">before</span> the desired output operation.</p>
-					<table class="codeOutput" style="width: 82.5%;"><tbody>
+					<table class="codeOutput"><tbody>
 						<tr>
 							<th>Code</th>
 							<th>Output</th>
@@ -366,7 +366,7 @@ int main () {
 				</tr>
 			</tbody></table>
 			<p style="font-style: italic;">Note that you may need to double the <code>cin.ignore()</code> statement</p>
-			<h3 class="tutorial">Why it works</h3>
+			<h3 class="tutorial"><a id="input-validation-rationale"></a>Why it works</h3>
 				<p>Despite the fact that the <code>cin</code> statement is inside the parentheses for the <code>while</code> loop, the program still looks for input at that point.
 					If the user inputs the wrong data type, <code>cin</code> throws a couple of flags (<code>fail</code> and/or <code>bad</code>, to be exact).
 					The computer interprets this to be a <code>false</code> value, so it runs the loop.</p>
@@ -437,7 +437,7 @@ do
 	}
 } while (swap);</pre> 
 			<p>Now, when we run the code, the sort will be complete:</p>
-			<table class="codeOutput">
+			<table class="codeOutput noscroll">
 				<tbody>
 					<tr>
 						<th>Pass</th>

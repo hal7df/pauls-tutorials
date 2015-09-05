@@ -137,6 +137,10 @@ table {
 	margin-left: auto;
 }
 
+table tbody {
+	width: 100%;
+}
+
 table td, table th {
 	border: 1px solid;
 	padding: 5px;
@@ -144,7 +148,11 @@ table td, table th {
 }
 
 table.codeOutput {
-	width: 75%;
+	display: block;
+	margin: 0px auto;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
 }
 
 table.codeOutput td, table.codeOutput th {
@@ -189,6 +197,10 @@ table.inputOutput tr > td:nth-child(2) {
 	color: #b2b2b2;
 	font-family: monospace;
 	font-size: 1.25em;
+}
+
+table.noscroll {
+	display: table;
 }
 
 /** FORMS **/
