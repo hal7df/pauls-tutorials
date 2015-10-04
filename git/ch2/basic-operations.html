@@ -209,7 +209,7 @@
 				<p>In order to merge manually fetched changes into your repository, you need to tell git which remote-tracking branch you want to merge into the working tree.
 					This should <span style="font-style:italic;">always</span> be the same remote branch as your current branch (unless you are doing branch merges, which will be discussed in more detail in <a href="branching.html">lesson 2-3</a>).</p>
 				<p>However, just typing <code>master</code> will not accomplish this, since <code>master</code> alone refers to the local <code>master</code>, and not the remote-tracking <code>master</code>.
-					To differentiate the two, you need to add <code>&lt;remote-name&lt;/</code> to the beginning of the branch name. So, to merge the changes from <code>master</code> on the <code>origin</code> remote, you would type:</p>
+					To differentiate the two, you need to add <code>remote-name/</code> to the beginning of the branch name. So, to merge the changes from <code>master</code> on the <code>origin</code> remote, you would type:</p>
 				<blockquote class="tutorialexample">
 					git merge origin/master
 				</blockquote>
