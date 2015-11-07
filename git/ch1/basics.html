@@ -55,7 +55,7 @@
 	<div id="intro">
 		<p>One of the important things to understand about git is that it is a specific kind of VCS called a <span class="italic">distributed version control system</span>,
 			meaning that it does not have a centralized location where all of the code history is stored, and the local copies all perform their version control functions from that repository.
-			Instead, every copy of a git <span class="italic">repository</span>, or <span class="italic">repo</span>, as they are called, is fully-blown, having a complete copy of the code history.
+			Instead, every copy of a git <span class="italic">repository</span> or <span class="italic">repo</span>, which contains all of your code for a project, is fully-blown, having a complete copy of the code history.
 			So, instead of relying on the web server for all of the functions of the VCS, git merely uses the web server as a means through which to keep all copies of the repository updated.</p>
 		<p>With that in mind, this lesson will teach you the basic operations in git and how it communicates with the repository stored on the Internet.</p>
 		<div id="toc">
@@ -85,8 +85,9 @@
 	<div id="tcontent">
 		<h2 class="tutorial"><a id="staging"></a>The Staging Area</h2>
 			<p>Although git keeps a full copy of the version history in every local repository,
-				it is still important to distinguish a <span class="italic">remote</span> repository from a <span style="font-weight: italic;">local</span>repository.
-				Local repositories do not (usually) directly move code between themselves. Communication with git is almost always done between the local repo and the remote repo, and other local repos grab the changes from the remote.</p>
+				it is still important to distinguish a <span class="italic">remote</span> repository from a <span class="italic">local</span> repository.
+				Local repositories &#8212; copies of a repository on your computer &#8212; do not (usually) directly move code between themselves.
+				Communication with git is almost always done between the local repo and the remote repo (the repository in the cloud), and other local repos grab the changes from the remote.</p>
 			<p>In version control, keeping remote repos updated with code from local repos and vice versa is not as simple as a copy-paste operation.
 				There are a number of steps involved from one end to the other to ensure that git does not destroy your code, but rather update it.
 				The first step in this process is the <span class="italic">staging area</span>.</p>
